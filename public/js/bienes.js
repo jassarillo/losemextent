@@ -53,19 +53,20 @@ function create_seccion() {
     });
 }
 // Guardar nuevo rol
-function save_role_create() {
+function save_seccion() {
+    console.log("dededed");
     if(!formValidate('#frm_new_rol')){ return false; };
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : url + "admin/store_new_role",
+        url : url + "admin/save_seccion",
         type: 'POST',
-        data: $("#frm_new_rol").serialize(),
+        data: $("#desc_seccion").serialize(),
         dataType: 'json',
         success: function(response) {
             if (response.success == true) {
-                destroyModal('mod_add_rol');
+                destroyModal('mod_add_seccion');
                 Swal.fire('¡Correcto!',response.message,'success');
                 $("#table-roles-permisos").load(" #table-roles-permisos");
             } else {

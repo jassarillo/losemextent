@@ -18,7 +18,7 @@
 
                                     <div class="form-group">
                                         <label class="control-label">Nombre de la Sección</label>
-                                        <input type="text" class="form-control" id="rol" name="rol" placeholder="Nombre de la Sección" required>
+                                        <input type="text" class="form-control" id="desc_seccion" name="desc_seccion" placeholder="Nombre de la Sección" required>
                                         <span id="usuario-error" class="help-block"></span>
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cancelar
                 </button>
-                <button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_04" onclick="save_role_create();">
+                <button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_04" onclick="save_seccion();">
                     Agregar
                 </button>
 

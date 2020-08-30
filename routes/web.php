@@ -86,6 +86,7 @@ Route::get('admin/data_listar_inventario', 'InventarioController@data_listar_inv
 Route::get('admin/alta_bienes', 'InventarioController@alta_bienes');
 Route::get('admin/data_listar_inventario', 'InventarioController@data_listar_inventario');
 Route::get('admin/create_seccion', 'InventarioController@create_seccion');
+Route::post('admin/save_seccion', 'InventarioController@save_seccion');
 
 Route::group(['middleware' => ['role:SuperAdmin|admin']], function() {
     Route::group(['prefix' => 'requisiciones'], function() {
