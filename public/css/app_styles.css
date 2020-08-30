@@ -1,0 +1,121 @@
+.center_img_foot {
+    position: absolute;
+    width: 500px;
+   /* height: 200px; */
+
+    left: 50%;
+    margin-top: -12px; /* Negative half of height. */
+    margin-left: -100px;
+}
+
+
+@media (max-width: 1024px) and (min-width: 769px){
+    .center_img_foot {
+        position: absolute;
+        left: 40%;
+        margin-top: -12px; /* Negative half of height. */
+        margin-left: -100px;
+    }  
+  
+}
+
+.datepicker table tr td.active:active:hover, .datepicker table tr td.active.highlighted:active:hover, .datepicker table tr td.active.active:hover, .datepicker table tr td.active.highlighted.active:hover, .datepicker table tr td.active:active:focus, .datepicker table tr td.active.highlighted:active:focus, .datepicker table tr td.active.active:focus, .datepicker table tr td.active.highlighted.active:focus, .datepicker table tr td.active:active.focus, .datepicker table tr td.active.highlighted:active.focus, .datepicker table tr td.active.active.focus, .datepicker table tr td.active.highlighted.active.focus {
+    color: #fff;
+    background-color: #1DB701 !important;
+    border-color: #124012 !important;
+}
+
+.datepicker tbody tr>td.day.active, .datepicker tbody tr>td.day.active:hover, .datepicker tbody tr>td.day.selected, .datepicker tbody tr>td.day.selected:hover {
+    background: #1DB701;
+    color: #fff;
+}
+
+.datepicker tbody tr>td.day.today {
+    position: relative;
+    background: rgba(30, 181, 8, 0.5)!important;
+    color: #fff!important;
+}
+
+.kt-content  {
+    background-image: url(../assets/media/bg/bg-cdmx_op.png) !important ;
+    background-repeat: no-repeat;
+    /* border: 2px dashed #333; */
+    background-position: center bottom; /*Positioning*/
+    background-size: 60% 30%;
+}
+
+@media (max-width: 667px) and (min-width: 375px){
+    .kt-content  {
+        background-image: url(../assets/media/bg/bg-cdmx_op.png) !important ;
+        background-repeat: no-repeat;
+        
+        /* border: 2px dashed #333; */
+        background-position: center bottom; /*Positioning*/
+        background-size: 90% 25%;
+    }
+}
+@media (max-width: 1024px) and (min-width: 768px){
+    .kt-content  {
+        background-image: url(../assets/media/bg/bg-cdmx_op.png) !important ;
+        background-repeat: no-repeat;
+        
+        /* border: 2px dashed #333; */
+        background-position: center bottom; /*Positioning*/
+        background-size: 80% 25%;
+    }
+  
+}
+
+@media (max-width: 740px) and (min-width: 360px){
+    .kt-content  {
+        background-image: url(../assets/media/bg/bg-cdmx_op.png) !important ;
+        background-repeat: no-repeat;
+        
+        /* border: 2px dashed #333; */
+        background-position: center bottom; /*Positioning*/
+        background-size: 90% 25%;
+    }
+  
+}
+
+.kt-font-cdmx {
+    color: #00B056!important;
+}
+
+.btn-cdmx {
+    color: #fff;
+    background-color: #00B056;
+    border-color: #00B056;
+    color: #fff;
+}
+
+.btn-cdmx:hover {
+    color: #fff;
+    background-color: #00B056 !important;
+    border-color: #00B056 !important;
+}
+
+.dataTables_wrapper .pagination .page-item:hover>.page-link {
+    background: #00B056;
+    color: #fff;
+}
+
+.dataTables_wrapper .pagination .page-item.active>.page-link {
+    background: #00B056;
+    color: #fff;
+}
+
+.dataTables_wrapper .pagination .page-item:hover>.page-link {
+    background: #00B056;
+    color: #fff;
+}
+
+.dataTables_wrapper .pagination .page-item.first>.page-link:hover, .dataTables_wrapper .pagination .page-item.last>.page-link:hover, .dataTables_wrapper .pagination .page-item.next>.page-link:hover, .dataTables_wrapper .pagination .page-item.previous>.page-link:hover {
+    background: #00B056;
+    color: #fff;
+}
+/*table.dataTable thead {background-color:#00B056;font-weight: bold;}*/
+
+.upperText{
+    text-transform: uppercase;
+}
