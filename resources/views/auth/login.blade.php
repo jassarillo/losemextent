@@ -155,9 +155,9 @@
                     style="background-image: url(assets/media/bg/bg-5.jpg);  background-repeat: no-repeat; background-position: center; ">
                     <div class="kt-login__section">
                         <div class="kt-login__block">
-                            <h3 class="kt-login__title">Sistemas Institucionales</h3>
+                            <h3 class="kt-login__title">LOSEMEXTENT</h3>
                             <div class="kt-login__desc">
-                                DIRECCION GENERAL DE TECNOLOGIAS Y COMUNICACIONES.
+                                By Capa75
                             </div>
                         </div>
                     </div>
