@@ -12,7 +12,6 @@
     <link rel="icon" type="image/vnd.microsoft.icon" href="{{ asset('assets/media/logos/favicon.ico') }}" sizes="48X16">
     @include('layouts/css/css_header_login')
 </head>
-
 <body
     class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
     <!-- begin:: Page -->
@@ -155,7 +154,7 @@
                     style="background-image: url(assets/media/bg/bg-5.jpg);  background-repeat: no-repeat; background-position: center; ">
                     <div class="kt-login__section">
                         <div class="kt-login__block">
-                            <h3 class="kt-login__title">LOSEMEXTENT</h3>
+                            <h3 class="kt-login__title">fzs</h3>
                             <div class="kt-login__desc">
                                 By Capa75
                             </div>
