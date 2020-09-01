@@ -65,7 +65,9 @@ function save_seccion() {
         data: $("#desc_seccion").serialize(),
         dataType: 'json',
         success: function(response) {
-            if (response.success == true) {
+
+            console.log(response);
+            if (response.resp == true) {
                 destroyModal('mod_add_seccion');
                 Swal.fire('¡Correcto!',response.message,'success');
                 $("#table-roles-permisos").load(" #table-roles-permisos");

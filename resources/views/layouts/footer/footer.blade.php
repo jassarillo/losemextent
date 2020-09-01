@@ -8,7 +8,7 @@
             </div>
             <div class="kt-aside__brand-logo kt-hidden-mobile center_img_foot" >
                <a href="{{ url('/home') }}">
-               <img alt="Logo" src="{{ URL::asset('assets/media/logos/SAF_DGTC.png')}}" class="kt-footer__brand-logo-default" width="320px">
+               <!--<img alt="Logo" src="{{ URL::asset('assets/media/logos/SAF_DGTC.png')}}" class="kt-footer__brand-logo-default" width="320px">-->
                </a>
             </div>
 

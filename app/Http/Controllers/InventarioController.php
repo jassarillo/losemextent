@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Bienes;
+use App\Secciones;
 use App\Http\Requests\UserRequest;
 use Yajra\Datatables\Datatables;
 use Auth;
@@ -29,7 +30,7 @@ class InventarioController extends Controller
     }
 
     public function alta_bienes(){
-    	return view('inventario.alta_bienes');
+    	return view('bienes.alta_bienes');
     }
 
     public function create_seccion()
@@ -41,11 +42,19 @@ class InventarioController extends Controller
     {
     	$desc_seccion = $request->desc_seccion;
     	//d($desc_seccion);
-    	$bienes = Bienes::create([
+
+        $secciones = new Secciones;
+
+        $secciones->descripcion = $desc_seccion;
+
+        $secciones->save();
+
+    	/*$bienes = Secciones::create([
                             'descripcion' => $desc_seccion
-                            
-                        ]);
-    	return response()->json_decode("ok");
+                        ]);*/
+    	//return response()->json("ok");
+        $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
+        return   $respuesta;
 
     }
 
