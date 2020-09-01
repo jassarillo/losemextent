@@ -10,7 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//$variable = 
 Auth::routes();
+//dd($variable);
+
+if (Auth::check()){
+Route::get('/login', function () {
+    if (Auth::check()){
+            return redirect('/admin');
+    }else{
+    Route::get('/login', 'Auth\LoginController@login');   
+  }
+
+});
+}
 Route::resource('roles', 'RoleController');
 
 Route::get('/error/{error}', 'ErrorController@error');
@@ -29,13 +43,12 @@ Route::post('/passForgot', 'Auth\ForgotPasswordController@validateEmail')->name(
 Route::post('/passUpdate', 'Auth\ForgotPasswordController@updatePass')->name('updatePass');
 Route::get('/forgot/verify/{id}', 'Auth\ForgotPasswordController@validateTokenPassReset')->name('forgotPassW');
 
+//Route::get('/login', 'Auth\LoginController@login');
+
+
 Route::get('/', function () {
     if (Auth::check()){
-            if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('SuperAdmin')){
-                return redirect('/admin');
-            }else{
-                return redirect('/home');
-            }
+            return redirect('/admin');
     }else{
         return redirect('/login');
     }
@@ -73,6 +86,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('/store_new_role', 'AdminController@store_new_role');
         });
     });*/
+Route::get('admin', 'AdminController@dashboard');
 Route::get('admin/listar_usuarios', 'AdminController@listar_usuarios');
 Route::get('admin/data_listar_usuarios', 'AdminController@data_listar_usuarios');
 Route::get('admin/data_listar_roles', 'AdminController@data_listar_roles');

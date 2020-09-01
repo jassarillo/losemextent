@@ -37,7 +37,8 @@ class LoginController extends Controller {
     public function __construct() {}
 
     public function login() {
-
+        
+      
         $datos=request();
         $usuario=$datos['username'];
         $validator=Auth::attempt(['usuario'=> $datos['username'], 'password'=> $datos['password'], 'estatus'=> '1']);
@@ -46,17 +47,9 @@ class LoginController extends Controller {
             $datosUsuario=DB::table('users')->where('usuario', '=', $usuario)->first();
             $id=$datosUsuario->id;
             $modelHasRol=DB::table('model_has_roles')->where('model_id', '=', $id)->first();
-            $idRol=$modelHasRol->role_id; //id del rol
-            $role_permissions=User::role_permissions($idRol);
-            $id_permission=$role_permissions->permission_id;
-            $nombrePermiso=User::permission_name($id_permission);
-
-            if($id_permission <=2) {
+         
                 $response=['success'=>true,'admin'=>true];
-            }
-            else {
-                $response=['success'=>true,'admin'=>false];
-            }
+           
 
             return $response;
         }

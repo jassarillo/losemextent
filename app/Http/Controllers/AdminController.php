@@ -38,11 +38,15 @@ class AdminController extends Controller
 
     public function dashboard()
     {
+          
        $perfil = Auth::user()->hasAnyRole(['SuperAdmin', 'Admin']);
+       //dd($perfil);
        if($perfil == true){
-            return view('admin.dashboard');
+          //dd(33);  return view('admin.dashboard');
         }else{
-           return view('/home');
+            //dd(9999);
+           //return view('/home');
+            return view('admin.dashboard');
        }
     }
 
