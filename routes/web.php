@@ -44,7 +44,7 @@ Route::get('/', function () {
         //dd(3333);
             return redirect('/admin');
     }else{
-        dd(777);
+        //dd(777);
         return redirect('/login');
     }
 });
