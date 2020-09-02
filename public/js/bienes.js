@@ -9,22 +9,27 @@ $(document).ready(function() {
             "url": url + "assets/vendors/general/datatables/Spanish.json"
         },
         ajax: {
-            "url": url + "admin/data_listar_inventario",
+            "url": url + "admin/data_listar_bienes",
             "type": "GET"
         },
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },
-            { data: 'apellido_paterno', name: 'apellido_paterno' },
-            { data: 'apellido_materno', name: 'apellido_materno' },
-            { data: 'usuario', name: 'usuario' },
-            { data: 'email', name: 'email' },
-            {
+            { data: 'id_clasificacion', name: 'id_clasificacion' },
+            { data: 'descripcion', name: 'descripcion' },
+            { data: 'causa_alta', name: 'causa_alta' },
+            { data: 'fecha_alta', name: 'fecha_alta' },
+            { data: 'estado', name: 'estado' },
+            { data: 'largo', name: 'largo' },
+            { data: 'ancho', name: 'ancho' },
+            { data: 'alto', name: 'fecha_alta' },
+            { data: 'diametro', name: 'fecha_alta' },
+            { data: 'peso', name: 'peso' },
+            /*{
                 "mRender": function (data, type, row) {
                     var id_user = row.id;
                     return '<a class="btn btn-cdmx" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Editar</a>';
                 }
-            }
+            }*/
 
         ]
         });
@@ -70,7 +75,7 @@ function save_seccion() {
             if (response.resp == true) {
                 destroyModal('mod_add_seccion');
                 Swal.fire('¡Correcto!',response.message,'success');
-                $("#table-roles-permisos").load(" #table-roles-permisos");
+                //$("#table-roles-permisos").load(" #table-roles-permisos");
                 getSelectSeccion();
             } else {
                 Swal.fire('error', response.message,"error");
@@ -157,7 +162,7 @@ function getSelectSeccion() {
                             $.each(data, function (idx, opt) {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
-                                $('#clasificacion').append(
+                                $('#id_clasificacion').append(
                                    '<option class="optInvent" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
                                 );
                             });
@@ -234,7 +239,7 @@ function save_bien() {
                 //console.log(666);
                
                     Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
-                
+                   $('#users-table').DataTable().ajax.reload();
             } else {
                 Swal.fire('error', respuesta.message,"error");
             }

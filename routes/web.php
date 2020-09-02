@@ -109,7 +109,6 @@ Route::get('admin/roles/{id}/editar_roles_permisos', 'RoleController@editar_role
 Route::get('admin/list_inventario', 'InventarioController@list_inventario');
 Route::get('admin/data_listar_inventario', 'InventarioController@data_listar_inventario');
 Route::get('admin/alta_bienes', 'InventarioController@alta_bienes');
-Route::get('admin/data_listar_inventario', 'InventarioController@data_listar_inventario');
 Route::get('admin/create_seccion', 'InventarioController@create_seccion');
 Route::post('admin/save_seccion', 'InventarioController@save_seccion');
 Route::get('admin/listSeccion', 'InventarioController@listSeccion');
@@ -118,6 +117,8 @@ Route::post('admin/save_causa_alta', 'InventarioController@save_causa_alta');
 Route::get('admin/getSelectCatUso', 'InventarioController@getSelectCatUso');
 Route::post('admin/save_uso', 'InventarioController@save_uso');
 Route::post('admin/storeBien', 'InventarioController@storeBien');
+Route::get('admin/data_listar_bienes', 'InventarioController@data_listar_bienes');
+
 
 
 

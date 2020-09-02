@@ -31,6 +31,13 @@ class InventarioController extends Controller
         return Datatables::of($users)->toJson();
     }
 
+    //For DataTable
+    public function data_listar_bienes(){
+        //dd(3232);
+        $users = Bienes::all();
+        return Datatables::of($users)->toJson();
+    }
+
     public function alta_bienes(){
     	return view('bienes.alta_bienes');
     }

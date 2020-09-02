@@ -122,9 +122,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            {{ Form::label('clasificacion', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('id_clasificacion', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                    <select class="form-control" id="clasificacion" name="clasificacion">
+                                                    <select class="form-control" id="id_clasificacion" name="id_clasificacion">
                                                         <option value="0">Seleccione</option>
                                                     </select>
                                             </div>
@@ -248,8 +248,8 @@
                                         <th> Alto</th>
                                         <th> Diametro</th>
                                         <th> Peso</th>
-                                        <th> Ver Foto</th>
-                                        <th> Usu de MAterias*?</th>
+                                        <!--<th> Ver Foto</th>-->
+                                        <!--<th> Usu de MAterias*?</th>-->
                                     </tr>
                                     </thead>
                                 </table>
