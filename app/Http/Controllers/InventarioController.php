@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Bienes;
+use App\CausaAlta;
+use App\CatUso;
 use App\Secciones;
 use App\Http\Requests\UserRequest;
 use Yajra\Datatables\Datatables;
@@ -42,20 +44,68 @@ class InventarioController extends Controller
     {
     	$desc_seccion = $request->desc_seccion;
     	//d($desc_seccion);
-
         $secciones = new Secciones;
-
         $secciones->descripcion = $desc_seccion;
-
         $secciones->save();
-
-    	/*$bienes = Secciones::create([
-                            'descripcion' => $desc_seccion
-                        ]);*/
-    	//return response()->json("ok");
         $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
         return   $respuesta;
 
     }
+
+    public function save_causa_alta(Request $request)
+    {
+        $desc_causa_alta = $request->desc_causa_alta;
+        //d($desc_causa_alta);
+        $secciones = new CausaAlta;
+        $secciones->descripcion = $desc_causa_alta;
+        $secciones->save();
+        $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
+        return   $respuesta;
+
+    }
+
+    public function save_uso(Request $request)
+    {
+        $desc_uso = $request->desc_uso;
+        //d($desc_uso);
+        $secciones = new CatUso;
+        $secciones->descripcion = $desc_uso;
+        $secciones->save();
+        $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
+        return   $respuesta;
+
+    }
+    
+    public function listSeccion()
+    {
+        $secciones = Secciones::select(['id','descripcion'])->get()->toArray();
+        //dd($bienes);
+        return response ()->json ($secciones);
+
+    }
+
+    public function listBienes()
+    {
+        $bienes = Bienes::select(['id','id_seccion','descripcion'])->get()->toArray();
+        //dd($bienes);
+        return response ()->json ($bienes);
+
+    }
+    public function getSelectCausaAlta()
+    {
+        
+        $cAlta = CausaAlta::select(['id','descripcion'])->get()->toArray();
+        //dd($bienes);
+        return response()->json($cAlta);
+    }
+    public function getSelectCatUso()
+    {
+        
+        $cUso = CatUso::select(['id','descripcion'])->get()->toArray();
+        //dd($bienes);
+        return response()->json($cUso);
+    }
+
+
 
 }

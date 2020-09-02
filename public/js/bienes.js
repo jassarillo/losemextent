@@ -52,10 +52,10 @@ function create_seccion() {
         }
     });
 }
-// Guardar nuevo rol
+// Guardar nueva seccion
 function save_seccion() {
-    console.log("dededed");
-    if(!formValidate('#frm_new_rol')){ return false; };
+    //console.log("dededed");
+    if(!formValidate('#frm_new_seccion')){ return false; };
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -66,11 +66,12 @@ function save_seccion() {
         dataType: 'json',
         success: function(response) {
 
-            console.log(response);
+            //console.log(response);
             if (response.resp == true) {
                 destroyModal('mod_add_seccion');
                 Swal.fire('¡Correcto!',response.message,'success');
                 $("#table-roles-permisos").load(" #table-roles-permisos");
+                getSelectSeccion();
             } else {
                 Swal.fire('error', response.message,"error");
             }
@@ -81,14 +82,149 @@ function save_seccion() {
         }
     });
 }
-// Guardar nuevo usuario
-function save_user_create() {
-    if(!formValidate('#frm_nuevo_usuario')){ return false; };
+
+function save_causa_alta() {
+    //console.log("dededed");
+    if(!formValidate('#frm_new_causa_alta')){ return false; };
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : url + "admin/store",
+        url : url + "admin/save_causa_alta",
+        type: 'POST',
+        data: $("#desc_causa_alta").serialize(),
+        dataType: 'json',
+        success: function(response) {
+
+            //console.log(response);
+            if (response.resp == true) {
+                destroyModal('mod_add_seccion');
+                Swal.fire('¡Correcto!',response.message,'success');
+                $("#table-roles-permisos").load(" #table-roles-permisos");
+                getSelectCausaAlta();
+            } else {
+                Swal.fire('error', response.message,"error");
+            }
+        },
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
+        }
+    });
+}
+
+function save_uso() {
+    //console.log("dededed");
+    if(!formValidate('#frm_new_uso')){ return false; };
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : url + "admin/save_uso",
+        type: 'POST',
+        data: $("#desc_uso").serialize(),
+        dataType: 'json',
+        success: function(response) {
+
+            //console.log(response);
+            if (response.resp == true) {
+                destroyModal('mod_add_seccion');
+                Swal.fire('¡Correcto!',response.message,'success');
+                $("#table-roles-permisos").load(" #table-roles-permisos");
+                getSelectUso();
+            } else {
+                Swal.fire('error', response.message,"error");
+            }
+        },
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
+        }
+    });
+}
+
+
+
+function getSelectSeccion() {
+    $(".optInvent").remove();
+    $.ajax({
+        type: "GET",
+        url :  "admin/listSeccion",
+        dataType: "json",
+        success: function (data)
+                        {
+                            //console.log(data[0]);
+                            $.each(data, function (idx, opt) {
+                                  // alert('Estoy recorriendo el registro numero: ' + idx);
+                                  //console.log(opt);
+                                $('#clasificacion').append(
+                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
+                                );
+                            });
+                        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+}
+getSelectSeccion()
+
+function getSelectCausaAlta() {
+    $(".optCatAlta").remove();
+    $.ajax({
+        type: "GET",
+        url :  "admin/getSelectCausaAlta",
+        dataType: "json",
+        success: function (data)
+                        {
+                            //console.log(data[0]);
+                            $.each(data, function (idx, opt) {
+                                  // alert('Estoy recorriendo el registro numero: ' + idx);
+                                  //console.log(opt);
+                                $('#causa_alta').append(
+                                   '<option class="optCatAlta" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
+                                );
+                            });
+                        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+}
+getSelectCausaAlta();
+
+function getSelectUso() {
+    $(".optCatUso").remove();
+    $.ajax({
+        type: "GET",
+        url :  "admin/getSelectCatUso",
+        dataType: "json",
+        success: function (data)
+                        {
+                            //console.log(data[0]);
+                            $.each(data, function (idx, opt) {
+                                  // alert('Estoy recorriendo el registro numero: ' + idx);
+                                  //console.log(opt);
+                                $('#uso_material').append(
+                                   '<option class="optCatUso" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
+                                );
+                            });
+                        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+}
+getSelectUso();
+
+// Guardar nuevo Bien
+function save_bien() {
+    if(!formValidate('#frm_nuevo_bien')){ return false; };
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : url + "admin/storeBien",
         type: 'POST',
         data: $("#frm_nuevo_usuario").serialize(),
         dataType: 'json',

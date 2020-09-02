@@ -14,17 +14,9 @@
 //$variable = 
 Auth::routes();
 //dd($variable);
+    $sesDep = Session::get('idUserSes');
+    //dd($sesDep);
 
-if (Auth::check()){
-Route::get('/login', function () {
-    if (Auth::check()){
-            return redirect('/admin');
-    }else{
-    Route::get('/login', 'Auth\LoginController@login');   
-  }
-
-});
-}
 Route::resource('roles', 'RoleController');
 
 Route::get('/error/{error}', 'ErrorController@error');
@@ -47,12 +39,32 @@ Route::get('/forgot/verify/{id}', 'Auth\ForgotPasswordController@validateTokenPa
 
 
 Route::get('/', function () {
+    //dd();
     if (Auth::check()){
+        //dd(3333);
             return redirect('/admin');
     }else{
+        dd(777);
         return redirect('/login');
     }
 });
+
+if (Auth::check()){ 
+    //dd(33);
+    Route::get('/login', function () 
+    {
+        if (Auth::check())
+        { //dd(44);
+            return redirect('/admin');
+        }
+        else
+        { //dd(55);
+            Route::get('/login', 'Auth\LoginController@login');   
+        }
+
+    });
+}
+
 
 //Rutas con AUTH, todas las rutas deben de pasar por auth como validación
 Route::group(['middleware' => ['auth']], function() {
@@ -71,7 +83,6 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/edit', 'AdminController@edit');
         Route::post('/store', 'AdminController@store');
         Route::post('/update', 'AdminController@update');
-
         //Rutas Permisos
         Route::get('/listar_permisos', 'AdminController@listar_permisos');
         Route::get('/create_permiso', 'AdminController@create_permiso');
@@ -101,6 +112,15 @@ Route::get('admin/alta_bienes', 'InventarioController@alta_bienes');
 Route::get('admin/data_listar_inventario', 'InventarioController@data_listar_inventario');
 Route::get('admin/create_seccion', 'InventarioController@create_seccion');
 Route::post('admin/save_seccion', 'InventarioController@save_seccion');
+Route::get('admin/listSeccion', 'InventarioController@listSeccion');
+Route::get('admin/getSelectCausaAlta', 'InventarioController@getSelectCausaAlta');
+Route::post('admin/save_causa_alta', 'InventarioController@save_causa_alta');
+Route::get('admin/getSelectCatUso', 'InventarioController@getSelectCatUso');
+Route::post('admin/save_uso', 'InventarioController@save_uso');
+Route::post('admin/storeBien', 'InventarioController@storeBien');
+
+
+
 
 Route::group(['middleware' => ['role:SuperAdmin|admin']], function() {
     Route::group(['prefix' => 'requisiciones'], function() {

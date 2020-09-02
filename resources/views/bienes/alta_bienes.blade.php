@@ -110,7 +110,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel">
                         <div class="kt-form kt-form--label-right">
-                        {{ Form::open(['url' => 'foo/bar','method' => 'POST','name'=>'form_update_user','id'=>'form_update_user','files' => true]) }}
+                            <form role="form" name="frm_alta_bien" id="frm_alta_bien" method="POST">
                             <div class="kt-form__body">
                                 <div class="kt-section kt-section--first">
                                     <div class="kt-section__body">
@@ -125,9 +125,7 @@
                                             {{ Form::label('clasificacion', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                     <select class="form-control" id="clasificacion" name="clasificacion">
-                                                        <option value="1">Bueno</option>
-                                                        <option value="2">Regular</option>
-                                                        <option value="3">Malo</option>
+                                                        <option value="0">Seleccione</option>
                                                     </select>
                                             </div>
                                         </div>
@@ -140,7 +138,9 @@
                                         <div class="form-group row">
                                             {{ Form::label('causa_alta', 'Causa de Alta', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('causa_alta', auth()->user()->causa_alta, array('class' => 'form-control')) }}
+                                              <select class="form-control" id="causa_alta" name="causa_alta">
+                                                        <option value="0">Seleccione</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -162,6 +162,13 @@
 
                                         <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"> </div>
                                     <!-- -------------------MEDIDAS----------------------------- -->
+                                    <div class="row">
+                                            <label class="col-xl-3"></label>
+                                            <div class="col-lg-9 col-xl-6">
+                                                <h3 class="kt-section__title kt-section__title-sm">Medidas
+                                                        </h3>
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             {{ Form::label('largo', 'Largo', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
@@ -194,12 +201,10 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            {{ Form::label('uso_materias', 'Uso de Materias', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('uso_material', 'Uso de Material', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                    <select class="form-control" id="uso_materias" name="uso_materias">
-                                                        <option value="1">Bueno</option>
-                                                        <option value="2">Regular</option>
-                                                        <option value="3">Malo</option>
+                                                    <select class="form-control" id="uso_material" name="uso_material">
+                                                        <option value="0">Seleccione</option>
                                                     </select>
                                             </div>
                                         </div>
@@ -207,7 +212,10 @@
                                             <div class="row">
                                                 <div class="col-xl-3"></div>
                                                 <div class="col-lg-9 col-xl-6">                                                    
-                                                    <button type="submit" class="btn btn-success" >Editar Perfil</button>
+                                                    <button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_00" 
+                                                    onclick="save_bien();">
+                                                        Agregar
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

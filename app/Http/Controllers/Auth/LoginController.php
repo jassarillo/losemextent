@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Session;
 
 class LoginController extends Controller {
     /*
@@ -49,8 +50,11 @@ class LoginController extends Controller {
             $modelHasRol=DB::table('model_has_roles')->where('model_id', '=', $id)->first();
          
                 $response=['success'=>true,'admin'=>true];
-           
-
+           ///dd($id);
+                //$depSS = $Usuario[0]['dependencia'];
+                Session::put('idUserSes', $id);
+                $sesDep = Session::get('idUserSes');
+                //dd($sesDep);
             return $response;
         }
 

@@ -120,7 +120,7 @@
                 <div class="kt-header__topbar-user">
                     <span class="kt-header__topbar-welcome kt-hidden-mobile">Bienvenido,</span>
                     <span class="kt-header__topbar-username kt-hidden-mobile">{{ Auth::user()->usuario }} </span>
-                    <img class="" alt="Pic" id="img_avatar_header" src="{{env('APP_URL').'storage/app/'.Auth::user()->avatar}}">
+                    <img class="" alt="Pic" id="img_avatar_header" src="{{ URL::asset('assets/media/misc/bg-1.jpg')}}">
                     <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
                     <span
                         class="kt-hidden kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">S</span>
@@ -132,7 +132,7 @@
                 <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x"
                     style="background-image: url({{ URL::asset('assets/media/misc/bg-1.jpg')}})">
                     <div class="kt-user-card__avatar">
-                        <img class="" id="img_avatar_header_menu" alt="Pic" src="{{env('APP_URL').'storage/app/'.Auth::user()->avatar}}">
+                        <img class="" id="img_avatar_header_menu" alt="Pic" src="{{ URL::asset('assets/media/misc/bg-1.jpg')}}">
                         <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
                         <span
                             class="kt-hidden kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">S</span>

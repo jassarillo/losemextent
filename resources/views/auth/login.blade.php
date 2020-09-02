@@ -154,11 +154,7 @@
                     style="background-image: url(assets/media/bg/bg-5.jpg);  background-repeat: no-repeat; background-position: center; ">
                     <div class="kt-login__section">
                         <div class="kt-login__block">
-<<<<<<< HEAD
                             <h3 class="kt-login__title">LOSEMEXTENT</h3>
-=======
-                            <h3 class="kt-login__title">fzs</h3>
->>>>>>> 7a426cda0668458bca372c4e6b6ead5af605e8d8
                             <div class="kt-login__desc">
                                 By Capa75
                             </div>
