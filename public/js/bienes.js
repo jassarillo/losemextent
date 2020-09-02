@@ -14,7 +14,7 @@ $(document).ready(function() {
         },
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'id_clasificacion', name: 'id_clasificacion' },
+            { data: 'id_seccion', name: 'id_seccion' },
             { data: 'descripcion', name: 'descripcion' },
             { data: 'causa_alta', name: 'causa_alta' },
             { data: 'fecha_alta', name: 'fecha_alta' },
