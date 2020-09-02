@@ -106,6 +106,37 @@ class InventarioController extends Controller
         return response()->json($cUso);
     }
 
+    public function storeBien(Request $request)
+    {
+        /*[
+      "clasificacion" => "1"
+      "descripcion" => "34"
+      "causa_alta" => "0"
+      "fecha_alta" => "2020-08-08"
+      "estado" => "1"
+      "largo" => "888"
+      "ancho" => "88"
+      "alto" => "88"
+      "diametro" => "88"
+      "peso" => "888"
+      "uso_material" => "2"
+    ]
+        dd($request);
+        $secciones = new CatUso;
+        $secciones->descripcion = $desc_uso;
+        $secciones->save();
+        $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
+        return   $respuesta;
+
+        */
+
+        $saveBienes = Bienes::create($request->all());
+
+        //dd($saveBienes->id);
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
+        return   $respuesta;
+    }
+
 
 
 }

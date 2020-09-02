@@ -110,7 +110,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel">
                         <div class="kt-form kt-form--label-right">
-                            <form role="form" name="frm_alta_bien" id="frm_alta_bien" method="POST">
+                            <form role="form" name="frm_nuevo_bien" id="frm_nuevo_bien" method="POST">
                             <div class="kt-form__body">
                                 <div class="kt-section kt-section--first">
                                     <div class="kt-section__body">

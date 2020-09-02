@@ -226,14 +226,15 @@ function save_bien() {
         },
         url : url + "admin/storeBien",
         type: 'POST',
-        data: $("#frm_nuevo_usuario").serialize(),
+        data: $("#frm_nuevo_bien").serialize(),
         dataType: 'json',
         success: function(respuesta) {
-            if (respuesta.success == true) {
-                $('#mod_add_user').modal('hide').on('hidden.bs.modal', function() {
-                    Swal.fire("Proceso  correcto!", "Se  creó  correctamente  el usuario!","success");
-                    $('#users-table').DataTable().ajax.reload();
-                });
+            //console.log(respuesta.resp);
+            if (respuesta.resp == true) {
+                //console.log(666);
+               
+                    Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                
             } else {
                 Swal.fire('error', respuesta.message,"error");
             }
