@@ -163,7 +163,7 @@ function getSelectSeccion() {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_clasificacion').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
+                                   '<option class="optInvent" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion+'</option> '
                                 );
                             });
                         },

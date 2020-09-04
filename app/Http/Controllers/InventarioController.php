@@ -8,6 +8,7 @@ use App\Bienes;
 use App\CausaAlta;
 use App\CatUso;
 use App\Secciones;
+use App\Inventario;
 use App\Http\Requests\UserRequest;
 use Yajra\Datatables\Datatables;
 use Auth;
@@ -27,8 +28,11 @@ class InventarioController extends Controller
 
     public function data_listar_inventario(){
     	//dd(3232);
-    	$users = User::all();
-        return Datatables::of($users)->toJson();
+    	$invent = Inventario::select('inventario.*','bienes.descripcion as descBien','secciones.descripcion as descClasif')
+        ->join('bienes','bienes.id_clasificacion','=','inventario.id_clasifica')
+        ->join('secciones','secciones.id_seccion','=','bienes.par_pre')
+        ->get()->toArray();
+        return Datatables::of($invent)->toJson();
     }
 
     //For DataTable
@@ -85,7 +89,7 @@ class InventarioController extends Controller
     
     public function listSeccion()
     {
-        $secciones = Secciones::select(['id','descripcion'])->get()->toArray();
+        $secciones = Secciones::select(['id_seccion','descripcion'])->get()->toArray();
         //dd($bienes);
         return response ()->json ($secciones);
 
@@ -115,28 +119,7 @@ class InventarioController extends Controller
 
     public function storeBien(Request $request)
     {
-        /*[
-      "clasificacion" => "1"
-      "descripcion" => "34"
-      "causa_alta" => "0"
-      "fecha_alta" => "2020-08-08"
-      "estado" => "1"
-      "largo" => "888"
-      "ancho" => "88"
-      "alto" => "88"
-      "diametro" => "88"
-      "peso" => "888"
-      "uso_material" => "2"
-    ]
-        dd($request);
-        $secciones = new CatUso;
-        $secciones->descripcion = $desc_uso;
-        $secciones->save();
-        $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
-        return   $respuesta;
-
-        */
-
+        
         $saveBienes = Bienes::create($request->all());
 
         //dd($saveBienes->id);
@@ -144,6 +127,11 @@ class InventarioController extends Controller
         return   $respuesta;
     }
 
+    /*public function data_list_inventario()
+    {
+        $users = Inventario::all();
+        return Datatables::of($users)->toJson();
+    }*/
 
 
 }
