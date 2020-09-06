@@ -118,6 +118,7 @@ Route::get('admin/getSelectCatUso', 'InventarioController@getSelectCatUso');
 Route::post('admin/save_uso', 'InventarioController@save_uso');
 Route::post('admin/storeBien', 'InventarioController@storeBien');
 Route::get('admin/data_listar_bienes', 'InventarioController@data_listar_bienes');
+Route::get('inventario/imprimeEtiquetas', 'InventarioController@imprimeEtiquetas');
 
 
 

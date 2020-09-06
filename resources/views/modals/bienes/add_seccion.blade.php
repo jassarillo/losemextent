@@ -62,7 +62,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-2">Uso</div>
+                                <div class="col-md-2">Uso de Material</div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="desc_uso" name="desc_uso" placeholder="Uso" required>
