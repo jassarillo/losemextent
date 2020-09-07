@@ -8,12 +8,17 @@ use App\Bienes;
 use App\CausaAlta;
 use App\CatUso;
 use App\Secciones;
+use App\Inventario;
 use App\Http\Requests\UserRequest;
 use Yajra\Datatables\Datatables;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\File;
 
 
 class InventarioController extends Controller
@@ -27,8 +32,11 @@ class InventarioController extends Controller
 
     public function data_listar_inventario(){
     	//dd(3232);
-    	$users = User::all();
-        return Datatables::of($users)->toJson();
+    	$invent = Inventario::select('inventario.*','bienes.descripcion as descBien','secciones.descripcion as descClasif')
+        ->join('bienes','bienes.id_clasificacion','=','inventario.id_clasifica')
+        ->join('secciones','secciones.id_seccion','=','bienes.par_pre')
+        ->get()->toArray();
+        return Datatables::of($invent)->toJson();
     }
 
     //For DataTable
@@ -85,7 +93,7 @@ class InventarioController extends Controller
     
     public function listSeccion()
     {
-        $secciones = Secciones::select(['id','descripcion'])->get()->toArray();
+        $secciones = Secciones::select(['id_seccion','descripcion'])->get()->toArray();
         //dd($bienes);
         return response ()->json ($secciones);
 
@@ -115,35 +123,40 @@ class InventarioController extends Controller
 
     public function storeBien(Request $request)
     {
-        /*[
-      "clasificacion" => "1"
-      "descripcion" => "34"
-      "causa_alta" => "0"
-      "fecha_alta" => "2020-08-08"
-      "estado" => "1"
-      "largo" => "888"
-      "ancho" => "88"
-      "alto" => "88"
-      "diametro" => "88"
-      "peso" => "888"
-      "uso_material" => "2"
-    ]
-        dd($request);
-        $secciones = new CatUso;
-        $secciones->descripcion = $desc_uso;
-        $secciones->save();
-        $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
-        return   $respuesta;
-
-        */
-
+        //dd($request->all());
+      
+        
         $saveBienes = Bienes::create($request->all());
-
+      if ($request->hasFile('anexo_1')) {
+            $fecha = Carbon::now();
+            $y = $fecha->format('y');
+              $file = Input::file('anexo_1');
+              $nombre = $file->getClientOriginalName();
+              $request->file('anexo_1')->move('uploads/inventarios_img/'.$y.'/', $saveBienes->id.'.jpg');
+        }
         //dd($saveBienes->id);
         $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
         return   $respuesta;
     }
 
+    public function data_list_inventario()
+    {
+        
+
+            $view = \View::make('bienes.pdf.formRepABDF', compact('dependencias','depenAltas', 'depenBajas', 'depenDFinal', 'fecha_ini','fecha_fin'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->loadHTML($view)->setPaper('letter','landscape');
+
+            return $pdf->stream('Bienes');
+    }
+    public function imprimeEtiquetas()
+    {
+        
+
+            
+           $pdf = PDF::loadView('inventario.pdf.etiquetas', ['data' => $data], compact('dia_elabora', 'mes_elabora', 'anio_elabora', 'dia_requiere', 'mes_requiere', 'anio_requiere', 'user', 'tipo', 'data2'))->setPaper('A4', 'portrait')->setWarnings(false)->stream();
+            return $pdf->stream('Bienes');
+    }
 
 
 }

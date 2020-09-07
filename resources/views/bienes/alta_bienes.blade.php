@@ -110,7 +110,8 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel">
                         <div class="kt-form kt-form--label-right">
-                            <form role="form" name="frm_nuevo_bien" id="frm_nuevo_bien" method="POST">
+                            <form role="form" name="frm_nuevo_bien" id="frm_nuevo_bien" method="POST" accept-charset="UTF-8" 
+                enctype="multipart/form-data">
                             <div class="kt-form__body">
                                 <div class="kt-section kt-section--first">
                                     <div class="kt-section__body">
@@ -201,6 +202,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            {{ Form::label('calibre', 'Calibre', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                {{ Form::text('calibre', auth()->user()->calibre, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             {{ Form::label('uso_material', 'Uso de Material', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                     <select class="form-control" id="uso_material" name="uso_material">
@@ -208,14 +215,31 @@
                                                     </select>
                                             </div>
                                         </div>
+                                        <div class="card-body px-3 pt-2">
+                                        <div class="form-group row align-items-center">
+                                            <div class="col-auto">
+
+                                                <label for="customFile" class="col-form-label">Adjuntar Imagen</label>
+                                            </div>
+                                            <div class="col-sm-9 col-md-9 col-lg-7 col-xl-7">
+                                                    <input class="col-12 pl-0 pr-0 pt-0 pb-0 btn border " type="file" name="anexo_1" id="anexo_1" style="background-color: white">
+                                                    <label for="archivo"></label>
+                                            </div>
+                                             <div class="col-1" align="center"></div>
+                                        </div>
+                            <div class="form-group row align-items-center">
+                            </div>
+                        </div>
                                         <div class="kt-form__actions">
                                             <div class="row">
                                                 <div class="col-xl-3"></div>
-                                                <div class="col-lg-9 col-xl-6">                                                    
-                                                    <button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_00" 
+                                                <div class="col-lg-9 col-xl-6">        
+
+                                                    <button type="submit" id="acciones" class="btn btn-success" >Guardar</button>                                            
+                                                    <!--<button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_00" 
                                                     onclick="save_bien();">
                                                         Agregar
-                                                    </button>
+                                                    </button>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -248,7 +272,7 @@
                                         <th> Alto</th>
                                         <th> Diametro</th>
                                         <th> Peso</th>
-                                        <!--<th> Ver Foto</th>-->
+                                        <th> Foto</th>
                                         <!--<th> Usu de MAterias*?</th>-->
                                     </tr>
                                     </thead>
@@ -265,7 +289,8 @@
                                 <div class="row">
                                     <div class="col-xl-3"></div>
                                     <div class="col-lg-9 col-xl-6">
-                                    <button type="submit" class="btn btn-brand">Guardar</button>
+
+                                    <!--<button type="submit" class="btn btn-brand">Guardar</button>-->
                                     </div>
                                 </div>
                             </div>

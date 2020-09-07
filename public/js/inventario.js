@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    $('.users-table').each(function () {
+    $('.inventarios-table').each(function () {
         $(this).dataTable(window.dtDefaultOptions);
     });
-    var dataTable = $('#users-table').dataTable({
+    var dataTable = $('#inventarios-table').dataTable({
         processing: true,
         serverSide: true,
         language: {
@@ -14,11 +14,15 @@ $(document).ready(function() {
         },
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },
-            { data: 'apellido_paterno', name: 'apellido_paterno' },
-            { data: 'apellido_materno', name: 'apellido_materno' },
-            { data: 'usuario', name: 'usuario' },
-            { data: 'email', name: 'email' },
+            { data: 'descClasif', name: 'descClasif' },
+            { data: 'descBien', name: 'descBien' },
+            { data: 'motivo_alta', name: 'motivo_alta' },
+            { data: 'factura', name: 'factura' },
+            { data: 'precio', name: 'email' },
+            { data: 'precio', name: 'email' },
+            { data: 'precio', name: 'email' },
+            { data: 'precio', name: 'email' },
+            { data: 'precio', name: 'email' },
             {
                 "mRender": function (data, type, row) {
                     var id_user = row.id;

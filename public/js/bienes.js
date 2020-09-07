@@ -24,12 +24,12 @@ $(document).ready(function() {
             { data: 'alto', name: 'fecha_alta' },
             { data: 'diametro', name: 'fecha_alta' },
             { data: 'peso', name: 'peso' },
-            /*{
+            {
                 "mRender": function (data, type, row) {
                     var id_user = row.id;
-                    return '<a class="btn btn-cdmx" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Editar</a>';
+                    return '<img width="80" height="95" class="img_avatar_header" alt="Pic" id="img_avatar_header" src="uploads/inventarios_img/20/'+row.id+'.jpg">';
                 }
-            }*/
+            }
 
         ]
         });
@@ -163,7 +163,7 @@ function getSelectSeccion() {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_clasificacion').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
+                                   '<option class="optInvent" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion+'</option> '
                                 );
                             });
                         },
@@ -223,16 +223,23 @@ function getSelectUso() {
 getSelectUso();
 
 // Guardar nuevo Bien
-function save_bien() {
-    if(!formValidate('#frm_nuevo_bien')){ return false; };
+$('#frm_nuevo_bien').on('submit', function(e) {
+            e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('_token', $('input[name=_token]').val());
+    console.log(formData);
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : url + "admin/storeBien",
-        type: 'POST',
-        data: $("#frm_nuevo_bien").serialize(),
-        dataType: 'json',
+        //url : url + "admin/storeBien",
+        type: "POST",
+        dataType: "json",
+        url: "admin/storeBien",
+        data: formData, 
+        cache: false,
+        contentType: false,
+        processData: false,
         success: function(respuesta) {
             //console.log(respuesta.resp);
             if (respuesta.resp == true) {
@@ -250,11 +257,10 @@ function save_bien() {
 
         }
     });
-}
+});
 
 // Mostrar modal para edición de usuario
 function edit_user_modal(data) {
-
     var id=data;
     $.ajax({
         headers: {

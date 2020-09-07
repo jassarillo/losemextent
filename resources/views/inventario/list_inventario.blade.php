@@ -72,22 +72,21 @@
 
     <div class="kt-portlet__body">
         <!--begin: Datatable -->
-        <table class="table table-striped- table-bordered table-hover table-checkable" id="users-table">
+        <table class="table table-striped- table-bordered table-hover table-checkable" id="inventarios-table">
             <thead>
             <tr>
                 <th> ID </th>
                 <th> Clasificación </th>
                 <th> Descripción </th>
-                <th> Causa de Alta </th>
-                <th> Fecha Ala </th>
-                <th> Estado </th>
-                <th> Largo</th>
-                <th> Ancho</th>
-                <th> Alto</th>
-                <th> Diametro</th>
-                <th> Peso</th>
-                <th> Ver Foto</th>
-                <th> Usu de MAterias*?</th>
+                <th> Fecha Inventario </th>
+                <th> Motivo de Alta </th>
+                <th> Factura </th>
+                <th> Precio</th>
+                <th> Conteo</th>
+                <th> Unico</th>
+                <th> Cantidad</th>
+                <th> Acciones</th>
+                
             </tr>
             </thead>
 
