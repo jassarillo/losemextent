@@ -142,20 +142,17 @@ class InventarioController extends Controller
     public function data_list_inventario()
     {
         
-
+/*
             $view = \View::make('bienes.pdf.formRepABDF', compact('dependencias','depenAltas', 'depenBajas', 'depenDFinal', 'fecha_ini','fecha_fin'))->render();
             $pdf = \App::make('dompdf.wrapper');
             $pdf->loadHTML($view)->setPaper('letter','landscape');
 
-            return $pdf->stream('Bienes');
+            return $pdf->stream('Bienes');*/
     }
     public function imprimeEtiquetas()
-    {
-        
-
-            
-           $pdf = PDF::loadView('inventario.pdf.etiquetas', ['data' => $data], compact('dia_elabora', 'mes_elabora', 'anio_elabora', 'dia_requiere', 'mes_requiere', 'anio_requiere', 'user', 'tipo', 'data2'))->setPaper('A4', 'portrait')->setWarnings(false)->stream();
-            return $pdf->stream('Bienes');
+    {   
+        return PDF::loadView('inventario.pdf.etiquetas')
+        ->stream('archivo.pdf');
     }
 
 
