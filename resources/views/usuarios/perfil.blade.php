@@ -35,7 +35,7 @@
                         </a>
                     </li>
 
-                    @can('SupersAdmin')
+                    
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_4" role="tab">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -48,7 +48,7 @@
                         </a>
                     </li>
 
-                    @endCan
+                   
                 </ul>
             </div>
         </div>
@@ -210,7 +210,7 @@
                         </div>
                     </div>
 
-                    @can('SupersAdmin')
+                    
                     <div class="tab-pane" id="kt_user_edit_tab_4" role="tabpanel">
                         <div class="kt-form kt-form--label-right">
                             <div class="kt-form__body">
@@ -352,7 +352,7 @@
                             </div>
                         </div>
                     </div>
-                    @endCan
+                   
 
                 </div>
             

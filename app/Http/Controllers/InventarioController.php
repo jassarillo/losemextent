@@ -33,8 +33,8 @@ class InventarioController extends Controller
     public function data_listar_inventario(){
     	//dd(3232);
     	$invent = Inventario::select('inventario.*','bienes.descripcion as descBien','secciones.descripcion as descClasif')
-        ->join('bienes','bienes.id_clasificacion','=','inventario.id_clasifica')
-        ->join('secciones','secciones.id_seccion','=','bienes.par_pre')
+        ->leftJoin('bienes','bienes.id_clasificacion','=','inventario.id_clasifica')
+        ->leftJoin('secciones','secciones.id_seccion','=','bienes.id_clasificacion')
         ->get()->toArray();
         return Datatables::of($invent)->toJson();
     }
@@ -62,7 +62,7 @@ class InventarioController extends Controller
         $secciones = new Secciones;
         $secciones->descripcion = $desc_seccion;
         $secciones->save();
-        $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
+        $respuesta = array('resp' => true, 'mensaje' => 'Seccion Agregada');
         return   $respuesta;
 
     }
@@ -74,7 +74,7 @@ class InventarioController extends Controller
         $secciones = new CausaAlta;
         $secciones->descripcion = $desc_causa_alta;
         $secciones->save();
-        $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
+        $respuesta = array('resp' => true, 'mensaje' => 'Causa Alta agregada');
         return   $respuesta;
 
     }
@@ -86,7 +86,7 @@ class InventarioController extends Controller
         $secciones = new CatUso;
         $secciones->descripcion = $desc_uso;
         $secciones->save();
-        $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
+        $respuesta = array('resp' => true, 'mensaje' => 'Detalle Uso Agregado');
         return   $respuesta;
 
     }
@@ -101,7 +101,7 @@ class InventarioController extends Controller
 
     public function listBienes()
     {
-        $bienes = Bienes::select(['id','id_seccion','descripcion'])->get()->toArray();
+        $bienes = Bienes::select(['id','id_clasificacion','descripcion'])->get()->toArray();
         //dd($bienes);
         return response ()->json ($bienes);
 
@@ -139,15 +139,40 @@ class InventarioController extends Controller
         return   $respuesta;
     }
 
+    public function storeBienInvent(Request $request)
+    {
+            //$last = DB::table('items')->latest()->first();
+        $lastId = Inventario::find(\DB::table('inventario')->max('id'));
+        //$lastId = Inventario::whereRaw("select max(id) from inventario")->get();
+        //dd($lastId->id);
+        //$saveBienes = Inventario::create($request->all());
+        $saveBienes = new Inventario;
+        $saveBienes->id = $lastId->id + 1;
+        $saveBienes->id_clasifica = $request->id_clasifica;
+        $saveBienes->id_bien = $request->id_bien;
+        $saveBienes->fecha_inventario = $request->fecha_inventario;
+        $saveBienes->motivo_alta = $request->motivo_alta;
+        $saveBienes->factura = $request->factura;
+        $saveBienes->precio = $request->precio;
+        //$saveBienes->conteo = $request->conteo;
+        $saveBienes->save();
+        
+        //dd($saveBienes->id);
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
+        return   $respuesta;
+
+    }
+
     public function data_list_inventario()
     {
         
-/*
+            /*
             $view = \View::make('bienes.pdf.formRepABDF', compact('dependencias','depenAltas', 'depenBajas', 'depenDFinal', 'fecha_ini','fecha_fin'))->render();
             $pdf = \App::make('dompdf.wrapper');
             $pdf->loadHTML($view)->setPaper('letter','landscape');
 
-            return $pdf->stream('Bienes');*/
+            return $pdf->stream('Bienes');
+            */
     }
     public function imprimeEtiquetas()
     {   

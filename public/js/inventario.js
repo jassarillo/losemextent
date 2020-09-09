@@ -34,71 +34,79 @@ $(document).ready(function() {
         });
 });
 
-// Mostrar modal para alta de usuario
-function add_user_modal() {
+function getSelectSeccion() {
+    $(".optInvent").remove();
     $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url : url + "admin/create",
-        dataType: 'html',
-        success: function(resp_success) {
-            var modal = resp_success;
-            $(modal).modal().on('shown.bs.modal', function() {
-                $("[class='make-switch']").bootstrapSwitch('animate', true);
-                $('.select2').select2({dropdownParent: $("#mod_add_user")});
-            }).on('hidden.bs.modal', function() {
-                $(this).remove();
-            });
-        },
+        type: "GET",
+        url :  "admin/listSeccion",
+        dataType: "json",
+        success: function (data)
+                        {
+                            //console.log(data[0]);
+                            $.each(data, function (idx, opt) {
+                                  // alert('Estoy recorriendo el registro numero: ' + idx);
+                                  //console.log(opt);
+                                $('#id_clasifica').append(
+                                   '<option class="optInvent" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion+'</option> '
+                                );
+                            });
+                        },
         error: function(respuesta) {
             Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
         }
     });
 }
-// Guardar nuevo rol
-function save_role_create() {
-    if(!formValidate('#frm_new_rol')){ return false; };
+getSelectSeccion();
+
+function getSelectBien() {
+    $(".optInvent").remove();
     $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url : url + "admin/store_new_role",
-        type: 'POST',
-        data: $("#frm_new_rol").serialize(),
-        dataType: 'json',
-        success: function(response) {
-            if (response.success == true) {
-                destroyModal('mod_add_rol');
-                Swal.fire('¡Correcto!',response.message,'success');
-                $("#table-roles-permisos").load(" #table-roles-permisos");
-            } else {
-                Swal.fire('error', response.message,"error");
-            }
-        },
-        error: function(xhr) {
-         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
-         Swal.fire('¡Alerta!', xhr, 'warning');
+        type: "GET",
+        url :  "admin/listBienes",
+        dataType: "json",
+        success: function (data)
+                        {
+                            //console.log(data[0]);
+                            $.each(data, function (idx, opt) {
+                                  // alert('Estoy recorriendo el registro numero: ' + idx);
+                                  //console.log(opt);
+                                $('#id_bien').append(
+                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
+                                );
+                            });
+                        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
         }
     });
 }
-// Guardar nuevo usuario
-function save_user_create() {
-    if(!formValidate('#frm_nuevo_usuario')){ return false; };
+getSelectBien();
+
+// Guardar nuevo Bien
+$('#frm_nuevo_invent').on('submit', function(e) {
+            e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('_token', $('input[name=_token]').val());
+    console.log(formData);
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : url + "admin/store",
-        type: 'POST',
-        data: $("#frm_nuevo_usuario").serialize(),
-        dataType: 'json',
+        //url : url + "admin/storeBien",
+        type: "POST",
+        dataType: "json",
+        url: "admin/storeBienInvent",
+        data: formData, 
+        cache: false,
+        contentType: false,
+        processData: false,
         success: function(respuesta) {
-            if (respuesta.success == true) {
-                $('#mod_add_user').modal('hide').on('hidden.bs.modal', function() {
-                    Swal.fire("Proceso  correcto!", "Se  creó  correctamente  el usuario!","success");
-                    $('#users-table').DataTable().ajax.reload();
-                });
+            //console.log(respuesta.resp);
+            if (respuesta.resp == true) {
+                //console.log(666);
+               
+                    Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                   $('#users-table').DataTable().ajax.reload();
             } else {
                 Swal.fire('error', respuesta.message,"error");
             }
@@ -109,89 +117,14 @@ function save_user_create() {
 
         }
     });
-}
+});
 
-// Mostrar modal para edición de usuario
-function edit_user_modal(data) {
 
-    var id=data;
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url : url + "admin/edit",
-        dataType: 'html',
-        data:{
-            id:id
-        },
-        success: function(resp_success) {
-            var modal = resp_success;
-            $(modal).modal().on('shown.bs.modal', function() {
+function mayus(e) {
+        e.value = e.value.toUpperCase();
+     };
 
-                $("[class='make-switch']").bootstrapSwitch('animate', true);
-                $('.select2').select2({dropdownParent: $("#mod_edit_user")});
-            }).on('hidden.bs.modal', function() {
-                $(this).remove();
-            });
-        },
-        error: function(respuesta) {
-            Swal.fire('¡Alerta!','Error de conectividad de red USR-03','warning');
-        }
-    });
-}
-
-function edit_user() {
-    if(!formValidate('#editar_usuario')){ return false; }
-    var password = $('#password').removeClass('has-error').val();
-    var password2 = $('#password2').removeClass('has-error').val();
-    if (password != password2){
-        showElementError('password2','Las contraseñas no son iguales.');
-        return false;
-    }
-    var dataString = ($("#editar_usuario").serialize());
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url : url + "admin/update",
-        type: 'POST',
-        data: dataString,
-        dataType: 'json',
-        success: function(respuesta) {
-            if (respuesta.success == true) {
-                $('#mod_edit_user').modal('hide').on('hidden.bs.modal', function() {
-                    Swal.fire("Proceso  correcto!", "Se  modifico  correctamente  el usuario!","success");
-                    $('#users-table').DataTable().ajax.reload();
-                });
-            }else {
-                Swal.fire('error', respuesta.message,"error");
-            }
-        },
-        error: function(respuesta) {
-            Swal.fire('¡Alerta!','Error de conectividad de red USR-04','warning');
-        }
-     });
-}
 // Mostrar modal para alta de rol
-function add_new_rol() {
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url : url + "admin/create_rol",
-        dataType: 'html',
-        success: function(resp_success) {
-            var modal = resp_success;
-            $(modal).modal().on('shown.bs.modal', function() {
-                $("[class='make-switch']").bootstrapSwitch('animate', true);
-            }).on('hidden.bs.modal', function() {
-                $(this).remove();
-            });
-        },
-        error: function(respuesta) {
-            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
-        }
-    });
-}
+
 
 //$(".dt-buttons").addClass('kt-hidden');
