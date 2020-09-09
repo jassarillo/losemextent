@@ -4,95 +4,268 @@
     <div class="kt-portlet__head kt-portlet__head--lg">
         <div class="kt-portlet__head-label">
             <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2020-08-25-063451/theme/html/demo1/dist/../src/media/svg/icons/Tools/Tools.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+   
+
+
+
+
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect x="0" y="0" width="24" height="24"/>
-        <path d="M15.9497475,3.80761184 L13.0246125,6.73274681 C12.2435639,7.51379539 12.2435639,8.78012535 13.0246125,9.56117394 L14.4388261,10.9753875 C15.2198746,11.7564361 16.4862046,11.7564361 17.2672532,10.9753875 L20.1923882,8.05025253 C20.7341101,10.0447871 20.2295941,12.2556873 18.674559,13.8107223 C16.8453326,15.6399488 14.1085592,16.0155296 11.8839934,14.9444337 L6.75735931,20.0710678 C5.97631073,20.8521164 4.70998077,20.8521164 3.92893219,20.0710678 C3.1478836,19.2900192 3.1478836,18.0236893 3.92893219,17.2426407 L9.05556629,12.1160066 C7.98447038,9.89144078 8.36005124,7.15466739 10.1892777,5.32544095 C11.7443127,3.77040588 13.9552129,3.26588995 15.9497475,3.80761184 Z" fill="#000000"/>
-        <path d="M16.6568542,5.92893219 L18.0710678,7.34314575 C18.4615921,7.73367004 18.4615921,8.36683502 18.0710678,8.75735931 L16.6913928,10.1370344 C16.3008685,10.5275587 15.6677035,10.5275587 15.2771792,10.1370344 L13.8629656,8.7228208 C13.4724413,8.33229651 13.4724413,7.69913153 13.8629656,7.30860724 L15.2426407,5.92893219 C15.633165,5.5384079 16.26633,5.5384079 16.6568542,5.92893219 Z" fill="#000000" opacity="0.3"/>
+        <rect id="bound" x="0" y="0" width="24" height="24"/>
+        <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" id="Combined-Shape" fill="#000000" opacity="0.3"/>
+        <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" id="Combined-Shape" fill="#000000"/>
+        <rect id="Rectangle-152" fill="#000000" opacity="0.3" x="10" y="9" width="7" height="2" rx="1"/>
+        <rect id="Rectangle-152-Copy-2" fill="#000000" opacity="0.3" x="7" y="9" width="2" height="2" rx="1"/>
+        <rect id="Rectangle-152-Copy-3" fill="#000000" opacity="0.3" x="7" y="13" width="2" height="2" rx="1"/>
+        <rect id="Rectangle-152-Copy" fill="#000000" opacity="0.3" x="10" y="13" width="7" height="2" rx="1"/>
+        <rect id="Rectangle-152-Copy-5" fill="#000000" opacity="0.3" x="7" y="17" width="2" height="2" rx="1"/>
+        <rect id="Rectangle-152-Copy-4" fill="#000000" opacity="0.3" x="10" y="17" width="7" height="2" rx="1"/>
     </g>
+</svg>
+
+
 </svg><!--end::Svg Icon--></span>
             <h3 class="kt-portlet__head-title">
-               Inventario
+               Alta Inventario
             </h3>
         </div>
         <div class="kt-portlet__head-toolbar">
             <div class="kt-portlet__head-wrapper">
-                <div class="kt-portlet__head-actions">
-                    <div class="dropdown dropdown-inline">
-                        <button type="button" class="btn btn-default btn-icon-sm dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="la la-download"></i> Exportar
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <ul class="kt-nav dt_export">
-                                <li class="kt-nav__section kt-nav__section--first">
-                                    <span class="kt-nav__section-text">Selecciona...</span>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="javascript:void(0)" class="kt-nav__link"  data-value="0">
-                                        <i class="kt-nav__link-icon la la-copy"></i>
-                                        <span class="kt-nav__link-text">Copiar</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="javascript:void(0)" class="kt-nav__link"  data-value="1">
-                                        <i class="kt-nav__link-icon la la-file-excel-o"></i>
-                                        <span class="kt-nav__link-text">Excel</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="javascript:void(0)" class="kt-nav__link"  data-value="2">
-                                        <i class="kt-nav__link-icon la la-file-text-o"></i>
-                                        <span class="kt-nav__link-text">CSV</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="javascript:void(0)" class="kt-nav__link"  data-value="3">
-                                        <i class="kt-nav__link-icon la la-file-pdf-o"></i>
-                                        <span class="kt-nav__link-text">PDF</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="javascript:void(0)" class="kt-nav__link" data-value="4">
-                                        <i class="kt-nav__link-icon la la-print"></i>
-                                        <span class="kt-nav__link-text">Imprimir</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                <!--<div class="kt-portlet__head-actions">
+                    
                     &nbsp;
-                    <a href="javascript:void(0);" onclick="add_user_modal();" class="btn btn-cdmx btn-elevate btn-icon-sm">
+                    <a href="javascript:void(0);" onclick="create_seccion();" class="btn btn-cdmx btn btn-brand btn-elevate">
                         <i class="la la-plus"></i>
-                       Nuevo Usuario
+                       Agregar Sección
                     </a>
-                </div>
+
+                </div>-->
             </div>
         </div>
     </div>
 
     <div class="kt-portlet__body">
-        <!--begin: Datatable -->
-        <table class="table table-striped- table-bordered table-hover table-checkable" id="inventarios-table">
-            <thead>
-            <tr>
-                <th> ID </th>
-                <th> Clasificación </th>
-                <th> Descripción </th>
-                <th> Fecha Inventario </th>
-                <th> Motivo de Alta </th>
-                <th> Factura </th>
-                <th> Precio</th>
-                <th> Conteo</th>
-                <th> Unico</th>
-                <th> Cantidad</th>
-                <th> Acciones</th>
-                
-            </tr>
-            </thead>
 
 
-        </table>
-        <!--end: Datatable -->
+ <div class="kt-portlet__head">
+            <div class="kt-portlet__head-toolbar">
+                <ul class="nav nav-tabs nav-tabs-space-xl nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#kt_user_edit_tab_1" role="tab">
+                            <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2020-08-25-063451/theme/html/demo1/dist/../src/media/svg/icons/General/Duplicate.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24"/>
+                            <path d="M15.9956071,6 L9,6 C7.34314575,6 6,7.34314575 6,9 L6,15.9956071 C4.70185442,15.9316381 4,15.1706419 4,13.8181818 L4,6.18181818 C4,4.76751186 4.76751186,4 6.18181818,4 L13.8181818,4 C15.1706419,4 15.9316381,4.70185442 15.9956071,6 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                            <path d="M10.1818182,8 L17.8181818,8 C19.2324881,8 20,8.76751186 20,10.1818182 L20,17.8181818 C20,19.2324881 19.2324881,20 17.8181818,20 L10.1818182,20 C8.76751186,20 8,19.2324881 8,17.8181818 L8,10.1818182 C8,8.76751186 8.76751186,8 10.1818182,8 Z" fill="#000000"/>
+                        </g>
+                    </svg><!--end::Svg Icon--></span> Agregar a Inventario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_3" role="tab">
+                            <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2020-08-25-063451/theme/html/demo1/dist/../src/media/svg/icons/Text/Bullet-list.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"/>
+                                <path d="M10.5,5 L19.5,5 C20.3284271,5 21,5.67157288 21,6.5 C21,7.32842712 20.3284271,8 19.5,8 L10.5,8 C9.67157288,8 9,7.32842712 9,6.5 C9,5.67157288 9.67157288,5 10.5,5 Z M10.5,10 L19.5,10 C20.3284271,10 21,10.6715729 21,11.5 C21,12.3284271 20.3284271,13 19.5,13 L10.5,13 C9.67157288,13 9,12.3284271 9,11.5 C9,10.6715729 9.67157288,10 10.5,10 Z M10.5,15 L19.5,15 C20.3284271,15 21,15.6715729 21,16.5 C21,17.3284271 20.3284271,18 19.5,18 L10.5,18 C9.67157288,18 9,17.3284271 9,16.5 C9,15.6715729 9.67157288,15 10.5,15 Z" fill="#000000"/>
+                                <path d="M5.5,8 C4.67157288,8 4,7.32842712 4,6.5 C4,5.67157288 4.67157288,5 5.5,5 C6.32842712,5 7,5.67157288 7,6.5 C7,7.32842712 6.32842712,8 5.5,8 Z M5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 C6.32842712,10 7,10.6715729 7,11.5 C7,12.3284271 6.32842712,13 5.5,13 Z M5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 C6.32842712,15 7,15.6715729 7,16.5 C7,17.3284271 6.32842712,18 5.5,18 Z" fill="#000000" opacity="0.3"/>
+                            </g>
+                            </svg><!--end::Svg Icon--></span> Bienes
+                        </a>
+                    </li>
+
+                   
+                </ul>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            
+                <div class="tab-content">
+                    <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel">
+                        <div class="kt-form kt-form--label-right">
+                            <form role="form" name="frm_nuevo_invent" id="frm_nuevo_invent" method="POST" accept-charset="UTF-8" 
+                enctype="multipart/form-data">
+                            <div class="kt-form__body">
+                                <div class="kt-section kt-section--first">
+                                    <div class="kt-section__body">
+                                        <div class="row">
+                                            <label class="col-xl-3"></label>
+                                            <div class="col-lg-9 col-xl-6">
+                                                <h3 class="kt-section__title kt-section__title-sm">Capturar Inventario de un Bien
+                                                        </h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('id_clasifica', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                    <select class="form-control" id="id_clasifica" name="id_clasifica">
+                                                        <option value="0">Seleccione</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('id_bien', 'Bien', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                    <select class="form-control" id="id_bien" name="id_bien">
+                                                        <option value="0">Seleccione</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            {{ Form::label('fecha_inventario', 'Fecha Inventario', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                {{ Form::date('fecha_inventario', auth()->user()->fecha_inventario, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('motivo_alta', 'Motivo de Alta', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                    <select class="form-control selectpicker" id="motivo_alta" name="motivo_alta">
+                                                        <option value="1">Reaprovechamiento</option>
+                                                        <option value="2">Reclasificación</option>
+                                                        <option value="3">Reposición</option>
+                                                        <option value="4">Sustitución</option>
+                                                        <option value="5">Transferencia</option>
+                                                        <option value="6">Traspaso</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+
+                                    
+                                        <div class="form-group row">
+                                            {{ Form::label('factura', 'Factura', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                
+                                                <input type="text" name="factura" id="factura" class="form-control" onkeyup="mayus(this);">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            {{ Form::label('precio', 'Precio', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                {{ Form::text('precio', auth()->user()->precio, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('alto', 'Conteo', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                <input type="number" name="conteo" id="conteo" class="form-control">
+                                            </div>
+                                        </div>
+                                       
+                                       
+                                        
+                                        
+                                         <div class="form-group form-group-last row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">Uno/Muchos
+                                            </label>
+                                            <div class="col-lg-9 col-xl-6">
+                                                <span class="kt-switch">
+                                                            <label>
+                                                                <input type="checkbox" name="email_notification_2">
+                                                                <span></span>
+                                                </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-2 col-lg-2 col-form-label">Del:
+                                            </label>
+                                            <div class="col-lg-9 col-xl-2">
+                                                    <input type="text" class="form-control" readonly="" name="ini" id="ini" style="background-color:#e8e8e8;">
+                                            </div>
+                                            <label class="col-xl-2 col-lg-2 col-form-label">Al:
+                                            </label>
+                                            <div class="col-lg-9 col-xl-2">
+                                                    <input type="text" class="form-control" style="background-color:#e8e8e8;" readonly="" name="fin" id="fin">
+                                            </div>
+                                        </div>
+                                        <div class="card-body px-3 pt-2">
+                                        
+                            <div class="form-group row align-items-center">
+                            </div>
+                        </div>
+                                        <div class="kt-form__actions">
+                                            <div class="row">
+                                                <div class="col-xl-3"></div>
+                                                <div class="col-lg-9 col-xl-6">        
+
+                                                    <button type="submit" id="acciones" class="btn btn-success" >Guardar</button>                                            
+                                                    <!--<button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_00" 
+                                                    onclick="save_bien();">
+                                                        Agregar
+                                                    </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {!! Form::close() !!}
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="kt_user_edit_tab_3" role="tabpanel">
+                        <div class="kt-form kt-form--label-right">
+                        {{ Form::open(['url' => 'foo/bar','method' => 'POST','name'=>'form_update_passwd','id'=>'form_update_passwd']) }}
+                            <div class="kt-form__body">
+                                <div class="kt-section kt-section--first">
+                                <!--begin: Datatable -->
+                                <div class="table-responsive col-xl-12"> 
+                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="inventarios-table">
+                                    <thead>
+                                    <tr>
+                                        <th> ID </th>
+                                        <th> Clasificación </th>
+                                        <th> Descripción </th>
+                                        <th> Fecha Inventario </th>
+                                        <th> Motivo de Alta </th>
+                                        <th> Factura </th>
+                                        <th> Precio</th>
+                                        <th> Conteo</th>
+                                        <th> Unico</th>
+                                        <th> Cantidad</th>
+                                        <th> Acciones</th>
+                                        
+                                    </tr>
+                                    </thead>
+
+
+                                </table>
+                            </div>
+                                <!--end: Datatable -->
+                                </div>
+                            </div>
+
+                            <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid">
+                            </div>
+
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-xl-3"></div>
+                                    <div class="col-lg-9 col-xl-6">
+
+                                    <!--<button type="submit" class="btn btn-brand">Guardar</button>-->
+                                    </div>
+                                </div>
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            
+        </div>
+
+
+
+
     </div>
 </div>
 @section('scripts')
