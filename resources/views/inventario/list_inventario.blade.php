@@ -150,7 +150,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            {{ Form::label('alto', 'Conteo', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('conteo', 'Conteo', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                 <input type="number" name="conteo" id="conteo" class="form-control">
                                             </div>

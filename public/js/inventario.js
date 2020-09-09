@@ -84,10 +84,10 @@ getSelectBien();
 
 // Guardar nuevo Bien
 $('#frm_nuevo_invent').on('submit', function(e) {
-            e.preventDefault();
+    e.preventDefault();
     var formData = new FormData(this);
     formData.append('_token', $('input[name=_token]').val());
-    console.log(formData);
+    console.log(formData);                          
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -95,7 +95,7 @@ $('#frm_nuevo_invent').on('submit', function(e) {
         //url : url + "admin/storeBien",
         type: "POST",
         dataType: "json",
-        url: "admin/storeBienInvent",
+        url: "admin/storeMasivo",
         data: formData, 
         cache: false,
         contentType: false,
@@ -119,6 +119,38 @@ $('#frm_nuevo_invent').on('submit', function(e) {
     });
 });
 
+$("#conteo").keyup(function() {
+            //console.log( "r34D!" );
+
+            nroBienes = $("#conteo").val();
+            id_bien = $("#id_bien").val();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                dataType: "json",
+                url: "admin/extractProgresivoMaxMin",
+                data: {"id_bien": id_bien,"nroBienes":nroBienes},
+                success: function( data ) {
+                    //console.log(data);
+                      console.log(data[0]['numero']);
+                      numero = data[0]['numero'];
+                      numeroFin = parseInt(numero) + parseInt(nroBienes);
+                        $("#ini").val(numero);
+                        $("#fin").val(numeroFin - 1);
+
+                        $("#preinsert").addClass('btn-success-2', true);
+                        $("#preinsert").prop('disabled', false);
+                },
+
+                error: function (data)
+                { console.log(data);
+
+                }
+            })
+
+});
 
 function mayus(e) {
         e.value = e.value.toUpperCase();

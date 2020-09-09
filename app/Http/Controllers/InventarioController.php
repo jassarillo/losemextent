@@ -174,11 +174,89 @@ class InventarioController extends Controller
             return $pdf->stream('Bienes');
             */
     }
+
+    public function extractProgresivoMaxMin(Request $request)
+    {
+        //dd($request->all());     
+        
+        $data = Inventario::select(DB::raw("max(progresivo) + 1 as numero"))
+        ->where('id_bien',$request->id_bien)
+        ->get();
+            //dd($data);
+        if($data[0]['numero'] =='')
+        {
+            $data[0]['numero'] =1;
+
+        }
+        return response ()->json ( $data );
+
+    }
+
+     public function storeMasivo(Request $request)
+    {
+
+      
+            //dd($request->conteo);
+            //dd($request->input());
+            $veces =$request->conteo;
+            for ($i = 0; $i < $veces ; $i++) 
+            {
+
+                /*
+                $data = T_Inventario::select(DB::raw("max(progresivo)  + 1 as numero"))->
+                where('dependencia', $sesDep )->
+                where('cambs',$request->codigo_cambs)->get();
+                if($data[0]['numero'] ==''){
+                  $ProgresivoMas =  $data[0]['numero'] =1;
+                }else { $ProgresivoMas =  $data[0]['numero'];}
+                $current_id = T_Inventario::select('inventarios')->max('id');
+                //dd($current_id + 1);
+                $montoStr = str_replace(",","",$request->costo_alta);
+                $bienes = new T_Inventario;
+                $bienes->id = $current_id + 1;
+                $bienes->contrato = $request->numero_contrato;
+                $bienes->tipo_unidad = 1;
+                $bienes->nombrecientifico =$request->nombreCientifico;
+                $bienes->status =true;
+                $bienes->save();
+                */
+                //dd(9);
+                $data = Inventario::select(DB::raw("max(progresivo)  + 1 as numero"))
+                ->where('id_bien',$request->codigo_cambs)->get();
+                if($data[0]['numero'] ==''){
+                  $ProgresivoMas =  $data[0]['numero'] =1;
+                }else { $ProgresivoMas =  $data[0]['numero'];}
+                dd($data[0]['numero']);
+                /*$progresivo = $ini 
+                $lastId = Inventario::find(\DB::table('inventario')->max('id'));
+                $saveBienes = new Inventario;
+                $saveBienes->id = $lastId->id + 1;
+                $saveBienes->id_clasifica = $request->id_clasifica;
+                $saveBienes->id_bien = $request->id_bien;
+                $saveBienes->fecha_inventario = $request->fecha_inventario;
+                $saveBienes->motivo_alta = $request->motivo_alta;
+                $saveBienes->factura = $request->factura;
+                $saveBienes->precio = $request->precio;
+                $saveBienes->progresivo = ;
+                $saveBienes->save();
+*/
+                
+
+            }
+      
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
+        return   $respuesta;
+
+
+    }
+
     public function imprimeEtiquetas()
     {   
         return PDF::loadView('inventario.pdf.etiquetas')
         ->stream('archivo.pdf');
     }
+
+
 
 
 }

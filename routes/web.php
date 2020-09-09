@@ -121,7 +121,8 @@ Route::get('admin/data_listar_bienes', 'InventarioController@data_listar_bienes'
 Route::get('inventario/imprimeEtiquetas', 'InventarioController@imprimeEtiquetas');
 Route::get('admin/listBienes', 'InventarioController@listBienes');
 Route::post('admin/storeBienInvent', 'InventarioController@storeBienInvent');
-
+Route::post('admin/extractProgresivoMaxMin', 'InventarioController@extractProgresivoMaxMin');
+Route::post('admin/storeMasivo', 'InventarioController@storeMasivo');
 
 
 Route::group(['middleware' => ['role:SuperAdmin|admin']], function() {
