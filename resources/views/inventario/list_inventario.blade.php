@@ -71,7 +71,7 @@
                                 <path d="M10.5,5 L19.5,5 C20.3284271,5 21,5.67157288 21,6.5 C21,7.32842712 20.3284271,8 19.5,8 L10.5,8 C9.67157288,8 9,7.32842712 9,6.5 C9,5.67157288 9.67157288,5 10.5,5 Z M10.5,10 L19.5,10 C20.3284271,10 21,10.6715729 21,11.5 C21,12.3284271 20.3284271,13 19.5,13 L10.5,13 C9.67157288,13 9,12.3284271 9,11.5 C9,10.6715729 9.67157288,10 10.5,10 Z M10.5,15 L19.5,15 C20.3284271,15 21,15.6715729 21,16.5 C21,17.3284271 20.3284271,18 19.5,18 L10.5,18 C9.67157288,18 9,17.3284271 9,16.5 C9,15.6715729 9.67157288,15 10.5,15 Z" fill="#000000"/>
                                 <path d="M5.5,8 C4.67157288,8 4,7.32842712 4,6.5 C4,5.67157288 4.67157288,5 5.5,5 C6.32842712,5 7,5.67157288 7,6.5 C7,7.32842712 6.32842712,8 5.5,8 Z M5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 C6.32842712,10 7,10.6715729 7,11.5 C7,12.3284271 6.32842712,13 5.5,13 Z M5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 C6.32842712,15 7,15.6715729 7,16.5 C7,17.3284271 6.32842712,18 5.5,18 Z" fill="#000000" opacity="0.3"/>
                             </g>
-                            </svg><!--end::Svg Icon--></span> Bienes
+                            </svg><!--end::Svg Icon--></span> Bienes - Inventario
                         </a>
                     </li>
 
@@ -99,7 +99,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('id_clasifica', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                    <select class="form-control" id="id_clasifica" name="id_clasifica">
+                                                    <select class="selectpicker form-control" id="id_clasifica" name="id_clasifica" data-show-subtext="true" data-live-search="true">
                                                         <option value="0">Seleccione</option>
                                                     </select>
                                             </div>
@@ -107,7 +107,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('id_bien', 'Bien', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                    <select class="form-control" id="id_bien" name="id_bien">
+                                                    <select class="selectpicker form-control" id="id_bien" name="id_bien" data-show-subtext="true" data-live-search="true">
                                                         <option value="0">Seleccione</option>
                                                     </select>
                                             </div>
@@ -123,12 +123,13 @@
                                             {{ Form::label('motivo_alta', 'Motivo de Alta', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                     <select class="form-control selectpicker" id="motivo_alta" name="motivo_alta">
-                                                        <option value="1">Reaprovechamiento</option>
-                                                        <option value="2">Reclasificación</option>
-                                                        <option value="3">Reposición</option>
-                                                        <option value="4">Sustitución</option>
-                                                        <option value="5">Transferencia</option>
-                                                        <option value="6">Traspaso</option>
+                                                        <option value="1">Inventario Inicial</option>
+                                                        <option value="2">Reaprovechamiento</option>
+                                                        <option value="3">Reclasificación</option>
+                                                        <option value="4">Reposición</option>
+                                                        <option value="5">Sustitución</option>
+                                                        <option value="6">Transferencia</option>
+                                                        <option value="7">Traspaso</option>
                                                     </select>
                                             </div>
                                         </div>

@@ -14,7 +14,7 @@ $(document).ready(function() {
         },
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'id_seccion', name: 'id_seccion' },
+            { data: 'id_clasificacion', name: 'id_clasificacion' },
             { data: 'descripcion', name: 'descripcion' },
             { data: 'causa_alta', name: 'causa_alta' },
             { data: 'fecha_alta', name: 'fecha_alta' },
@@ -157,14 +157,16 @@ function getSelectSeccion() {
         url :  "admin/listSeccion",
         dataType: "json",
         success: function (data)
-                        {
+                        { 
+                            $(".selectpicker").selectpicker();
                             //console.log(data[0]);
                             $.each(data, function (idx, opt) {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_clasificacion').append(
-                                   '<option class="optInvent" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion+'</option> '
+                                   '<option class="optInvent" value="' + opt.id_seccion + '"> ' + opt.id_seccion + ' ' +  opt.descripcion +'</option> '
                                 );
+                                $('.selectpicker').selectpicker('refresh');
                             });
                         },
         error: function(respuesta) {

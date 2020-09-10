@@ -10,6 +10,6 @@ class Bienes extends Model
 
     protected $fillable = [
         'id', 'id_clasificacion', 'descripcion', 'causa_alta', 'fecha_alta', 'estado', 'largo', 'ancho', 'alto', 
-        'diametro', 'peso', 'calibre', 'uso_material', 'status', 'created_at','updated_at'
+        'diametro', 'peso', 'calibre', 'litros', 'uso_material', 'status', 'created_at','updated_at'
     ];
 }

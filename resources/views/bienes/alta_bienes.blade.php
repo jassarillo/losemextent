@@ -125,7 +125,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('id_clasificacion', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                    <select class="form-control" id="id_clasificacion" name="id_clasificacion">
+                                                    <select class="selectpicker form-control" id="id_clasificacion" name="id_clasificacion" ata-show-subtext="true" data-live-search="true">
                                                         <option value="0">Seleccione</option>
                                                     </select>
                                             </div>

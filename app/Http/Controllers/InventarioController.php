@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\File;
 class InventarioController extends Controller
 {
 
-   
 
     public function list_inventario(){
         return view('inventario.list_inventario');
@@ -101,7 +100,7 @@ class InventarioController extends Controller
 
     public function listBienes()
     {
-        $bienes = Bienes::select(['id','id_clasificacion','descripcion'])->get()->toArray();
+        $bienes = Bienes::select(['id','id_clasificacion','descripcion', 'largo'])->get()->toArray();
         //dd($bienes);
         return response ()->json ($bienes);
 
@@ -141,23 +140,19 @@ class InventarioController extends Controller
 
     public function storeBienInvent(Request $request)
     {
-            //$last = DB::table('items')->latest()->first();
+
         $lastId = Inventario::find(\DB::table('inventario')->max('id'));
-        //$lastId = Inventario::whereRaw("select max(id) from inventario")->get();
-        //dd($lastId->id);
-        //$saveBienes = Inventario::create($request->all());
         $saveBienes = new Inventario;
         $saveBienes->id = $lastId->id + 1;
-        $saveBienes->id_clasifica = $request->id_clasifica;
+        $saveBienes->id_clasificacion = $request->id_clasifica;
+        $saveBienes->par_pre = $request->id_clasifica;
         $saveBienes->id_bien = $request->id_bien;
         $saveBienes->fecha_inventario = $request->fecha_inventario;
         $saveBienes->motivo_alta = $request->motivo_alta;
         $saveBienes->factura = $request->factura;
         $saveBienes->precio = $request->precio;
-        //$saveBienes->conteo = $request->conteo;
         $saveBienes->save();
-        
-        //dd($saveBienes->id);
+
         $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
         return   $respuesta;
 
@@ -202,44 +197,30 @@ class InventarioController extends Controller
             for ($i = 0; $i < $veces ; $i++) 
             {
 
-                /*
-                $data = T_Inventario::select(DB::raw("max(progresivo)  + 1 as numero"))->
-                where('dependencia', $sesDep )->
-                where('cambs',$request->codigo_cambs)->get();
-                if($data[0]['numero'] ==''){
-                  $ProgresivoMas =  $data[0]['numero'] =1;
-                }else { $ProgresivoMas =  $data[0]['numero'];}
-                $current_id = T_Inventario::select('inventarios')->max('id');
-                //dd($current_id + 1);
-                $montoStr = str_replace(",","",$request->costo_alta);
-                $bienes = new T_Inventario;
-                $bienes->id = $current_id + 1;
-                $bienes->contrato = $request->numero_contrato;
-                $bienes->tipo_unidad = 1;
-                $bienes->nombrecientifico =$request->nombreCientifico;
-                $bienes->status =true;
-                $bienes->save();
-                */
-                //dd(9);
+                
+
+                //dd($request->id_bien);
                 $data = Inventario::select(DB::raw("max(progresivo)  + 1 as numero"))
-                ->where('id_bien',$request->codigo_cambs)->get();
+                ->where('id_bien',$request->id_bien)->get()->toArray();
+                //dd($data[0]['numero']);
                 if($data[0]['numero'] ==''){
                   $ProgresivoMas =  $data[0]['numero'] =1;
                 }else { $ProgresivoMas =  $data[0]['numero'];}
-                dd($data[0]['numero']);
-                /*$progresivo = $ini 
-                $lastId = Inventario::find(\DB::table('inventario')->max('id'));
+                //dd($ProgresivoMas);
+                //$progresivo = $ini; 
+                $lastId = Inventario::select(DB::raw("max(id)  + 1 as numero"))->get()->toArray();
+                //dd($lastId[0]['numero']);
                 $saveBienes = new Inventario;
-                $saveBienes->id = $lastId->id + 1;
+                $saveBienes->id = $lastId[0]['numero'];
                 $saveBienes->id_clasifica = $request->id_clasifica;
                 $saveBienes->id_bien = $request->id_bien;
                 $saveBienes->fecha_inventario = $request->fecha_inventario;
                 $saveBienes->motivo_alta = $request->motivo_alta;
                 $saveBienes->factura = $request->factura;
                 $saveBienes->precio = $request->precio;
-                $saveBienes->progresivo = ;
+                $saveBienes->progresivo = $ProgresivoMas;
                 $saveBienes->save();
-*/
+
                 
 
             }

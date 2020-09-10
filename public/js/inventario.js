@@ -47,7 +47,7 @@ function getSelectSeccion() {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_clasifica').append(
-                                   '<option class="optInvent" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion+'</option> '
+                                   '<option class="optInvent" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion +'</option> '
                                 );
                             });
                         },
@@ -66,13 +66,16 @@ function getSelectBien() {
         dataType: "json",
         success: function (data)
                         {
+                            $(".selectpicker").selectpicker();
                             //console.log(data[0]);
                             $.each(data, function (idx, opt) {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_bien').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
+                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasificacion +" "+ opt.descripcion + ' largo: '+ 
+                                   opt.largo+'</option> '
                                 );
+                                $('.selectpicker').selectpicker('refresh');
                             });
                         },
         error: function(respuesta) {

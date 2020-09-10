@@ -86,6 +86,7 @@
                 <th> Alto</th>
                 <th> Diametro</th>
                 <th> Peso</th>
+                <!--<th> Litros</th>-->
                 <th> Ver Foto</th>
                 <th> Usu de MAterias*?</th>
             </tr>
