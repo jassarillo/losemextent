@@ -155,20 +155,16 @@
                                             <div class="col-lg-9 col-xl-6">
                                                 <input type="number" name="conteo" id="conteo" class="form-control">
                                             </div>
-                                        </div>
-                                       
-                                       
-                                        
-                                        
+                                        </div>                                        
                                          <div class="form-group form-group-last row">
-                                            <label class="col-xl-3 col-lg-3 col-form-label">Uno/Muchos
+                                            <label class="col-xl-3 col-lg-3 col-form-label">Un registro
                                             </label>
                                             <div class="col-lg-9 col-xl-6">
                                                 <span class="kt-switch">
-                                                            <label>
-                                                                <input type="checkbox" name="email_notification_2">
-                                                                <span></span>
-                                                </label>
+                                                    <label>
+                                                        <input type="checkbox" name="unico" id="unico">
+                                                        <span></span>
+                                                    </label>
                                                 </span>
                                             </div>
                                         </div>

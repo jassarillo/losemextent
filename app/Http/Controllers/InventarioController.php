@@ -197,8 +197,6 @@ class InventarioController extends Controller
             for ($i = 0; $i < $veces ; $i++) 
             {
 
-                
-
                 //dd($request->id_bien);
                 $data = Inventario::select(DB::raw("max(progresivo)  + 1 as numero"))
                 ->where('id_bien',$request->id_bien)->get()->toArray();
@@ -208,6 +206,11 @@ class InventarioController extends Controller
                 }else { $ProgresivoMas =  $data[0]['numero'];}
                 //dd($ProgresivoMas);
                 //$progresivo = $ini; 
+                if ($request->unico == true){
+                    $unico = 1;
+                }else {
+                    $unico =0;
+                }
                 $lastId = Inventario::select(DB::raw("max(id)  + 1 as numero"))->get()->toArray();
                 //dd($lastId[0]['numero']);
                 $saveBienes = new Inventario;
@@ -219,8 +222,14 @@ class InventarioController extends Controller
                 $saveBienes->factura = $request->factura;
                 $saveBienes->precio = $request->precio;
                 $saveBienes->progresivo = $ProgresivoMas;
+                $saveBienes->unico = $unico;
+                $saveBienes->conteo = $request->conteo;
                 $saveBienes->save();
-
+                if ($request->unico == true){
+                    break;
+                }
+                
+                
                 
 
             }
