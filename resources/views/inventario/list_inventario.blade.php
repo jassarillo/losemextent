@@ -147,7 +147,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('precio', 'Precio', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('precio', auth()->user()->precio, array('class' => 'form-control')) }}
+                                                {{ Form::number('precio', auth()->user()->precio, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
                                         <div class="form-group row">
