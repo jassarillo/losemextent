@@ -31,10 +31,18 @@ class InventarioController extends Controller
 
     public function data_listar_inventario(){
     	//dd(3232);
-    	$invent = Inventario::select('inventario.*','bienes.descripcion as descBien','secciones.descripcion as descClasif')
+    	/*$invent = Inventario::select('inventario.*','bienes.descripcion as descBien','secciones.descripcion as descClasif')
         ->leftJoin('bienes','bienes.id_clasificacion','=','inventario.id_clasifica')
         ->leftJoin('secciones','secciones.id_seccion','=','bienes.id_clasificacion')
+        ->get()->toArray();*/
+
+        $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
+                'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo','unico', 'conteo'
+                ,'progresivo')
+        ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
+        ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
         ->get()->toArray();
+
         return Datatables::of($invent)->toJson();
     }
 
@@ -57,9 +65,13 @@ class InventarioController extends Controller
     public function save_seccion(Request $request)
     {
     	$desc_seccion = $request->desc_seccion;
+        $lastIdSeccion = Secciones::find(\DB::table('secciones')->max('id_seccion'));
     	//d($desc_seccion);
         $secciones = new Secciones;
         $secciones->descripcion = $desc_seccion;
+        $secciones->id_seccion = $lastIdSeccion->id_seccion;
+        $secciones->par_pre = $lastIdSeccion->id_seccion;
+
         $secciones->save();
         $respuesta = array('resp' => true, 'mensaje' => 'Seccion Agregada');
         return   $respuesta;
@@ -135,35 +147,7 @@ class InventarioController extends Controller
       
         
         $saveBienes = Bienes::create($request->all());
-        //dd($saveBienes);
-        //$lastId = Bienes::find(\DB::table('bienes')->max('id'));
-        /*$guadarBienes = new Bienes;
-        $guadarBienes->id     =$lastId;
-        $guadarBienes->id_clasificacion       =6;
-        $guadarBienes->descripcion        =$request->descripcion;
-        $guadarBienes->causa_alta     =$request->causa_alta;
-        $guadarBienes->fecha_alta     =$request->fecha_alta;
-        $guadarBienes->estado     =$request->estado;
-        $guadarBienes->largo      =$request->largo;
-        $guadarBienes->largo_medida       =$request->largo_medida;
-        $guadarBienes->ancho      =$request->ancho;
-        $guadarBienes->ancho_medida       =$request->ancho_medida;
-        $guadarBienes->alto       =$request->alto;
-        $guadarBienes->alto_medida        =$request->alto_medida;
-        $guadarBienes->diametro        =           $request->diametro;
-        $guadarBienes->diametro_medida     =           $request->diametro_medida;
-        $guadarBienes->peso       =$request->peso;
-        $guadarBienes->peso_medida        =$request->peso_medida;
-        $guadarBienes->calibre        =$request->calibre;
-        $guadarBienes->calibre_medida        =$request->calibre_medida;
-        $guadarBienes->litros     =$request->litros;
-        $guadarBienes->litros_medida      =$request->litros_medida;
-        $guadarBienes->uso_material       =$request->uso_material;
-        $guadarBienes->status     =$request->status;
-        $guadarBienes->created_at     =$request->created_at;
-        $guadarBienes->updated_at     =$request->updated_at;
-        $guadarBienes->save();*/
-
+      
 
         //dd($saveBienes);
       if ($request->hasFile('anexo_1')) {
@@ -185,7 +169,6 @@ class InventarioController extends Controller
         $saveBienes = new Inventario;
         $saveBienes->id = $lastId->id + 1;
         $saveBienes->id_clasificacion = $request->id_clasifica;
-        $saveBienes->par_pre = $request->id_clasifica;
         $saveBienes->id_bien = $request->id_bien;
         $saveBienes->fecha_inventario = $request->fecha_inventario;
         $saveBienes->motivo_alta = $request->motivo_alta;

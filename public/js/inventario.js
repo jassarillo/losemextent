@@ -16,13 +16,12 @@ $(document).ready(function() {
             { data: 'id', name: 'id' },
             { data: 'descClasif', name: 'descClasif' },
             { data: 'descBien', name: 'descBien' },
-            { data: 'motivo_alta', name: 'motivo_alta' },
             { data: 'factura', name: 'factura' },
-            { data: 'precio', name: 'email' },
-            { data: 'precio', name: 'email' },
-            { data: 'precio', name: 'email' },
-            { data: 'precio', name: 'email' },
-            { data: 'precio', name: 'email' },
+            { data: 'precio', name: 'precio' },
+            { data: 'conteo', name: 'conteo' },
+            { data: 'progresivo', name: 'progresivo' },
+            { data: 'unico', name: 'unico' },
+            { data: 'conteo', name: 'conteo' },
             {
                 "mRender": function (data, type, row) {
                     var id_user = row.id;

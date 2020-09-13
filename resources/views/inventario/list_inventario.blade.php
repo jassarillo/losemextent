@@ -221,15 +221,13 @@
                                         <th> ID </th>
                                         <th> Clasificación </th>
                                         <th> Descripción </th>
-                                        <th> Fecha Inventario </th>
-                                        <th> Motivo de Alta </th>
                                         <th> Factura </th>
                                         <th> Precio</th>
                                         <th> Conteo</th>
+                                        <th> Progresivo</th>
                                         <th> Unico</th>
                                         <th> Cantidad</th>
                                         <th> Acciones</th>
-                                        
                                     </tr>
                                     </thead>
 
