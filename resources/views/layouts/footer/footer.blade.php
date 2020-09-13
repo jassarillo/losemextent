@@ -4,7 +4,7 @@
             <div class="kt-footer__copyright">
                 2019&nbsp;©&nbsp;
 
-                <a href="javascript:void(0)" class="kt-link">DGTC</a>
+                <a href="javascript:void(0)" class="kt-link">LOSEMEX</a>
             </div>
             <div class="kt-aside__brand-logo kt-hidden-mobile center_img_foot" >
                <a href="{{ url('/home') }}">

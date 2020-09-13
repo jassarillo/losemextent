@@ -70,8 +70,6 @@ class InventarioController extends Controller
         $secciones = new Secciones;
         $secciones->descripcion = $desc_seccion;
         $secciones->id_seccion = $lastIdSeccion->id_seccion;
-        $secciones->par_pre = $lastIdSeccion->id_seccion;
-
         $secciones->save();
         $respuesta = array('resp' => true, 'mensaje' => 'Seccion Agregada');
         return   $respuesta;

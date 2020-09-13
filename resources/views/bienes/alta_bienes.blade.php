@@ -177,7 +177,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('largo', 'Largo', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-4 col-xl-3">
-                                                {{ Form::number('largo', auth()->user()->largo, array('class' => 'form-control')) }}
+                                                {{ Form::text('largo', auth()->user()->largo, array('class' => 'form-control')) }}
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="largo_medida" name="largo_medida">
@@ -195,7 +195,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('ancho', 'Ancho', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-4 col-xl-3">
-                                                {{ Form::number('ancho', auth()->user()->ancho, array('class' => 'form-control')) }}
+                                                {{ Form::text('ancho', auth()->user()->ancho, array('class' => 'form-control')) }}
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="ancho_medida" name="ancho_medida">
@@ -212,7 +212,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('alto', 'Alto', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-4 col-xl-3">
-                                                {{ Form::number('alto', auth()->user()->alto, array('class' => 'form-control')) }}
+                                                {{ Form::text('alto', auth()->user()->alto, array('class' => 'form-control')) }}
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="alto_medida" name="alto_medida">
@@ -229,7 +229,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('diametro', 'Diametro', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-4 col-xl-3">
-                                                {{ Form::number('diametro', auth()->user()->diametro, array('class' => 'form-control')) }}
+                                                {{ Form::text('diametro', auth()->user()->diametro, array('class' => 'form-control')) }}
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="diametro_medida" name="diametro_medida">
@@ -246,7 +246,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('peso', 'Peso', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-4 col-xl-3">
-                                                {{ Form::number('peso', auth()->user()->peso, array('class' => 'form-control')) }}
+                                                {{ Form::text('peso', auth()->user()->peso, array('class' => 'form-control')) }}
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="peso_medida" name="peso_medida">
@@ -262,7 +262,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('calibre', 'Calibre', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-4 col-xl-3">
-                                                {{ Form::number('calibre', auth()->user()->calibre, array('class' => 'form-control')) }}
+                                                {{ Form::text('calibre', auth()->user()->calibre, array('class' => 'form-control')) }}
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="calibre_medida" name="calibre_medida">
@@ -279,7 +279,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('volumen', 'Volumen', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-4 col-xl-3">
-                                                {{ Form::number('volumen', auth()->user()->volumen, array('class' => 'form-control')) }}
+                                                {{ Form::text('volumen', auth()->user()->volumen, array('class' => 'form-control')) }}
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="volumen_medida" name="volumen_medida">
