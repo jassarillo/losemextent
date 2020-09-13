@@ -98,9 +98,18 @@ class InventarioController extends Controller
 
     }
 
-    public function listBienes()
+    public function listBienes(Request $request)
     {
-        $bienes = Bienes::select(['id','id_clasificacion','descripcion', 'largo'])->get()->toArray();
+        if($request->val_clasif == 0){
+            //dd($request->val_clasif);
+            $bienes = Bienes::select(['id','id_clasificacion','descripcion', 'largo'])->get()->toArray();
+        }
+        else
+        {
+            $bienes = Bienes::select(['id','id_clasificacion','descripcion', 'largo'])
+            ->where('id_clasificacion',$request->val_clasif)->get()->toArray();
+        }    
+        
         //dd($bienes);
         return response ()->json ($bienes);
 
@@ -122,10 +131,41 @@ class InventarioController extends Controller
 
     public function storeBien(Request $request)
     {
-        //dd($request->all());
+        //dd($request->descripcion);
       
         
         $saveBienes = Bienes::create($request->all());
+        //dd($saveBienes);
+        //$lastId = Bienes::find(\DB::table('bienes')->max('id'));
+        /*$guadarBienes = new Bienes;
+        $guadarBienes->id     =$lastId;
+        $guadarBienes->id_clasificacion       =6;
+        $guadarBienes->descripcion        =$request->descripcion;
+        $guadarBienes->causa_alta     =$request->causa_alta;
+        $guadarBienes->fecha_alta     =$request->fecha_alta;
+        $guadarBienes->estado     =$request->estado;
+        $guadarBienes->largo      =$request->largo;
+        $guadarBienes->largo_medida       =$request->largo_medida;
+        $guadarBienes->ancho      =$request->ancho;
+        $guadarBienes->ancho_medida       =$request->ancho_medida;
+        $guadarBienes->alto       =$request->alto;
+        $guadarBienes->alto_medida        =$request->alto_medida;
+        $guadarBienes->diametro        =           $request->diametro;
+        $guadarBienes->diametro_medida     =           $request->diametro_medida;
+        $guadarBienes->peso       =$request->peso;
+        $guadarBienes->peso_medida        =$request->peso_medida;
+        $guadarBienes->calibre        =$request->calibre;
+        $guadarBienes->calibre_medida        =$request->calibre_medida;
+        $guadarBienes->litros     =$request->litros;
+        $guadarBienes->litros_medida      =$request->litros_medida;
+        $guadarBienes->uso_material       =$request->uso_material;
+        $guadarBienes->status     =$request->status;
+        $guadarBienes->created_at     =$request->created_at;
+        $guadarBienes->updated_at     =$request->updated_at;
+        $guadarBienes->save();*/
+
+
+        //dd($saveBienes);
       if ($request->hasFile('anexo_1')) {
             $fecha = Carbon::now();
             $y = $fecha->format('y');

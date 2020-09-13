@@ -35,7 +35,7 @@ $(document).ready(function() {
 });
 
 function getSelectSeccion() {
-    $(".optInvent").remove();
+    $(".optSeccion").remove();
     $.ajax({
         type: "GET",
         url :  "admin/listSeccion",
@@ -47,7 +47,7 @@ function getSelectSeccion() {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_clasifica').append(
-                                   '<option class="optInvent" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion +'</option> '
+                                   '<option class="optSeccion" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion +'</option> '
                                 );
                             });
                         },
@@ -58,11 +58,28 @@ function getSelectSeccion() {
 }
 getSelectSeccion();
 
+
+$('#id_clasifica').on('change', function(){
+    console.log("onchange selccion");
+    getSelectBien();
+});
+
+
 function getSelectBien() {
+
+    val_clasif = $("#id_clasifica").val();
+    //if(val_clasif == 0){ 
+        //console.log(val_clasif);
+    //}
+
     $(".optInvent").remove();
     $.ajax({
-        type: "GET",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
         url :  "admin/listBienes",
+        data: {"val_clasif":  val_clasif},
         dataType: "json",
         success: function (data)
                         {
@@ -153,6 +170,19 @@ $("#conteo").keyup(function() {
                 }
             })
 
+});
+
+$('#unico').on('change', function(){ // on change of state
+           if(this.checked) // if changed state is "CHECKED"
+            {
+                console.log("chido!");
+                $("#hideUnico").hide();
+                //$("#partidaCatalogo").show();
+            }
+            else
+            {
+                $("#hideUnico").show();
+            }
 });
 
 function mayus(e) {

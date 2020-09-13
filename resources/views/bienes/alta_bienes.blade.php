@@ -133,7 +133,9 @@
                                         <div class="form-group row">
                                             {{ Form::label('descripcion', 'Descripcion', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('descripcion', auth()->user()->descripcion, array('class' => 'form-control')) }}
+                                                
+
+                                                <input type="text" class="form-control"  name="descripcion" id="descripcion" onkeyup="mayus(this);">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -163,6 +165,8 @@
 
                                         <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"> </div>
                                     <!-- -------------------MEDIDAS----------------------------- -->
+                                    <!-- -------------------MEDIDAS----------------------------- -->
+                                    <!-- -------------------MEDIDAS----------------------------- -->
                                     <div class="row">
                                             <label class="col-xl-3"></label>
                                             <div class="col-lg-9 col-xl-6">
@@ -172,39 +176,119 @@
                                         </div>
                                         <div class="form-group row">
                                             {{ Form::label('largo', 'Largo', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
-                                            <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('largo', auth()->user()->largo, array('class' => 'form-control')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::number('largo', auth()->user()->largo, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="largo_medida" name="largo_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             {{ Form::label('ancho', 'Ancho', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
-                                            <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('ancho', auth()->user()->ancho, array('class' => 'form-control')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::number('ancho', auth()->user()->ancho, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="ancho_medida" name="ancho_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             {{ Form::label('alto', 'Alto', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
-                                            <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('alto', auth()->user()->alto, array('class' => 'form-control')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::number('alto', auth()->user()->alto, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="alto_medida" name="alto_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             {{ Form::label('diametro', 'Diametro', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
-                                            <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('diametro', auth()->user()->diametro, array('class' => 'form-control')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::number('diametro', auth()->user()->diametro, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="diametro_medida" name="diametro_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             {{ Form::label('peso', 'Peso', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
-                                            <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('peso', auth()->user()->peso, array('class' => 'form-control')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::number('peso', auth()->user()->peso, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="peso_medida" name="peso_medida">
+                                                    <option value="1">Miligramo</option>
+                                                    <option value="2">CentíGramo</option>
+                                                    <option value="3">Kilo</option>
+                                                    <option value="4">Tonelada</option>
+                                                    <option value="5">Libra</option>
+                                                    <option value="6">Onza</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             {{ Form::label('calibre', 'Calibre', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
-                                            <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('calibre', auth()->user()->calibre, array('class' => 'form-control')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::number('calibre', auth()->user()->calibre, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="calibre_medida" name="calibre_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('volumen', 'Volumen', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::number('volumen', auth()->user()->volumen, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="volumen_medida" name="volumen_medida">
+                                                    <option value="1">Litros</option>
+                                                    <option value="2">Galones</option>
+                                                    <option value="3">Centímetros Cúbicos</option>
+                                                    <option value="4">Mili Litros</option>
+                                                    <option value="5">Onzas</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">

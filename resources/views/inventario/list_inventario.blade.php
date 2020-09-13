@@ -168,16 +168,18 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-xl-2 col-lg-2 col-form-label">Del:
-                                            </label>
-                                            <div class="col-lg-9 col-xl-2">
-                                                    <input type="text" class="form-control" readonly="" name="ini" id="ini" style="background-color:#e8e8e8;">
-                                            </div>
-                                            <label class="col-xl-2 col-lg-2 col-form-label">Al:
-                                            </label>
-                                            <div class="col-lg-9 col-xl-2">
-                                                    <input type="text" class="form-control" style="background-color:#e8e8e8;" readonly="" name="fin" id="fin">
+                                        <div id="hideUnico">
+                                            <div class="form-group row">
+                                                <label class="col-xl-2 col-lg-2 col-form-label">Del:
+                                                </label>
+                                                <div class="col-lg-9 col-xl-2">
+                                                        <input type="text" class="form-control" readonly="" name="ini" id="ini" style="background-color:#e8e8e8;">
+                                                </div>
+                                                <label class="col-xl-2 col-lg-2 col-form-label">Al:
+                                                </label>
+                                                <div class="col-lg-9 col-xl-2">
+                                                        <input type="text" class="form-control" style="background-color:#e8e8e8;" readonly="" name="fin" id="fin">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="card-body px-3 pt-2">

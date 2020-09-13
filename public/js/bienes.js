@@ -148,7 +148,10 @@ function save_uso() {
     });
 }
 
-
+//Change Seccion
+$('#id_clasificacion').on('change', function(){
+    console.log("onchange selccion");
+});
 
 function getSelectSeccion() {
     $(".optInvent").remove();
@@ -343,4 +346,7 @@ function add_new_rol() {
     });
 }
 
+function mayus(e) {
+        e.value = e.value.toUpperCase();
+     };
 //$(".dt-buttons").addClass('kt-hidden');
