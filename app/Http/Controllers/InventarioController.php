@@ -21,6 +21,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\File;
 
 
+
 class InventarioController extends Controller
 {
 

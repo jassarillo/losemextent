@@ -164,7 +164,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        
+        //Milon\Barcode\BarcodeServiceProvider::class,
         //Yajra\DataTables\ButtonsServiceProvider::class,
         //Yajra\DataTables\DataTablesServiceProvider::class,
 
@@ -238,7 +238,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-
+        //'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        //'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 
     ],
 

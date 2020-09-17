@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\File;
-
+use Milon\Barcode\DNS1D;
+//use Milon\Barcode\DNS1D;
 
 class EtiquetasController extends Controller
 {

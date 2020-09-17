@@ -113,7 +113,9 @@
                                 <th> ID </th>
                                 <th> Proveedor</th>
                                 <th> Licitacion Participante </th>
-                                <th> Acciones</th>
+                                <th> hola
+                               
+                                </th>
                             </tr>
                         </thead>
                     </table>
