@@ -66,11 +66,11 @@ class InventarioController extends Controller
     public function save_seccion(Request $request)
     {
     	$desc_seccion = $request->desc_seccion;
-        $lastIdSeccion = Secciones::find(\DB::table('secciones')->max('id_seccion'));
+        $lastIdSeccion = Secciones::find(\DB::table('secciones')->max('id'));
     	//d($desc_seccion);
         $secciones = new Secciones;
         $secciones->descripcion = $desc_seccion;
-        $secciones->id_seccion = $lastIdSeccion->id_seccion;
+        $secciones->id_seccion = $lastIdSeccion->id +1 ;
         $secciones->save();
         $respuesta = array('resp' => true, 'mensaje' => 'Seccion Agregada');
         return   $respuesta;

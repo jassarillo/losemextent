@@ -30,4 +30,15 @@ class EtiquetasController extends Controller
         return view('inventario.viewEtiquetas');
     }
 
+    public function getNumRows(Request $request)
+    {
+
+      
+        $Resg = DB::table('inventario')
+        //->where('id_bien', $request->id_bien)
+        ->orderBy('id', 'desc')
+        ->paginate(5);
+        return response ()->json ($Resg);  
+    }
+
 }

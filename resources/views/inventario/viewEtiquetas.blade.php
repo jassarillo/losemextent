@@ -23,10 +23,37 @@
                     </div>-->
                 </div>
                 <div class="kt-portlet__body">
-                    <div class="kt-widget16">
-                        <!-- Aqi van filtros Etiquetas-->
+                    
+                        <!-- Aqui van filtros Etiquetas-->
+
                         
-                    </div>
+                           <div class="col-xm-6">
+                            <label>Secciones</label>
+                           </div> 
+                            <div class="col-xm-5">
+                                   <select class="selectpicker form-control" id="id_clasifica" name="id_clasifica" data-show-subtext="true" data-live-search="true">
+                                                        <option value="0">Seleccione</option>
+                                    </select>
+                            </div>
+
+                            <div class="col-xm-6">
+                            <label>Bienes</label>
+                            </div> 
+                            <div class="col-xm-5">
+                                    <select class="selectpicker form-control" id="id_bien" name="id_bien" data-show-subtext="true" data-live-search="true">
+                                        <option value="0">Seleccione</option>
+                                    </select>
+                            </div>
+
+                            <div class="col-xm-6">
+                                <!---->
+                            </div> 
+
+                       
+                            <div><hr color="#00b140" class="mb-2"></div>
+                        <!-- Aqui van filtros Etiquetas -->
+                        
+
                 </div>
             </div>
             <!--end:: Widgets/Support Stats-->
@@ -107,15 +134,12 @@
                 <div class="kt-portlet__body">
                     <div class="kt-widget16">
                     <table class="table table-striped- table-bordered table-hover table-checkable"
-                        id="resumen_proveedor-table">
+                        id="pages-table">
                         <thead>
                             <tr>
-                                <th> ID </th>
-                                <th> Proveedor</th>
-                                <th> Licitacion Participante </th>
-                                <th> hola
-                               
-                                </th>
+                                <th> No. Pagina</th>
+                                <th> Rango</th>
+                                <th> Imprimir página </th>
                             </tr>
                         </thead>
                     </table>
@@ -126,4 +150,7 @@
         </div>
     </div>
 </div>
+@section('scripts')
+<script src="{{ URL::asset('js/etiquetas.js')}}" type="text/javascript"></script>
+@endsection
 @endsection
