@@ -174,7 +174,6 @@ class InventarioController extends Controller
         $saveBienes->factura = $request->factura;
         $saveBienes->precio = $request->precio;
         $saveBienes->save();
-
         $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
         return   $respuesta;
 

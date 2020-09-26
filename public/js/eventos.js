@@ -59,17 +59,8 @@ getSelectSeccion();
 
 
 $('#id_clasifica').on('change', function(){
-    //console.log("onchange selccion");
+    console.log("onchange selccion");
     getSelectBien();
-});
-
-$('#id_bien').on('change', function(){
-    //console.log("onchange selccion");
-    //getSelectBien();
-    id_clasifica = $('#id_clasifica').val();
-    id_bien = $('#id_bien').val();
-    //console.log(id_clasifica);
-    numRows(id_clasifica, id_bien, 0);
 });
 
 
@@ -97,7 +88,7 @@ function getSelectBien() {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_bien').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasificacion + "-" + opt.id + " - " + opt.descripcion + ' largo: '+ 
+                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasificacion +" "+ opt.descripcion + ' largo: '+ 
                                    opt.largo+'</option> '
                                 );
                                 $('.selectpicker').selectpicker('refresh');
@@ -110,57 +101,92 @@ function getSelectBien() {
 }
 getSelectBien();
 
+// Guardar nuevo Bien
+$('#frm_nuevo_invent').on('submit', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('_token', $('input[name=_token]').val());
+    console.log(formData);                          
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        //url : url + "admin/storeBien",
+        type: "POST",
+        dataType: "json",
+        url: "admin/storeMasivo",
+        data: formData, 
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            //console.log(respuesta.resp);
+            if (respuesta.resp == true) {
+                //console.log(666);
+               
+                    Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                   $('#users-table').DataTable().ajax.reload();
+            } else {
+                Swal.fire('error', respuesta.message,"error");
+            }
+        },
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
 
+        }
+    });
+});
 
-    numRows = function(id_clasifica, id_bien, noInvent)
-        {
-            
-            $(".otrasFilas").remove();
+$("#conteo").keyup(function() {
+            //console.log( "r34D!" );
+
+            nroBienes = $("#conteo").val();
+            id_bien = $("#id_bien").val();
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: "POST",        
-                    dataType: "json",
-                    url: "inventario/getNumRows",
-                    data: {"id_clasifica": id_clasifica, "id_bien":id_bien, "noInvent":noInvent},
-                    success: function (data)
-                    {
-                        console.log(data);
-                        if(data.total == 0)
-                        {
-                            $("#messageRows").text("0 Registros a Imprimir.");
-                        }
-                        else
-                        {
-                            $("#messageRows").text("");
-                             noInt =1;
-                             console.log(data.last_page);
-                             for(i =0; i < data.last_page; i++ )
-                             {
-                                rangeFin = noInt *20;
-                                rangeIni = rangeFin - 20;
-                                rangeIniPlus = parseInt(rangeIni) + 1;
-                                $('#pages-table').append(
-                                    '<tr class="otrasFilas">' +
-                                        '<td>'+ noInt  +'</td> ' +
-                                        '<td>'+ rangeIniPlus +' - ' + rangeFin +'</td> ' +
-                                        '<td> <a href="http://127.0.0.1:9000/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+ id_bien +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
-                                        //'<td> <a href="http://pdf.losemextent.com.mx/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+ id_bien +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
-                                    '</tr>');
-                                noInt++;
-                            }
-                         }
-                        
+                },
+                type: "POST",
+                dataType: "json",
+                url: "admin/extractProgresivoMaxMin",
+                data: {"id_bien": id_bien,"nroBienes":nroBienes},
+                success: function( data ) {
+                    //console.log(data);
+                      console.log(data[0]['numero']);
+                      numero = data[0]['numero'];
+                      numeroFin = parseInt(numero) + parseInt(nroBienes);
+                        $("#ini").val(numero);
+                        $("#fin").val(numeroFin - 1);
 
-                    },
-                    error: function (data)
-                    {
-                            alert( data);
-                    }
-                })
-        };
+                        $("#preinsert").addClass('btn-success-2', true);
+                        $("#preinsert").prop('disabled', false);
+                },
 
+                error: function (data)
+                { console.log(data);
+
+                }
+            })
+
+});
+
+$('#unico').on('change', function(){ // on change of state
+           if(this.checked) // if changed state is "CHECKED"
+            {
+                console.log("chido!");
+                $("#hideUnico").hide();
+                //$("#partidaCatalogo").show();
+            }
+            else
+            {
+                $("#hideUnico").show();
+            }
+});
+
+function mayus(e) {
+        e.value = e.value.toUpperCase();
+     };
 
 // Mostrar modal para alta de rol
 

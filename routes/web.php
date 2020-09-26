@@ -126,6 +126,7 @@ Route::post('admin/storeMasivo', 'InventarioController@storeMasivo');
 Route::get('inventario/selectEtiquetas', 'EtiquetasController@viewEtiquetas');
 Route::post('inventario/getNumRows', 'EtiquetasController@getNumRows');
 
+Route::get('admin/list_eventos', 'EventosController@list_eventos');
 
 Route::group(['middleware' => ['role:SuperAdmin|admin']], function() {
     Route::group(['prefix' => 'requisiciones'], function() {

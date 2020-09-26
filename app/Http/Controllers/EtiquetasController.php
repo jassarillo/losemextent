@@ -32,12 +32,12 @@ class EtiquetasController extends Controller
 
     public function getNumRows(Request $request)
     {
-
+            
       
         $Resg = DB::table('inventario')
-        //->where('id_bien', $request->id_bien)
+        ->where('id_bien', $request->id_bien)
         ->orderBy('id', 'desc')
-        ->paginate(5);
+        ->paginate(30);
         return response ()->json ($Resg);  
     }
 
