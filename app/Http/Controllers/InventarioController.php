@@ -39,7 +39,7 @@ class InventarioController extends Controller
 
         $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
                 'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo','unico', 'conteo'
-                ,'progresivo')
+                ,'progresivo', 'id_clasifica', 'id_bien')
         ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
         ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
         ->get()->toArray();

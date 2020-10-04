@@ -41,4 +41,21 @@ class EtiquetasController extends Controller
         return response ()->json ($Resg);  
     }
 
+    public function listBienes(Request $request)
+    {
+        if($request->val_clasif == 0){
+            //dd($request->val_clasif);
+            $bienes = Bienes::select(['id','id_clasificacion','descripcion', 'largo'])->get()->toArray();
+        }
+        else
+        {
+            $bienes = Bienes::select(['id','id_clasificacion','descripcion', 'largo'])
+            ->where('id_clasificacion',$request->val_clasif)->get()->toArray();
+        }    
+        
+        //dd($bienes);
+        return response ()->json ($bienes);
+
+    }
+
 }

@@ -145,8 +145,8 @@ getSelectBien();
                                     '<tr class="otrasFilas">' +
                                         '<td>'+ noInt  +'</td> ' +
                                         '<td>'+ rangeIniPlus +' - ' + rangeFin +'</td> ' +
-                                        '<td> <a href="http://127.0.0.1:9000/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+ id_bien +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
-                                        //'<td> <a href="http://pdf.losemextent.com.mx/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+ id_bien +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
+                                        //'<td> <a href="http://127.0.0.1:9000/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+ id_bien +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
+                                        '<td> <a href="http://pdf.losemextent.com.mx/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+ id_bien +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
                                     '</tr>');
                                 noInt++;
                             }

@@ -13,7 +13,12 @@ $(document).ready(function() {
             "type": "GET"
         },
         columns: [
-            { data: 'id', name: 'id' },
+            {
+                "mRender": function (data, type, row) {
+                  
+                    return  row.id_clasifica + '' + row.id_bien + '' + row.progresivo;
+                }
+            },
             { data: 'descClasif', name: 'descClasif' },
             { data: 'descBien', name: 'descBien' },
             { data: 'factura', name: 'factura' },
@@ -88,7 +93,7 @@ function getSelectBien() {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_bien').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasificacion +" "+ opt.descripcion + ' largo: '+ 
+                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasificacion +"-"+ opt.id + " " + opt.descripcion + ' largo: '+ 
                                    opt.largo+'</option> '
                                 );
                                 $('.selectpicker').selectpicker('refresh');
