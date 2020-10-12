@@ -127,6 +127,21 @@ Route::get('inventario/selectEtiquetas', 'EtiquetasController@viewEtiquetas');
 Route::post('inventario/getNumRows', 'EtiquetasController@getNumRows');
 
 Route::get('admin/list_eventos', 'EventosController@list_eventos');
+Route::get('admin/editar_seccion', 'BienesController@editar_seccion');
+Route::get('admin/get_data_edit_seccion/{id_bien}', 'BienesController@get_data_edit_seccion');
+Route::post('admin/updateBien', 'BienesController@updateBien');
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::group(['middleware' => ['role:SuperAdmin|admin']], function() {
     Route::group(['prefix' => 'requisiciones'], function() {

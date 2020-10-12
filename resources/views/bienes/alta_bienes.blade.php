@@ -11,7 +11,7 @@
     </g>
 </svg><!--end::Svg Icon--></span>
             <h3 class="kt-portlet__head-title">
-               Alta Bienes
+               Alta Bienes              
             </h3>
         </div>
         <div class="kt-portlet__head-toolbar">
@@ -332,6 +332,28 @@
                                 </div>
                             </div>
                         {!! Form::close() !!}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        
+
+
                         </div>
                     </div>
 
@@ -357,9 +379,12 @@
                                         <th> Diametro</th>
                                         <th> Peso</th>
                                         <th> Foto</th>
+                                        <th> Editar </th>
+                                        <!--<th> Eliminar</th>-->
                                         <!--<th> Usu de MAterias*?</th>-->
                                     </tr>
                                     </thead>
+
                                 </table>
                             </div>
                                 <!--end: Datatable -->
@@ -379,21 +404,294 @@
                                 </div>
                             </div>
                             {!! Form::close() !!}
+
+
+                          
+
+
+
                         </div>
                     </div>
-
+                            
                     
 
                 </div>
             
         </div>
 
+        <!-- modal editar -->
+            <!-- local datatable modal -->
+<div id="kt_modal_KTDatatable_local" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" style="min-height: 590px;">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                   apturar Datos de un Bien
+                    
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--begin: Search Form -->
+                
+    <div class="row align-items-center">
+        <div class="col-xl-8 order-2 order-xl-1">
+               
+                
+                <form role="form" name="frm_edit_bien" id="frm_edit_bien" method="POST" accept-charset="UTF-8" 
+                enctype="multipart/form-data">
+                            <div class="kt-form__body">
+                                <div class="kt-section kt-section--first">
+                                    <div class="kt-section__body">
+                                     
+                                        <!--<div class="form-group row">
+                                            {{ Form::label('id_clasificacion', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                    <select class="selectpicker form-control" id="id_clasificacion" name="id_clasificacion" ata-show-subtext="true" data-live-search="true">
+                                                        <option value="0">Seleccione</option>
+                                                    </select>
+                                            </div>
+                                        </div>-->
+                                        <input type="hidden" name="id_update" id="id_update">
+                                        <div class="form-group row">
+                                            {{ Form::label('descripcion_e', 'Descripcion', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                
 
+                                                <input type="text" class="form-control"  name="descripcion_e" id="descripcion_e" onkeyup="mayus(this);">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('causa_alta_e', 'Causa de Alta', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                              <select class="form-control" id="causa_alta_e" name="causa_alta_e">
+                                                       
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('fecha_alta_e', 'Fecha de Alta', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                {{ Form::date('fecha_alta_e', auth()->user()->fecha_alta_e, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('estado_e', 'Estado', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                    <select class="form-control" id="estado_e" name="estado_e">
+                                                        <option value="1">Bueno</option>
+                                                        <option value="2">Regular</option>
+                                                        <option value="3">Malo</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"> </div>
+                                    <!-- -------------------MEDIDAS----------------------------- -->
+                                    <!-- -------------------MEDIDAS----------------------------- -->
+                                    <!-- -------------------MEDIDAS----------------------------- -->
+                                    <div class="row">
+                                            <label class="col-xl-3"></label>
+                                            <div class="col-lg-9 col-xl-6">
+                                                <h3 class="kt-section__title kt-section__title-sm">Medidas
+                                                        </h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('largo_e', 'Largo', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::text('largo_e', auth()->user()->largo_e, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="largo_e_medida" name="largo_e_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            {{ Form::label('ancho_e', 'Ancho', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::text('ancho_e', auth()->user()->ancho_e, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="ancho_e_medida" name="ancho_e_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('alto_e', 'Alto', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::text('alto_e', auth()->user()->alto_e, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="alto_e_medida" name="alto_e_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('diametro_e', 'Diametro', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::text('diametro_e', auth()->user()->diametro_e, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="diametro_e_medida" name="diametro_e_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('peso_e', 'Peso', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::text('peso_e', auth()->user()->peso_e, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="peso_e_medida" name="peso_e_medida">
+                                                    <option value="1">Miligramo</option>
+                                                    <option value="2">CentíGramo</option>
+                                                    <option value="3">Kilo</option>
+                                                    <option value="4">Tonelada</option>
+                                                    <option value="5">Libra</option>
+                                                    <option value="6">Onza</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('calibre_e', 'Calibre', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::text('calibre_e', auth()->user()->calibre_e, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="calibre_e_medida" name="calibre_e_medida">
+                                                    <option value="1">Milimetros</option>
+                                                    <option value="2">Centímetros</option>
+                                                    <option value="3">Pulgadas</option>
+                                                    <option value="4">Metros</option>
+                                                    <option value="5">Inches</option>
+                                                    <option value="6">Yardas</option>
+                                                    <option value="7">Brazadas</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('volumen_e', 'Volumen', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-4 col-xl-3">
+                                                {{ Form::text('volumen_e', auth()->user()->volumen_e, array('class' => 'form-control')) }}
+                                            </div>
+                                            <div class="col-lg-4 col-xl-3">
+                                                <select class="form-control" id="volumen_e_medida" name="volumen_e_medida">
+                                                    <option value="1">Litros</option>
+                                                    <option value="2">Galones</option>
+                                                    <option value="3">Centímetros Cúbicos</option>
+                                                    <option value="4">Mili Litros</option>
+                                                    <option value="5">Onzas</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('uso_material_e', 'Uso de Material', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                    <select class="form-control" id="uso_material_e" name="uso_material_e">
+                                                        <option value="0">Seleccione</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="card-body px-3 pt-2">
+                                        <div class="form-group row align-items-center">
+                                            <div class="col-auto">
+
+                                                <label for="customFile" class="col-form-label">Adjuntar Imagen</label>
+                                            </div>
+                                            <div class="col-sm-9 col-md-9 col-lg-7 col-xl-7">
+                                                    <input class="col-12 pl-0 pr-0 pt-0 pb-0 btn border " type="file" name="anexo_1" id="anexo_1" style="background-color: white">
+                                                    <label for="archivo"></label>
+                                            </div>
+                                             <div class="col-1" align="center"></div>
+                                        </div>
+                            <div class="form-group row align-items-center">
+                            </div>
+                        </div>
+                                        <div class="kt-form__actions">
+                                            <div class="row">
+                                                <div class="col-xl-3"></div>
+                                                <div class="col-lg-9 col-xl-6">        
+
+                                                    <!--<button type="submit" id="actualizar" class="btn btn-success" >Guardar</button>  -->
+
+                                                    <input type="submit" class="btn btn-cdmx" name="Actualizar">                                          
+                                                    <!--<button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_00" 
+                                                    onclick="save_bien();">
+                                                        Agregar
+                                                    </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>        
+        </div>
+      
+    </div>
+             <!--end: Search Form -->
+            </div>
+            <div class="modal-body modal-body-fit">
+                <!--begin: Datatable -->
+                <div id="modal_datatable_local_source"></div>
+                <!--end: Datatable -->
+            </div>
+            <div class="modal-footer kt-hidden">
+                <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-md" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default btn-bold btn-upper btn-font-md">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+        <!--modal editar -->
 
 
     </div>
 </div>
+
 @section('scripts')
+<script type="text/javascript">
+     $("#modalRegistro").modal({backdrop:'static',keyboard:false, show:true});
+
+                            //alert("Registro guardado: \n " + data);
+                            setTimeout(function () {
+                            $('#modalRegistro').modal("hide");
+                            }, 1000);
+</script>
+
 <script src="{{ URL::asset('js/bienes.js')}}" type="text/javascript"></script>
 @endsection
 @endsection
