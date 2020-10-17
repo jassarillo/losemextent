@@ -2,26 +2,23 @@ $(document).ready(function() {
     $('.inventarios-table').each(function () {
         $(this).dataTable(window.dtDefaultOptions);
     });
-    var dataTable = $('#inventarios-table').dataTable({
+    var dataTable = $('#eventos-table').dataTable({
         processing: true,
         serverSide: true,
         language: {
             "url": url + "assets/vendors/general/datatables/Spanish.json"
         },
         ajax: {
-            "url": url + "admin/data_listar_inventario",
+            "url": url + "admin/data_listar_eventos",
             "type": "GET"
         },
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'descClasif', name: 'descClasif' },
-            { data: 'descBien', name: 'descBien' },
-            { data: 'factura', name: 'factura' },
-            { data: 'precio', name: 'precio' },
-            { data: 'conteo', name: 'conteo' },
-            { data: 'progresivo', name: 'progresivo' },
-            { data: 'unico', name: 'unico' },
-            { data: 'conteo', name: 'conteo' },
+            { data: 'destino', name: 'destino' },
+            { data: 'fecha', name: 'fecha' },
+            { data: 'entregado', name: 'entregado' },
+            { data: 'descripcion', name: 'descripcion' },
+            { data: 'lugar', name: 'lugar' },
             {
                 "mRender": function (data, type, row) {
                     var id_user = row.id;
@@ -102,7 +99,7 @@ function getSelectBien() {
 getSelectBien();
 
 // Guardar nuevo Bien
-$('#frm_nuevo_invent').on('submit', function(e) {
+$('#frm_nuevo_evento').on('submit', function(e) {
     e.preventDefault();
     var formData = new FormData(this);
     formData.append('_token', $('input[name=_token]').val());
@@ -114,7 +111,7 @@ $('#frm_nuevo_invent').on('submit', function(e) {
         //url : url + "admin/storeBien",
         type: "POST",
         dataType: "json",
-        url: "admin/storeMasivo",
+        url: "admin/storeEventos",
         data: formData, 
         cache: false,
         contentType: false,

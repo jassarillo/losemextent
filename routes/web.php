@@ -132,6 +132,8 @@ Route::get('admin/get_data_edit_seccion/{id_bien}', 'BienesController@get_data_e
 Route::post('admin/updateBien', 'BienesController@updateBien');
 
 
+Route::post('admin/storeEventos', 'EventosController@storeEventos');
+Route::get('admin/data_listar_eventos', 'EventosController@data_listar_eventos');
 
 
 
