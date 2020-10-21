@@ -132,6 +132,7 @@ Route::get('admin/get_data_edit_seccion/{id_bien}', 'BienesController@get_data_e
 Route::post('admin/updateBien', 'BienesController@updateBien');
 
 
+Route::get('admin/existencias', 'ExistenciasController@existencias');
 
 
 
