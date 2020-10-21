@@ -211,7 +211,7 @@ class InventarioController extends Controller
      public function storeMasivo(Request $request)
     {
 
-      
+            dd("Ver donde colocar el inser a existencias");
             //dd($request->conteo);
             //dd($request->input());
             $veces =$request->conteo;
