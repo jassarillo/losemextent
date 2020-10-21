@@ -135,6 +135,7 @@ Route::post('admin/updateBien', 'BienesController@updateBien');
 Route::post('admin/storeEventos', 'EventosController@storeEventos');
 Route::get('admin/data_listar_eventos', 'EventosController@data_listar_eventos');
 
+Route::get('admin/agregar_bienes_eventos', 'EventosController@agregar_bienes_eventos');
 
 
 

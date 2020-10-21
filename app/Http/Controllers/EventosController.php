@@ -66,8 +66,10 @@ class EventosController extends Controller
         return   $respuesta;
     }
     
-
-
+    
+    public function agregar_bienes_eventos(){
+        return view('eventos.bienes_eventos');
+    }
 
 
 }
