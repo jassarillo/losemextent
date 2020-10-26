@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Eventos;
+use App\Existencias;
 use App\CausaAlta;
 use App\CatUso;
 use App\Secciones;
@@ -70,6 +71,9 @@ class EventosController extends Controller
     public function agregar_bienes_eventos(){
         return view('eventos.bienes_eventos');
     }
+
+    
+    
 
 
 }

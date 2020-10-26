@@ -134,12 +134,14 @@ Route::post('admin/updateBien', 'BienesController@updateBien');
 
 
 Route::get('admin/existencias', 'ExistenciasController@existencias');
+Route::get('admin/data_listar_existencias', 'ExistenciasController@tableExistencias');
 
 Route::post('admin/storeEventos', 'EventosController@storeEventos');
 Route::get('admin/data_listar_eventos', 'EventosController@data_listar_eventos');
 
-
 Route::get('admin/agregar_bienes_eventos', 'EventosController@agregar_bienes_eventos');
+
+
 
 
 

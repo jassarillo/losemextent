@@ -55,19 +55,17 @@
                                 <div class="kt-section kt-section--first">
                                 <!--begin: Datatable -->
                                 <div class="table-responsive col-xl-12"> 
-                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="inventarios-table">
+                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="existencias-table">
                                     <thead>
                                     <tr>
                                         <th> ID </th>
+                                        <th> Bodega </th>
+                                        <th> Id Clasifica </th>
                                         <th> Clasificación </th>
-                                        <th> Descripción </th>
-                                        <th> Factura </th>
-                                        <th> Precio</th>
-                                        <th> Conteo</th>
-                                        <th> Progresivo</th>
-                                        <th> Unico</th>
-                                        <th> Cantidad</th>
-                                        <th> Acciones</th>
+                                        <th> Id Bien </th>
+                                        <th> Bien </th>
+                                        <th> Conteo Existencia</th>
+                                        <th> Fecha</th>
                                     </tr>
                                     </thead>
 
@@ -101,6 +99,6 @@
     </div>
 </div>
 @section('scripts')
-<script src="{{ URL::asset('js/inventario.js')}}" type="text/javascript"></script>
+<script src="{{ URL::asset('js/existencias.js')}}" type="text/javascript"></script>
 @endsection
 @endsection

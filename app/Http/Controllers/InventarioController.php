@@ -9,6 +9,7 @@ use App\CausaAlta;
 use App\CatUso;
 use App\Secciones;
 use App\Inventario;
+use App\Existencias;
 use App\Http\Requests\UserRequest;
 use Yajra\Datatables\Datatables;
 use Auth;
@@ -211,7 +212,7 @@ class InventarioController extends Controller
      public function storeMasivo(Request $request)
     {
 
-            dd("Ver donde colocar el inser a existencias");
+            //dd("Ver donde colocar el inser a existencias");
             //dd($request->conteo);
             //dd($request->input());
             $veces =$request->conteo;
@@ -249,11 +250,58 @@ class InventarioController extends Controller
                 if ($request->unico == true){
                     break;
                 }
-                
-                
+            }
+
+                //Verifica si existe un registro de este tipo
+                $ifExiste = Existencias::select(DB::raw('COUNT(id) as num'),'conteo_existencia')
+                ->where('id_clasifica',$request->id_clasifica)
+                ->where('id_bien',$request->id_bien)
+                ->groupBy('conteo_existencia')
+                ->get()->toArray();
+                //dd($ifExiste);
+                if(!$ifExiste){ 
+
+                    
+                    $ConteoTodos = DB::select('select sum(distinct conteo) as uno from inventario 
+                    where id_clasifica = '. $request->id_clasifica .' 
+                    and id_bien = '. $request->id_bien .' and unico =0 ');
+                    //dd($ConteoTodos[0]->uno);
+                    $ConteoUnico = DB::select('select  sum(conteo) as dos from inventario 
+                        where id_clasifica = '. $request->id_clasifica .'  
+                        and id_bien = '. $request->id_bien .' and unico =1');
+                    //dd($ConteoUnico[0]->dos);
+                    $sumaTodo = $ConteoTodos[0]->uno + $ConteoUnico[0]->dos;
+
+                    //sdd($sumaTodo);
+                     $Existencias = new Existencias;
+                        $Existencias->bodega = 1;
+                        $Existencias->id_clasifica = $request->id_clasifica;
+                        $Existencias->id_bien = $request->id_bien;
+                        $Existencias->conteo_existencia = $sumaTodo ; 
+                        $Existencias->save();
+                    }else
+                    {
+                        if($ifExiste[0]['num'] == 0){
+                            //dd($ifExiste[0]['num'],55);
+                            $Existencias = new Existencias;
+                            $Existencias->bodega = 1;
+                            $Existencias->id_clasifica = $request->id_clasifica;
+                            $Existencias->id_bien = $request->id_bien;
+                            $Existencias->conteo_existencia = $request->conteo;
+                            $Existencias->save();
+                        }else{
+                            //dd($ifExiste[0]['num'],66);
+                            $sum =$ifExiste[0]['conteo_existencia'] + $request->conteo;
+                            Existencias::where('id_clasifica',$request->id_clasifica)
+                            ->where('id_bien',$request->id_bien)
+                            ->update(['conteo_existencia' => $sum ]);
+
+                            
+                        }
+                    }
+
                 
 
-            }
       
         $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
         return   $respuesta;

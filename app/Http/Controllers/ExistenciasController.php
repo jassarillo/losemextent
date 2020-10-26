@@ -30,9 +30,15 @@ class ExistenciasController extends Controller
         return view('inventario.existencias');
     }
 
-    public function data_listar_existencias(){
+    public function tableExistencias(){
         //dd(3232);
-        $existencias = Existencias::all();
+        
+        $existencias = Existencias::select('existencias.id','bodega', 'existencias.id_clasifica', 'se.descripcion as descSeccion', 'existencias.id_bien', 'bi.descripcion as descBien', 
+        	'conteo_existencia','existencias.created_at')
+        ->leftJoin('secciones as se','existencias.id_clasifica','=','se.id_seccion')
+        ->leftJoin('bienes as bi','existencias.id_bien','=','bi.id')
+        ->get()->toArray();
+        //dd($existencias);
         return Datatables::of($existencias)->toJson();
     }
 
