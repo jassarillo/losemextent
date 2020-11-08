@@ -88,5 +88,13 @@ class BienesController extends Controller
         return   $respuesta;
     }
 
+    public function getDataInventario($id_inventrio){
+        $bien = Inventario::select('*')
+        ->where('id',$id_inventrio)
+        ->get()->toArray();
+        //dd($bienes);
+        return response()->json($bien);
+    }
+    
 
 }

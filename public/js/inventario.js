@@ -30,7 +30,9 @@ $(document).ready(function() {
             {
                 "mRender": function (data, type, row) {
                     var id_user = row.id;
-                    return '<a class="btn btn-cdmx" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Editar</a>';
+                    //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+id_user+');" href="javascript:void(0)">Editar</a>';
+                    return '<a onclick="get_data_edit_inventario('+ row.id +');" href="#'+row.id+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
+
                 }
             }
 
@@ -142,6 +144,57 @@ $('#frm_nuevo_invent').on('submit', function(e) {
         }
     });
 });
+
+function get_data_edit_inventario(id_bien) {
+    //console.log(id_bien);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : url + "admin/get_data_edit_inventario/"+ id_bien,
+        dataType: 'html',
+        success: function(data) {
+            //console.log(data);
+            var obj = jQuery.parseJSON( data );
+
+            console.log(obj);
+            $("#fecha_inventario_e").val(obj[0]['fecha_inventario']);
+            //getSelectCausaAlta_edit();
+
+            /*getSelectCausaAlta_edit(obj[0]['causa_alta']);
+            $("#id_update").val(obj[0]['id']);
+            $("#descripcion_e").val(obj[0]['descripcion']);
+            $("#fecha_alta_e").val(obj[0]['fecha_alta']);
+            $("#estado_e").prop('selectedIndex', obj[0]['estado'] - 1);
+            $("#largo_e").val(obj[0]['largo']);
+            $("#largo_e_medida").prop('selectedIndex', obj[0]['largo_medida'] - 1);
+            $("#ancho_e").val(obj[0]['ancho']);
+            $("#ancho_e_medida").prop('selectedIndex', obj[0]['ancho_medida'] - 1);
+            $("#alto_e").val(obj[0]['alto']);
+            $("#alto_e_medida").prop('selectedIndex', obj[0]['alto_medida'] - 1);
+            $("#diametro_e").val(obj[0]['diametro']);
+            $("#diametro_e_medida").prop('selectedIndex', obj[0]['diametro_medida'] - 1);
+            $("#peso_e").val(obj[0]['peso']);
+            $("#peso_e_medida").prop('selectedIndex', obj[0]['peso_medida'] - 1);
+            $("#calibre_e").val(obj[0]['calibre']);
+            $("#calibre_e_medida").prop('selectedIndex', obj[0]['calibre_medida'] - 1);
+            $("#volumen_e").val(obj[0]['volumen']);
+            $("#volumen_e_medida").prop('selectedIndex', obj[0]['volumen_medida'] - 1);
+
+            getSelectUso_edit(obj[0]['uso_material'] - 1);
+            */
+
+            //$("#estado_e").val(obj[0]['estado']);
+
+            //$("#causa_alta_e").prop('selectedIndex', 3);
+            
+        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+}
+
 
 $("#conteo").keyup(function() {
             //console.log( "r34D!" );
