@@ -75,7 +75,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel">
                         <div class="kt-form kt-form--label-right">
-                            <form role="form" name="frm_nuevo_invent" id="frm_nuevo_invent" method="POST" accept-charset="UTF-8" 
+                            <form role="form" name="frm_nuevo_evento" id="frm_nuevo_evento" method="POST" accept-charset="UTF-8" 
                 enctype="multipart/form-data">
                             <div class="kt-form__body">
                                 <div class="kt-section kt-section--first">
@@ -101,7 +101,7 @@
                                                 {{ Form::date('fecha_evento', auth()->user()->fecha_evento, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+                                        <!--<div class="form-group row">
                                             {{ Form::label('entregado', 'Entregado', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                     <select class="form-control selectpicker" id="entregado" name="entregado">
@@ -109,7 +109,7 @@
                                                         <option value="2">No</option>
                                                     </select>
                                             </div>
-                                        </div>
+                                        </div>-->
 
                                     
                                         <div class="form-group row">
@@ -124,7 +124,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('lugar', 'Lugar', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                {{ Form::number('lugar', auth()->user()->lugar, array('class' => 'form-control')) }}
+                                                {{ Form::text('lugar', auth()->user()->lugar, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
                                                                             
@@ -163,18 +163,15 @@
                                 <div class="kt-section kt-section--first">
                                 <!--begin: Datatable -->
                                 <div class="table-responsive col-xl-12"> 
-                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="inventarios-table">
+                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="eventos-table">
                                     <thead>
                                     <tr>
                                         <th> ID </th>
-                                        <th> Clasificación </th>
-                                        <th> Descripción </th>
-                                        <th> Factura </th>
-                                        <th> Precio</th>
-                                        <th> Conteo</th>
-                                        <th> Progresivo</th>
-                                        <th> Unico</th>
-                                        <th> Cantidad</th>
+                                        <th> Destino </th>
+                                        <th> Fecha </th>
+                                        <th> Entregado </th>
+                                        <th> Descripción</th>
+                                        <th> Lugar</th>
                                         <th> Acciones</th>
                                     </tr>
                                     </thead>
@@ -214,6 +211,6 @@
     </div>
 </div>
 @section('scripts')
-<script src="{{ URL::asset('js/inventario.js')}}" type="text/javascript"></script>
+<script src="{{ URL::asset('js/eventos.js')}}" type="text/javascript"></script>
 @endsection
 @endsection

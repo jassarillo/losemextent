@@ -1,0 +1,709 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : mamp_mysql
+ Source Server Type    : MySQL
+ Source Server Version : 50726
+ Source Host           : localhost:8889
+ Source Schema         : almacenNube
+
+ Target Server Type    : MySQL
+ Target Server Version : 50726
+ File Encoding         : 65001
+
+ Date: 21/10/2020 01:31:44
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for bienes
+-- ----------------------------
+DROP TABLE IF EXISTS `bienes`;
+CREATE TABLE `bienes` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `id_clasificacion` int(4) DEFAULT NULL,
+  `par_pre` int(4) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `causa_alta` int(4) DEFAULT NULL,
+  `fecha_alta` date DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
+  `largo` varchar(56) DEFAULT NULL,
+  `largo_medida` int(2) DEFAULT NULL,
+  `ancho` varchar(56) DEFAULT NULL,
+  `ancho_medida` int(2) DEFAULT NULL,
+  `alto` varchar(56) DEFAULT NULL,
+  `alto_medida` int(2) DEFAULT NULL,
+  `diametro` varchar(56) DEFAULT NULL,
+  `diametro_medida` int(2) DEFAULT NULL,
+  `peso` varchar(56) DEFAULT NULL,
+  `peso_medida` int(2) DEFAULT NULL,
+  `calibre` varchar(56) DEFAULT NULL,
+  `calibre_medida` int(2) DEFAULT NULL,
+  `volumen` int(2) DEFAULT NULL,
+  `volumen_medida` int(2) DEFAULT NULL,
+  `uso_material` int(4) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of bienes
+-- ----------------------------
+BEGIN;
+INSERT INTO `bienes` VALUES (1, 1, NULL, 'SACO  EN FORMA DE CILINDRO', 9, '2020-08-27', 3, '60', 2, NULL, 1, NULL, 1, NULL, 1, '100', 3, NULL, 1, NULL, 1, 6, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (2, 95, NULL, 'TUERCA', 9, '2020-08-26', 1, '5', 4, '44', 3, '33', 3, '56', 5, '444', 3, '55', 2, 4432, 3, 4, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (3, 28, NULL, 'LAZO AZUL', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (4, 88, NULL, 'TORNILLO HEXAGONAL DE ALTA RESISTENCIA77', 9, '2020-08-26', 1, '11', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (5, 88, NULL, 'TORNILLO HEXAGONAL DE ALTA RESISTENCIA', 9, '2020-09-26', 1, '9.5', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (6, 96, NULL, 'CASCO DE PROTECCIÓN SIN SUSPENSIÓN TIPO CACHUCHA', 9, '2020-09-04', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (7, 88, NULL, 'TORNILLO HEXAGONAL', 9, '2020-08-26', 1, '2', 3, '16', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (8, 96, NULL, 'CHAMARRA IMPERMEABLE CON REFLEJANTE 444444', 9, '2020-09-04', 1, '33', 5, '333', 5, '333344', 5, '5555', 5, '6666', 2, '7777', 2, 8888, 2, NULL, NULL, '2020-09-13', '2020-10-11');
+INSERT INTO `bienes` VALUES (9, 96, NULL, 'PANTALÓN IMPERMEABLE CON REFLEJANTE', 9, '2020-09-04', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (10, 88, NULL, 'TORNILLO GALVANIZADO CABEZA HEXAGONAL', 9, '2020-08-26', 1, '2', 3, '9.5', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (11, 97, NULL, 'MARRO', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '20', 3, NULL, 1, NULL, 1, 13, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `bienes` VALUES (12, 98, NULL, 'ABRAZADERA DE 2 UÑAS DE 1\"', 9, '2020-09-09', 1, NULL, 1, '1', 3, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (13, 98, NULL, 'ABRAZADERA DE 1 UÑA DE 2\"', 9, '2020-09-09', 1, NULL, 1, '2', 3, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (14, 98, NULL, 'ABRAZADERA DE 1 UÑA DE 3/4\"', 9, '2020-09-09', 1, NULL, 1, '3/4', 3, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (15, 88, NULL, 'TORNILLO PARA GUÍA DE ALUMINIO CON BASTAGO', 9, '2020-08-26', 1, '89', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (16, 88, NULL, 'TORNILLO GALVANIZADO CABEZA HEXAGONAL', 9, '2020-08-26', 1, '1.5', 3, NULL, 1, NULL, 1, '9.5', 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (17, 100, NULL, 'ACEITE PARA SISTEMAS HIDRAULICOS', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 19, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (18, 101, NULL, 'ALAMBRE RECOCIDO', 9, '2020-09-02', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '34', 3, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (19, 102, NULL, 'BAILARINA', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (20, 88, NULL, 'TORNILLO CABEZA HEXAGONAL MILIMÉTRICO', 9, '2020-08-26', 1, '10', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (21, 0, NULL, 'BANDERIN REFLEJANTE NARANJA DE SEGURIAD', 9, '2020-09-03', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (22, 104, NULL, 'BOMBILLO TRANSPARENTE', 9, '2020-09-03', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (23, 104, NULL, 'BOMBILLO BLANCO', 9, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (24, 88, NULL, 'TORNILLO CABEZA HEXAGONAL DE ALTA RESISTENCIA CON BASTAGO Y TUERCA', 9, '2020-08-26', 1, '5.5', 3, '13', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (25, 105, NULL, 'BOWL DE ACERO INOXIDABLE', 9, '2020-09-02', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (26, 88, NULL, 'TORNILLO CABEZA HEXAGONAL CON BASTAGO', 9, '2020-08-26', 1, '70MM', 1, '10', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (27, 88, NULL, 'TORNILLO CABEZA HEXAGONAL CON BATAGO, RONDANA Y TUERCA', 9, '2020-08-26', 1, '5.5', 3, '.25', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (28, 106, NULL, 'CABLE ELECTRICO', 9, '2020-09-09', 1, '100', 4, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '4', 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (29, 106, NULL, 'CABLE ELECTRICO', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '6', 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (30, 106, NULL, 'CABLE ELECTRICO', 9, '2020-09-09', 1, '100', 4, NULL, 1, NULL, 1, NULL, 1, NULL, 1, '12', 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (31, 88, NULL, 'TORNILLO CABEZA HEXAGONAL', 9, '2020-08-26', 1, '4', 3, '6.4', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (32, 47, NULL, 'CABLE DE ACERO', 9, '2020-09-09', 1, '30', 4, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (33, 47, NULL, 'CABLE DE ACERO', 9, '2020-09-09', 1, '30', 4, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (34, 63, NULL, 'CONTACTO CON PLACA', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (35, 88, NULL, 'TORNILLO CABEZA HEXAGONAL', 9, '2020-08-26', 1, '2', 3, '19', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (36, 70, NULL, 'CAMPANA DE ACRILICO', 9, '2020-08-25', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (37, 88, NULL, 'TORNILLO CABEZA HEXAGONAL', 9, '2020-08-26', 1, '2', 3, '9.5', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (38, 105, NULL, 'CHAROLA DE AGUA CON CHAROLA PARA CHAFER', 9, '2020-09-02', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (40, 88, NULL, 'PUNTA DE BROCA GALVANIZADO', 9, '2020-08-26', 1, '3', 3, '6.4', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (41, 105, NULL, 'CHAROLA REDONDA CON ANTIDERRAPANTE', 9, '2020-09-02', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (42, 105, NULL, 'CHAROLA RECTANGULAR CON ANTIDERRAPANTE', 9, '2020-09-04', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (43, 84, NULL, 'CINTA CON GANCHO PARA MATRACA', 9, '2020-09-04', 1, '4', 4, '4', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (44, 88, NULL, 'PUNTA DE BROCA DORADO', 9, '2020-08-26', 1, '3', 3, '6.4', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (45, 84, NULL, 'CINTA CON GANCHO PARA MATRACA', 9, '2020-09-04', 1, '3', 4, '4', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (46, 84, NULL, 'CINTA CON GANCHO PARA MATRACA', 9, '2020-09-04', 1, '5', 4, '4', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (47, 84, NULL, 'CINTA CON GANCHO PARA MATRACA', 9, '2020-09-04', 1, '7', 4, '5', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (48, 84, NULL, 'CINTA CON GANCHO PARA MATRACA', 9, '2020-09-04', 1, '8', 4, '5', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (49, 84, NULL, 'CINTA CON GANCHO PARA MATRACA', 9, '2020-09-04', 1, '4', 4, '4', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (50, 84, NULL, 'CINTA  PARA MATRACA', 9, '2020-09-04', 1, '7', 4, '4', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (51, 84, NULL, 'CINTA PARA MATRACA', 9, '2020-09-04', 1, '4', 4, '4', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (52, 109, NULL, 'PIJA PARA MADERA', 9, '2020-08-26', 1, '1.5', 3, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (53, 110, NULL, 'CONECTOR', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '2', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (54, 110, NULL, 'CONECTOR CON CUERDA ITERIOR', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '1', 3, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (55, 110, NULL, 'CONECTOR CON CUERDA INTERIOR', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '3/4', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (56, 110, NULL, 'CONECTOR CONDUFLEX', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '2', 3, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (57, 110, NULL, 'CONECTOR CONDUFLEX', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '3/4', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (63, 110, NULL, 'CONECTOR CONDUFLEX', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '3/8', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (64, 110, NULL, 'CONECTOR', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '3/4', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (65, 106, NULL, 'CONECTOR DE AUDIO Y VIDEO', 9, '2020-09-02', 1, '26m', 4, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (66, 105, NULL, 'PORTA CHAFER', 9, '2020-08-04', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (67, 110, NULL, 'CONECTOR DE CUERDA INTERIOR', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '2', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (68, 110, NULL, 'CONECTOR DE CUERDA INTERIOR', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '2', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (69, 110, NULL, 'CONECTOR', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '1/2', 3, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (71, 105, NULL, 'PINSAS DE HIELO', 9, '2020-09-06', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (72, 110, NULL, 'CONECTOR CONDUFLEX', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '1 1/2', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (73, 84, NULL, 'MATRACA GRANDE', 9, '2020-09-06', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (74, 111, NULL, 'CONTRAS', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '1', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (75, 111, NULL, 'CONTRAS', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '3/4', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (76, 111, NULL, 'CONTRAS', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '1 1/4', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (77, 52, NULL, 'COPLE CON CUERDA INTERIOR', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '1 1/2', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (78, 52, NULL, 'COPLE', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '6', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (79, 97, NULL, 'PICO', 9, '2020-09-06', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (80, 97, NULL, 'PALA DE JARDINERO PUNTIAGUDA', 9, '2020-09-06', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (81, 52, NULL, 'COPLE DE LARGERO TRANSVERSAL', 9, '2020-09-04', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (82, 52, NULL, 'COPLE', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, '1/2', 3, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (83, 105, NULL, 'CUCHARA PARA SERVICIO', 9, '2020-09-02', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (84, 97, NULL, 'PALA DE JARDINERO CHATA', 9, '2020-09-06', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (85, 112, NULL, 'DESPACHADOR DE CINTA', 9, '2020-09-02', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (86, 97, NULL, 'PALA DE ALBAÑIL PARA MEZCLA', 9, '2020-09-06', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (87, 54, NULL, 'ELECTROBOMBA 0.37KW', 0, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (88, 112, NULL, 'ENGRAPADORAS', 9, '2020-09-02', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (89, 63, NULL, 'SWITCH DE 2 FUSIBLES', 9, '2020-09-06', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (90, 105, NULL, 'ENSALADERO', 9, '2020-09-02', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (91, 21, NULL, 'ROLLO DE FLEJE', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (92, 105, NULL, 'QUEMADOR PARA PARRILLA HEXAGONAL', 9, '2020-09-06', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (93, 104, NULL, 'BOMBILLO GRANDE TRANSPARENTE', 9, '2020-09-02', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `bienes` VALUES (94, 104, NULL, 'BOMBILLO GRANDE BLANCO', 9, '2020-09-03', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-09-25', '2020-09-25');
+INSERT INTO `bienes` VALUES (95, 105, NULL, 'CHAFER', 9, '2020-09-03', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-25', '2020-09-25');
+INSERT INTO `bienes` VALUES (96, 21, NULL, 'ROLLO DE HULE CRISTAL', 9, '2020-09-08', 1, '1.43', 4, '2.5', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-25', '2020-09-25');
+INSERT INTO `bienes` VALUES (97, 29, NULL, 'TUBO GUIA', 9, '2020-09-02', 1, '1.25', 4, '4.5', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-25', '2020-09-25');
+INSERT INTO `bienes` VALUES (98, 33, NULL, 'ESCALERA DE MADERA', 9, '2020-09-25', 1, '2.90', 4, '42', 2, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-25', '2020-09-25');
+INSERT INTO `bienes` VALUES (99, 114, NULL, 'GUITARRAS', 9, '2020-09-09', 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 13, NULL, '2020-09-25', '2020-09-25');
+INSERT INTO `bienes` VALUES (100, 1, NULL, 'XXXXXX', 0, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 0, NULL, '2020-10-05', '2020-10-05');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for bienes_old
+-- ----------------------------
+DROP TABLE IF EXISTS `bienes_old`;
+CREATE TABLE `bienes_old` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `id_clasificacion` int(4) DEFAULT NULL,
+  `par_pre` int(4) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `causa_alta` int(4) DEFAULT NULL,
+  `fecha_alta` date DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
+  `largo` varchar(56) DEFAULT NULL,
+  `ancho` varchar(56) DEFAULT NULL,
+  `alto` varchar(56) DEFAULT NULL,
+  `diametro` varchar(56) DEFAULT NULL,
+  `peso` varchar(56) DEFAULT NULL,
+  `calibre` varchar(255) DEFAULT NULL,
+  `uso_material` int(4) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of bienes_old
+-- ----------------------------
+BEGIN;
+INSERT INTO `bienes_old` VALUES (2, 37, NULL, 'MARCO', 9, '2020-08-24', 1, '75', NULL, NULL, NULL, NULL, '', 10, NULL, '2020-09-05', '2020-09-05');
+INSERT INTO `bienes_old` VALUES (3, 37, NULL, 'MARCO', 9, '2020-08-24', 1, '1', NULL, NULL, NULL, NULL, '', 10, NULL, '2020-09-05', '2020-09-05');
+INSERT INTO `bienes_old` VALUES (4, 37, NULL, 'MARCO', 9, '2020-09-24', 1, '1.5', NULL, NULL, NULL, NULL, '', 0, NULL, '2020-09-05', '2020-09-05');
+INSERT INTO `bienes_old` VALUES (6, 37, NULL, 'MARCO', 9, '2020-09-24', 1, '30', NULL, NULL, NULL, NULL, '', 10, NULL, '2020-09-05', '2020-09-05');
+INSERT INTO `bienes_old` VALUES (7, 6, NULL, 'MONTA CARGAS HYSTER', 9, '2020-09-01', 1, NULL, NULL, NULL, NULL, NULL, '', 0, NULL, '2020-09-05', '2020-09-05');
+INSERT INTO `bienes_old` VALUES (8, 19, NULL, 'MESA CUADRADA', 9, '2020-08-25', 1, '164mts x 164mts', NULL, NULL, NULL, NULL, '', 0, NULL, '2020-09-05', '2020-09-05');
+INSERT INTO `bienes_old` VALUES (9, 19, NULL, 'MESA DE MADERA REDONDA', 9, '2020-08-25', 1, NULL, NULL, NULL, NULL, NULL, '', 11, NULL, '2020-09-06', '2020-09-06');
+INSERT INTO `bienes_old` VALUES (10, 19, NULL, 'MESA DE CENTRO', 9, '2020-08-25', 1, NULL, NULL, NULL, NULL, NULL, '', 11, NULL, '2020-09-06', '2020-09-06');
+INSERT INTO `bienes_old` VALUES (11, 6, NULL, 'MONTACARGA YALE 50VX', 9, '2020-08-26', 1, NULL, NULL, NULL, NULL, NULL, '', 0, NULL, '2020-09-06', '2020-09-06');
+INSERT INTO `bienes_old` VALUES (12, 5, NULL, '23PRUEBA', 7, '2020-09-23', 2, '22', '55', '66', '777', '8', '344f ff', 8, NULL, '2020-09-10', '2020-09-10');
+INSERT INTO `bienes_old` VALUES (13, 19, NULL, 'Otra PRUEBA', 9, '2020-09-09', 1, '11', '44', '34', '34', '5', '455gg', 10, NULL, '2020-09-10', '2020-09-10');
+INSERT INTO `bienes_old` VALUES (14, 5, NULL, 'PRUEBA30', 6, '2020-09-09', 1, '55', '54', '32', '47', '55', '87', 10, NULL, '2020-09-10', '2020-09-10');
+INSERT INTO `bienes_old` VALUES (15, 51, NULL, 'flauta para pagoda', 9, '2020-09-24', 1, '1.3 mts', NULL, NULL, NULL, NULL, NULL, 12, NULL, '2020-09-10', '2020-09-10');
+INSERT INTO `bienes_old` VALUES (16, 8, NULL, 'PRUEBA 334', 7, '2020-09-09', 1, '56 cm', NULL, NULL, NULL, NULL, NULL, 0, NULL, '2020-09-10', '2020-09-10');
+INSERT INTO `bienes_old` VALUES (17, 8, NULL, 'PRUEBA 334', 7, '2020-09-09', 1, '56 cm', NULL, NULL, NULL, NULL, NULL, 9, NULL, '2020-09-10', '2020-09-10');
+INSERT INTO `bienes_old` VALUES (18, 8, NULL, 'PRUEBA G', 7, '2020-09-09', 1, '56 cm', NULL, NULL, NULL, NULL, NULL, 9, NULL, '2020-09-10', '2020-09-10');
+INSERT INTO `bienes_old` VALUES (19, 8, NULL, 'Prueba', 5, '2020-09-12', 2, '1.2cm', '1.3cm', '1.4cm', '1.5cm', '20kg', '16', 6, NULL, '2020-09-12', '2020-09-12');
+INSERT INTO `bienes_old` VALUES (20, 8, NULL, 'Prueba', 5, '2020-09-12', 2, '1.2cm', '1.3cm', '1.4cm', '1.5cm', '20kg', '16', 6, NULL, '2020-09-12', '2020-09-12');
+INSERT INTO `bienes_old` VALUES (21, 37, NULL, 'marco PRUEBA', 9, '2020-09-11', 1, 'PRUEBA', 'PRUEBA', NULL, NULL, NULL, NULL, 6, NULL, '2020-09-12', '2020-09-12');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for cat_altas
+-- ----------------------------
+DROP TABLE IF EXISTS `cat_altas`;
+CREATE TABLE `cat_altas` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cat_altas
+-- ----------------------------
+BEGIN;
+INSERT INTO `cat_altas` VALUES (5, 'causa alta prueba', NULL, '2020-09-02', '2020-09-02');
+INSERT INTO `cat_altas` VALUES (6, 'siete 77', NULL, '2020-09-02', '2020-09-02');
+INSERT INTO `cat_altas` VALUES (7, 'siete 77', NULL, '2020-09-02', '2020-09-02');
+INSERT INTO `cat_altas` VALUES (8, 'Fgg', NULL, '2020-09-02', '2020-09-02');
+INSERT INTO `cat_altas` VALUES (9, 'INVENTARIO INICIAL', NULL, '2020-09-05', '2020-09-05');
+INSERT INTO `cat_altas` VALUES (10, 'COMPRA', NULL, '2020-09-13', '2020-09-13');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for cat_uso
+-- ----------------------------
+DROP TABLE IF EXISTS `cat_uso`;
+CREATE TABLE `cat_uso` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cat_uso
+-- ----------------------------
+BEGIN;
+INSERT INTO `cat_uso` VALUES (6, 'eventos', NULL, '2020-09-02 05:12:35', '2020-09-02 05:12:35');
+INSERT INTO `cat_uso` VALUES (7, '7uso', NULL, '2020-09-02 05:14:41', '2020-09-02 05:14:41');
+INSERT INTO `cat_uso` VALUES (8, '33', NULL, '2020-09-02 06:27:37', '2020-09-02 06:27:37');
+INSERT INTO `cat_uso` VALUES (9, 'PABELLÓN FORMATO P-2', NULL, '2020-09-05 18:32:53', '2020-09-05 18:32:53');
+INSERT INTO `cat_uso` VALUES (10, 'TEMPLETE (ESENARIOS)', NULL, '2020-09-05 22:14:09', '2020-09-05 22:14:09');
+INSERT INTO `cat_uso` VALUES (11, 'muebles en madera', NULL, '2020-09-05 23:50:17', '2020-09-05 23:50:17');
+INSERT INTO `cat_uso` VALUES (12, 'PAGODA DE 3 Y 5 MTS Y 6 MTS', NULL, '2020-09-10 03:43:22', '2020-09-10 03:43:22');
+INSERT INTO `cat_uso` VALUES (13, 'GENERAL', NULL, '2020-09-13 17:54:46', '2020-09-13 17:54:46');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for eventos
+-- ----------------------------
+DROP TABLE IF EXISTS `eventos`;
+CREATE TABLE `eventos` (
+  `id` int(16) NOT NULL AUTO_INCREMENT,
+  `destino` varchar(255) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `entregado` int(4) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `lugar` varbinary(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of eventos
+-- ----------------------------
+BEGIN;
+INSERT INTO `eventos` VALUES (1, '234', NULL, 2, '32', 0x343333, NULL, '2020-10-21 06:29:56', '2020-10-21 06:29:56');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for inventario
+-- ----------------------------
+DROP TABLE IF EXISTS `inventario`;
+CREATE TABLE `inventario` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `id_clasifica` int(8) DEFAULT NULL,
+  `id_bien` int(8) DEFAULT NULL,
+  `fecha_inventario` date DEFAULT NULL,
+  `motivo_alta` int(4) DEFAULT NULL,
+  `factura` varchar(56) DEFAULT NULL,
+  `precio` int(8) DEFAULT NULL,
+  `conteo` int(4) DEFAULT NULL,
+  `progresivo` int(8) DEFAULT NULL,
+  `unico` int(4) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of inventario
+-- ----------------------------
+BEGIN;
+INSERT INTO `inventario` VALUES (1, 94, 2, '2020-08-26', 1, '0', 0, 51, 1, 1, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `inventario` VALUES (2, 28, 3, '2019-09-09', 1, '0', 0, 3, 1, 1, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `inventario` VALUES (3, 88, 4, '2020-08-26', 1, '0', 0, 77, 1, 1, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `inventario` VALUES (4, 88, 5, '2020-08-26', 1, '0', 0, 78, 1, 1, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `inventario` VALUES (5, 88, 7, '2020-08-26', 1, '0', 1, 1, 1, 1, NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `inventario` VALUES (6, 94, 12, '2020-09-09', 1, '0', 0, 1, 1, 1, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (7, 88, 44, '2020-08-26', 1, '0', 0, 19, 1, 1, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (8, 88, 40, '2020-08-26', 1, '0', 0, 41, 1, 1, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (9, 94, 6, '2020-09-04', 1, '0', 0, 3, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (10, 94, 6, '2020-09-04', 1, '0', 0, 3, 2, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (11, 94, 6, '2020-09-04', 1, '0', 0, 3, 3, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (12, 94, 8, '2020-09-04', 1, '0', 0, 4, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (13, 94, 8, '2020-09-04', 1, '0', 0, 4, 2, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (14, 94, 8, '2020-09-04', 1, '0', 0, 4, 3, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (15, 94, 8, '2020-09-04', 1, '0', 0, 4, 4, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (16, 94, 0, '2020-09-04', 1, '0', 0, 4, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (17, 94, 0, '2020-09-04', 1, '0', 0, 4, 2, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (18, 94, 0, '2020-09-04', 1, '0', 0, 4, 3, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (19, 94, 0, '2020-09-04', 1, '0', 0, 4, 4, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (20, 94, 13, '2020-09-09', 1, '0', 0, 1, 1, 1, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (21, 94, 14, '2020-09-09', 1, '0', 0, 18, 1, 1, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (22, 88, 37, '2020-08-26', 1, '0', 0, 1, 1, 1, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (23, 94, 17, '2020-09-09', 1, '0', 0, 2, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (24, 94, 17, '2020-09-09', 1, '0', 0, 2, 2, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (25, 94, 80, '2020-09-06', 1, '0', 0, 1, 1, 0, NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `inventario` VALUES (26, 105, 66, '2020-09-04', 1, '0', 0, 64, 1, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (27, 105, 66, '2020-09-04', 1, '0', 0, 64, 2, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (28, 105, 66, '2020-09-04', 1, '0', 0, 64, 3, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (29, 105, 66, '2020-09-04', 1, '0', 0, 64, 4, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (30, 105, 66, '2020-09-04', 1, '0', 0, 64, 5, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (31, 105, 66, '2020-09-04', 1, '0', 0, 64, 6, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (32, 105, 66, '2020-09-04', 1, '0', 0, 64, 7, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (33, 105, 66, '2020-09-04', 1, '0', 0, 64, 8, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (34, 105, 66, '2020-09-04', 1, '0', 0, 64, 9, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (35, 105, 66, '2020-09-04', 1, '0', 0, 64, 10, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (36, 105, 66, '2020-09-04', 1, '0', 0, 64, 11, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (37, 105, 66, '2020-09-04', 1, '0', 0, 64, 12, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (38, 105, 66, '2020-09-04', 1, '0', 0, 64, 13, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (39, 105, 66, '2020-09-04', 1, '0', 0, 64, 14, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (40, 105, 66, '2020-09-04', 1, '0', 0, 64, 15, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (41, 105, 66, '2020-09-04', 1, '0', 0, 64, 16, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (42, 105, 66, '2020-09-04', 1, '0', 0, 64, 17, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (43, 105, 66, '2020-09-04', 1, '0', 0, 64, 18, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (44, 105, 66, '2020-09-04', 1, '0', 0, 64, 19, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (45, 105, 66, '2020-09-04', 1, '0', 0, 64, 20, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (46, 105, 66, '2020-09-04', 1, '0', 0, 64, 21, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (47, 105, 66, '2020-09-04', 1, '0', 0, 64, 22, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (48, 105, 66, '2020-09-04', 1, '0', 0, 64, 23, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (49, 105, 66, '2020-09-04', 1, '0', 0, 64, 24, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (50, 105, 66, '2020-09-04', 1, '0', 0, 64, 25, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (51, 105, 66, '2020-09-04', 1, '0', 0, 64, 26, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (52, 105, 66, '2020-09-04', 1, '0', 0, 64, 27, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (53, 105, 66, '2020-09-04', 1, '0', 0, 64, 28, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (54, 105, 66, '2020-09-04', 1, '0', 0, 64, 29, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (55, 105, 66, '2020-09-04', 1, '0', 0, 64, 30, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (56, 105, 66, '2020-09-04', 1, '0', 0, 64, 31, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (57, 105, 66, '2020-09-04', 1, '0', 0, 64, 32, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (58, 105, 66, '2020-09-04', 1, '0', 0, 64, 33, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (59, 105, 66, '2020-09-04', 1, '0', 0, 64, 34, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (60, 105, 66, '2020-09-04', 1, '0', 0, 64, 35, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (61, 105, 66, '2020-09-04', 1, '0', 0, 64, 36, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (62, 105, 66, '2020-09-04', 1, '0', 0, 64, 37, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (63, 105, 66, '2020-09-04', 1, '0', 0, 64, 38, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (64, 105, 66, '2020-09-04', 1, '0', 0, 64, 39, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (65, 105, 66, '2020-09-04', 1, '0', 0, 64, 40, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (66, 105, 66, '2020-09-04', 1, '0', 0, 64, 41, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (67, 105, 66, '2020-09-04', 1, '0', 0, 64, 42, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (68, 105, 66, '2020-09-04', 1, '0', 0, 64, 43, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (69, 105, 66, '2020-09-04', 1, '0', 0, 64, 44, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (70, 105, 66, '2020-09-04', 1, '0', 0, 64, 45, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (71, 105, 66, '2020-09-04', 1, '0', 0, 64, 46, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (72, 105, 66, '2020-09-04', 1, '0', 0, 64, 47, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (73, 105, 66, '2020-09-04', 1, '0', 0, 64, 48, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (74, 105, 66, '2020-09-04', 1, '0', 0, 64, 49, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (75, 105, 66, '2020-09-04', 1, '0', 0, 64, 50, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (76, 105, 66, '2020-09-04', 1, '0', 0, 64, 51, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (77, 105, 66, '2020-09-04', 1, '0', 0, 64, 52, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (78, 105, 66, '2020-09-04', 1, '0', 0, 64, 53, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (79, 105, 66, '2020-09-04', 1, '0', 0, 64, 54, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (80, 105, 66, '2020-09-04', 1, '0', 0, 64, 55, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (81, 105, 66, '2020-09-04', 1, '0', 0, 64, 56, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (82, 105, 66, '2020-09-04', 1, '0', 0, 64, 57, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (83, 105, 66, '2020-09-04', 1, '0', 0, 64, 58, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (84, 105, 66, '2020-09-04', 1, '0', 0, 64, 59, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (85, 105, 66, '2020-09-04', 1, '0', 0, 64, 60, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (86, 105, 66, '2020-09-04', 1, '0', 0, 64, 61, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (87, 105, 66, '2020-09-04', 1, '0', 0, 64, 62, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (88, 105, 66, '2020-09-04', 1, '0', 0, 64, 63, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (89, 105, 66, '2020-09-04', 1, '0', 0, 64, 64, 0, NULL, '2020-09-23', '2020-09-23');
+INSERT INTO `inventario` VALUES (90, 33, 98, '2020-09-25', 1, '0', 0, 1, 1, 0, NULL, '2020-09-25', '2020-09-25');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for menus
+-- ----------------------------
+DROP TABLE IF EXISTS `menus`;
+CREATE TABLE `menus` (
+  `id` int(4) NOT NULL,
+  `menu` varchar(150) DEFAULT NULL,
+  `slug` varchar(150) DEFAULT NULL,
+  `padre` int(4) NOT NULL,
+  `orden` int(2) NOT NULL,
+  `activo` int(11) DEFAULT NULL,
+  `descripcion` varchar(150) DEFAULT NULL,
+  `ruta` varchar(50) DEFAULT NULL,
+  `ajax` varchar(2) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of menus
+-- ----------------------------
+BEGIN;
+INSERT INTO `menus` VALUES (1, 'Opción 1', 'opcion1', 0, 0, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (2, 'Opción 2', 'opcion2', 0, 1, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (3, 'Opción 3', 'opcion3', 0, 2, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (4, 'Opción 4', 'opcion4', 0, 3, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (5, 'Opción 1.1', 'opcion-1.1', 1, 0, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (6, 'Opción 1.2', 'opcion-1.2', 1, 1, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (7, 'Opción 3.1', 'opcion-3.1', 3, 0, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (8, 'Opción 3.2', 'opcion-3.2', 3, 1, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (9, 'Opción 4.1', 'opcion-4.1', 4, 0, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (10, 'Opción 3.2.1', 'opcion-3.2.1', 8, 0, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (11, 'Opción 3.2.2', 'opcion-3.2.2', 8, 1, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+INSERT INTO `menus` VALUES (12, 'Opción 3.2.3', 'opcion-3.2.3', 8, 2, 1, NULL, '/home', NULL, '2020-08-28 15:28:32', '2020-08-28 15:28:32');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for migrations
+-- ----------------------------
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Table structure for model_has_menu_permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `model_has_menu_permissions`;
+CREATE TABLE `model_has_menu_permissions` (
+  `id` int(8) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for model_has_permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `model_has_permissions`;
+CREATE TABLE `model_has_permissions` (
+  `permission_id` int(4) NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` int(8) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for model_has_roles
+-- ----------------------------
+DROP TABLE IF EXISTS `model_has_roles`;
+CREATE TABLE `model_has_roles` (
+  `role_id` int(4) NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` int(8) NOT NULL,
+  PRIMARY KEY (`role_id`,`model_id`,`model_type`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of model_has_roles
+-- ----------------------------
+BEGIN;
+INSERT INTO `model_has_roles` VALUES (1, 'AppUser', 1);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE `permissions` (
+  `id` int(4) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of permissions
+-- ----------------------------
+BEGIN;
+INSERT INTO `permissions` VALUES (1, 'SuperAdmin', 'web', NULL, NULL);
+INSERT INTO `permissions` VALUES (2, 'Admin', 'web', NULL, NULL);
+INSERT INTO `permissions` VALUES (3, 'Ver', 'web', NULL, NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for role_has_permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `role_has_permissions`;
+CREATE TABLE `role_has_permissions` (
+  `permission_id` int(4) NOT NULL,
+  `role_id` int(4) NOT NULL,
+  PRIMARY KEY (`permission_id`,`role_id`),
+  KEY `role_has_permissions_role_id_foreign` (`role_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of role_has_permissions
+-- ----------------------------
+BEGIN;
+INSERT INTO `role_has_permissions` VALUES (1, 1);
+INSERT INTO `role_has_permissions` VALUES (2, 2);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for roles
+-- ----------------------------
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles` (
+  `id` int(4) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of roles
+-- ----------------------------
+BEGIN;
+INSERT INTO `roles` VALUES (1, 'SuperAdmin', 'web', NULL, NULL);
+INSERT INTO `roles` VALUES (2, 'admin', 'web', NULL, NULL);
+INSERT INTO `roles` VALUES (3, 'SinAsignar', 'web', NULL, NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for secciones
+-- ----------------------------
+DROP TABLE IF EXISTS `secciones`;
+CREATE TABLE `secciones` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `id_seccion` int(11) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of secciones
+-- ----------------------------
+BEGIN;
+INSERT INTO `secciones` VALUES (1, 1, 'CONTRAPESOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (2, 3, 'MAMPARAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (3, 6, 'MONTACRGAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (4, 7, 'PANELES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (5, 2, 'SALAS LOUNCH', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (6, 5, 'EQUIPOS DE ILUMINACION', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (7, 8, 'SILLAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (8, 9, 'PLACAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (9, 10, 'LARGUEROS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (10, 11, 'BIGUETAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (11, 12, 'TIRANTES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (12, 13, 'PATAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (13, 14, 'TOTEMS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (14, 15, 'TARIMAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (15, 16, 'FORMAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (16, 17, 'LONAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (17, 18, 'TABLONES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (18, 19, 'MESAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (19, 4, 'AIRES ACONDCIONADOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (20, 20, 'BALLAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (21, 21, 'ROLLOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (22, 22, 'ECONOMICOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (23, 23, 'ALFOMBRAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (24, 24, 'CONTENEDORES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (25, 25, 'CALENTADORES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (26, 26, 'NO CONFORME', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (27, 27, 'POLINES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (28, 28, 'LAZOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (29, 29, 'TUBOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (30, 30, 'CRUCETAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (31, 32, 'PORTICOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (32, 31, 'BASES (CONTRAPESO)', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (33, 33, 'ESCALERAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (34, 34, 'TRINCHES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (35, 35, 'ESQUINEROS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (36, 36, 'BARANDAL', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (37, 37, 'MARCOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (38, 38, 'BANCOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (39, 39, 'RAMPAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (40, 40, 'ESTACA', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (41, 41, 'CLAVO', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (42, 42, 'TS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (43, 43, 'MASTIL', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (44, 44, 'ESPIGAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (45, 45, 'CUMBRERAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (46, 46, 'BASES (FIGADORAS)', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (47, 47, 'CABLES TENSORES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (48, 48, 'ESPARRAGOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (49, 49, 'EXTENCIONES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (50, 50, 'CORONAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (51, 51, 'FLAUTAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (52, 52, 'COPLES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (53, 53, 'MENSULAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (54, 54, 'MAQUINARIA', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (55, 55, 'UNIFILAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (56, 56, 'POLIPASTOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (57, 57, 'COMSUMIBLES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (58, 61, 'LIENZOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (59, 58, 'PLAFONES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (60, 59, 'CUBRE POSTES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (61, 60, 'COGIN CON FUNDA', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (62, 62, 'CUBIERTAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (63, 63, 'MATERIAL ELECTRICO', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (64, 64, 'BAMBALINAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (65, 65, 'POSTES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (66, 66, 'BARANDALES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (67, 67, 'ANDAMIOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (68, 68, 'REFACCIONES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (69, 69, 'TANQUES DE GAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (70, 70, 'CAMPANAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (71, 71, 'GARRAFONES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (72, 72, 'MALLAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (73, 73, 'EXTINTORES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (74, 74, 'ESQUELETOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (75, 75, 'PUERTAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (76, 76, 'PLOTER', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (77, 77, 'DUCTOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (78, 78, 'MATERIALES DE PRODUCCION', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (79, 79, 'CONSUMIBLES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (80, 80, 'ARAÑA', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (81, 81, 'PERFILES', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (82, 82, 'MONTEN', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (83, 83, 'PORTA PANEL', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (84, 84, 'MATRACAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (85, 85, 'ALMAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (86, 86, 'CANGREJOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (87, 87, 'ZAPATOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (88, 88, 'TORNILLOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (89, 89, 'MADEROS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (90, 90, 'LAMINAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (91, 91, 'SILLON', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (92, 92, 'TRIANGULOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (93, 93, 'ESPONJAS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (94, 94, 'CURVOS', 1, NULL, NULL);
+INSERT INTO `secciones` VALUES (95, 95, 'TUERCAS', NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `secciones` VALUES (96, 96, 'EQUIPO PERSONAL', NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `secciones` VALUES (97, 97, 'HERRAMIENTA DE TRABAJO', NULL, '2020-09-13', '2020-09-13');
+INSERT INTO `secciones` VALUES (98, 98, 'ABRAZADERAS', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (99, 99, 'ACEITE PARA ENGRADAJES', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (100, 100, 'ACEITES', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (101, 101, 'ALAMBRES', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (102, 102, 'BAILARINAS', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (103, 103, 'SEGURIDAD', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (104, 104, 'BOMBILLOS', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (105, 105, 'UTENSILIOS DE COCINA', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (106, 106, 'CABLES ELECTRICOS', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (107, 107, 'CONTACTOS', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (108, 108, 'CAMPANA DE ACRILICO', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (109, 109, 'PIJAS', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (110, 110, 'CONECTORES', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (111, 111, 'CONTRAS', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (112, 112, 'HERRAMIENTA DE OFICINA', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (113, 113, 'pruebajulio', NULL, '2020-09-19', '2020-09-19');
+INSERT INTO `secciones` VALUES (114, 114, 'ACCESORIOS', NULL, '2020-09-25', '2020-09-25');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `confirmed` tinyint(1) NOT NULL DEFAULT '0',
+  `confirmation_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `apellido_paterno` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `apellido_materno` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `usuario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'avatares/avatar_neutro.jpeg',
+  `estatus` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_rol` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rfc` varchar(13) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+BEGIN;
+INSERT INTO `users` VALUES (1, 'uiu', 'jas@g.com', NULL, '$2y$10$aG47QfL6hikw.YfHnKfOaOVbzuNNmapypJTfoYwfIEhL7ZRfE7kuW', 0, 'nPS2Va97dAZxaop5YVQKyESD9', NULL, '2020-08-28 15:53:46', '2020-08-28 15:53:46', 'iuiu', 'uiu', 'jas', 'avatares/avatar_neutro.jpeg', '0', NULL, NULL);
+INSERT INTO `users` VALUES (2, 'user', 'j@g.com', '2020-08-28 10:56:40', '$2y$10$964LYU0HFf1N.1B/eLcvTuhGwr9JddMI15U68c29dNkhV3WMt./Ii', 0, NULL, NULL, NULL, NULL, 'ee', 'ee', 'admin', 'avatares/avatar_neutro.jpeg', '1', '1', 'UYUYUYUYU');
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;

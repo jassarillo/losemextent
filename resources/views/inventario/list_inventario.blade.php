@@ -262,6 +262,7 @@
 
 
 
+        @include("inventario.modal.modal-editar-inventario")
 
     </div>
 </div>

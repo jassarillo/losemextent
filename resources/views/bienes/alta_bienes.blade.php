@@ -12,7 +12,7 @@
 </svg><!--end::Svg Icon--></span>
             <h3 class="kt-portlet__head-title">
                Alta Bienes              
-            </h3>
+            </h3> 
         </div>
         <div class="kt-portlet__head-toolbar">
             <div class="kt-portlet__head-wrapper">
@@ -426,7 +426,7 @@
         <div class="modal-content" style="min-height: 590px;">
             <div class="modal-header">
                 <h5 class="modal-title">
-                   apturar Datos de un Bien
+                   Editar Bien
                     
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

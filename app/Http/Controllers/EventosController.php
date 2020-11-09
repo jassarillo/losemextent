@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Bienes;
+use App\Eventos;
+use App\Existencias;
 use App\CausaAlta;
 use App\CatUso;
 use App\Secciones;
@@ -31,11 +32,7 @@ class EventosController extends Controller
     }
 
     public function data_listar_inventario(){
-    	//dd(3232);
-    	/*$invent = Inventario::select('inventario.*','bienes.descripcion as descBien','secciones.descripcion as descClasif')
-        ->leftJoin('bienes','bienes.id_clasificacion','=','inventario.id_clasifica')
-        ->leftJoin('secciones','secciones.id_seccion','=','bienes.id_clasificacion')
-        ->get()->toArray();*/
+   
 
         $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
                 'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo','unico', 'conteo'
@@ -48,49 +45,74 @@ class EventosController extends Controller
     }
 
     //For DataTable
-    public function data_listar_bienes(){
+    public function data_listar_eventos(){
         //dd(3232);
-        $users = Bienes::all();
-        return Datatables::of($users)->toJson();
+        $eventos = Eventos::all();
+        return Datatables::of($eventos)->toJson();
     }
 
     public function alta_bienes(){
     	return view('bienes.alta_bienes');
     }
 
-    public function create_seccion()
+    public function storeEventos(Request $request)
     {
-        return view('modals.bienes.add_seccion');
+        //dd($request->descripcion);
+      
+        
+        $saveBienes = Eventos::create($request->all());
+        
+        //dd($saveBienes->destino);
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
+        return   $respuesta;
+    }
+    
+
+    public function agregar_bienes_eventos(){
+        return view('eventos.bienes_eventos');
     }
 
-    public function save_seccion(Request $request)
+    public function getSelectEventos()
     {
-    	$desc_seccion = $request->desc_seccion;
-        $lastIdSeccion = Secciones::find(\DB::table('secciones')->max('id'));
-    	//d($desc_seccion);
-        $secciones = new Secciones;
-        $secciones->descripcion = $desc_seccion;
-        $secciones->id_seccion = $lastIdSeccion->id +1 ;
-        $secciones->save();
-        $respuesta = array('resp' => true, 'mensaje' => 'Seccion Agregada');
+        
+        $eventos = Eventos::select(['id','destino'])->get()->toArray();
+        //dd($bienes);
+        return response()->json($eventos);
+    }
+    
+    public function selectInventario(Request $request)
+    {
+        //dd($request->val_clasif);
+        $inventario = Inventario::select(['inventario.id','inventario.id_clasifica','inventario.id_bien','inventario.progresivo','bienes.descripcion'])
+        ->join('bienes', 'inventario.id_clasifica', '=', 'bienes.id_clasificacion')
+        ->whereNull('inventario.status')
+        ->where('id_clasifica',$request->val_clasif)
+        ->where('id_bien',$request->id_bien)
+        ->get()->toArray();
+        //dd($inventario);
+        return response()->json($inventario);
+    }
+
+    public function addItemEvent(Request $request)
+    {
+        //dd($request->id_inventario);
+        //$request->evento
+
+        $inventario = Inventario::select('*')->where('id',$request->id_inventario)->update(['status' => 2, 'id_evento' => $request->id_inventario]);
+
+        $existencias = Existencias::select('*')
+        ->where('id_clasifica',$request->id_clasifica)
+        ->where('id_bien',$request->id_bien)->first();
+        //dd($existencias->conteo_existencia);
+        $existenciaMenos = $existencias->conteo_existencia - 1;
+        $existencias->update(['conteo_existencia' => $existenciaMenos]);
+                          
+
+        //dd($inventario);
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
         return   $respuesta;
 
     }
-
-    public function save_causa_alta(Request $request)
-    {
-        $desc_causa_alta = $request->desc_causa_alta;
-        //d($desc_causa_alta);
-        $secciones = new CausaAlta;
-        $secciones->descripcion = $desc_causa_alta;
-        $secciones->save();
-        $respuesta = array('resp' => true, 'mensaje' => 'Causa Alta agregada');
-        return   $respuesta;
-
-    }
-
-
-
 
 
 }

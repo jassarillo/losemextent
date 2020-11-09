@@ -43,12 +43,12 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-        'mysql' => [
+         'mysql' => [
             'unix_socket'   => '/Applications/MAMP/tmp/mysql/mysql.sock',
             'driver' => 'mysql',
             'host' =>  '127.0.0.1',
             'port' =>  '3306',
-            'database' => 'plantilla',
+            'database' => 'almacen_nube',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8mb4',
@@ -61,7 +61,6 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

@@ -238,6 +238,7 @@ function get_data_edit_seccion(id_bien) {
 }
 
 function getSelectCausaAlta_edit(causa_alta) {
+    console.log(causa_alta);
     $(".optCatAlta_e").remove();
     $.ajax({
         type: "GET",
@@ -254,7 +255,7 @@ function getSelectCausaAlta_edit(causa_alta) {
                                    '<option class="optCatAlta_e" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
                                 );
                             });
-                            $("#causa_alta_e").prop('selectedIndex', 4);
+                            $("#causa_alta_e").prop('selectedIndex', causa_alta - 5);
 
                         },
         error: function(respuesta) {
