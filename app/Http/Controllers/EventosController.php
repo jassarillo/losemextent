@@ -67,13 +67,31 @@ class EventosController extends Controller
         return   $respuesta;
     }
     
-    
+
     public function agregar_bienes_eventos(){
         return view('eventos.bienes_eventos');
     }
 
+    public function getSelectEventos()
+    {
+        
+        $eventos = Eventos::select(['id','destino'])->get()->toArray();
+        //dd($bienes);
+        return response()->json($eventos);
+    }
     
-    
+
+    public function selectInventario(Request $request)
+    {
+        //dd($request->val_clasif);
+        $inventario = Inventario::select(['inventario.id','inventario.id_clasifica','inventario.id_bien','inventario.progresivo','bienes.descripcion'])
+        ->join('bienes', 'inventario.id_clasifica', '=', 'bienes.id_clasificacion')
+        ->where('id_clasifica',$request->val_clasif)
+        ->where('id_bien',$request->id_bien)
+        ->get()->toArray();
+        //dd($inventario);
+        return response()->json($inventario);
+    }
 
 
 }

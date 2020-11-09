@@ -56,7 +56,7 @@ getSelectSeccion();
 
 
 $('#id_clasifica').on('change', function(){
-    console.log("onchange selccion");
+    //console.log("onchange selccion");
     getSelectBien();
 });
 
@@ -68,7 +68,7 @@ function getSelectBien() {
         //console.log(val_clasif);
     //}
 
-    $(".optInvent").remove();
+    $(".optBien").remove();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -85,7 +85,7 @@ function getSelectBien() {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_bien').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasificacion +" "+ opt.descripcion + ' largo: '+ 
+                                   '<option class="optBien" value="' + opt.id + '"> ' + opt.id_clasificacion +" "+ opt.descripcion + ' largo: '+ 
                                    opt.largo+'</option> '
                                 );
                                 $('.selectpicker').selectpicker('refresh');
@@ -96,7 +96,50 @@ function getSelectBien() {
         }
     });
 }
-getSelectBien();
+//getSelectBien();
+$('#id_bien').on('change', function(){
+    //console.log("onchange selccion");
+    getSelectInventario();
+});
+
+function getSelectInventario() {
+
+    val_clasif = $("#id_clasifica").val();
+    id_bien = $("#id_bien").val();
+
+    //if(val_clasif == 0){ 
+        //console.log(val_clasif);
+    //}
+
+    $(".optInvent").remove();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url :  "admin/listInventario",
+        data: {"val_clasif":  val_clasif, "id_bien": id_bien},
+        dataType: "json",
+        success: function (data)
+                        {
+                            $(".selectpicker").selectpicker();
+                            //console.log(data[0]);
+                            $.each(data, function (idx, opt) {
+                                  // alert('Estoy recorriendo el registro numero: ' + idx);
+                                  //console.log(opt);
+                                $('#id_inventario').append(
+                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasifica+" "+ opt.descripcion +'</option> '
+                                );
+                                $('.selectpicker').selectpicker('refresh');
+                            });
+                        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+}
+//getSelectInventario();
+
 
 // Guardar nuevo Bien
 $('#frm_nuevo_evento').on('submit', function(e) {
@@ -184,6 +227,43 @@ $('#unico').on('change', function(){ // on change of state
 function mayus(e) {
         e.value = e.value.toUpperCase();
      };
+
+function getSelecEvento() {
+
+    val_clasif = $("#id_clasifica").val();
+    //if(val_clasif == 0){ 
+        //console.log(val_clasif);
+    //}
+
+    $(".optEvent").remove();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url :  "admin/listEventos",
+        data: {"val_clasif":  val_clasif},
+        dataType: "json",
+        success: function (data)
+                        {
+                            $(".selectpicker").selectpicker();
+                            //console.log(data[0]);
+                            $.each(data, function (idx, opt) {
+                                  // alert('Estoy recorriendo el registro numero: ' + idx);
+                                  //console.log(opt);
+                                $('#evento').append(
+                                   '<option class="optEvent" value="' + opt.id + '"> ' 
+                                   + opt.id +" "+ opt.destino + '  -  ' +opt.progresivo +'</option> '
+                                );
+                                $('.selectpicker').selectpicker('refresh');
+                            });
+                        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+}
+getSelecEvento();
 
 // Mostrar modal para alta de rol
 

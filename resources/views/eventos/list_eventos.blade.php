@@ -101,7 +101,7 @@
                                                 {{ Form::date('fecha_evento', auth()->user()->fecha_evento, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+                                        <!--<div class="form-group row">
                                             {{ Form::label('entregado', 'Entregado', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                     <select class="form-control selectpicker" id="entregado" name="entregado">
@@ -109,7 +109,7 @@
                                                         <option value="2">No</option>
                                                     </select>
                                             </div>
-                                        </div>
+                                        </div>-->
 
                                     
                                         <div class="form-group row">
@@ -124,7 +124,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('lugar', 'Lugar', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                {{ Form::number('lugar', auth()->user()->lugar, array('class' => 'form-control')) }}
+                                                {{ Form::text('lugar', auth()->user()->lugar, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
                                                                             

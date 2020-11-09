@@ -141,7 +141,8 @@ Route::post('admin/storeEventos', 'EventosController@storeEventos');
 Route::get('admin/data_listar_eventos', 'EventosController@data_listar_eventos');
 
 Route::get('admin/agregar_bienes_eventos', 'EventosController@agregar_bienes_eventos');
-
+Route::post('admin/listEventos', 'EventosController@getSelectEventos');
+Route::post('admin/listInventario', 'EventosController@selectInventario');
 
 
 
