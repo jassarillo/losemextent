@@ -174,6 +174,7 @@ class InventarioController extends Controller
         $saveBienes->motivo_alta = $request->motivo_alta;
         $saveBienes->factura = $request->factura;
         $saveBienes->precio = $request->precio;
+        $saveBienes->status = 1;
         $saveBienes->save();
         $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
         return   $respuesta;
@@ -246,6 +247,7 @@ class InventarioController extends Controller
                 $saveBienes->progresivo = $ProgresivoMas;
                 $saveBienes->unico = $unico;
                 $saveBienes->conteo = $request->conteo;
+                $saveBienes->status = 1;
                 $saveBienes->save();
                 if ($request->unico == true){
                     break;

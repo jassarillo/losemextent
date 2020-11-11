@@ -49,6 +49,19 @@
                                                 </h3>
                                             </div>
                                         </div>
+                                        <div class="form-group form-group-last row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">Por Scanner
+                                            </label>
+                                            <div class="col-lg-9 col-xl-6">
+                                                <span class="kt-switch">
+                                                    <label>
+                                                        <input type="checkbox" name="unico" id="unico">
+                                                        <span></span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
                                         <div class="form-group row">
                                             {{ Form::label('evento', 'Evento', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
@@ -57,7 +70,8 @@
                                             </select> 
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+                                        <div id="hideUnico">
+                                            <div class="form-group row">
                                             {{ Form::label('id_clasifica', 'Clasificacón', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                             <select class="form-control selectpicker" id="id_clasifica" name="id_clasifica">
@@ -84,19 +98,22 @@
                                             </select> 
                                             </div>
                                         </div>
+                                        </div>
                                         
-                                        <div class="form-group row">
+                                        
+                                        <!--<div class="form-group row">
                                             {{ Form::label('cantidad', 'Cantidad', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                 {{ Form::number('cantidad', auth()->user()->cantidad, array('class' => 'form-control')) }}
                                             </div>
-                                        </div>
-
+                                        </div>-->
+                                        <div id="codigo_input">
                                          <div class="form-group row">
                                             {{ Form::label('codigoInvent', 'Código Inventario', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                 {{ Form::number('codigoInvent', auth()->user()->codigoInvent, array('class' => 'form-control')) }}
                                             </div>
+                                        </div>
                                         </div> 
                                        
                                         <div class="card-body px-3 pt-2">
@@ -109,10 +126,7 @@
                                                 <div class="col-lg-9 col-xl-6">        
 
                                                     <button type="submit" id="acciones" class="btn btn-success" >Guardar</button>                                            
-                                                    <!--<button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_00" 
-                                                    onclick="save_bien();">
-                                                        Agregar
-                                                    </button>-->
+                                                    
                                                 </div>
                                             </div>
                                         </div>

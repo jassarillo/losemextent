@@ -42,12 +42,14 @@ function getSelectSeccion() {
         success: function (data)
                         {
                             //console.log(data[0]);
+                            $(".selectpicker").selectpicker();
                             $.each(data, function (idx, opt) {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_clasifica').append(
                                    '<option class="optSeccion" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion +'</option> '
                                 );
+                                $('.selectpicker').selectpicker('refresh');
                             });
                         },
         error: function(respuesta) {
@@ -108,7 +110,7 @@ function getSelectBien() {
         }
     });
 }
-getSelectBien();
+//getSelectBien();
 
 
 
@@ -151,6 +153,8 @@ getSelectBien();
                                 noInt++;
                             }
                          }
+
+
                         
 
                     },

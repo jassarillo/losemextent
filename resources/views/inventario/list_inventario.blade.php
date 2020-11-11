@@ -93,7 +93,7 @@
                                             <label class="col-xl-3"></label>
                                             <div class="col-lg-9 col-xl-6">
                                                 <h3 class="kt-section__title kt-section__title-sm">Capturar Inventario de un Bien
-                                                        </h3>
+                                                </h3>
                                             </div>
                                         </div>
                                         <div class="form-group row">

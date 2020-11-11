@@ -164,13 +164,21 @@ $('#frm_nuevo_evento').on('submit', function(e) {
             getSelectInventario();
             if (respuesta.resp == true) {
                 //console.log(666);
-               
-                    Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+               if(respuesta.mensaje == 'Elemento no disponible')
+               {
+                Swal.fire("Elemento no disponible!", "Bien registrado correctamente!","warning");
+               }
+               else
+               {
+                Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+               }
+                    
                    $('#users-table').DataTable().ajax.reload();
 
             } else {
                 Swal.fire('error', respuesta.message,"error");
             }
+            $('#codigoInvent').val('');
         },
         error: function(xhr) {
          //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
@@ -212,17 +220,19 @@ $("#conteo").keyup(function() {
             })
 
 });
-
+$("#codigo_input").hide();
 $('#unico').on('change', function(){ // on change of state
            if(this.checked) // if changed state is "CHECKED"
             {
                 console.log("chido!");
                 $("#hideUnico").hide();
-                //$("#partidaCatalogo").show();
+                $("#codigo_input").show();
             }
             else
             {
                 $("#hideUnico").show();
+                $("#codigo_input").hide();
+
             }
 });
 

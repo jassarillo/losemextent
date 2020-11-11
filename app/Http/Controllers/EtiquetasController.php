@@ -24,7 +24,7 @@ use Milon\Barcode\DNS1D;
 
 class EtiquetasController extends Controller
 {
-
+ 
 
     public function viewEtiquetas(){
         return view('inventario.viewEtiquetas');
