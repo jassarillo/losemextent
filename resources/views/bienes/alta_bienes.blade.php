@@ -306,7 +306,7 @@
                                                 <label for="customFile" class="col-form-label">Adjuntar Imagen</label>
                                             </div>
                                             <div class="col-sm-9 col-md-9 col-lg-7 col-xl-7">
-                                                    <input class="col-12 pl-0 pr-0 pt-0 pb-0 btn border " type="file" name="anexo_1" id="anexo_1" style="background-color: white">
+                                                    <input class="col-12 pl-0 pr-0 pt-0 pb-0 btn border " type="file" name="anexo_1" id="anexo_1" accept="image/*" style="background-color: white">
                                                     <label for="archivo"></label>
                                             </div>
                                              <div class="col-1" align="center"></div>

@@ -372,37 +372,64 @@ $('#frm_nuevo_bien').on('submit', function(e) {
     var formData = new FormData(this);
     formData.append('_token', $('input[name=_token]').val());
     console.log(formData);
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        //url : url + "admin/storeBien",
-        type: "POST",
-        dataType: "json",
-        url: "admin/storeBien",
-        data: formData, 
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(respuesta) {
-            //console.log(respuesta.resp);
-            if (respuesta.resp == true) {
-                //console.log(666);
-               
-                    Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
-                   $('#users-table').DataTable().ajax.reload();
-            } else {
-                Swal.fire('error', respuesta.message,"error");
-            }
-        },
-        error: function(xhr) {
-         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
-         Swal.fire('¡Alerta!', xhr, 'warning');
+    if($("#id_clasificacion").val() == 0){
+        alert("Falta Clasificación");
+    }else if($("#descripcion").val() == "")
+        alert("Falta campo Descipción");
+    else{
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                //url : url + "admin/storeBien",
+                type: "POST",
+                dataType: "json",
+                url: "admin/storeBien",
+                data: formData, 
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(respuesta) {
+                    //console.log(respuesta.resp);
+                    if (respuesta.resp == true) {
+                        //console.log(666);
+                       
+                            Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                           $('#users-table').DataTable().ajax.reload();
+                           limpiarFormBienes();
+                    } else {
+                        Swal.fire('error', respuesta.message,"error");
+                    }
+                },
+                error: function(xhr) {
+                 //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+                 Swal.fire('¡Alerta!', xhr, 'warning');
 
+                }
+            });
         }
-    });
 });
 
+ function limpiarFormBienes(){
+
+    //id_clasificacion: 3
+    $("#descripcion").val("");
+    $("#causa_alta").val("");
+    $("#fecha_alta").val("");
+    $("#estado").val("");
+    $("#largo").val("");
+    $("#ancho").val("");
+    $("#alto").val("");
+    $("#diametro").val("");
+    $("#peso").val("");
+    $("#calibre").val("");
+    $("#volumen").val("");
+    $("#uso_material").val("");
+    $("#uso_material").val("");
+    $("#anexo_1").val("");
+
+
+ }
   
     function save_bien() {
         console.log(4444);
@@ -415,35 +442,38 @@ $('#frm_edit_bien').on('submit', function(e) {
     var formData = new FormData(this);
     formData.append('_token', $('input[name=_token]').val());
     console.log(formData);
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        //url : url + "admin/storeBien",
-        type: "POST",
-        dataType: "json",
-        url: "admin/updateBien",
-        data: formData, 
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(respuesta) {
-            //console.log(respuesta.resp);
-            if (respuesta.resp == true) {
-                //console.log(666);
-               
-                    Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
-                   $('#users-table').DataTable().ajax.reload();
-            } else {
-                Swal.fire('error', respuesta.message,"error");
-            }
-        },
-        error: function(xhr) {
-         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
-         Swal.fire('¡Alerta!', xhr, 'warning');
+    
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                //url : url + "admin/storeBien",
+                type: "POST",
+                dataType: "json",
+                url: "admin/updateBien",
+                data: formData, 
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(respuesta) {
+                    //console.log(respuesta.resp);
+                    if (respuesta.resp == true) {
+                        //console.log(666);
+                       
+                            Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                           $('#users-table').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire('error', respuesta.message,"error");
+                    }
+                },
+                error: function(xhr) {
+                 //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+                 Swal.fire('¡Alerta!', xhr, 'warning');
 
-        }
-    });
+                }
+            });
+    
+
 });
 
 // Mostrar modal para edición de usuario

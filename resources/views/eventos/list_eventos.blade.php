@@ -96,9 +96,17 @@
                                         
                                         
                                         <div class="form-group row">
-                                            {{ Form::label('fecha_evento', 'Fecha', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('fecha', 'Fecha', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                {{ Form::date('fecha_evento', auth()->user()->fecha_evento, array('class' => 'form-control')) }}
+                                                {{ Form::date('fecha', auth()->user()->fecha, array('class' => 'form-control')) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            
+                                            {{ Form::label('hora', 'Hora', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                <input class="form-control" type="time" value="13:45:00" id="hora" name="hora">
                                             </div>
                                         </div>
                                         <!--<div class="form-group row">
@@ -169,6 +177,7 @@
                                         <th> ID </th>
                                         <th> Destino </th>
                                         <th> Fecha </th>
+                                        <th> Hora </th>
                                         <th> Entregado </th>
                                         <th> Descripción</th>
                                         <th> Lugar</th>
@@ -211,6 +220,7 @@
     </div>
 </div>
 @section('scripts')
+
 <script src="{{ URL::asset('js/eventos.js')}}" type="text/javascript"></script>
 @endsection
 @endsection

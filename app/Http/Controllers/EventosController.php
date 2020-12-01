@@ -117,7 +117,8 @@ class EventosController extends Controller
                 //Registro por codigo scanner
                 $idClean = ltrim($request->codigoInvent, '0');
                 //dd($value);
-                $inventario = Inventario::select('*')->where('id',$idClean)->update(['status' => 2, 'id_evento' => $request->id_inventario]);
+                $inventario = Inventario::select('*')
+                ->where('id',$idClean)->update(['status' => 2, 'id_evento' => $request->id_inventario]);
 
                 $existencias = Existencias::select('*')
                 ->where('id_clasifica',$existencias->id_clasifica)
@@ -127,7 +128,6 @@ class EventosController extends Controller
                 $existencias->update(['conteo_existencia' => $existenciaMenos]);
                 $mensaje = 'Registro exitoso';
             }    
-            
             
         }
         else
@@ -144,9 +144,7 @@ class EventosController extends Controller
             $mensaje ='Registro exitoso';
         }
 
-        //-----
-        
-        //------  
+ 
 
         //dd($inventario);
         $respuesta = array('resp' => true, 'mensaje' => $mensaje);

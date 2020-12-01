@@ -32,11 +32,6 @@ class InventarioController extends Controller
     }
 
     public function data_listar_inventario(){
-    	//dd(3232);
-    	/*$invent = Inventario::select('inventario.*','bienes.descripcion as descBien','secciones.descripcion as descClasif')
-        ->leftJoin('bienes','bienes.id_clasificacion','=','inventario.id_clasifica')
-        ->leftJoin('secciones','secciones.id_seccion','=','bienes.id_clasificacion')
-        ->get()->toArray();*/
 
         $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
                 'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo','unico', 'conteo'

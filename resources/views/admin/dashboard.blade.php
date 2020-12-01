@@ -2,7 +2,7 @@
 @section('content')
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
     <div class="row">
-        <div class="col-xl-8 order-lg-4 order-xl-1">
+        <!--<div class="col-xl-8 order-lg-4 order-xl-1">
             <div class="kt-portlet kt-portlet--height-fluid kt-portlet--mobile ">
                 <div
                     class="kt-portlet__head kt-portlet__head--lg kt-portlet__head--noborder kt-portlet__head--break-sm">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="kt-portlet__body">
-                    <!--begin: Datatable -->
+                    
                     <table class="table table-striped- table-bordered table-hover table-checkable"
                         id="resumen_licitaciones-table">
                         <thead>
@@ -48,15 +48,15 @@
                             </tr>
                         </thead>
                     </table>
-                    <!--end: Datatable -->
+                    
                 </div>
                 <div class="kt-portlet__body kt-portlet__body--fit">
                     <div class="kt-datatable" id="kt_datatable_latest_orders"></div>
                 </div>
             </div>
 
-        </div>
-        <div class="col-lg-6 col-xl-4 order-lg-1 order-xl-1">
+        </div>-->
+        <!--<div class="col-lg-6 col-xl-4 order-lg-1 order-xl-1">
             <div class="kt-portlet kt-portlet--height-fluid kt-widget19">
                 <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
                     <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
@@ -98,11 +98,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
     <div class="row">
-        <div class="col-xl-6">
-            <!--begin:: Widgets/Support Cases-->
+        <!--<div class="col-xl-6">
+          
             <div class="kt-portlet kt-portlet--height-fluid">
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
@@ -125,7 +125,7 @@
                             Herramientas
                         </a>
                         <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
-                            <!--end::Nav-->
+                           
                         </div>
                     </div>
                 </div>
@@ -234,10 +234,9 @@
                     </div>
                 </div>
             </div>
-            <!--end:: Widgets/Support Stats-->
-        </div>
-        <div class="col-xl-6">
-            <!--begin:: Widgets/Support Requests-->
+            
+        </div>-->
+        <!--<div class="col-xl-6">
             <div class="kt-portlet kt-portlet--height-fluid">
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
@@ -251,7 +250,7 @@
                             Herramientas
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
-                            <!--begin::Nav-->
+                            
                             <ul class="kt-nav">
                                 <li class="kt-nav__head">
                                     Export Options
@@ -305,7 +304,7 @@
                                         data-original-title="Click to learn more...">Learn more</a>
                                 </li>
                             </ul>
-                            <!--end::Nav-->
+                          
                         </div>
                     </div>
                 </div>
@@ -325,8 +324,7 @@
                     </div>
                 </div>
             </div>
-            <!--end:: Widgets/Support Requests-->
-        </div>
+        </div>-->
     </div>
 </div>
 @endsection

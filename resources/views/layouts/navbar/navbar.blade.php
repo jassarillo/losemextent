@@ -1,11 +1,15 @@
 
 <div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
    <!-- begin:: Aside -->
+    <!--<br>
+        <br>-->
 
    <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
+
       <div class="kt-aside__brand-logo">
+
          <a href="{{ url('/') }}">
-            <!--<img alt="Logo" src="{{ URL::asset('assets/media/logos/'.env('APP_LOGO_ASIDE') ) }}" >-->
+            <img alt="Logo" src="{{ URL::asset('assets/media/logos/header-nav.png') }}" >
          </a>
       </div>
       <div class="kt-aside__brand-tools">
@@ -115,7 +119,8 @@
                   <ul class="kt-menu__subnav">
                      <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">Utils</span></span></li>
                      <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/list_eventos') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Registrar Evento</span></a></li>
-                     <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/agregar_bienes_eventos') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Bienes Para Evento</span></a></li>
+                     <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/agregar_bienes_eventos') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Salida Para Evento</span></a></li>
+                     <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/agregar_bienes_eventos') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Salida Por Petición</span></a></li>
                   </ul>
                </div>
             </li>

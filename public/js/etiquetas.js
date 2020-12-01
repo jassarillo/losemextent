@@ -71,9 +71,21 @@ $('#id_bien').on('change', function(){
     id_clasifica = $('#id_clasifica').val();
     id_bien = $('#id_bien').val();
     //console.log(id_clasifica);
-    numRows(id_clasifica, id_bien, 0);
+    nro_progresivo =0;
+    numRows(id_clasifica, id_bien, nro_progresivo);
+    getSelectNro(id_clasifica, id_bien);
+
 });
 
+$('#nro_progresivo').on('change', function(){
+    id_clasifica = $('#id_clasifica').val();
+    id_bien = $('#id_bien').val();
+    nro_progresivo = $('#nro_progresivo').val();
+
+    numRows(id_clasifica, id_bien, nro_progresivo);
+    //getSelectNro(id_clasifica, id_bien);
+
+});
 
 function getSelectBien() {
 
@@ -128,27 +140,28 @@ function getSelectBien() {
                     data: {"id_clasifica": id_clasifica, "id_bien":id_bien, "noInvent":noInvent},
                     success: function (data)
                     {
-                        console.log(data);
+                        //console.log(data);
                         if(data.total == 0)
                         {
                             $("#messageRows").text("0 Registros a Imprimir.");
                         }
                         else
-                        {
+                        { 
+
                             $("#messageRows").text("");
                              noInt =1;
                              console.log(data.last_page);
                              for(i =0; i < data.last_page; i++ )
                              {
-                                rangeFin = noInt *20;
-                                rangeIni = rangeFin - 20;
+                                rangeFin = noInt * 30;
+                                rangeIni = rangeFin - 30;
                                 rangeIniPlus = parseInt(rangeIni) + 1;
                                 $('#pages-table').append(
                                     '<tr class="otrasFilas">' +
                                         '<td>'+ noInt  +'</td> ' +
                                         '<td>'+ rangeIniPlus +' - ' + rangeFin +'</td> ' +
-                                        //'<td> <a href="http://127.0.0.1:9000/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+ id_bien +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
-                                        '<td> <a href="http://pdf.losemextent.com.mx/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+ id_bien +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
+                                        //'<td> <a href="http://127.0.0.1:9000/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien+'/'+ noInvent +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
+                                        '<td> <a href="http://pdf.losemextent.com.mx/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien +'/'+noInvent+'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
                                     '</tr>');
                                 noInt++;
                             }
@@ -157,6 +170,39 @@ function getSelectBien() {
 
                         
 
+                    },
+                    error: function (data)
+                    {
+                            alert( data);
+                    }
+                })
+        };
+
+        getSelectNro = function(id_clasifica, id_bien)
+        {
+            //console.log(id_clasifica,id_bien);
+            $(".optNro").remove();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",        
+                    dataType: "json",
+                    url: "inventario/getNroId",
+                    data: {"id_clasifica": id_clasifica, "id_bien":id_bien},
+                    success: function (data)
+                    {
+                        //console.log(data);
+                        
+                        $.each(data, function (idx, opt) {
+                            //console.log(opt.id);
+                                  // alert('Estoy recorriendo el registro numero: ' + idx);
+                                  //console.log(opt);
+                                $('#nro_progresivo').append(
+                                   '<option class="optNro" value="' + opt.id + '"> ' + opt.id + '</option> '
+                                );
+                               
+                            });
                     },
                     error: function (data)
                     {

@@ -126,6 +126,8 @@ Route::post('admin/extractProgresivoMaxMin', 'InventarioController@extractProgre
 Route::post('admin/storeMasivo', 'InventarioController@storeMasivo');
 Route::get('inventario/selectEtiquetas', 'EtiquetasController@viewEtiquetas');
 Route::post('inventario/getNumRows', 'EtiquetasController@getNumRows');
+Route::post('inventario/getNroId', 'EtiquetasController@getNroId');
+
 
 Route::get('admin/list_eventos', 'EventosController@list_eventos');
 Route::get('admin/editar_seccion', 'BienesController@editar_seccion');

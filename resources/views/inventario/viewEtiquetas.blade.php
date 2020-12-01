@@ -63,7 +63,7 @@
                             <label>Nro.</label>
                             </div> 
                             <div class="col-xm-5">
-                                    <select class="selectpicker form-control" id="nro_progresivo" name="nro_progresivo" data-show-subtext="true" data-live-search="true">
+                                    <select class="form-control" id="nro_progresivo" name="nro_progresivo" data-show-subtext="true" data-live-search="true">
                                         <option value="0">Seleccione</option>
                                     </select>
                             </div>

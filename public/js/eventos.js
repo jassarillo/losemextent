@@ -16,6 +16,7 @@ $(document).ready(function() {
             { data: 'id', name: 'id' },
             { data: 'destino', name: 'destino' },
             { data: 'fecha', name: 'fecha' },
+            { data: 'hora', name: 'hora' },
             { data: 'entregado', name: 'entregado' },
             { data: 'descripcion', name: 'descripcion' },
             { data: 'lugar', name: 'lugar' },
@@ -141,8 +142,62 @@ function getSelectInventario() {
 //getSelectInventario();
 
 
-// Guardar nuevo Bien
+// Guardar un Evento
 $('#frm_nuevo_evento').on('submit', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('_token', $('input[name=_token]').val());
+    console.log(formData);                          
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        //url : url + "admin/storeBien",
+        type: "POST",
+        dataType: "json",
+        url: "admin/storeEventos",
+        data: formData, 
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            //console.log(respuesta.resp);
+            
+            if (respuesta.resp == true) {
+                //console.log(666);
+               
+                Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                getSelectInventario();
+               
+                    limpiarFormEvento();
+                   $('#eventos-table').DataTable().ajax.reload();
+
+            } else {
+                Swal.fire('error', respuesta.message,"error");
+            }
+            $('#codigoInvent').val('');
+        },
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
+
+        }
+    });
+});
+
+
+function limpiarFormEvento() {
+    $("#destino").val("");
+    $("#fecha").val("");
+    $("#hora").val("");
+    $("#descripcion").val("");
+    $("#lugar").val("");
+};
+
+
+
+// Salida nuevo Bien a evento
+$('#frm_salida_a_evento').on('submit', function(e) {
     e.preventDefault();
     var formData = new FormData(this);
     formData.append('_token', $('input[name=_token]').val());
@@ -161,19 +216,20 @@ $('#frm_nuevo_evento').on('submit', function(e) {
         processData: false,
         success: function(respuesta) {
             //console.log(respuesta.resp);
-            getSelectInventario();
+            
             if (respuesta.resp == true) {
                 //console.log(666);
                if(respuesta.mensaje == 'Elemento no disponible')
                {
-                Swal.fire("Elemento no disponible!", "Bien registrado correctamente!","warning");
+                Swal.fire("Elemento no disponible!", "Verificar existencia!","warning");
                }
                else
                {
                 Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                getSelectInventario();
                }
                     
-                   $('#users-table').DataTable().ajax.reload();
+                   //$('#eventos-table').DataTable().ajax.reload();
 
             } else {
                 Swal.fire('error', respuesta.message,"error");
@@ -227,6 +283,8 @@ $('#unico').on('change', function(){ // on change of state
                 console.log("chido!");
                 $("#hideUnico").hide();
                 $("#codigo_input").show();
+                //$("#id_clasifica").val();
+                //$("#id_bien").val();
             }
             else
             {

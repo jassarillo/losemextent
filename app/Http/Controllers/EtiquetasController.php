@@ -33,12 +33,31 @@ class EtiquetasController extends Controller
     public function getNumRows(Request $request)
     {
             
-      
-        $Resg = DB::table('inventario')
+      if($request->noInvent == 0 ){
+        //dd(3);
+         $Resg = DB::table('inventario')
         ->where('id_bien', $request->id_bien)
+        ->where('id_clasifica', $request->id_clasifica)
         ->orderBy('id', 'desc')
         ->paginate(30);
-        return response ()->json ($Resg);  
+        //dd($Resg);
+      }
+      else
+      {
+
+        $Resg = DB::table('inventario')
+        ->where('id_bien', $request->id_bien)
+        ->where('id_clasifica', $request->id_clasifica)
+        ->where('id', $request->noInvent)
+        ->orderBy('id', 'desc')
+        ->paginate(30);
+
+      }
+       
+
+
+        return response ()->json ($Resg); 
+
     }
 
     public function listBienes(Request $request)
@@ -57,5 +76,15 @@ class EtiquetasController extends Controller
         return response ()->json ($bienes);
 
     }
+
+    public function getNroId(Request $request)
+    {
+        $bienes = Inventario::select('id')
+        ->where('id_clasifica',$request->id_clasifica)
+        ->where('id_bien',$request->id_bien)
+        ->get()->toArray();
+        return response ()->json ($bienes);  
+    }
+    
 
 }

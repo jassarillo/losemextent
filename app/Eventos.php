@@ -9,7 +9,7 @@ class Eventos extends Model
     protected $table = 'eventos';
 
     protected $fillable = [
-        'id','destino','fecha','entregado','descripcion','lugar','status',
+        'id','destino','fecha','hora','entregado','descripcion','lugar','status',
         'created_at','updated_at'
     ];
 }

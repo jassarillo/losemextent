@@ -37,7 +37,7 @@
     </div>
 
     <div class="kt-portlet__body">
-        <form role="form" name="frm_nuevo_evento" id="frm_nuevo_evento" method="POST" accept-charset="UTF-8" 
+        <form role="form" name="frm_salida_a_evento" id="frm_salida_a_evento" method="POST" accept-charset="UTF-8" 
                 enctype="multipart/form-data">
                             <div class="kt-form__body">
                                 <div class="kt-section kt-section--first">

@@ -141,22 +141,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="kt-login__account">
+                        <!--<div class="kt-login__account">
                             <span class="kt-login__account-msg">
                                 ¿Aún no tienes una cuenta?
                             </span>&nbsp;&nbsp;
-                            <a href="javascript:;" id="kt_login_signup" class="kt-login__account-link">Regístrate!</a>
+                           <a href="javascript:;" id="kt_login_signup" class="kt-login__account-link">Regístrate!</a>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="kt-grid__item kt-grid__item--fluid kt-grid__item--center kt-grid kt-grid--ver kt-login__content"
-                    style="background-image: url(assets/media/bg/bg-5.jpg);  background-repeat: no-repeat; background-position: center; ">
+                    style="background-image: url(assets/media/bg/portada.jpg);  background-repeat: no-repeat; background-position: center; ">
                     <div class="kt-login__section">
                         <div class="kt-login__block">
-                            <h3 class="kt-login__title">LOSEMEXTENT</h3>
+                            <h3 class="kt-login__title"></h3>
                             <div class="kt-login__desc">
-                                By Capa75
+                                
                             </div>
                         </div>
                     </div>
