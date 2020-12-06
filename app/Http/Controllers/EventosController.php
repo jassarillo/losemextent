@@ -47,7 +47,12 @@ class EventosController extends Controller
     //For DataTable
     public function data_listar_eventos(){
         //dd(3232);
-        $eventos = Eventos::all();
+        $eventos = Eventos::select('*','emp1.nombre_completo as nomb1', 
+            'emp2.nombre_completo as nomb2' ,'emp3.nombre_completo as nomb3')
+        ->leftJoin('empleados as emp1','emp1.nro_empleado','=','eventos.empleado1')
+        ->leftJoin('empleados as emp2','emp2.nro_empleado','=','eventos.empleado2')
+        ->leftJoin('empleados as emp3','emp3.nro_empleado','=','eventos.empleado3')
+        ->get()->toArray();
         return Datatables::of($eventos)->toJson();
     }
 

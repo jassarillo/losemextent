@@ -17,7 +17,9 @@ $(document).ready(function() {
             { data: 'destino', name: 'destino' },
             { data: 'fecha', name: 'fecha' },
             { data: 'hora', name: 'hora' },
-            { data: 'entregado', name: 'entregado' },
+            { data: 'nomb1', name: 'nomb1' },
+            { data: 'nomb2', name: 'nomb2' },
+            { data: 'nomb3', name: 'nomb3' },
             { data: 'descripcion', name: 'descripcion' },
             { data: 'lugar', name: 'lugar' },
             {
@@ -192,6 +194,9 @@ function limpiarFormEvento() {
     $("#hora").val("");
     $("#descripcion").val("");
     $("#lugar").val("");
+    $("#empleado1").val("");
+    $("#empleado2").val("");
+    $("#empleado3").val(""); 
 };
 
 

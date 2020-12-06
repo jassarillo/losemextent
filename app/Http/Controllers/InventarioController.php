@@ -31,16 +31,46 @@ class InventarioController extends Controller
         return view('inventario.list_inventario');
     }
 
-    public function data_listar_inventario(){
+    public function data_listar_inventario(Request $request){
 
-        $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
-                'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo','unico', 'conteo'
-                ,'progresivo', 'id_clasifica', 'id_bien')
-        ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
-        ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
-        ->get()->toArray();
+        //dd($request->inicio);
+        if($request->inicio == null)
+        { 
+            $invent = Inventario::select('*')->take(0)->get()->toArray();
+        }   
+        else
+        {
+            //dd($request->eligeSeccion);
 
-        return Datatables::of($invent)->toJson();
+            if($request->eligeBien == 0)
+            {
+
+                $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
+                    'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
+                    'unico', 'conteo'
+                    ,'progresivo', 'id_clasifica', 'id_bien')
+                ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
+                ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
+                ->where('secciones.id_seccion', $request->eligeSeccion)
+                ->get()->toArray();
+            }
+            else
+            {
+                $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
+                    'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
+                    'unico', 'conteo'
+                    ,'progresivo', 'id_clasifica', 'id_bien')
+                ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
+                ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
+                ->where('secciones.id_seccion', $request->eligeSeccion)
+                ->where('bienes.id', $request->eligeBien)
+                ->get()->toArray();
+
+            }
+        }    
+
+        return Datatables::of($invent)->toJson();   
+
     }
 
     //For DataTable

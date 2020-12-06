@@ -19,7 +19,7 @@
         <div class="col-xl-8 order-2 order-xl-1">
                
                 
-                <form role="form" name="frm_nuevo_invent" id="frm_nuevo_invent" method="POST" accept-charset="UTF-8" 
+                <form role="form" name="frm_edit_invent" id="frm_edit_invent" method="POST" accept-charset="UTF-8" 
                 enctype="multipart/form-data">
                             <div class="kt-form__body">
                                 <div class="kt-section kt-section--first">
@@ -27,7 +27,7 @@
                                         <div class="row">
                                             <label class="col-xl-3"></label>
                                             <div class="col-lg-9 col-xl-6">
-                                                <h3 class="kt-section__title kt-section__title-sm">Capturar Inventario de un Bien
+                                                <h3 class="kt-section__title kt-section__title-sm">Editar Inventario de un Bien
                                                         </h3>
                                             </div>
                                         </div>
@@ -40,9 +40,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            {{ Form::label('motivo_alta', 'Motivo de Alta', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('motivo_alta_e', 'Motivo de Alta', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                    <select class="form-control selectpicker" id="motivo_alta" name="motivo_alta">
+                                                    <select class="form-control" id="motivo_alta_e" name="motivo_alta_e">
                                                         <option value="1">Inventario Inicial</option>
                                                         <option value="2">Reaprovechamiento</option>
                                                         <option value="3">Reclasificación</option>
@@ -56,24 +56,24 @@
 
                                     
                                         <div class="form-group row">
-                                            {{ Form::label('factura', 'Factura', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('factura_e', 'Factura', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                 
-                                                <input type="text" name="factura" id="factura" class="form-control" onkeyup="mayus(this);">
+                                                <input type="text" name="factura_e" id="factura_e" class="form-control" onkeyup="mayus(this);">
                                                 
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            {{ Form::label('precio', 'Precio', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('precio_e', 'Precio', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                {{ Form::number('precio', auth()->user()->precio, array('class' => 'form-control')) }}
+                                                {{ Form::number('precio_e', auth()->user()->precio_e, array('class' => 'form-control')) }}
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            {{ Form::label('conteo', 'Conteo', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('conteo_e', 'Conteo', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                <input type="number" name="conteo" id="conteo" class="form-control">
+                                                <input type="number" name="conteo_e" id="conteo_e" class="form-control">
                                             </div>
                                         </div>                                        
                                          <div class="form-group form-group-last row">
@@ -82,26 +82,13 @@
                                             <div class="col-lg-9 col-xl-6">
                                                 <span class="kt-switch">
                                                     <label>
-                                                        <input type="checkbox" name="unico" id="unico">
+                                                        <input type="checkbox" name="unicoEdit" id="unicoEdit">
                                                         <span></span>
                                                     </label>
                                                 </span>
                                             </div>
                                         </div>
-                                        <div id="hideUnico">
-                                            <div class="form-group row">
-                                                <label class="col-xl-2 col-lg-2 col-form-label">Del:
-                                                </label>
-                                                <div class="col-lg-9 col-xl-2">
-                                                        <input type="text" class="form-control" readonly="" name="ini" id="ini" style="background-color:#e8e8e8;">
-                                                </div>
-                                                <label class="col-xl-2 col-lg-2 col-form-label">Al:
-                                                </label>
-                                                <div class="col-lg-9 col-xl-2">
-                                                        <input type="text" class="form-control" style="background-color:#e8e8e8;" readonly="" name="fin" id="fin">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="card-body px-3 pt-2">
                                         
                             <div class="form-group row align-items-center">

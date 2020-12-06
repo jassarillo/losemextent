@@ -192,7 +192,7 @@
                                                 <div class="col-xl-3"></div>
                                                 <div class="col-lg-9 col-xl-6">        
 
-                                                    <button type="submit" id="acciones" class="btn btn-success" >Guardar</button>                                            
+                                                    <button type="submit" id="accion" class="btn btn-success" >Guardar</button>                                            
                                                     <!--<button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_00" 
                                                     onclick="save_bien();">
                                                         Agregar
@@ -207,10 +207,34 @@
                         {!! Form::close() !!}
                         </div>
                     </div>
-
+                        
                     <div class="tab-pane" id="kt_user_edit_tab_3" role="tabpanel">
                         <div class="kt-form kt-form--label-right">
+
+                        <div class="row">    
+                            <div class="col-md-6">
+
+                                <label>Sección</label>
+                                    <select class="selectpicker form-control" id="eligeSeccion" name="eligeSeccion" data-show-subtext="true" data-live-search="true">
+                                        <option value="0">Elige</option>
+                                    </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Bien</label>
+                                    <select class="selectpicker form-control" id="eligeBien" name="eligeBien" data-show-subtext="true" data-live-search="true">
+                                        <option value="0">Todos</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input id="BtnBuscar" class="btn btn-info" type="button" value="Consultar" />
+                            </div>
+                        </div>
+                        <br>
+
                         {{ Form::open(['url' => 'foo/bar','method' => 'POST','name'=>'form_update_passwd','id'=>'form_update_passwd']) }}
+                        
                             <div class="kt-form__body">
                                 <div class="kt-section kt-section--first">
                                 <!--begin: Datatable -->
@@ -226,7 +250,6 @@
                                         <th> Conteo</th>
                                         <th> Progresivo</th>
                                         <th> Unico</th>
-                                        <th> Cantidad</th>
                                         <th> Acciones</th>
                                     </tr>
                                     </thead>
