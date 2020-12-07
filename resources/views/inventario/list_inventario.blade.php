@@ -242,12 +242,12 @@
                                     <table class="table table-striped- table-bordered table-hover table-checkable" id="inventarios-table">
                                     <thead>
                                     <tr>
-                                        <th> ID </th>
+                                        <th> Clasificación </th>
+                                        <th> idInvent</th>
                                         <th> Clasificación </th>
                                         <th> Descripción </th>
                                         <th> Factura </th>
                                         <th> Precio</th>
-                                        <th> Conteo</th>
                                         <th> Progresivo</th>
                                         <th> Unico</th>
                                         <th> Acciones</th>

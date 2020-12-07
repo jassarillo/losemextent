@@ -181,6 +181,7 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="largo_medida" name="largo_medida">
+                                                    <option value="0">Elige</option>
                                                     <option value="1">Milimetros</option>
                                                     <option value="2">Centímetros</option>
                                                     <option value="3">Pulgadas</option>
@@ -199,6 +200,7 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="ancho_medida" name="ancho_medida">
+                                                    <option value="0">Elige</option>
                                                     <option value="1">Milimetros</option>
                                                     <option value="2">Centímetros</option>
                                                     <option value="3">Pulgadas</option>
@@ -216,6 +218,7 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="alto_medida" name="alto_medida">
+                                                    <option value="0">Elige</option>
                                                     <option value="1">Milimetros</option>
                                                     <option value="2">Centímetros</option>
                                                     <option value="3">Pulgadas</option>
@@ -233,6 +236,7 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="diametro_medida" name="diametro_medida">
+                                                    <option value="0">Elige</option>
                                                     <option value="1">Milimetros</option>
                                                     <option value="2">Centímetros</option>
                                                     <option value="3">Pulgadas</option>
@@ -250,12 +254,13 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="peso_medida" name="peso_medida">
-                                                    <option value="1">Miligramo</option>
-                                                    <option value="2">CentíGramo</option>
-                                                    <option value="3">Kilo</option>
-                                                    <option value="4">Tonelada</option>
-                                                    <option value="5">Libra</option>
-                                                    <option value="6">Onza</option>
+                                                    <option value="0">Elige</option>
+                                                    <option value="10">Miligramo</option>
+                                                    <option value="11">CentíGramo</option>
+                                                    <option value="12">Kilo</option>
+                                                    <option value="13">Tonelada</option>
+                                                    <option value="14">Libra</option>
+                                                    <option value="15">Onza</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -266,6 +271,7 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="calibre_medida" name="calibre_medida">
+                                                    <option value="0">Elige</option>
                                                     <option value="1">Milimetros</option>
                                                     <option value="2">Centímetros</option>
                                                     <option value="3">Pulgadas</option>
@@ -283,11 +289,12 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="volumen_medida" name="volumen_medida">
-                                                    <option value="1">Litros</option>
-                                                    <option value="2">Galones</option>
-                                                    <option value="3">Centímetros Cúbicos</option>
-                                                    <option value="4">Mili Litros</option>
-                                                    <option value="5">Onzas</option>
+                                                    <option value="0">Elige</option>
+                                                    <option value="20">Litros</option>
+                                                    <option value="21">Galones</option>
+                                                    <option value="22">Centímetros Cúbicos</option>
+                                                    <option value="23">Mili Litros</option>
+                                                    <option value="24">Onzas</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -377,7 +384,9 @@
                                         <th> Ancho</th>
                                         <th> Alto</th>
                                         <th> Diametro</th>
+                                        <th> Calibre</th>
                                         <th> Peso</th>
+                                        <th> Volumen</th>
                                         <th> Foto</th>
                                         <th> Editar </th>
                                         <!--<th> Eliminar</th>-->
@@ -506,6 +515,7 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="largo_e_medida" name="largo_e_medida">
+                                                    <option value="0">Elige</option>
                                                     <option value="1">Milimetros</option>
                                                     <option value="2">Centímetros</option>
                                                     <option value="3">Pulgadas</option>
@@ -524,6 +534,7 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="ancho_e_medida" name="ancho_e_medida">
+                                                    <option value="0">Elige</option>
                                                     <option value="1">Milimetros</option>
                                                     <option value="2">Centímetros</option>
                                                     <option value="3">Pulgadas</option>
@@ -541,6 +552,7 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="alto_e_medida" name="alto_e_medida">
+                                                    <option value="0">Elige</option>
                                                     <option value="1">Milimetros</option>
                                                     <option value="2">Centímetros</option>
                                                     <option value="3">Pulgadas</option>
@@ -558,6 +570,7 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="diametro_e_medida" name="diametro_e_medida">
+                                                    <option value="0">Elige</option>
                                                     <option value="1">Milimetros</option>
                                                     <option value="2">Centímetros</option>
                                                     <option value="3">Pulgadas</option>
@@ -575,12 +588,13 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="peso_e_medida" name="peso_e_medida">
-                                                    <option value="1">Miligramo</option>
-                                                    <option value="2">CentíGramo</option>
-                                                    <option value="3">Kilo</option>
-                                                    <option value="4">Tonelada</option>
-                                                    <option value="5">Libra</option>
-                                                    <option value="6">Onza</option>
+                                                    <option value="0">Elige</option>
+                                                    <option value="10">Miligramo</option>
+                                                    <option value="11">CentíGramo</option>
+                                                    <option value="12">Kilo</option>
+                                                    <option value="13">Tonelada</option>
+                                                    <option value="14">Libra</option>
+                                                    <option value="15">Onza</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -608,11 +622,12 @@
                                             </div>
                                             <div class="col-lg-4 col-xl-3">
                                                 <select class="form-control" id="volumen_e_medida" name="volumen_e_medida">
-                                                    <option value="1">Litros</option>
-                                                    <option value="2">Galones</option>
-                                                    <option value="3">Centímetros Cúbicos</option>
-                                                    <option value="4">Mili Litros</option>
-                                                    <option value="5">Onzas</option>
+                                                    <option value="0">Elige</option>
+                                                    <option value="20">Litros</option>
+                                                    <option value="21">Galones</option>
+                                                    <option value="22">Centímetros Cúbicos</option>
+                                                    <option value="23">Mili Litros</option>
+                                                    <option value="24">Onzas</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -678,6 +693,57 @@
 </div>
         <!--modal editar -->
 
+
+        <!--  modal Fotos -->
+        <div id="kt_modal_imagen_local" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" style="min-height: 590px;">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                   Editar Bien
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--begin: Search Form -->
+                
+    <div class="row align-items-center">
+        <div class="col-xl-8 order-2 order-xl-1">
+               
+                
+                <form role="form" name="frm_edit_bien" id="frm_edit_bien" method="POST" accept-charset="UTF-8" 
+                enctype="multipart/form-data">
+                            <div class="kt-form__body">
+                                <div class="kt-section kt-section--first">
+                                    <div class="kt-section__body">
+                                     <embed src="../reportes/contratos/101"
+                                                       frameborder="0" width="100%" height="600px">
+                                     
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>        
+        </div>
+      
+    </div>
+             <!--end: Search Form -->
+            </div>
+            <div class="modal-body modal-body-fit">
+                <!--begin: Datatable -->
+                <div id="modal_datatable_local_source"></div>
+                <!--end: Datatable -->
+            </div>
+            <div class="modal-footer kt-hidden">
+                <button type="button" class="btn btn-clean btn-bold btn-upper btn-font-md" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default btn-bold btn-upper btn-font-md">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+        <!--  modal fotos -->
 
     </div>
 </div>

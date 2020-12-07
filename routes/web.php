@@ -105,11 +105,11 @@ Route::get('admin/listar_roles', 'AdminController@listar_roles');
 Route::get('admin/create_rol', 'AdminController@create_rol');
 Route::get('admin/roles/{id}/editar_roles_permisos', 'RoleController@editar_roles_permisos');
 
-
 Route::get('admin/list_inventario', 'InventarioController@list_inventario');
 Route::get('admin/data_listar_inventario', 'InventarioController@data_listar_inventario');
 Route::get('admin/get_data_edit_inventario/{id_inventrio}', 'BienesController@getDataInventario');
 Route::get('admin/alta_bienes', 'InventarioController@alta_bienes');
+Route::post('admin/deleteBien', 'InventarioController@deleteBien');
 Route::get('admin/create_seccion', 'InventarioController@create_seccion');
 Route::post('admin/save_seccion', 'InventarioController@save_seccion');
 Route::get('admin/listSeccion', 'InventarioController@listSeccion');

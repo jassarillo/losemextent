@@ -15,26 +15,81 @@ $(document).ready(function() {
             "type": "GET"
         },
         columns: [
-            { data: 'id', name: 'id' },
-            { data: 'id_clasificacion', name: 'id_clasificacion' },
-            { data: 'descripcion', name: 'descripcion' },
-            { data: 'causa_alta', name: 'causa_alta' },
+            { data: 'idBien', name: 'idBien' },
+            { data: 'secDesc', name: 'secDesc' },
+            { data: 'bienesDesc', name: 'bienesDesc' },
+            { data: 'descAlta', name: 'descAlta' },
             { data: 'fecha_alta', name: 'fecha_alta' },
-            { data: 'estado', name: 'estado' },
-            { data: 'largo', name: 'largo' },
-            { data: 'ancho', name: 'ancho' },
-            { data: 'alto', name: 'fecha_alta' },
-            { data: 'diametro', name: 'fecha_alta' },
-            { data: 'peso', name: 'peso' },
             {
                 "mRender": function (data, type, row) {
                     //var id_user = row.id;
-                    return '<img width="80" height="95" class="img_avatar_header" alt="Pic" id="img_avatar_header" src="uploads/inventarios_img/20/'+row.id+'.jpg">';
+                    estadoD='';
+                    if(row.estado == 1 ){estadoD ='Bueno';}
+                    else if(row.estado == 2){estadoD ='Regular';}
+                    else if(row.estado == 3){estadoD ='Malo'; }
+                    else{estadoD =''; }
+                    return estadoD;
+                }
+            },
+            //{ data: 'largo', name: 'largo' },
+            {
+                "mRender": function (data, type, row) {
+                    
+                    return row.largo+' '+row.largo_medidaD;
                 }
             },
             {
                 "mRender": function (data, type, row) {
-                    var id_bien = row.id;
+                    
+                    return row.ancho+' '+row.ancho_medidaD;
+                }
+            },
+            //{ data: 'ancho', name: 'ancho' },
+            {
+                "mRender": function (data, type, row) {
+                    
+                    return row.alto+' '+row.alto_medidaD;
+                }
+            },
+            //{ data: 'alto', name: 'fecha_alta' },
+            //{ data: 'diametro', name: 'fecha_alta' },
+            {
+                "mRender": function (data, type, row) {
+                    
+                    return row.diametro+' '+row.diametro_medidaD;
+                }
+            },
+            {
+                "mRender": function (data, type, row) {
+                    
+                    return row.calibre+' '+row.calibre_medidaD;
+                }
+            },
+            //{ data: 'peso', name: 'peso' },
+            {
+                "mRender": function (data, type, row) {
+                    
+                    return row.peso+' '+row.peso_medidaD;
+                }
+            },
+            {
+                "mRender": function (data, type, row) {
+                    
+                    return row.volumen+' '+row.volumen_medidaD;
+                }
+            },
+            {
+                "mRender": function (data, type, row) {
+                    //var id_user = row.id;
+                   
+                    //return '<img width="80" height="95" class="img_avatar_header" alt="Pic" id="img_avatar_header" src="uploads/inventarios_img/20/'+row.idBien+'.jpg">';
+                    return '<a onclick="modal_img_seccion('+ row.idBien +');" href="#'+row.idBien+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_imagen_local" >Editar</a>';
+
+                }
+            },
+            {
+                "mRender": function (data, type, row) {
+                    var id_bien = row.idBien;
                     
                     //return '<button type="button" class="btn btn-brand" data-toggle="modal" data-target="#kt_modal_KTDatatable_local">Launch Modal</button>';
                     return '<a onclick="get_data_edit_seccion('+ id_bien +');" href="#'+id_bien+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
@@ -42,8 +97,8 @@ $(document).ready(function() {
             },
             /*{
                 "mRender": function (data, type, row) {
-                    var id_user = row.id;
-                    return '<a class="btn btn-danger" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Eliminar</a>';
+                    var id_bien= row.idBien
+                    return '<a class="btn btn-danger" onClick="deleteBien('+id_bien+');">Eliminar</a>';
                 }
             }*/
 
@@ -167,26 +222,30 @@ function save_uso() {
 //Editar Bien   *** *** ***
 function editar_bien(id_bien) {
     console.log(id_bien);
-    /*$.ajax({
+}
+
+function deleteBien(id_bien) {
+    console.log(id_bien);
+    $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : url + "admin/editar_seccion",
-        dataType: 'html',
-        success: function(resp_success) {
-            var modal = resp_success;
-            $(modal).modal().on('shown.bs.modal', function() {
-                $("[class='make-switch']").bootstrapSwitch('animate', true);
-                $('.select2').select2({dropdownParent: $("#mod_edit_bien")});
-            }).on('hidden.bs.modal', function() {
-                $(this).remove();
-            });
-            get_data_edit_seccion(id_bien);
+        url : url + "admin/deleteBien",
+        type: 'POST',
+        data: {'id_bien':id_bien},
+        dataType: 'json',
+        success: function(response) {
+               
+                Swal.fire('¡Correcto!',response.message,'success');
+                $('#users-table').DataTable().ajax.reload();
+               
+           
         },
-        error: function(respuesta) {
-            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
         }
-    });*/
+    });
 }
 
 //****---------->
@@ -411,7 +470,6 @@ $('#frm_nuevo_bien').on('submit', function(e) {
 });
 
  function limpiarFormBienes(){
-
     //id_clasificacion: 3
     $("#descripcion").val("");
     $("#causa_alta").val("");
@@ -427,7 +485,6 @@ $('#frm_nuevo_bien').on('submit', function(e) {
     $("#uso_material").val("");
     $("#uso_material").val("");
     $("#anexo_1").val("");
-
 
  }
   

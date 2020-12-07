@@ -10,6 +10,7 @@ use App\CatUso;
 use App\Secciones;
 use App\Inventario;
 use App\Existencias;
+use App\Medidas;
 use App\Http\Requests\UserRequest;
 use Yajra\Datatables\Datatables;
 use Auth;
@@ -45,25 +46,25 @@ class InventarioController extends Controller
             if($request->eligeBien == 0)
             {
 
-                $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
+                $invent = Inventario::select('inventario.id as idInvent','inventario.id', 'secciones.descripcion as descClasif', 
                     'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
                     'unico', 'conteo'
                     ,'progresivo', 'id_clasifica', 'id_bien')
                 ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
                 ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
-                ->where('secciones.id_seccion', $request->eligeSeccion)
+                ->where('inventario.id_clasifica', $request->eligeSeccion)
                 ->get()->toArray();
             }
             else
             {
-                $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
+                $invent = Inventario::select('inventario.id as idInvent','inventario.id', 'secciones.descripcion as descClasif', 
                     'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
                     'unico', 'conteo'
                     ,'progresivo', 'id_clasifica', 'id_bien')
                 ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
                 ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
-                ->where('secciones.id_seccion', $request->eligeSeccion)
-                ->where('bienes.id', $request->eligeBien)
+                ->where('inventario.id_clasifica', $request->eligeSeccion)
+                ->where('inventario.id_bien', $request->eligeBien)
                 ->get()->toArray();
 
             }
@@ -76,8 +77,34 @@ class InventarioController extends Controller
     //For DataTable
     public function data_listar_bienes(){
         //dd(3232);
-        $users = Bienes::all();
-        return Datatables::of($users)->toJson();
+        $bienes = Bienes::select('*','bienes.id as idBien','secciones.descripcion as secDesc','bienes.descripcion as bienesDesc','cat_altas.descripcion as descAlta',
+            'mAncho.descripcion as ancho_medidaD',
+            DB::raw('case when ancho is null then \'0\' else ancho end as ancho'),
+            DB::raw('case when mAncho.descripcion is null then \'\' else mAncho.descripcion end as ancho_medidaD'),
+            DB::raw('case when largo is null then \'0\' else largo end as largo'),
+            DB::raw('case when mLarg.descripcion is null then \'\' else mLarg.descripcion end as largo_medidaD'),
+            DB::raw('case when alto is null then \'0\' else alto end as alto'),
+            DB::raw('case when mAlto.descripcion is null then \'\' else mAlto.descripcion end as alto_medidaD'),
+            DB::raw('case when diametro is null then \'0\' else diametro end as diametro'),
+            DB::raw('case when mDiamet.descripcion is null then \'\' else mDiamet.descripcion end as diametro_medidaD'),
+            DB::raw('case when peso is null then \'0\' else peso end as peso'),
+            DB::raw('case when mPeso.descripcion is null then \'\' else mPeso.descripcion end as peso_medidaD'),
+            DB::raw('case when volumen is null then \'0\' else volumen end as volumen'),
+            DB::raw('case when mVol.descripcion is null then \'\' else mVol.descripcion end as volumen_medidaD'),
+            DB::raw('case when calibre is null then \'0\' else calibre end as calibre'),
+            DB::raw('case when mCal.descripcion is null then \'\' else mCal.descripcion end as calibre_medidaD')
+                )
+        ->join('secciones','bienes.id_clasificacion', '=', 'secciones.id_seccion')
+        ->join('cat_altas','cat_altas.id', '=', 'bienes.causa_alta')
+        ->leftJoin('cat_medidas as mLarg','mLarg.id','=','bienes.largo_medida')
+        ->leftJoin('cat_medidas as mAncho','mAncho.id','=','bienes.ancho_medida')
+        ->leftJoin('cat_medidas as mAlto','mAlto.id','=','bienes.alto_medida')
+        ->leftJoin('cat_medidas as mDiamet','mDiamet.id','=','bienes.diametro_medida')
+        ->leftJoin('cat_medidas as mPeso','mPeso.id','=','bienes.peso_medida')
+        ->leftJoin('cat_medidas as mVol','mVol.id','=','bienes.volumen_medida')
+        ->leftJoin('cat_medidas as mCal','mCal.id','=','bienes.calibre_medida')
+        ->get()->toArray();
+        return Datatables::of($bienes)->toJson();
     }
 
     public function alta_bienes(){
@@ -138,13 +165,51 @@ class InventarioController extends Controller
     public function listBienes(Request $request)
     {
         if($request->val_clasif == 0){
-            //dd($request->val_clasif);
-            $bienes = Bienes::select(['id','id_clasificacion','descripcion', 'largo'])->get()->toArray();
+            $bienes = Bienes::select('id_clasificacion','bienes.id','bienes.alto','bienes.largo',
+                'bienes.ancho','bienes.diametro','bienes.peso','bienes.volumen',
+                'bienes.descripcion as descripcionB',
+                'mLarg.descripcion as largo_medidaD',
+                'mAncho.descripcion as ancho_medidaD','mAlto.descripcion as alto_medidaD',
+                'mDiamet.descripcion as diametro_medidaD','mPeso.descripcion as peso_medidaD',
+                'mVol.descripcion as volumen_medidaD')
+            ->leftJoin('cat_medidas as mLarg','mLarg.id','=','bienes.largo_medida')
+            ->leftJoin('cat_medidas as mAncho','mAncho.id','=','bienes.ancho_medida')
+            ->leftJoin('cat_medidas as mAlto','mAlto.id','=','bienes.alto_medida')
+            ->leftJoin('cat_medidas as mDiamet','mDiamet.id','=','bienes.diametro_medida')
+            ->leftJoin('cat_medidas as mPeso','mPeso.id','=','bienes.peso_medida')
+            ->leftJoin('cat_medidas as mVol','mVol.id','=','bienes.volumen_medida')
+            ->get()->toArray();
+
+            //$data = DB::select('select * from bienes');
+           
+            //+ opt.id_clasificacion +"-"+ opt.id + " " + opt.descripcion + ' largo: '+ opt.largo+
+           //opt.largo_medida+ '- ancho: ' + opt.ancho_medida+'- alto: ' + opt.alto_medida
+           //+'- diametro: ' + opt.diametro_medida +'- peso: ' + opt.peso_medida+ '- volumen: '
+           //+ opt.volumen_medida
         }
         else
         {
-            $bienes = Bienes::select(['id','id_clasificacion','descripcion', 'largo'])
-            ->where('id_clasificacion',$request->val_clasif)->get()->toArray();
+            $bienes = Bienes::select('id_clasificacion','bienes.id','bienes.alto','bienes.largo',
+                'bienes.ancho','bienes.diametro','bienes.peso','bienes.volumen',
+                'bienes.descripcion as descripcionB',
+                'mLarg.descripcion as largo_medidaD',
+                'mAncho.descripcion as ancho_medidaD','mAlto.descripcion as alto_medidaD',
+                'mDiamet.descripcion as diametro_medidaD','mPeso.descripcion as peso_medidaD',
+                'mVol.descripcion as volumen_medidaD')
+            ->leftJoin('cat_medidas as mLarg','mLarg.id','=','bienes.largo_medida')
+            ->leftJoin('cat_medidas as mAncho','mAncho.id','=','bienes.ancho_medida')
+            ->leftJoin('cat_medidas as mAlto','mAlto.id','=','bienes.alto_medida')
+            ->leftJoin('cat_medidas as mDiamet','mDiamet.id','=','bienes.diametro_medida')
+            ->leftJoin('cat_medidas as mPeso','mPeso.id','=','bienes.peso_medida')
+            ->leftJoin('cat_medidas as mVol','mVol.id','=','bienes.volumen_medida')
+            ->where('id_clasificacion',$request->val_clasif)
+            ->get()->toArray();
+
+           
+/*
+            $bienes = Bienes::select('*')
+            ->where('id_clasificacion',$request->val_clasif)
+            ->get()->toArray();*/
         }    
         
         //dd($bienes);
@@ -166,6 +231,17 @@ class InventarioController extends Controller
         return response()->json($cUso);
     }
 
+    
+    public function deleteBien(Request $request)
+    { 
+        //dd($request->id_bien);
+        $resg = Bienes::where('id', '=', $request->id_bien)->first();
+        $resg->delete();
+        $respuesta = array('resp' => true, 'mensaje' => 'Bien eliminado');
+        return   $respuesta;
+
+
+    }
     public function storeBien(Request $request)
     {
         //dd($request->descripcion);

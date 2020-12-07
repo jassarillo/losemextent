@@ -110,9 +110,29 @@ function getSelectBien() {
                             $.each(data, function (idx, opt) {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
-                                $('#id_bien').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasificacion + "-" + opt.id + " - " + opt.descripcion + ' largo: '+ 
-                                   opt.largo+'</option> '
+                                 if(!opt.largo_medidaD){largo_medidaD ='';}else{largo_medidaD =opt.largo_medidaD; }
+                                    if(!opt.ancho_medidaD){ancho_medidaD ='';}else{ancho_medidaD =opt.ancho_medidaD; }
+                                    if(!opt.alto_medidaD){alto_medidaD ='';}else{alto_medidaD=opt.alto_medidaD;}
+                                    if(!opt.diametro_medidaD){diametro_medidaD ='';}else{diametro_medidaD =opt.diametro_medidaD;}
+                                    if(!opt.peso_medidaD){peso_medidaD ='';}else{peso_medidaD = opt.peso_medidaD;}
+                                    if(!opt.volumen_medidaD){volumen_medidaD ='';}else{volumen_medidaD=opt.volumen_medidaD;}
+                                    
+                                    
+                                    if(!opt.largo){largo ='0';}else{largo =opt.largo; }
+                                    if(!opt.ancho){ancho ='0';}else{ancho =opt.ancho; }
+                                    if(!opt.alto){alto ='0';}else{alto=opt.alto;}
+                                    if(!opt.diametro){diametro ='0';}else{diametro =opt.diametro;}
+                                    if(!opt.peso){peso ='0';}else{peso = opt.peso;}
+                                    if(!opt.volumen){volumen ='0';}else{volumen=opt.volumen;}
+                                    
+                                    
+                                    
+                                 $('#id_bien').append(
+                                  '<option class="optInvent" value="' + opt.id + '">' 
+                                   + opt.id_clasificacion +"-"+ opt.id + " " + opt.descripcionB + ' largo: '+ largo+
+                                   largo_medidaD+ '- ancho: ' +ancho + ancho_medidaD+'- alto: '+alto + alto_medidaD
+                                   +'- diametro: '+diametro + diametro_medidaD +'- peso: ' +peso+ peso_medidaD+ '- volumen: '
+                                   +volumen+ volumen_medidaD+'</option>'
                                 );
                                 $('.selectpicker').selectpicker('refresh');
                             });

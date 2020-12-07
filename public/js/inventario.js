@@ -20,23 +20,37 @@ $(document).ready(function()
                             "targets": [0],
                             "visible": false,
                             "searchable": false
-
                         }],
 
                     "columns": [
+                        { data: 'unico', name: 'unico' },
+                        
+                        {
+
+                            "mRender": function (data, type, row) {
+                                number =  row.idInvent;
+                                if (number<=9999) { number = ("000"+number).slice(-5); }
+                                return number;
+                                
+                                //var id_user = row.idInvent;
+                                //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+row.idInvent+');" href="javascript:void('+ row.idInvent+')">Editar</a>';
+                               
+
+                            }
+                        },
+                        //{ data: 'idInvent', name: 'idInvent' },
                         { data: 'descClasif', name: 'descClasif' },
                         { data: 'descBien', name: 'descBien' },
                         { data: 'factura', name: 'factura' },
                         { data: 'precio', name: 'precio' },
-                        { data: 'conteo', name: 'conteo' },
                         { data: 'progresivo', name: 'progresivo' },
                         { data: 'unico', name: 'unico' },
-                        { data: 'conteo', name: 'conteo' },
+                
                         {
                             "mRender": function (data, type, row) {
-                                var id_user = row.id;
-                                //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+id_user+');" href="javascript:void(0)">Editar</a>';
-                                return '<a onclick="get_data_edit_inventario('+ row.id +');" href="#'+row.id+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
+                                //var id_user = row.idInvent;
+                                //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+row.idInvent+');" href="javascript:void('+ row.idInvent+')">Editar</a>';
+                                return '<a onclick="get_data_edit_inventario('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
 
                             }
                         }
@@ -64,50 +78,7 @@ $(document).ready(function()
 
     extractEntradas();
 
-       /*var filtro;
-        filtro=$("#eligeSeccion").val();
-        $('.inventarios-table').each(function () {
-            $(this).dataTable(window.dtDefaultOptions);
-        });
-
-        console.log(filtro);
-        var dataTable = $('#inventarios-table').dataTable({
-            processing: true,
-            serverSide: true,
-            language: {
-                "url": url + "assets/vendors/general/datatables/Spanish.json"
-            },
-            ajax: {
-                "url": url + "admin/data_listar_inventario",
-                "type": "GET",
-                "data":{"filtro":filtro}
-            },
-            columns: [
-                {
-                    "mRender": function (data, type, row) {
-                      
-                        return  row.id_clasifica + '' + row.id_bien + '' + row.progresivo;
-                    }
-                },
-                { data: 'descClasif', name: 'descClasif' },
-                { data: 'descBien', name: 'descBien' },
-                { data: 'factura', name: 'factura' },
-                { data: 'precio', name: 'precio' },
-                { data: 'conteo', name: 'conteo' },
-                { data: 'progresivo', name: 'progresivo' },
-                { data: 'unico', name: 'unico' },
-                { data: 'conteo', name: 'conteo' },
-                {
-                    "mRender": function (data, type, row) {
-                        var id_user = row.id;
-                        //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+id_user+');" href="javascript:void(0)">Editar</a>';
-                        return '<a onclick="get_data_edit_inventario('+ row.id +');" href="#'+row.id+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
-
-                    }
-                }
-
-            ]
-        });*/
+     
 
 
 
@@ -138,7 +109,7 @@ $(document).ready(function()
                         //console.log(666);
                             eligeSeccion=$("#eligeSeccion").val();
                             //data_table.ajax.url("admin/data_listar_inventario?inicio=" +1+"&eligeSeccion=" + eligeSeccion).load();
-                            
+                            limpiarFormBienes();
                             Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
                            
                     } 
@@ -198,37 +169,25 @@ $(document).ready(function()
     getSelectSeccionSearch();
 
 });//fin Document reading
-/*
-function getSelectSeccion() {
-    $(".clasifOpt").remove();
-    $.ajax({
-        type: "GET",
-        url :  "admin/listSeccion",
-        dataType: "json",
-        success: function (data)
-                        {
-                            //console.log(data[0]);
-                            $.each(data, function (idx, clasOpt) {
-                                  // alert('Estoy recorriendo el registro numero: ' + idx);
-                                //console.log(opt.id_seccion);
-                                $('#id_clasifica').append(
-                                   '<option class="clasifOpt" value="' + clasOpt.id_seccion + '"> ' + clasOpt.id_seccion +" "+ clasOpt.descripcion +'</option> '
-                                );
-
-                                //eligeSeccion
-                                
-
-                            });
-                        },
-        error: function(respuesta) {
-            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
-        }
-    });
-}
-getSelectSeccion();*/
 
 
 
+function limpiarFormBienes(){
+
+    //id_clasificacion: 3
+    $("#id_bien").val("");
+    $('.selectpicker').selectpicker('refresh');
+    $(".optInvent").remove();
+    $("#fecha_inventario").val("");
+    $("#motivo_alta").val("");
+    $("#factura").val("");
+    $("#precio").val("");
+    $("#conteo").val("");
+    $("#ini").val("");
+    $("#fin").val("");
+
+
+};
 
 $('#id_clasifica').on('change', function(){
     val_clasif = $("#id_clasifica").val();
@@ -262,17 +221,39 @@ function getSelectBien(val_clasif) {
                             $(".selectpicker").selectpicker();
                             //console.log(data[0]);
                             $.each(data, function (idx, opt) {
-                                  // alert('Estoy recorriendo el registro numero: ' + idx);
-                                  //console.log(opt);
-                                $('#id_bien').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasificacion +"-"+ opt.id + " " + opt.descripcion + ' largo: '+ 
-                                   opt.largo+'</option> '
+                                 
+                                    if(!opt.largo_medidaD){largo_medidaD ='';}else{largo_medidaD =opt.largo_medidaD; }
+                                    if(!opt.ancho_medidaD){ancho_medidaD ='';}else{ancho_medidaD =opt.ancho_medidaD; }
+                                    if(!opt.alto_medidaD){alto_medidaD ='';}else{alto_medidaD=opt.alto_medidaD;}
+                                    if(!opt.diametro_medidaD){diametro_medidaD ='';}else{diametro_medidaD =opt.diametro_medidaD;}
+                                    if(!opt.peso_medidaD){peso_medidaD ='';}else{peso_medidaD = opt.peso_medidaD;}
+                                    if(!opt.volumen_medidaD){volumen_medidaD ='';}else{volumen_medidaD=opt.volumen_medidaD;}
+                                    
+                                    
+                                    if(!opt.largo){largo ='0';}else{largo =opt.largo; }
+                                    if(!opt.ancho){ancho ='0';}else{ancho =opt.ancho; }
+                                    if(!opt.alto){alto ='0';}else{alto=opt.alto;}
+                                    if(!opt.diametro){diametro ='0';}else{diametro =opt.diametro;}
+                                    if(!opt.peso){peso ='0';}else{peso = opt.peso;}
+                                    if(!opt.volumen){volumen ='0';}else{volumen=opt.volumen;}
+                                    
+                                    
+                                    
+                                 $('#id_bien').append(
+                                  '<option class="optInvent" value="' + opt.id + '">' 
+                                   + opt.id_clasificacion +"-"+ opt.id + " " + opt.descripcionB + ' largo: '+ largo+
+                                   largo_medidaD+ '- ancho: ' +ancho + ancho_medidaD+'- alto: '+alto + alto_medidaD
+                                   +'- diametro: '+diametro + diametro_medidaD +'- peso: ' +peso+ peso_medidaD+ '- volumen: '
+                                   +volumen+ volumen_medidaD+'</option>'
                                 );
 
                                 
                                 $('#eligeBien').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasificacion +"-"+ opt.id + " " + opt.descripcion + ' largo: '+ 
-                                   opt.largo+'</option> '
+                                   '<option class="optInvent" value="' + opt.id + '">' 
+                                   + opt.id_clasificacion +"-"+ opt.id + " " + opt.descripcionB + ' largo: '+ largo+
+                                   largo_medidaD+ '- ancho: ' +ancho + ancho_medidaD+'- alto: '+alto + alto_medidaD
+                                   +'- diametro: '+diametro + diametro_medidaD +'- peso: ' +peso+ peso_medidaD+ '- volumen: '
+                                   +volumen+ volumen_medidaD+'</option>'
                                 );
                                 $('.selectpicker').selectpicker('refresh');
                             });
