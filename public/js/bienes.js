@@ -81,9 +81,11 @@ $(document).ready(function() {
             {
                 "mRender": function (data, type, row) {
                     //var id_user = row.id;
-                   
+                   var year = row.year + '';
+                    yearCut = year.substr(2,3);
                     //return '<img width="80" height="95" class="img_avatar_header" alt="Pic" id="img_avatar_header" src="uploads/inventarios_img/20/'+row.idBien+'.jpg">';
-                    return '<a onclick="modal_img_seccion('+ row.idBien +');" href="#'+row.idBien+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_imagen_local" >Editar</a>';
+                    //year = row.created_at;
+                    return '<a onclick="ver_foto('+ yearCut+','+ row.idBien +');" href="#'+row.idBien+'"  data-toggle="modal" data-target="#kt_modal_imagen_local" ><img width="80" height="95" class="img_avatar_header" alt="Pic" id="img_avatar_header" src="uploads/inventarios_img/'+yearCut+'/'+row.idBien+'.jpg"></a>';
 
                 }
             },
@@ -224,6 +226,11 @@ function editar_bien(id_bien) {
     console.log(id_bien);
 }
 
+function ver_foto(yearCut,idBien){
+    console.log(yearCut);
+    $('#img_modal').attr('src', 'uploads/inventarios_img/'+yearCut+'/'+idBien+'.jpg');
+}
+
 function deleteBien(id_bien) {
     console.log(id_bien);
     $.ajax({
@@ -266,23 +273,23 @@ function get_data_edit_seccion(id_bien) {
             $("#id_update").val(obj[0]['id']);
             $("#descripcion_e").val(obj[0]['descripcion']);
             $("#fecha_alta_e").val(obj[0]['fecha_alta']);
-            $("#estado_e").prop('selectedIndex', obj[0]['estado'] - 1);
+            $("#estado_e").prop('selectedIndex', obj[0]['estado']);
             $("#largo_e").val(obj[0]['largo']);
-            $("#largo_e_medida").prop('selectedIndex', obj[0]['largo_medida'] - 1);
+            $("#largo_e_medida").prop('selectedIndex', obj[0]['largo_medida']);
             $("#ancho_e").val(obj[0]['ancho']);
-            $("#ancho_e_medida").prop('selectedIndex', obj[0]['ancho_medida'] - 1);
+            $("#ancho_e_medida").prop('selectedIndex', obj[0]['ancho_medida']);
             $("#alto_e").val(obj[0]['alto']);
-            $("#alto_e_medida").prop('selectedIndex', obj[0]['alto_medida'] - 1);
+            $("#alto_e_medida").prop('selectedIndex', obj[0]['alto_medida']);
             $("#diametro_e").val(obj[0]['diametro']);
-            $("#diametro_e_medida").prop('selectedIndex', obj[0]['diametro_medida'] - 1);
+            $("#diametro_e_medida").prop('selectedIndex', obj[0]['diametro_medida']);
             $("#peso_e").val(obj[0]['peso']);
-            $("#peso_e_medida").prop('selectedIndex', obj[0]['peso_medida'] - 1);
+            $("#peso_e_medida").prop('selectedIndex', obj[0]['peso_medida']);
             $("#calibre_e").val(obj[0]['calibre']);
-            $("#calibre_e_medida").prop('selectedIndex', obj[0]['calibre_medida'] - 1);
+            $("#calibre_e_medida").prop('selectedIndex', obj[0]['calibre_medida']);
             $("#volumen_e").val(obj[0]['volumen']);
-            $("#volumen_e_medida").prop('selectedIndex', obj[0]['volumen_medida'] - 1);
+            $("#volumen_e_medida").prop('selectedIndex', obj[0]['volumen_medida']);
 
-            getSelectUso_edit(obj[0]['uso_material'] - 1);
+            getSelectUso_edit(obj[0]['uso_material']);
             
 
             //$("#estado_e").val(obj[0]['estado']);
@@ -297,7 +304,7 @@ function get_data_edit_seccion(id_bien) {
 }
 
 function getSelectCausaAlta_edit(causa_alta) {
-    console.log(causa_alta);
+    //console.log(causa_alta);
     $(".optCatAlta_e").remove();
     $.ajax({
         type: "GET",
@@ -339,7 +346,7 @@ function getSelectUso_edit(cau_uso) {
                                    '<option class="optCatUso_e" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
                                 );
                             });
-                            $("#uso_material_e").prop('selectedIndex', cau_uso);
+                            $("#uso_material_e").prop('selectedIndex', cau_uso - 5);
                         },
         error: function(respuesta) {
             Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');

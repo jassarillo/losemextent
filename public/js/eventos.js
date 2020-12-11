@@ -350,6 +350,11 @@ function getSelecEvento() {
                                    '<option class="optEvent" value="' + opt.id + '"> ' 
                                    + opt.id +" "+ opt.destino +'</option> '
                                 );
+
+                                $('#teamEvento').append(
+                                   '<option class="optEvent" value="' + opt.id + '"> ' 
+                                   + opt.id +" "+ opt.destino +'</option> '
+                                );
                                 $('.selectpicker').selectpicker('refresh');
                             });
                         },
@@ -360,6 +365,67 @@ function getSelecEvento() {
 }
 getSelecEvento();
 
+
+$('#teamEvento').on('change', function(){ // on change of state
+    idEvento = $("#teamEvento").val();
+    getTeamList(idEvento);
+});
+
+function getTeamList(idEvento) {
+      $(".otrosTeam").remove();
+           $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                dataType: "json",
+                url: "admin/getListTeam",
+                data: {"idEvento": idEvento},
+                success: function( data ) {
+                   //Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                     $.each(data, function (idx, opt) {
+                    
+                       
+                        $('#teamTable').append(
+                            '<tr class="otrosTeam">' +
+                                '<td>' + opt.id_evento + '</td>' +
+                                '<td>'+opt.id_evento+' </td> ' +
+                                '<td>'+opt.id_empleado+' </td> ' +
+                            '</tr>');
+                    });
+                },
+
+                error: function (data)
+                { console.log(data);
+
+                }
+            });
+};
+
+$("#nro_empleado").change(function() {
+            //contrato = $("#contrato").val();
+            //console.log("frfrfrf");
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                dataType: "json",
+                url: "admin/insertEmpleado",
+                data: {"idEvento": idEvento},
+                success: function( data ) {
+                   Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                   idEvento = $("#teamEvento").val();
+                   getTeamList(idEvento);
+                },
+
+                error: function (data)
+                { console.log(data);
+
+                }
+            });
+
+});
 // Mostrar modal para alta de rol
 
 

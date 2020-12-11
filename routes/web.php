@@ -146,6 +146,8 @@ Route::get('admin/agregar_bienes_eventos', 'EventosController@agregar_bienes_eve
 Route::post('admin/listEventos', 'EventosController@getSelectEventos');
 Route::post('admin/listInventario', 'EventosController@selectInventario');
 Route::post('admin/addItemEvent', 'EventosController@addItemEvent');
+Route::post('admin/getListTeam', 'EventosController@getListTeam');
+Route::post('admin/insertEmpleado', 'EventosController@insertEmpleado');
 
 
 

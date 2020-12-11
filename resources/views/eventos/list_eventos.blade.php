@@ -75,15 +75,15 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel">
                         <div class="kt-form kt-form--label-right">
-                            <form role="form" name="frm_nuevo_evento" id="frm_nuevo_evento" method="POST" accept-charset="UTF-8" 
-                enctype="multipart/form-data">
+                            
                             <div class="kt-form__body">
                                 <div class="kt-section kt-section--first">
                                     <div class="kt-section__body">
+                                        <form role="form" name="frm_nuevo_evento" id="frm_nuevo_evento" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                                         <div class="row">
                                             <label class="col-xl-3"></label>
                                             <div class="col-lg-9 col-xl-6">
-                                                <h3 class="kt-section__title kt-section__title-sm">Capturar Evento
+                                                <h3 class="kt-section__title kt-section__title-sm">1.- Capturar Evento
                                                         </h3>
                                             </div>
                                         </div>
@@ -136,33 +136,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            {{ Form::label('empleado1', 'Empleado 1', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
-                                            <div class="col-lg-9 col-xl-6">
-                                                {{ Form::number('empleado1', auth()->user()->empleado1, array('class' => 'form-control')) }}
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            {{ Form::label('empleado2', 'Empleado 2', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
-                                            <div class="col-lg-9 col-xl-6">
-                                                {{ Form::number('empleado2', auth()->user()->empleado2, array('class' => 'form-control')) }}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            {{ Form::label('empleado3', 'Empleado 3', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
-                                            <div class="col-lg-9 col-xl-6">
-                                                {{ Form::number('empleado3', auth()->user()->empleado3, array('class' => 'form-control')) }}
-                                            </div>
-                                        </div>
+                                        
                                                                             
                                          
                                         
-                                        <div class="card-body px-3 pt-2">
-                                        
-                            <div class="form-group row align-items-center">
-                            </div>
-                        </div>
+                                       
                                         <div class="kt-form__actions">
                                             <div class="row">
                                                 <div class="col-xl-3"></div>
@@ -176,11 +154,13 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {!! Form::close() !!}
 
                                     </div>
+                                   
                                 </div>
                             </div>
-                        {!! Form::close() !!}
+                        
                         </div>
                     </div>
 
@@ -241,6 +221,78 @@
 
     </div>
 </div>
+<div class="row">
+        <div class="col-xl-6">
+            <!--begin:: Widgets/Support Requests-->
+            <div class="kt-portlet kt-portlet--height-fluid">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                             2.- Agregar  Equipo de Trabajo <small></small>
+                        </h3>
+                    </div>
+                   
+                </div>
+                <div class="kt-portlet__body">
+                
+                            <!-- Otro form -->
+                            
+                            <div class="form-group row">
+                                
+                                <div class="col-xl-12">
+                                    <label>Evento</label>
+                                    <select class="form-control selectpicker" id="teamEvento" name="teamEvento">
+                                        <option value="0">Elige</option>
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                
+                                <div class="col-xl-12">
+                                    <label>Destino</label>
+                                        <input type="text" name="nro_empleado" id="nro_empleado" class="form-control" onkeyup="mayus(this);">
+                                </div>
+                            </div>
+                            
+                            <!-- Otro form -->
+                   
+                </div>
+            </div>
+            <!--end:: Widgets/Support Requests-->
+        </div>
+
+        <div class="col-xl-6">
+            <!--begin:: Widgets/Support Requests-->
+            <div class="kt-portlet kt-portlet--height-fluid">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                             3.- Listado Equipo <small></small>
+                        </h3>
+                    </div>
+                   
+                </div>
+                <div class="kt-portlet__body">
+                
+                        <!-- Otro form -->
+                            <table class="table table-striped- table-bordered table-hover table-checkable"
+                                id="teamTable" name="teamTable">
+                                <thead>
+                                    <tr>
+                                        <th> Id Evento</th>
+                                        <th> Evento</th>
+                                        <th> Empleado </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        
+                        <!-- Otro form -->
+                   
+                </div>
+            </div>
+            <!--end:: Widgets/Support Requests-->
+        </div>
+    </div>
 @section('scripts')
 
 <script src="{{ URL::asset('js/eventos.js')}}" type="text/javascript"></script>

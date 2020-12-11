@@ -467,8 +467,6 @@
                                         <div class="form-group row">
                                             {{ Form::label('descripcion_e', 'Descripcion', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                
-
                                                 <input type="text" class="form-control"  name="descripcion_e" id="descripcion_e" onkeyup="mayus(this);">
                                             </div>
                                         </div>
@@ -700,7 +698,7 @@
         <div class="modal-content" style="min-height: 590px;">
             <div class="modal-header">
                 <h5 class="modal-title">
-                   Editar Bien
+                    Foto
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -708,28 +706,8 @@
             </div>
             <div class="modal-body">
                 <!--begin: Search Form -->
-                
-    <div class="row align-items-center">
-        <div class="col-xl-8 order-2 order-xl-1">
-               
-                
-                <form role="form" name="frm_edit_bien" id="frm_edit_bien" method="POST" accept-charset="UTF-8" 
-                enctype="multipart/form-data">
-                            <div class="kt-form__body">
-                                <div class="kt-section kt-section--first">
-                                    <div class="kt-section__body">
-                                     <embed src="../reportes/contratos/101"
-                                                       frameborder="0" width="100%" height="600px">
-                                     
-
-                                    </div>
-                                </div>
-                            </div>
-                        </form>        
-        </div>
-      
-    </div>
-             <!--end: Search Form -->
+                <embed id="img_modal" src="#" width="100%" height="600px">
+                <!--end: Search Form -->
             </div>
             <div class="modal-body modal-body-fit">
                 <!--begin: Datatable -->

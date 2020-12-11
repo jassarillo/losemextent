@@ -10,6 +10,7 @@ use App\CausaAlta;
 use App\CatUso;
 use App\Secciones;
 use App\Inventario;
+use App\TeamEvento;
 use App\Http\Requests\UserRequest;
 use Yajra\Datatables\Datatables;
 use Auth;
@@ -155,6 +156,28 @@ class EventosController extends Controller
         $respuesta = array('resp' => true, 'mensaje' => $mensaje);
         return   $respuesta;
 
+    }
+
+    
+    public function getListTeam(Request $request)
+    {
+        $teaEvent = TeamEvento::select()->get()->toArray();
+        return response()->json($teaEvent);
+
+    }
+    
+    public function insertEmpleado(Request $request)
+    {
+        
+         $saveEvent = new TeamEvento;
+        //$procesoBaja->id = $current_id + 1;
+        $saveEvent->id_evento = 3;
+        $saveEvent->id_empleado = 43;
+        $saveEvent->status = 1;
+        $saveEvent->save(); 
+        $mensaje = '';
+        $respuesta = array('resp' => true, 'mensaje' => $mensaje);
+        return   $respuesta;
     }
 
 

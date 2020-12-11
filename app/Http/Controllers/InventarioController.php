@@ -92,7 +92,8 @@ class InventarioController extends Controller
             DB::raw('case when volumen is null then \'0\' else volumen end as volumen'),
             DB::raw('case when mVol.descripcion is null then \'\' else mVol.descripcion end as volumen_medidaD'),
             DB::raw('case when calibre is null then \'0\' else calibre end as calibre'),
-            DB::raw('case when mCal.descripcion is null then \'\' else mCal.descripcion end as calibre_medidaD')
+            DB::raw('case when mCal.descripcion is null then \'\' else mCal.descripcion end as calibre_medidaD'),
+            DB::raw('extract(year from bienes.created_at) as year')
                 )
         ->join('secciones','bienes.id_clasificacion', '=', 'secciones.id_seccion')
         ->join('cat_altas','cat_altas.id', '=', 'bienes.causa_alta')
