@@ -65,14 +65,20 @@ $('#id_clasifica').on('change', function(){
     getSelectBien();
 });
 
+
+/*$('#nro_progresivo').on('change', function(){
+    
+});*/
+
 $('#id_bien').on('change', function(){
     //console.log("onchange selccion");
     //getSelectBien();
     id_clasifica = $('#id_clasifica').val();
     id_bien = $('#id_bien').val();
+    indice_init = $('#indice_init').val();
     //console.log(id_clasifica);
     nro_progresivo =0;
-    numRows(id_clasifica, id_bien, nro_progresivo);
+    numRows(id_clasifica, id_bien, nro_progresivo, indice_init);
     getSelectNro(id_clasifica, id_bien);
 
 });
@@ -81,8 +87,10 @@ $('#nro_progresivo').on('change', function(){
     id_clasifica = $('#id_clasifica').val();
     id_bien = $('#id_bien').val();
     nro_progresivo = $('#nro_progresivo').val();
+    indice_init = $('#indice_init').val();
 
-    numRows(id_clasifica, id_bien, nro_progresivo);
+
+    numRows(id_clasifica, id_bien, nro_progresivo, indice_init);
     //getSelectNro(id_clasifica, id_bien);
 
 });
@@ -146,7 +154,7 @@ function getSelectBien() {
 
 
 
-    numRows = function(id_clasifica, id_bien, noInvent)
+    numRows = function(id_clasifica, id_bien, noInvent, indice_init)
         {
             
             $(".otrasFilas").remove();
@@ -157,7 +165,8 @@ function getSelectBien() {
                     type: "POST",        
                     dataType: "json",
                     url: "inventario/getNumRows",
-                    data: {"id_clasifica": id_clasifica, "id_bien":id_bien, "noInvent":noInvent},
+                    data: {"id_clasifica": id_clasifica, "id_bien":id_bien, 
+                            "noInvent":noInvent},
                     success: function (data)
                     {
                         //console.log(data);
@@ -170,7 +179,7 @@ function getSelectBien() {
 
                             $("#messageRows").text("");
                              noInt =1;
-                             console.log(data.last_page);
+                             //console.log(data.last_page);
                              for(i =0; i < data.last_page; i++ )
                              {
                                 rangeFin = noInt * 30;
@@ -180,8 +189,8 @@ function getSelectBien() {
                                     '<tr class="otrasFilas">' +
                                         '<td>'+ noInt  +'</td> ' +
                                         '<td>'+ rangeIniPlus +' - ' + rangeFin +'</td> ' +
-                                        //'<td> <a href="http://127.0.0.1:9000/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien+'/'+ noInvent +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
-                                        '<td> <a href="http://pdf.losemextent.com.mx/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien +'/'+noInvent+'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
+                                        '<td> <a href="http://127.0.0.1:9000/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien+'/'+ noInvent +'/'+ indice_init +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
+                                        //'<td> <a href="http://pdf.losemextent.com.mx/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien +'/'+noInvent+'/'+ indice_init +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
                                     '</tr>');
                                 noInt++;
                             }

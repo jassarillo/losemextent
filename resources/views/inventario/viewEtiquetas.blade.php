@@ -58,6 +58,13 @@
                                         <option value="0">Seleccione</option>
                                     </select>
                             </div>
+                            <div class="col-xm-6">
+                            <label>Iniciar en indice: (0 predefinido)</label>
+                            </div> 
+                            <div class="col-xm-5">
+                                    <input class="form-control" type="number" value="0" 
+                                    name="indice_init" id="indice_init">
+                            </div>
 
                             <div class="col-xm-6">
                             <label>Nro.</label>
@@ -68,7 +75,7 @@
                                     </select>
                             </div>
 
-                       
+                            
                             <div><hr color="#00b140" class="mb-2"></div>
                         <!-- Aqui van filtros Etiquetas -->
                         

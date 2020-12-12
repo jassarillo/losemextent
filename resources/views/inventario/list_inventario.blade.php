@@ -250,6 +250,7 @@
                                         <th> Precio</th>
                                         <th> Progresivo</th>
                                         <th> Unico</th>
+                                        <th> Cantidad</th>
                                         <th> Acciones</th>
                                     </tr>
                                     </thead>

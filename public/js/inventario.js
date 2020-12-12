@@ -45,6 +45,7 @@ $(document).ready(function()
                         { data: 'precio', name: 'precio' },
                         { data: 'progresivo', name: 'progresivo' },
                         { data: 'unico', name: 'unico' },
+                        { data: 'conteo', name: 'conteo' },
                 
                         {
                             "mRender": function (data, type, row) {
