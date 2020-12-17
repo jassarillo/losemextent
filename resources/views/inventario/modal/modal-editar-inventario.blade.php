@@ -34,6 +34,7 @@
                                        
                                         
                                         <div class="form-group row">
+                                            <input type="hidden" name="id_invent_hiden" id="id_invent_hiden">
                                             {{ Form::label('fecha_inventario_e', 'Fecha Inventario', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                 {{ Form::date('fecha_inventario_e', auth()->user()->fecha_inventario_e, array('class' => 'form-control')) }}
@@ -77,7 +78,7 @@
                                             </div>
                                         </div>                                        
                                          <div class="form-group form-group-last row">
-                                            <label class="col-xl-3 col-lg-3 col-form-label">Un registro
+                                            <label class="col-xl-3 col-lg-3 col-form-label"  >Convertir a un solo registro
                                             </label>
                                             <div class="col-lg-9 col-xl-6">
                                                 <span class="kt-switch">

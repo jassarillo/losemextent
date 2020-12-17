@@ -265,15 +265,15 @@ function get_data_edit_seccion(id_bien) {
         url : url + "admin/get_data_edit_seccion/"+ id_bien,
         dataType: 'html',
         success: function(data) {
-            //console.log(data[0]['id']);
+            console.log(data);
             var obj = jQuery.parseJSON( data );
             //getSelectCausaAlta_edit();
-
+ 
             getSelectCausaAlta_edit(obj[0]['causa_alta']);
             $("#id_update").val(obj[0]['id']);
             $("#descripcion_e").val(obj[0]['descripcion']);
             $("#fecha_alta_e").val(obj[0]['fecha_alta']);
-            $("#estado_e").prop('selectedIndex', obj[0]['estado']);
+            $("#estado_e").prop('selectedIndex', obj[0]['estado']-1);
             $("#largo_e").val(obj[0]['largo']);
             $("#largo_e_medida").prop('selectedIndex', obj[0]['largo_medida']);
             $("#ancho_e").val(obj[0]['ancho']);
@@ -502,7 +502,7 @@ $('#frm_nuevo_bien').on('submit', function(e) {
 
 //Editar bien
 $('#frm_edit_bien').on('submit', function(e) {
-            e.preventDefault();
+    e.preventDefault();
     var formData = new FormData(this);
     formData.append('_token', $('input[name=_token]').val());
     console.log(formData);

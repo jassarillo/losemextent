@@ -366,7 +366,7 @@ function getSelecEvento() {
 getSelecEvento();
 
 
-$('#teamEvento').on('change', function(){ // on change of state
+$('#teamEvento').on('blur', function(){ // on change of state
     idEvento = $("#teamEvento").val();
     getTeamList(idEvento);
 });
@@ -416,6 +416,7 @@ $("#nro_empleado").change(function() {
                 success: function( data ) {
                    Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
                    idEvento = $("#teamEvento").val();
+                   //$("#nro_empleado").val();
                    getTeamList(idEvento);
                 },
 

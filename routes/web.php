@@ -108,6 +108,9 @@ Route::get('admin/roles/{id}/editar_roles_permisos', 'RoleController@editar_role
 Route::get('admin/list_inventario', 'InventarioController@list_inventario');
 Route::get('admin/data_listar_inventario', 'InventarioController@data_listar_inventario');
 Route::get('admin/get_data_edit_inventario/{id_inventrio}', 'BienesController@getDataInventario');
+Route::post('admin/updateInventItem', 'InventarioController@updateInventItem');//***
+Route::post('admin/deleteUnico', 'InventarioController@deleteUnico');
+
 Route::get('admin/alta_bienes', 'InventarioController@alta_bienes');
 Route::post('admin/deleteBien', 'InventarioController@deleteBien');
 Route::get('admin/create_seccion', 'InventarioController@create_seccion');
@@ -138,6 +141,10 @@ Route::post('admin/updateBien', 'BienesController@updateBien');
 
 Route::get('admin/existencias', 'ExistenciasController@existencias');
 Route::get('admin/data_listar_existencias', 'ExistenciasController@tableExistencias');
+
+Route::get('admin/buscador', 'ExistenciasController@buscador');
+Route::get('admin/get_datos_buscador/{nro_invent}', 'ExistenciasController@get_datos_buscador');
+
 
 Route::post('admin/storeEventos', 'EventosController@storeEventos');
 Route::get('admin/data_listar_eventos', 'EventosController@data_listar_eventos');

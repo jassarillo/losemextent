@@ -251,7 +251,8 @@
                                         <th> Progresivo</th>
                                         <th> Unico</th>
                                         <th> Cantidad</th>
-                                        <th> Acciones</th>
+                                        <th> Editar</th>
+                                        <th> Eliminar Unico</th>
                                     </tr>
                                     </thead>
 

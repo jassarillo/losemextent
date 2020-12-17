@@ -82,6 +82,7 @@
                      <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/alta_bienes') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Bienes</span></a></li>
                      <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/list_inventario') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Alta de Inventario</span></a></li>
                      <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/existencias') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Existencias</span></a></li>
+                     <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/buscador') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Buscador</span></a></li>
                   </ul>
                </div>
             </li>

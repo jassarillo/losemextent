@@ -179,7 +179,7 @@ function getSelectBien() {
 
                             $("#messageRows").text("");
                              noInt =1;
-                             //console.log(data.last_page);
+                             console.log(data.last_page);
                              for(i =0; i < data.last_page; i++ )
                              {
                                 rangeFin = noInt * 30;
@@ -189,8 +189,8 @@ function getSelectBien() {
                                     '<tr class="otrasFilas">' +
                                         '<td>'+ noInt  +'</td> ' +
                                         '<td>'+ rangeIniPlus +' - ' + rangeFin +'</td> ' +
-                                        '<td> <a href="http://127.0.0.1:9000/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien+'/'+ noInvent +'/'+ indice_init +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
-                                        //'<td> <a href="http://pdf.losemextent.com.mx/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien +'/'+noInvent+'/'+ indice_init +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
+                                        //'<td> <a href="http://127.0.0.1:9000/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien+'/'+ noInvent +'/'+ indice_init +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
+                                        '<td> <a href="http://pdf.losemextent.com.mx/imprimeEtiquetas/'+rangeIni+'/'+rangeFin+'/'+id_clasifica+'/'+ id_bien +'/'+noInvent+'/'+ indice_init +'" target="_blank" class="btn btn-success btn-group-lg active" ><i class="fas fa-print"></i></a> </td> ' +
                                     '</tr>');
                                 noInt++;
                             }

@@ -51,8 +51,23 @@ $(document).ready(function()
                             "mRender": function (data, type, row) {
                                 //var id_user = row.idInvent;
                                 //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+row.idInvent+');" href="javascript:void('+ row.idInvent+')">Editar</a>';
-                                return '<a onclick="get_data_edit_inventario('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
+                                    return '<a onclick="get_data_edit_inventario('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
+                            }
+                        },
+                        {
+                            "mRender": function (data, type, row) {
+                                
+                                if(row.unico == 1)
+                                {
+                                    return '<a  onClick="deleteUnico('+row.idInvent+');" class="btn btn-outline-danger active">Eliminar</a>'
 
+                                    //'<a class="btn btn-danger" onClick="deleteUnico('+row.idInvent+');">Eliminar</a>';
+                                }
+                                else
+                                {
+                                    return '';
+
+                                }
                             }
                         }
                     ],
@@ -129,13 +144,17 @@ $(document).ready(function()
 
         $('#BtnBuscar').on('click', function () {
                     
-                    eligeSeccion=$("#eligeSeccion").val();
+                    reloadDataTableInvent();
+
+        });
+
+        function reloadDataTableInvent(){
+            eligeSeccion=$("#eligeSeccion").val();
                     eligeBien=$("#eligeBien").val();
                     //console.log(eligeSeccion);
                     data_table.ajax.url("admin/data_listar_inventario?inicio=" +1
                         +"&eligeSeccion=" + eligeSeccion + "&eligeBien=" + eligeBien ).load();
-
-        });
+        };
 
     function getSelectSeccionSearch() {
         $(".optSeccionSearch").remove();
@@ -169,6 +188,67 @@ $(document).ready(function()
     }
     getSelectSeccionSearch();
 
+    $('#frm_edit_invent').on('submit', function(e) {
+    //console.log("weweweweweke");
+    e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('_token', $('input[name=_token]').val());
+    console.log(formData);
+    
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                //url : url + "admin/storeBien",
+                type: "POST",
+                dataType: "json",
+                url: "admin/updateInventItem",
+                data: formData, 
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(respuesta) {
+                    //console.log(respuesta.resp);
+                    if (respuesta.resp == true) {
+                        //console.log(666);
+                       reloadDataTableInvent();
+                        Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                        //$('#users-table').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire('error', respuesta.message,"error");
+                    }
+                },
+                error: function(xhr) {
+                 //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+                 Swal.fire('¡Alerta!', xhr, 'warning');
+
+                }
+            });
+    });
+
+     deleteUnico = function(id_invent) {
+    //console.log(id_invent);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : url + "admin/deleteUnico",
+        type: 'POST',
+        data: {'id_invent':id_invent},
+        dataType: 'json',
+        success: function(response) {
+               reloadDataTableInvent();
+                Swal.fire('¡Correcto!',response.message,'success');
+                //$('#users-table').DataTable().ajax.reload();
+               
+           
+        },
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
+        }
+    });
+}
 });//fin Document reading
 
 
@@ -269,13 +349,13 @@ function getSelectBien(val_clasif) {
 
 
 
-function get_data_edit_inventario(id_bien) {
+function get_data_edit_inventario(id_invent) {
     //console.log(id_bien);
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : url + "admin/get_data_edit_inventario/"+ id_bien,
+        url : url + "admin/get_data_edit_inventario/"+ id_invent,
         dataType: 'html',
         success: function(data) {
             //console.log(data);
@@ -288,36 +368,17 @@ function get_data_edit_inventario(id_bien) {
             $("#factura_e").val(obj[0]['factura']);
             $("#precio_e").val(obj[0]['precio']);
             $("#conteo_e").val(obj[0]['conteo']);
+            if(obj[0]['unico'] == 1 )
+            {
+                $("#unicoEdit").prop("checked",true);
+            }
+            else
+            {
+                $("#unicoEdit").prop("checked",false);
+            }
+            $("#id_invent_hiden").val(id_invent);
             
-            //getSelectCausaAlta_edit();
-
-            //getSelectCausaAlta_edit(obj[0]['causa_alta']);
-            /*
-            $("#id_update").val(obj[0]['id']);
-            $("#descripcion_e").val(obj[0]['descripcion']);
-            $("#fecha_alta_e").val(obj[0]['fecha_alta']);
-            $("#estado_e").prop('selectedIndex', obj[0]['estado'] - 1);
-            $("#largo_e").val(obj[0]['largo']);
-            $("#largo_e_medida").prop('selectedIndex', obj[0]['largo_medida'] - 1);
-            $("#ancho_e").val(obj[0]['ancho']);
-            $("#ancho_e_medida").prop('selectedIndex', obj[0]['ancho_medida'] - 1);
-            $("#alto_e").val(obj[0]['alto']);
-            $("#alto_e_medida").prop('selectedIndex', obj[0]['alto_medida'] - 1);
-            $("#diametro_e").val(obj[0]['diametro']);
-            $("#diametro_e_medida").prop('selectedIndex', obj[0]['diametro_medida'] - 1);
-            $("#peso_e").val(obj[0]['peso']);
-            $("#peso_e_medida").prop('selectedIndex', obj[0]['peso_medida'] - 1);
-            $("#calibre_e").val(obj[0]['calibre']);
-            $("#calibre_e_medida").prop('selectedIndex', obj[0]['calibre_medida'] - 1);
-            $("#volumen_e").val(obj[0]['volumen']);
-            $("#volumen_e_medida").prop('selectedIndex', obj[0]['volumen_medida'] - 1);
-*/
-            //getSelectUso_edit(obj[0]['uso_material'] - 1);
-            
-
-            //$("#estado_e").val(obj[0]['estado']);
-
-            //$("#causa_alta_e").prop('selectedIndex', 3);
+           
             
         },
         error: function(respuesta) {
@@ -325,6 +386,7 @@ function get_data_edit_inventario(id_bien) {
         }
     });
 }
+
 
 
 $("#conteo").keyup(function() {

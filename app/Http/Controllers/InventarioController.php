@@ -233,6 +233,18 @@ class InventarioController extends Controller
     }
 
     
+    public function deleteUnico(Request $request)
+    { 
+        //dd($request->id_bien);
+        $resg = Inventario::where('id', '=', $request->id_invent)->first();
+        $resg->delete();
+        //dd($resg);
+        $respuesta = array('resp' => true, 'mensaje' => 'Elemento eliminado');
+        return   $respuesta;
+
+
+    }
+
     public function deleteBien(Request $request)
     { 
         //dd($request->id_bien);
@@ -283,6 +295,55 @@ class InventarioController extends Controller
 
     }
 
+
+    public function updateInventItem (Request $request)
+    {
+        
+        
+        $lastId = Inventario::where('id', '=', $request->id_invent_hiden)->get()->toArray(); 
+        //dd($lastId);
+        
+        $updateUnico = Inventario::where('id','=',$request->id_invent_hiden)
+                    ->where('id_bien', $lastId[0]['id_bien'])
+                    ->where('id_clasifica',$lastId[0]['id_clasifica'])->first();
+        //evaluamos si es unico
+        if(!$request->unicoEdit){
+            //dd("no");
+            $updateUnico->update(['conteo_existencia' => $request->conteo_existencia , 
+                                //'unico'=> $request->unicoEdit,
+                                'fecha_inventario'=>$request->fecha_inventario_e,
+                                'motivo_alta'=>$request->motivo_alta_e,
+                                'factura'=>$request->factura_e,
+                                'precio'=>$request->precio_e,
+                                'conteo'=>$request->conteo_e
+                                ]);  
+        }
+        else
+        {
+            $updateUnico->update(['conteo_existencia' => $request->conteo_existencia , 
+                                'unico'=> 1,
+                                'fecha_inventario'=>$request->fecha_inventario_e,
+                                'motivo_alta'=>$request->motivo_alta_e,
+                                'factura'=>$request->factura_e,
+                                'precio'=>$request->precio_e,
+                                'conteo'=>$request->conteo_e
+                                ]); 
+
+            $deleteOthers = Inventario::where('id','!=',$request->id_invent_hiden)
+                    ->where('id_bien', $lastId[0]['id_bien'])
+                    ->where('id_clasifica',$lastId[0]['id_clasifica'])->delete();
+
+        }
+                  
+
+        
+
+        //dd($updateUnico,$deleteOthers);
+        
+        $respuesta = array('resp' => true, 'mensaje' => 'Bien eliminado');
+        return   $respuesta;                
+
+    }
     public function data_list_inventario()
     {
         
