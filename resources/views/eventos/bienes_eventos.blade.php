@@ -145,7 +145,7 @@
                                 <div class="kt-section kt-section--first">
                                 <!--begin: Datatable -->
                                 <div class="table-responsive col-xl-12"> 
-                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="eventos-table">
+                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="bienes-evento-table">
                                     <thead>
                                     <tr>
                                         <th> ID </th>

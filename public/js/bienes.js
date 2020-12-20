@@ -18,6 +18,7 @@ $(document).ready(function() {
             { data: 'idBien', name: 'idBien' },
             { data: 'secDesc', name: 'secDesc' },
             { data: 'bienesDesc', name: 'bienesDesc' },
+            { data: 'observacion', name: 'observacion' },
             { data: 'descAlta', name: 'descAlta' },
             { data: 'fecha_alta', name: 'fecha_alta' },
             {
@@ -272,6 +273,7 @@ function get_data_edit_seccion(id_bien) {
             getSelectCausaAlta_edit(obj[0]['causa_alta']);
             $("#id_update").val(obj[0]['id']);
             $("#descripcion_e").val(obj[0]['descripcion']);
+            $("#observacion_e").val(obj[0]['observacion']);
             $("#fecha_alta_e").val(obj[0]['fecha_alta']);
             $("#estado_e").prop('selectedIndex', obj[0]['estado']-1);
             $("#largo_e").val(obj[0]['largo']);
@@ -479,6 +481,7 @@ $('#frm_nuevo_bien').on('submit', function(e) {
  function limpiarFormBienes(){
     //id_clasificacion: 3
     $("#descripcion").val("");
+    $("#observacion").val("");
     $("#causa_alta").val("");
     $("#fecha_alta").val("");
     $("#estado").val("");

@@ -145,6 +145,24 @@
                                         </div>
 
                                         <div class="form-group row">
+                                            {{ Form::label('rfc', 'RFC', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                
+                                                <input type="text" name="rfc" id="rfc" class="form-control" onkeyup="mayus(this);">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            {{ Form::label('r_social', 'Razón Social', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                
+                                                <input type="text" name="r_social" id="r_social" class="form-control" onkeyup="mayus(this);">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
                                             {{ Form::label('precio', 'Precio', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                 {{ Form::number('precio', auth()->user()->precio, array('class' => 'form-control')) }}
@@ -247,6 +265,8 @@
                                         <th> Clasificación </th>
                                         <th> Descripción </th>
                                         <th> Factura </th>
+                                        <th> RFC </th>
+                                        <th> R Social </th>
                                         <th> Precio</th>
                                         <th> Progresivo</th>
                                         <th> Unico</th>

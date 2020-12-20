@@ -49,7 +49,7 @@ class InventarioController extends Controller
                 $invent = Inventario::select('inventario.id as idInvent','inventario.id', 'secciones.descripcion as descClasif', 
                     'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
                     'unico', 'conteo'
-                    ,'progresivo', 'id_clasifica', 'id_bien')
+                    ,'progresivo', 'id_clasifica', 'id_bien','rfc','r_social')
                 ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
                 ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
                 ->where('inventario.id_clasifica', $request->eligeSeccion)
@@ -60,7 +60,7 @@ class InventarioController extends Controller
                 $invent = Inventario::select('inventario.id as idInvent','inventario.id', 'secciones.descripcion as descClasif', 
                     'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
                     'unico', 'conteo'
-                    ,'progresivo', 'id_clasifica', 'id_bien')
+                    ,'progresivo', 'id_clasifica', 'id_bien','rfc','r_social')
                 ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
                 ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
                 ->where('inventario.id_clasifica', $request->eligeSeccion)
@@ -287,6 +287,8 @@ class InventarioController extends Controller
         $saveBienes->fecha_inventario = $request->fecha_inventario;
         $saveBienes->motivo_alta = $request->motivo_alta;
         $saveBienes->factura = $request->factura;
+        $saveBienes->rfc = $request->rfc;
+        $saveBienes->r_social = $request->r_social;
         $saveBienes->precio = $request->precio;
         $saveBienes->status = 1;
         $saveBienes->save();
@@ -314,19 +316,27 @@ class InventarioController extends Controller
                                 'fecha_inventario'=>$request->fecha_inventario_e,
                                 'motivo_alta'=>$request->motivo_alta_e,
                                 'factura'=>$request->factura_e,
+                                'rfc'=>$request->rfc_e,
+                                'r_social'=>$request->r_social_e,
                                 'precio'=>$request->precio_e,
                                 'conteo'=>$request->conteo_e
                                 ]);  
         }
         else
-        {
+        {//DB::raw('count(*) as user_count, status') 
+            $count = Inventario::select(DB::raw("count(*)  as count"))
+                    ->where('id','!=',$request->id_invent_hiden)
+                    ->where('id_bien', $lastId[0]['id_bien'])
+                    ->where('id_clasifica',$lastId[0]['id_clasifica'])->get()->toArray();
+                    //dd($count[0]['count']);
+
             $updateUnico->update(['conteo_existencia' => $request->conteo_existencia , 
                                 'unico'=> 1,
                                 'fecha_inventario'=>$request->fecha_inventario_e,
                                 'motivo_alta'=>$request->motivo_alta_e,
                                 'factura'=>$request->factura_e,
                                 'precio'=>$request->precio_e,
-                                'conteo'=>$request->conteo_e
+                                'conteo'=>$count[0]['count']
                                 ]); 
 
             $deleteOthers = Inventario::where('id','!=',$request->id_invent_hiden)
@@ -340,7 +350,7 @@ class InventarioController extends Controller
 
         //dd($updateUnico,$deleteOthers);
         
-        $respuesta = array('resp' => true, 'mensaje' => 'Bien eliminado');
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro actualizado');
         return   $respuesta;                
 
     }
@@ -406,6 +416,8 @@ class InventarioController extends Controller
                 $saveBienes->fecha_inventario = $request->fecha_inventario;
                 $saveBienes->motivo_alta = $request->motivo_alta;
                 $saveBienes->factura = $request->factura;
+                $saveBienes->rfc = $request->rfc;
+                $saveBienes->r_social = $request->r_social;
                 $saveBienes->precio = $request->precio;
                 $saveBienes->progresivo = $ProgresivoMas;
                 $saveBienes->unico = $unico;

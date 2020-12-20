@@ -32,18 +32,7 @@ class EventosController extends Controller
         return view('eventos.list_eventos');
     }
 
-    public function data_listar_inventario(){
-   
 
-        $invent = Inventario::select('inventario.id', 'secciones.descripcion as descClasif', 
-                'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo','unico', 'conteo'
-                ,'progresivo')
-        ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
-        ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
-        ->get()->toArray();
-
-        return Datatables::of($invent)->toJson();
-    }
 
     //For DataTable
     public function data_listar_eventos(){
@@ -97,6 +86,50 @@ class EventosController extends Controller
         ->get()->toArray();
         //dd($inventario);
         return response()->json($inventario);
+    }
+
+    public function listar_bienes_evento(Request $request){
+
+        //dd($request->inicio);
+        if($request->inicio == null)
+        { //dd(3);
+            $invent = Inventario::select('*')->take(0)->get()->toArray();
+        }   
+        else
+        {
+            //dd($request->eligeSeccion);
+
+            if($request->eligeBien == 0)
+            {
+                //dd(2);
+                $invent = Inventario::select('inventario.id as idInvent','inventario.id', 'secciones.descripcion as descClasif', 
+                    'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
+                    'unico', 'conteo'
+                    ,'progresivo', 'id_clasifica', 'id_bien')
+                ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
+                ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
+                ->where('inventario.id_evento', $request->evento)
+                //->where('inventario.id_clasifica', $request->eligeSeccion)
+                ->get()->toArray();
+            }
+            else
+            {
+                dd(3);
+                $invent = Inventario::select('inventario.id as idInvent','inventario.id', 'secciones.descripcion as descClasif', 
+                    'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
+                    'unico', 'conteo'
+                    ,'progresivo', 'id_clasifica', 'id_bien')
+                ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
+                ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
+                ->where('inventario.id_clasifica', $request->eligeSeccion)
+                ->where('inventario.id_bien', $request->eligeBien)
+                ->get()->toArray();
+
+            }
+        }    
+
+        return Datatables::of($invent)->toJson();   
+
     }
 
     public function addItemEvent(Request $request)
@@ -161,7 +194,14 @@ class EventosController extends Controller
     
     public function getListTeam(Request $request)
     {
-        $teaEvent = TeamEvento::select()->get()->toArray();
+        
+        $teaEvent = Eventos::select('eventos.id as id_event', 'destino', 'nombre_completo')
+        ->Join('team_evento','team_evento.id_evento', '=', 'eventos.id')
+        ->Join('empleados',  'empleados.nro_empleado', '=','team_evento.id_empleado')
+        ->where('eventos.id', $request->idEvento)
+        ->groupBy('eventos.id','destino', 'nombre_completo')
+        ->get()->toArray();
+        //dd($teaEvent);
         return response()->json($teaEvent);
 
     }
@@ -169,15 +209,28 @@ class EventosController extends Controller
     public function insertEmpleado(Request $request)
     {
         
-         $saveEvent = new TeamEvento;
-        //$procesoBaja->id = $current_id + 1;
-        $saveEvent->id_evento = 3;
-        $saveEvent->id_empleado = 43;
+        $saveEvent = new TeamEvento;
+        $saveEvent->id_evento = $request->teamEvento;
+        $saveEvent->id_empleado = $request->nro_empleado;
         $saveEvent->status = 1;
-        $saveEvent->save(); 
+        $saveEvent->save();
         $mensaje = '';
+
         $respuesta = array('resp' => true, 'mensaje' => $mensaje);
         return   $respuesta;
+    }
+
+    public function unicoMuchos(Request $request)
+    {
+        $campoUnico = Inventario::select('unico')
+        ->where('id_clasifica', $request->val_clasif)
+        ->where('id_bien', $request->id_bien)
+        ->get()->toArray();
+
+        //dd($campoUnico);
+
+        return response()->json($teaEvent);
+
     }
 
 

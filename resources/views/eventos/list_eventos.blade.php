@@ -178,9 +178,9 @@
                                         <th> Destino </th>
                                         <th> Fecha </th>
                                         <th> Hora </th>
-                                        <th> Empleado 1 </th>
+                                        <!--<th> Empleado 1 </th>
                                         <th> Empleado 2 </th>
-                                        <th> Empleado 3 </th>
+                                        <th> Empleado 3 </th>-->
                                         <th> Descripción</th>
                                         <th> Lugar</th>
                                         <th> Acciones</th>
@@ -249,7 +249,7 @@
                             <div class="form-group row">
                                 
                                 <div class="col-xl-12">
-                                    <label>Destino</label>
+                                    <label>Nro. Empleado: </label>
                                         <input type="text" name="nro_empleado" id="nro_empleado" class="form-control" onkeyup="mayus(this);">
                                 </div>
                             </div>

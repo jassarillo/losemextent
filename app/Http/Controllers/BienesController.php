@@ -55,6 +55,7 @@ class BienesController extends Controller
         //$bajaUP = $baja;
         $bienUp->update(
           ['descripcion' => $request->descripcion_e,
+            'observacion' =>  $request->observacion_e,
             'causa_alta' =>  $request->causa_alta_e,
             'fecha_alta' => $request->fecha_alta_e,
             'estado' => $request->estado_e,

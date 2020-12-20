@@ -155,6 +155,9 @@ Route::post('admin/listInventario', 'EventosController@selectInventario');
 Route::post('admin/addItemEvent', 'EventosController@addItemEvent');
 Route::post('admin/getListTeam', 'EventosController@getListTeam');
 Route::post('admin/insertEmpleado', 'EventosController@insertEmpleado');
+Route::get('admin/listar_bienes_evento', 'EventosController@listar_bienes_evento');
+Route::post('admin/unicoMuchos', 'EventosController@unicoMuchos');
+
 
 
 

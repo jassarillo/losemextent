@@ -66,6 +66,24 @@
                                         </div>
 
                                         <div class="form-group row">
+                                            {{ Form::label('rfc_e', 'RFC', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                
+                                                <input type="text" name="rfc_e" id="rfc_e" class="form-control" onkeyup="mayus(this);">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            {{ Form::label('r_social_e', 'R Social', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                
+                                                <input type="text" name="r_social_e" id="r_social_e" class="form-control" onkeyup="mayus(this);">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
                                             {{ Form::label('precio_e', 'Precio', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                 {{ Form::number('precio_e', auth()->user()->precio_e, array('class' => 'form-control')) }}

@@ -17,9 +17,9 @@ $(document).ready(function() {
             { data: 'destino', name: 'destino' },
             { data: 'fecha', name: 'fecha' },
             { data: 'hora', name: 'hora' },
-            { data: 'nomb1', name: 'nomb1' },
-            { data: 'nomb2', name: 'nomb2' },
-            { data: 'nomb3', name: 'nomb3' },
+//           { data: 'nomb1', name: 'nomb1' },
+//            { data: 'nomb2', name: 'nomb2' },
+//            { data: 'nomb3', name: 'nomb3' },
             { data: 'descripcion', name: 'descripcion' },
             { data: 'lugar', name: 'lugar' },
             {
@@ -28,10 +28,82 @@ $(document).ready(function() {
                     return '<a class="btn btn-cdmx" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Editar</a>';
                 }
             }
-
         ]
         });
-});
+
+    function selectBienesAEvento() 
+    {
+        filtro=0;
+               
+                data_table = $("#bienes-evento-table").DataTable({
+                   
+                    "buttons": [
+                        'csv', 'excel', 'pdf', 'print'
+                    ],
+                    "ajax": {
+                        "url":   "admin/listar_bienes_evento",
+                        "data": { filtro: filtro },//Consulta a PAGOSUNIFICADOS
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+                    "columnDefs":
+                        [{
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        }],
+
+                    "columns": [
+                        //{ data: 'idInvent', name: 'idInvent' },
+                        { data: 'descClasif', name: 'descClasif' },
+                        { data: 'descBien', name: 'descBien' },
+                        { data: 'factura', name: 'factura' },
+                        {
+                            "mRender": function (data, type, row) {
+                                //var id_user = row.idInvent;
+                                //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+row.idInvent+');" href="javascript:void('+ row.idInvent+')">Editar</a>';
+                                    return '<a onclick="get_data_edit_inventario('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
+                            }
+                        }
+                       
+                    ],
+                    "drawCallback": function () {
+                        $(".creditos").change(function () {
+                            if ($(this).is(':checked')) {
+                                //console.log($(this).val());
+                                if ($.inArray($(this).val(), creditos) == -1) {
+                                    //creditos[] = $(this).val();
+                                    creditos.push($(this).val());
+                                }
+
+                            }
+                            else {
+                                //creditos.pop($(this).val())
+                                creditos.splice($.inArray($(this).val(), creditos), 1);
+                            }
+                            console.log(creditos);
+                        });
+
+                    }
+                });
+    };
+    selectBienesAEvento();   
+
+    $('#evento').on('change', function () {
+                    
+                    reloadDataTableInvent();
+
+        });
+
+        function reloadDataTableInvent(){
+            evento=$("#evento").val();
+                    eligeBien=$("#eligeBien").val();
+                    //console.log(eligeSeccion);
+                    data_table.ajax.url("admin/listar_bienes_evento?inicio=" +1
+                        +"&eligeSeccion=" + eligeBien + "&eligeBien=" + eligeBien ).load();
+        }; 
+
+});//Fin Document Ready
 
 function getSelectSeccion() {
     $(".optSeccion").remove();
@@ -122,7 +194,30 @@ function getSelectBien() {
 //getSelectBien();
 $('#id_bien').on('change', function(){
     //console.log("onchange selccion");
-    getSelectInventario();
+    val_clasif = $("#id_clasifica").val();
+    id_bien = $("#id_bien").val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url :  "admin/unicoMuchos",
+        data: {"val_clasif":  val_clasif, "id_bien": id_bien},
+        dataType: "json",
+        success: function (data)
+                        { 
+                            if(data == 0)
+                            {
+                                getSelectInventario();
+                            }
+
+                        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+
+
 });
 
 function getSelectInventario() {
@@ -187,7 +282,7 @@ $('#frm_nuevo_evento').on('submit', function(e) {
             
             if (respuesta.resp == true) {
                 //console.log(666);
-               
+                getSelecEvento();
                 Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
                 getSelectInventario();
                
@@ -298,7 +393,7 @@ $("#conteo").keyup(function() {
                 { console.log(data);
 
                 }
-            })
+            });
 
 });
 $("#codigo_input").hide();
@@ -382,15 +477,14 @@ function getTeamList(idEvento) {
                 url: "admin/getListTeam",
                 data: {"idEvento": idEvento},
                 success: function( data ) {
+
                    //Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
                      $.each(data, function (idx, opt) {
-                    
-                       
                         $('#teamTable').append(
                             '<tr class="otrosTeam">' +
-                                '<td>' + opt.id_evento + '</td>' +
-                                '<td>'+opt.id_evento+' </td> ' +
-                                '<td>'+opt.id_empleado+' </td> ' +
+                                '<td>' + opt.id_event + '</td>' +
+                                '<td>'+opt.destino+' </td> ' +
+                                '<td>'+opt.nombre_completo+' </td> ' +
                             '</tr>');
                     });
                 },
@@ -403,6 +497,8 @@ function getTeamList(idEvento) {
 };
 
 $("#nro_empleado").change(function() {
+            nro_empleado = $("#nro_empleado").val();
+            teamEvento = $("#teamEvento").val();
             //contrato = $("#contrato").val();
             //console.log("frfrfrf");
             $.ajax({
@@ -412,7 +508,7 @@ $("#nro_empleado").change(function() {
                 type: "POST",
                 dataType: "json",
                 url: "admin/insertEmpleado",
-                data: {"idEvento": idEvento},
+                data: {"nro_empleado": nro_empleado, "teamEvento":teamEvento},
                 success: function( data ) {
                    Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
                    idEvento = $("#teamEvento").val();
@@ -427,7 +523,11 @@ $("#nro_empleado").change(function() {
             });
 
 });
-// Mostrar modal para alta de rol
 
 
-//$(".dt-buttons").addClass('kt-hidden');
+
+$("#teamEvento").change(function() {
+            idEvento = $("#teamEvento").val();
+            getTeamList(idEvento)
+});
+

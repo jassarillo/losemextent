@@ -139,6 +139,14 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            {{ Form::label('observacion', 'Observacion', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                
+
+                                                <input type="text" class="form-control"  name="observacion" id="observacion" onkeyup="mayus(this);">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             {{ Form::label('causa_alta', 'Causa de Alta', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                               <select class="form-control" id="causa_alta" name="causa_alta">
@@ -377,6 +385,7 @@
                                         <th> ID </th>
                                         <th> Clasificación </th>
                                         <th> Descripción </th>
+                                        <th> Observación </th>
                                         <th> Causa de Alta </th>
                                         <th> Fecha Ala </th>
                                         <th> Estado </th>
@@ -468,6 +477,12 @@
                                             {{ Form::label('descripcion_e', 'Descripcion', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                 <input type="text" class="form-control"  name="descripcion_e" id="descripcion_e" onkeyup="mayus(this);">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('observacion_e', 'Observacion', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                <input type="text" class="form-control"  name="observacion_e" id="observacion_e" onkeyup="mayus(this);">
                                             </div>
                                         </div>
                                         <div class="form-group row">

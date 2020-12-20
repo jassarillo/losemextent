@@ -21,7 +21,6 @@ $(document).ready(function()
                             "visible": false,
                             "searchable": false
                         }],
-
                     "columns": [
                         { data: 'unico', name: 'unico' },
                         
@@ -42,6 +41,8 @@ $(document).ready(function()
                         { data: 'descClasif', name: 'descClasif' },
                         { data: 'descBien', name: 'descBien' },
                         { data: 'factura', name: 'factura' },
+                        { data: 'rfc', name: 'rfc' },
+                        { data: 'r_social', name: 'r_social' },
                         { data: 'precio', name: 'precio' },
                         { data: 'progresivo', name: 'progresivo' },
                         { data: 'unico', name: 'unico' },
@@ -262,6 +263,8 @@ function limpiarFormBienes(){
     $("#fecha_inventario").val("");
     $("#motivo_alta").val("");
     $("#factura").val("");
+    $("#rfc").val("");
+    $("#r_social").val("");
     $("#precio").val("");
     $("#conteo").val("");
     $("#ini").val("");
@@ -366,6 +369,8 @@ function get_data_edit_inventario(id_invent) {
             //$("#motivo_alta_e").val(obj[0]['motivo_alta']);
             $("#motivo_alta_e").prop('selectedIndex', obj[0]['motivo_alta']-1);
             $("#factura_e").val(obj[0]['factura']);
+            $("#rfc_e").val(obj[0]['rfc']);
+            $("#r_social_e").val(obj[0]['r_social']);
             $("#precio_e").val(obj[0]['precio']);
             $("#conteo_e").val(obj[0]['conteo']);
             if(obj[0]['unico'] == 1 )
