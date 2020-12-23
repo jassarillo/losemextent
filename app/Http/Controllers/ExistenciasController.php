@@ -10,6 +10,8 @@ use App\CatUso;
 use App\Secciones;
 use App\Bienes;
 use App\Inventario;
+use App\Eventos;
+use App\Empleados;
 use App\Http\Requests\UserRequest;
 use Yajra\Datatables\Datatables;
 use Auth;
@@ -57,5 +59,61 @@ class ExistenciasController extends Controller
         //dd($bien);
         return response()->json($bien);
     }  
+
+    public function getTotalNumbers()
+    {
+        $countSecciones = Secciones::select(DB::raw("count(*)  as countSecciones"))
+                ->get()->toArray();
+
+        $countBienes = Bienes::select(DB::raw("count(*)  as countBienes"))
+                ->get()->toArray();
+
+        $countInventario = Inventario::select(DB::raw("count(*)  as countInvent"))
+                ->get()->toArray();
+
+        $countEventos = Eventos::select(DB::raw("count(*)  as countEventos"))
+                ->get()->toArray();
+
+        $countEmpleados = Empleados::select(DB::raw("count(*)  as countEmpleados"))
+                ->get()->toArray();
+
+        $arrayMerge = array_merge($countSecciones,$countBienes,$countInventario, 
+            $countEventos, $countEmpleados);
+
+        //dd($arrayMerge);
+
+        return response()->json($arrayMerge);
+    }
+
+    public function InventDisponibles()
+    {
+        
+        $invent = Inventario::select('secciones.descripcion as descClasif', 
+                    DB::raw("sum(conteo)  as conteo"))
+                ->Join('bienes','inventario.id_bien','=','bienes.id')
+                ->Join('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
+                ->where('inventario.status',1)
+                ->groupBy('secciones.descripcion')
+                ->get()->toArray();
+
+                return response()->json($invent);
+
+    }
+
+    public function bienesEnUso()
+    {
+        
+        $invent = Inventario::select('secciones.descripcion as descClasif', 
+                    DB::raw("sum(conteo)  as conteo"))
+                ->Join('bienes','inventario.id_bien','=','bienes.id')
+                ->Join('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
+                ->where('inventario.status',2)
+                ->groupBy('secciones.descripcion')
+                ->get()->toArray();
+
+                return response()->json($invent);
+
+    }
+    
 
 }

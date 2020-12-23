@@ -158,6 +158,9 @@ Route::post('admin/insertEmpleado', 'EventosController@insertEmpleado');
 Route::get('admin/listar_bienes_evento', 'EventosController@listar_bienes_evento');
 Route::post('admin/unicoMuchos', 'EventosController@unicoMuchos');
 
+Route::get('admin/getTotalNumbers', 'ExistenciasController@getTotalNumbers');
+Route::get('admin/InventDisponibles', 'ExistenciasController@InventDisponibles');
+Route::get('admin/bienesEnUso', 'ExistenciasController@bienesEnUso');
 
 
 
