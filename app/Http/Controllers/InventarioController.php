@@ -310,7 +310,7 @@ class InventarioController extends Controller
                     ->where('id_clasifica',$lastId[0]['id_clasifica'])->first();
         //evaluamos si es unico
         if(!$request->unicoEdit){
-            //dd("no");
+            //dd(3);
             $updateUnico->update(['conteo_existencia' => $request->conteo_existencia , 
                                 //'unico'=> $request->unicoEdit,
                                 'fecha_inventario'=>$request->fecha_inventario_e,
@@ -324,6 +324,14 @@ class InventarioController extends Controller
         }
         else
         {//DB::raw('count(*) as user_count, status') 
+
+        //dd(5);
+            $countUnicoVal = Inventario::select('conteo')
+                    ->where('unico',1)
+                    ->where('id_bien', $lastId[0]['id_bien'])
+                    ->where('id_clasifica',$lastId[0]['id_clasifica'])->get()->toArray();
+                    //dd($countUnicoVal[0]['conteo']);
+
             $count = Inventario::select(DB::raw("count(*)  as count"))
                     ->where('id','!=',$request->id_invent_hiden)
                     ->where('id_bien', $lastId[0]['id_bien'])
@@ -336,7 +344,7 @@ class InventarioController extends Controller
                                 'motivo_alta'=>$request->motivo_alta_e,
                                 'factura'=>$request->factura_e,
                                 'precio'=>$request->precio_e,
-                                'conteo'=>$count[0]['count']
+                                'conteo'=>$count[0]['count'] + $countUnicoVal[0]['conteo']
                                 ]); 
 
             $deleteOthers = Inventario::where('id','!=',$request->id_invent_hiden)
@@ -364,6 +372,26 @@ class InventarioController extends Controller
 
             return $pdf->stream('Bienes');
             */
+    }
+
+    public function esUnicoProgresivo(Request $request)
+    {
+           
+        $data = Inventario::select(DB::raw("distinct unico as unico"))
+        ->where('id_clasifica',$request->id_clasifica)
+        ->where('id_bien',$request->id_bien)
+        ->get()->toArray();
+
+        if(!$data)
+        {   
+            $valor=100;
+        }
+        else
+        {
+                $valor =$data[0]['unico'];            
+        }
+        return response ()->json ( $valor );
+
     }
 
     public function extractProgresivoMaxMin(Request $request)

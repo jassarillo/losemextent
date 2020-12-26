@@ -278,10 +278,16 @@ $('#id_clasifica').on('change', function(){
     getSelectBien(val_clasif);
 });
 
+$('#id_bien').on('change', function(){
+    esUnicoProgresivo();
+});
+
 $('#eligeSeccion').on('change', function(){
     val_clasif = $("#eligeSeccion").val();
     getSelectBien(val_clasif);
 });
+
+
 
 
 function getSelectBien(val_clasif) {
@@ -350,7 +356,45 @@ function getSelectBien(val_clasif) {
 //getSelectBien();
 
 
+function esUnicoProgresivo() {
+     id_clasifica = $("#id_clasifica").val();
+     id_bien = $("#id_bien").val();
+    //console.log(id_bien);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url :  "admin/esUnicoProgresivo",
+        data: {"id_clasifica":  id_clasifica, "id_bien":id_bien},
+        success: function(data) {
+            console.log(data);
+            if(data == 100)
+            {
+                $("#unico").hide();
+                $("#unico").attr('disabled', false);
 
+            }
+            else if(data == 0)
+            {
+                $("#unico").prop("checked",false);
+                $("#unico").attr('disabled', 'disabled');
+                $("#hideUnico").show();
+            }
+            else if(data == 1)
+            {
+                $("#unico").prop("checked",true);
+                $("#unico").attr('disabled', 'disabled');
+                $("#hideUnico").hide();
+
+            }            
+            
+        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+}
 
 function get_data_edit_inventario(id_invent) {
     //console.log(id_bien);
@@ -430,7 +474,7 @@ $("#conteo").keyup(function() {
 $('#unico').on('change', function(){ // on change of state
            if(this.checked) // if changed state is "CHECKED"
             {
-                console.log("chido!");
+                //console.log("chido!");
                 $("#hideUnico").hide();
                 //$("#partidaCatalogo").show();
             }

@@ -67,32 +67,38 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
         $datos = User::validaCorreo($request->remail);
+        //dd(22);
         if ($datos == null) {
             \Log::info(__METHOD__ . ' Crear nuevo Usuario');
             try {
+                //dd(33);
                 $confirmation_code = str_random(25);
-                $url_confirmation = env('APP_URL') . "register/verify/" . $confirmation_code;
+                //$url_confirmation = env('APP_URL') . "register/verify/" . $confirmation_code;
                 $usuario = $request->nombre." ".$request->apaterno;
                 $user = User::create([
-                    'name' => $request->nombre,
-                    'apellido_paterno' => $request->apaterno,
-                    'apellido_materno' => $request->amaterno,
-                    'usuario' => $request->user,
-                    'email' => $request->remail,
+                   
+                    'name' => $request->name,
+                    'apellido_paterno' => $request->name,
+                    'apellido_materno' => $request->name,
+                    'usuario' => $request->name,
+                    'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'estatus' => (!$request->estatus_user) ? '0' : '1',
                     'confirmation_code' => $confirmation_code
                 ]);
-                Mail::to($request->remail)->send(new EmailConfirmation($url_confirmation, $usuario));
-                $respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
+                //dd(55);
+                ////Mail::to($request->remail)->send(new EmailConfirmation($url_confirmation, $usuario));
+                //$respuesta = array('resp' => true, 'mensaje' => 'El usuario se Registro y se envio el correo');
+                $respuesta =array('resp' => true, 'mensaje' => 'El usuario se Registro');
                 //se agina el rol "sin asignar"
-                $grol = DB::table('roles')->where('id', '=',2 )->first();
+                $grol = DB::table('roles')->where('id', '=',1 )->first();
                // Le asignamos el rol
                $user->assignRole($grol->name);
                 DB::commit();
                 return $respuesta;
            } catch (\Exception $th) {
                 DB::rollback();
+                dd($th->getMessage());
                 \Log::warning(__METHOD__."--->Line:".$th->getLine()."----->".$th->getMessage());
                 $respuesta = ['resp' => false, 'message' => 'Error al guardar el usuario.'];
                 return $respuesta;

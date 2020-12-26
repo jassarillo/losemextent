@@ -69,14 +69,14 @@ if (Auth::check()){
 //Rutas con AUTH, todas las rutas deben de pasar por auth como validación
 Route::group(['middleware' => ['auth']], function() {
     //Inicia Middleware de rol
-    /*Route::group(['middleware' => ['role:SuperAdmin|admin']], function() {
+    Route::group(['middleware' => ['role:SuperAdmin|admin']], function() {
     //editar usuarios
         Route::group(['prefix' => 'admin'], function() {
         Route::get('/', 'AdminController@dashboard');
         Route::get('/index', 'AdminController@index');
-        //Route::get('/listar_usuarios', 'AdminController@listar_usuarios');
+        Route::get('/listar_usuarios', 'AdminController@listar_usuarios');
         Route::get('/data_resumen_proveedores', 'AdminController@data_resumen_proveedores');
-        //Route::get('/data_listar_usuarios', 'AdminController@data_listar_usuarios');
+        Route::get('/data_listar_usuarios', 'AdminController@data_listar_usuarios');
         Route::get('/data_listar_roles', 'AdminController@data_listar_roles');
         Route::get('/data_licitaciones', 'AdminController@data_licitaciones');
         Route::get('/create', 'AdminController@create');
@@ -96,7 +96,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/create_rol', 'AdminController@create_rol');
         Route::post('/store_new_role', 'AdminController@store_new_role');
         });
-    });*/
+    });
 Route::get('admin', 'AdminController@dashboard');
 Route::get('admin/listar_usuarios', 'AdminController@listar_usuarios');
 Route::get('admin/data_listar_usuarios', 'AdminController@data_listar_usuarios');
@@ -130,6 +130,7 @@ Route::post('admin/storeMasivo', 'InventarioController@storeMasivo');
 Route::get('inventario/selectEtiquetas', 'EtiquetasController@viewEtiquetas');
 Route::post('inventario/getNumRows', 'EtiquetasController@getNumRows');
 Route::post('inventario/getNroId', 'EtiquetasController@getNroId');
+Route::post('admin/esUnicoProgresivo', 'InventarioController@esUnicoProgresivo');
 
 
 Route::get('admin/list_eventos', 'EventosController@list_eventos');

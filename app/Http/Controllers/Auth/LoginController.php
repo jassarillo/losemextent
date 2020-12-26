@@ -38,13 +38,15 @@ class LoginController extends Controller {
     public function __construct() {}
 
     public function login() {
-        
       
         $datos=request();
         $usuario=$datos['username'];
         $validator=Auth::attempt(['usuario'=> $datos['username'], 'password'=> $datos['password'], 'estatus'=> '1']);
+        //dd(22);
 
         if($validator==true) {
+        //dd(33);
+
             $datosUsuario=DB::table('users')->where('usuario', '=', $usuario)->first();
             $id=$datosUsuario->id;
             $modelHasRol=DB::table('model_has_roles')->where('model_id', '=', $id)->first();
