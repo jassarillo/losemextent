@@ -121,7 +121,7 @@
 
                                     
                                         <div class="form-group row">
-                                            {{ Form::label('descripcion', 'Descripcion', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('descripcion', 'Descripción', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                 
                                                 <input type="text" name="descripcion" id="descripcion" class="form-control" onkeyup="mayus(this);">
@@ -183,6 +183,7 @@
                                         <th> Empleado 3 </th>-->
                                         <th> Descripción</th>
                                         <th> Lugar</th>
+                                        <th> Editar</th>
                                         <th> Acciones</th>
                                     </tr>
                                     </thead>
@@ -210,7 +211,9 @@
                         </div>
                     </div>
 
-                    
+                            @include("eventos.modal.editar_evento")
+
+                            @include("eventos.modal.acuseEvento")
 
                 </div>
             

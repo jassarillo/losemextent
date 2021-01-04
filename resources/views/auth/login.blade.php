@@ -53,8 +53,8 @@
                                                     <input type="checkbox" name="remember"> Recordarme
                                                     <span></span>
                                                 </label>
-                                                <a href="javascript:;" id="kt_login_forgot"> ¿Olvidaste tu Contraseña
-                                                    ?</a>
+                                                <!--<a href="javascript:;" id="kt_login_forgot"> ¿Olvidaste tu Contraseña
+                                                    ?</a>-->
                                             </div>
                                             <div class="kt-login__actions">
                                                 <button id="kt_login_signin_submit"

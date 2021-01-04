@@ -149,6 +149,9 @@ Route::get('admin/get_datos_buscador/{nro_invent}', 'ExistenciasController@get_d
 
 Route::post('admin/storeEventos', 'EventosController@storeEventos');
 Route::get('admin/data_listar_eventos', 'EventosController@data_listar_eventos');
+Route::get('admin/get_data_edit_evento/{id_event}', 'EventosController@get_data_edit_evento');
+Route::post('admin/updateEvento', 'EventosController@updateEventPost');
+
 
 Route::get('admin/agregar_bienes_eventos', 'EventosController@agregar_bienes_eventos');
 Route::post('admin/listEventos', 'EventosController@getSelectEventos');
@@ -158,6 +161,9 @@ Route::post('admin/getListTeam', 'EventosController@getListTeam');
 Route::post('admin/insertEmpleado', 'EventosController@insertEmpleado');
 Route::get('admin/listar_bienes_evento', 'EventosController@listar_bienes_evento');
 Route::post('admin/unicoMuchos', 'EventosController@unicoMuchos');
+Route::get('admin/remover_bien_evento/{idInvent}/{id_clasifica}/{id_bien}', 
+    'EventosController@remover_bien_evento');
+
 
 Route::get('admin/getTotalNumbers', 'ExistenciasController@getTotalNumbers');
 Route::get('admin/InventDisponibles', 'ExistenciasController@InventDisponibles');

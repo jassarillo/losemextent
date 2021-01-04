@@ -331,6 +331,16 @@ class InventarioController extends Controller
                     ->where('id_bien', $lastId[0]['id_bien'])
                     ->where('id_clasifica',$lastId[0]['id_clasifica'])->get()->toArray();
                     //dd($countUnicoVal[0]['conteo']);
+            if(!$countUnicoVal)
+            {
+                //dd(3232);
+                $conteo = 0;
+
+            }
+            else
+            {
+               $conteo = $countUnicoVal[0]['conteo'];
+            }
 
             $count = Inventario::select(DB::raw("count(*)  as count"))
                     ->where('id','!=',$request->id_invent_hiden)
@@ -344,7 +354,7 @@ class InventarioController extends Controller
                                 'motivo_alta'=>$request->motivo_alta_e,
                                 'factura'=>$request->factura_e,
                                 'precio'=>$request->precio_e,
-                                'conteo'=>$count[0]['count'] + $countUnicoVal[0]['conteo']
+                                'conteo'=>$count[0]['count'] + $conteo
                                 ]); 
 
             $deleteOthers = Inventario::where('id','!=',$request->id_invent_hiden)

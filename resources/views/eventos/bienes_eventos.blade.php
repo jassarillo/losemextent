@@ -72,7 +72,7 @@
                                         </div>
                                         <div id="hideUnico">
                                             <div class="form-group row">
-                                            {{ Form::label('id_clasifica', 'Clasificacón', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('id_clasifica', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                             <select class="form-control selectpicker" id="id_clasifica" name="id_clasifica">
                                                         <option value="0">Elige</option>
@@ -149,11 +149,10 @@
                                     <thead>
                                     <tr>
                                         <th> ID </th>
-                                        <th> Destino </th>
-                                        <th> Fecha </th>
-                                        <th> Entregado </th>
+                                        <th> Nro. </th>
+                                        <th> Sección </th>
+                                        <th> Bien </th>
                                         <th> Descripción</th>
-                                        <th> Lugar</th>
                                         <th> Acciones</th>
                                     </tr>
                                     </thead>

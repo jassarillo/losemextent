@@ -37,11 +37,7 @@ class EventosController extends Controller
     //For DataTable
     public function data_listar_eventos(){
         //dd(3232);
-        $eventos = Eventos::select('*','emp1.nombre_completo as nomb1', 
-            'emp2.nombre_completo as nomb2' ,'emp3.nombre_completo as nomb3')
-        ->leftJoin('empleados as emp1','emp1.nro_empleado','=','eventos.empleado1')
-        ->leftJoin('empleados as emp2','emp2.nro_empleado','=','eventos.empleado2')
-        ->leftJoin('empleados as emp3','emp3.nro_empleado','=','eventos.empleado3')
+        $eventos = Eventos::select('*')
         ->get()->toArray();
         return Datatables::of($eventos)->toJson();
     }
@@ -90,7 +86,7 @@ class EventosController extends Controller
 
     public function listar_bienes_evento(Request $request){
 
-        //dd($request->inicio);
+        //dd($request);
         if($request->inicio == null)
         { //dd(3);
             $invent = Inventario::select('*')->take(0)->get()->toArray();
@@ -108,7 +104,7 @@ class EventosController extends Controller
                     ,'progresivo', 'id_clasifica', 'id_bien')
                 ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
                 ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
-                ->where('inventario.id_evento', $request->evento)
+                ->where('inventario.id_evento', $request->evento_id)
                 //->where('inventario.id_clasifica', $request->eligeSeccion)
                 ->get()->toArray();
             }
@@ -155,9 +151,9 @@ class EventosController extends Controller
             {
                 //Registro por codigo scanner
                 $idClean = ltrim($request->codigoInvent, '0');
-                //dd($value);
+                //dd($request->evento);
                 $inventario = Inventario::select('*')
-                ->where('id',$idClean)->update(['status' => 2, 'id_evento' => $request->id_inventario]);
+                ->where('id',$idClean)->update(['status' => 2, 'id_evento' => $request->evento]);
 
                 $existencias = Existencias::select('*')
                 ->where('id_clasifica',$existencias->id_clasifica)
@@ -233,5 +229,51 @@ class EventosController extends Controller
 
     }
 
+    public function get_data_edit_evento($id_event){
+        //dd($id_event);
+        $evento = Eventos::select('*')
+        ->where('id',$id_event)
+        ->get()->toArray();
+        //dd($bienes);
+        return response()->json($evento);
+    }
 
+    public function updateEventPost(Request $request)
+    {
+        $id_update =$request->id_update; 
+        $eventUp =    Eventos::where('id',$id_update);
+        //$bajaUP = $baja;
+        $eventUp->update(
+          ['destino' => $request->destino_e,
+            'fecha' =>  $request->fecha_e,
+            'hora' =>  $request->hora_e,
+            'descripcion' => $request->descripcion_e,
+            'lugar' => $request->lugar_e
+                 ]);
+
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
+        return   $respuesta;
+    }
+
+    public function remover_bien_evento($id_event,$id_clasifica,$id_bien){
+        //dd($id_event);
+        $idUp =    Inventario::where('id',$id_event);
+        $idUp->update(['id_evento' => 0,'status' =>  1]);
+
+        $getExistActual = Existencias::select('conteo_existencia')
+        ->where('id_clasifica',$id_clasifica)
+        ->where('id_bien',$id_bien)->get()->toArray();
+        //dd($getExistActual[0]['conteo_existencia']);
+
+        $existUp = Existencias::where('id_clasifica',$id_clasifica)
+        ->where('id_bien',$id_bien);
+        //dd($existUp);
+        $existUp->update(['conteo_existencia' => $getExistActual[0]['conteo_existencia'] +1]);
+
+
+        //dd($bienes);
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
+        return   response()->json($respuesta);
+    }
+    
 }

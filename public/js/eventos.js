@@ -25,7 +25,17 @@ $(document).ready(function() {
             {
                 "mRender": function (data, type, row) {
                     var id_user = row.id;
-                    return '<a class="btn btn-cdmx" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Editar</a>';
+                    //return '<a class="btn btn-primary" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Editar</a>'; ----glyphicon glyphicon-print
+                    return '<a onclick="ver_acuse_pdf('+ row.id +');" href="#'+row.id+'" class="btn btn-default"  data-toggle="modal" data-target="#kt_modal_imagen_local" ><i class="fa fa-print" aria-hidden="true"></i>Imprimir</a>';
+                    
+                }
+            },
+            {
+                "mRender": function (data, type, row) {
+                    
+                   // return '<a class="btn btn-cdmx" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Editar</a>';
+                    return '<a onclick="get_data_edit_evento('+ row.id +');" href="#'+row.id+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
+
                 }
             }
         ]
@@ -54,15 +64,17 @@ $(document).ready(function() {
                         }],
 
                     "columns": [
-                        //{ data: 'idInvent', name: 'idInvent' },
+                        { data: 'unico', name: 'unico' },
+                        { data: 'idInvent', name: 'idInvent' },
                         { data: 'descClasif', name: 'descClasif' },
                         { data: 'descBien', name: 'descBien' },
                         { data: 'factura', name: 'factura' },
                         {
                             "mRender": function (data, type, row) {
                                 //var id_user = row.idInvent;
-                                //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+row.idInvent+');" href="javascript:void('+ row.idInvent+')">Editar</a>';
-                                    return '<a onclick="get_data_edit_inventario('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
+                                return '<a class="btn btn-danger" onClick="remover_bien_evento(' + row.idInvent +','
+                                + row.id_clasifica + ',' +row.id_bien +');" href="javascript:void('+ row.idInvent+')">Eliminar</a>';
+                                //    return '<a onclick="remover_bien_evento('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-danger" >Eliminar</a>';
                             }
                         }
                        
@@ -96,14 +108,125 @@ $(document).ready(function() {
         });
 
         function reloadDataTableInvent(){
-            evento=$("#evento").val();
+            evento_id=$("#evento").val();
+            //console.log(evento_id);
                     eligeBien=$("#eligeBien").val();
                     //console.log(eligeSeccion);
                     data_table.ajax.url("admin/listar_bienes_evento?inicio=" +1
-                        +"&eligeSeccion=" + eligeBien + "&eligeBien=" + eligeBien ).load();
+                        +"&evento_id=" + evento_id ).load();
         }; 
 
+
+        // Salida nuevo Bien a evento
+$('#frm_salida_a_evento').on('submit', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('_token', $('input[name=_token]').val());
+    console.log(formData);                          
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        //url : url + "admin/storeBien",
+        type: "POST",
+        dataType: "json",
+        url: "admin/addItemEvent",
+        data: formData, 
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            //console.log(respuesta.resp);
+            
+            if (respuesta.resp == true) {
+                //console.log(666);
+               if(respuesta.mensaje == 'Elemento no disponible')
+               {
+
+                Swal.fire("Elemento no disponible!", "Verificar existencia!","warning");
+                
+               }
+               else
+               {
+                Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                getSelectInventario();
+                reloadDataTableInvent();
+               }
+                    
+                   //$('#eventos-table').DataTable().ajax.reload();
+
+            } else {
+                Swal.fire('error', respuesta.message,"error");
+            }
+            $('#codigoInvent').val('');
+        },
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
+
+        }
+    });
+});
+
+remover_bien_evento = function (idInvent,id_clasifica,id_bien) {
+    //console.log(id_event);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : url + "admin/remover_bien_evento/"+ idInvent+"/"+id_clasifica+"/"+id_bien,
+        dataType: 'html',
+        success: function(respuesta) {
+                    var obj = jQuery.parseJSON( respuesta );
+                    //console.log(obj.resp);
+                    if(obj.resp == true) {
+                        //console.log(666);
+                       reloadDataTableInvent();
+                            Swal.fire("Proceso  correcto!", "Registro removido!","success");
+                    } else {
+                        Swal.fire('error', respuesta.message,"error");
+                    }
+                },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+};
+
+
 });//Fin Document Ready
+
+function get_data_edit_evento(id_event) {
+    //console.log(id_event);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : url + "admin/get_data_edit_evento/"+ id_event,
+        dataType: 'html',
+        success: function(data) {
+            console.log(data);
+            var obj = jQuery.parseJSON( data );
+            //getSelectCausaAlta_edit();
+            
+            $("#destino_e").val(obj[0]['destino']);
+            $("#fecha_e").val(obj[0]['fecha']);
+            $("#hora_e").val(obj[0]['hora']);
+            $("#descripcion_e").val(obj[0]['descripcion']);
+            $("#lugar_e").val(obj[0]['lugar']);
+            $("#id_update").val(obj[0]['id']);
+
+            
+        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+};
+
+
+
+
 
 function getSelectSeccion() {
     $(".optSeccion").remove();
@@ -316,53 +439,7 @@ function limpiarFormEvento() {
 
 
 
-// Salida nuevo Bien a evento
-$('#frm_salida_a_evento').on('submit', function(e) {
-    e.preventDefault();
-    var formData = new FormData(this);
-    formData.append('_token', $('input[name=_token]').val());
-    console.log(formData);                          
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        //url : url + "admin/storeBien",
-        type: "POST",
-        dataType: "json",
-        url: "admin/addItemEvent",
-        data: formData, 
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(respuesta) {
-            //console.log(respuesta.resp);
-            
-            if (respuesta.resp == true) {
-                //console.log(666);
-               if(respuesta.mensaje == 'Elemento no disponible')
-               {
-                Swal.fire("Elemento no disponible!", "Verificar existencia!","warning");
-               }
-               else
-               {
-                Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
-                getSelectInventario();
-               }
-                    
-                   //$('#eventos-table').DataTable().ajax.reload();
 
-            } else {
-                Swal.fire('error', respuesta.message,"error");
-            }
-            $('#codigoInvent').val('');
-        },
-        error: function(xhr) {
-         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
-         Swal.fire('¡Alerta!', xhr, 'warning');
-
-        }
-    });
-});
 
 $("#conteo").keyup(function() {
             //console.log( "r34D!" );
@@ -530,4 +607,49 @@ $("#teamEvento").change(function() {
             idEvento = $("#teamEvento").val();
             getTeamList(idEvento)
 });
+
+$('#frm_edit_evento').on('submit', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('_token', $('input[name=_token]').val());
+    //console.log(formData);
+    
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                //url : url + "admin/storeBien",
+                type: "POST",
+                dataType: "json",
+                url: "admin/updateEvento",
+                data: formData, 
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(respuesta) {
+                    //console.log(respuesta.resp);
+                    if (respuesta.resp == true) {
+                        //console.log(666);
+                       
+                            Swal.fire("Proceso  correcto!", "Registro exitoso!","success");
+                           $('#eventos-table').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire('error', respuesta.message,"error");
+                    }
+                },
+                error: function(xhr) {
+                 //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+                 Swal.fire('¡Alerta!', xhr, 'warning');
+
+                }
+            });
+    
+
+});
+
+function ver_acuse_pdf(idBien){
+    //console.log(yearCut);
+    //$('#img_modal').attr('src', 'http://localhost:9000/acuseEvento/27');//'uploads/inventarios_img/'+yearCut+'/'+idBien+'.jpg');
+    $('#img_modal').attr('src', 'http://pdf.losemextent.com.mx/acuseEvento/'+idBien);//'uploads/inventarios_img/'+yearCut+'/'+idBien+'.jpg');
+}
 

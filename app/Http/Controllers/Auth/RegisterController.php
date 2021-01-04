@@ -83,7 +83,8 @@ class RegisterController extends Controller
                     'usuario' => $request->name,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
-                    'estatus' => (!$request->estatus_user) ? '0' : '1',
+                    'estatus' => 0,
+                    'id_rol' => 1,
                     'confirmation_code' => $confirmation_code
                 ]);
                 //dd(55);
