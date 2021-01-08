@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    $("#boxNumber").hide();
+
     $('.inventarios-table').each(function () {
         $(this).dataTable(window.dtDefaultOptions);
     });
@@ -328,9 +330,20 @@ $('#id_bien').on('change', function(){
         data: {"val_clasif":  val_clasif, "id_bien": id_bien},
         dataType: "json",
         success: function (data)
-                        { 
-                            if(data == 0)
+                        {   //console.log(data[0].unico);
+                            if(data[0].unico == 1)
                             {
+                                $("#boxNumber").show();
+                                $("#inventariadoOnOff").hide();
+                                getCantidad();
+                            }
+                            else if(data[0].unico == 0)
+                            {
+                                $("#boxNumber").hide();
+                                $("#inventariadoOnOff").show();
+                                //$("#boxNumber").show();
+                                //$("#codigo_input").hide();
+
                                 getSelectInventario();
                             }
 
@@ -342,6 +355,35 @@ $('#id_bien').on('change', function(){
 
 
 });
+
+function getCantidad() {
+    //////////////////////////////////////////
+    //////////////////////////////////////////
+    //////////////////////////////////////////
+    val_clasif = $("#id_clasifica").val();
+    id_bien = $("#id_bien").val();
+
+    
+
+    $(".optInvent").remove();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url :  "admin/cantidadExistente",
+        data: {"val_clasif":  val_clasif, "id_bien": id_bien},
+        dataType: "json",
+        success: function (data)
+                        {
+                            //console.log(data);
+                            $("#inputRestar").val(data[0].conteo_a);
+                        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+}
 
 function getSelectInventario() {
 
@@ -371,8 +413,9 @@ function getSelectInventario() {
                                 $('#id_inventario').append(
                                    '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasifica+ opt.id_bien+ opt.progresivo +" "+ opt.descripcion +'</option> '
                                 );
-                                $('.selectpicker').selectpicker('refresh');
+                                
                             });
+                            $('.selectpicker').selectpicker('refresh');
                         },
         error: function(respuesta) {
             Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');

@@ -75,7 +75,11 @@ class EventosController extends Controller
     {
         //dd($request->val_clasif);
         $inventario = Inventario::select(['inventario.id','inventario.id_clasifica','inventario.id_bien','inventario.progresivo','bienes.descripcion'])
-        ->join('bienes', 'inventario.id_clasifica', '=', 'bienes.id_clasificacion')
+        //->join('bienes', 'inventario.id_clasifica', '=', 'bienes.id_clasificacion')
+        ->rightJoin('bienes', function($join){  //Join multiples matchs  ***************** *****/*/*/*/*/*/*/
+                     $join->on('inventario.id_clasifica', '=', 'bienes.id_clasificacion')
+                          ->on('bienes.id', '=', 'inventario.id_bien');
+                   })
         ->where('inventario.status',1)
         ->where('id_clasifica',$request->val_clasif)
         ->where('id_bien',$request->id_bien)
@@ -225,7 +229,7 @@ class EventosController extends Controller
 
         //dd($campoUnico);
 
-        return response()->json($teaEvent);
+        return response()->json($campoUnico);
 
     }
 
@@ -274,6 +278,21 @@ class EventosController extends Controller
         //dd($bienes);
         $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
         return   response()->json($respuesta);
+    }
+
+    public function cantidadExistente(Request $request)
+    {
+        $campoUnico = Inventario::select('conteo',
+            DB::raw('case when conteo is null then \'0\' else conteo end as conteo_a'))
+        ->where('id_clasifica', $request->val_clasif)
+        ->where('id_bien', $request->id_bien)
+        ->where('unico', 1)
+        ->get()->toArray();
+
+        //dd($campoUnico);
+
+        return response()->json($campoUnico);
+
     }
     
 }

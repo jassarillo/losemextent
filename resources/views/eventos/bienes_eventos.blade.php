@@ -75,8 +75,7 @@
                                             {{ Form::label('id_clasifica', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                             <select class="form-control selectpicker" id="id_clasifica" name="id_clasifica">
-                                                        <option value="0">Elige</option>
-                                                        
+                                            <option value="0">Elige</option>
                                             </select> 
                                             </div>
                                         </div>
@@ -84,11 +83,11 @@
                                             {{ Form::label('id_bien', 'Bien', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                             <select class="form-control selectpicker" id="id_bien" name="id_bien">
-                                                        <option value="0">Elige</option>
-                                                        
+                                            <option value="0">Elige</option>
                                             </select> 
                                             </div>
                                         </div>
+                                        <div id="inventariadoOnOff">
                                         <div class="form-group row">
                                             {{ Form::label('id_inventario', 'Inventariado', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
@@ -99,6 +98,7 @@
                                             </div>
                                         </div>
                                         </div>
+                                        </div>
                                         
                                         
                                         <!--<div class="form-group row">
@@ -107,6 +107,18 @@
                                                 {{ Form::number('cantidad', auth()->user()->cantidad, array('class' => 'form-control')) }}
                                             </div>
                                         </div>-->
+                                        
+                                        <div id="boxNumber">
+                                            <div class="form-group row">
+                                            {{ Form::label('boxNumberInput', 'Cantidad Número', array('class' => 'col-xl-3 col-form-label')) }}
+                                                <div class="col-xl-3">
+                                                    {{ Form::number('boxNumberInput', auth()->user()->codigoInvent, array('class' => 'form-control')) }}
+                                                </div>
+                                                <div class="col-xl-3">
+                                                    {{ Form::number('inputRestar', auth()->user()->codigoInvent, array('class' => 'form-control')) }}
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div id="codigo_input">
                                          <div class="form-group row">
                                             {{ Form::label('codigoInvent', 'Código Inventario', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
