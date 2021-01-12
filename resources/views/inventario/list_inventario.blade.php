@@ -206,7 +206,7 @@
                                                 <div class="col-xl-3"></div>
                                                 <div class="col-lg-9 col-xl-6">        
 
-                                                    <button type="submit" id="accion" class="btn btn-success" >Guardar</button>                                            
+                                                    <button type="submit" id="accion_save" class="btn btn-success" >Guardar</button>                                            
                                                     <!--<button type="button" class="btn btn-cdmx swal2-center" id="usr_js_fn_00" 
                                                     onclick="save_bien();">
                                                         Agregar

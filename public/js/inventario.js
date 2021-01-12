@@ -52,7 +52,7 @@ $(document).ready(function()
                             "mRender": function (data, type, row) {
                                 //var id_user = row.idInvent;
                                 //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+row.idInvent+');" href="javascript:void('+ row.idInvent+')">Editar</a>';
-                                    return '<a onclick="get_data_edit_inventario('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
+                                    return '<a onclick="get_data_edit_inventario('+ row.idInvent +','+ row.unico+');" href="#'+row.idInvent+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
                             }
                         },
                         {
@@ -60,7 +60,7 @@ $(document).ready(function()
                                 
                                 if(row.unico == 1)
                                 {
-                                    return '<a  onClick="deleteUnico('+row.idInvent+');" class="btn btn-outline-danger active">Eliminar</a>'
+                                    return '<a  onClick="deleteUnico('+ row.idInvent +','+ row.id_clasifica +','+row.id_bien+');" class="btn btn-outline-danger active">Eliminar</a>'
 
                                     //'<a class="btn btn-danger" onClick="deleteUnico('+row.idInvent+');">Eliminar</a>';
                                 }
@@ -227,7 +227,7 @@ $(document).ready(function()
             });
     });
 
-     deleteUnico = function(id_invent) {
+     deleteUnico = function(id_invent,id_clasifica,id_bien) {
     //console.log(id_invent);
     $.ajax({
         headers: {
@@ -235,7 +235,7 @@ $(document).ready(function()
         },
         url : url + "admin/deleteUnico",
         type: 'POST',
-        data: {'id_invent':id_invent},
+        data: {'id_invent':id_invent, 'id_clasifica': id_clasifica, 'id_bien': id_bien},
         dataType: 'json',
         success: function(response) {
                reloadDataTableInvent();
@@ -373,18 +373,22 @@ function esUnicoProgresivo() {
             {
                 $("#unico").hide();
                 $("#unico").attr('disabled', false);
-
+                $("#accion_save").attr('disabled', false);
+                $("#hideUnico").show();
+                
             }
-            else if(data == 0)
+            else if(data == 0)//muchos
             {
                 $("#unico").prop("checked",false);
                 $("#unico").attr('disabled', 'disabled');
+                //$("#accion_save").attr('disabled', 'disabled');
                 $("#hideUnico").show();
             }
-            else if(data == 1)
+            else if(data == 1)//unico no permite insert
             {
                 $("#unico").prop("checked",true);
                 $("#unico").attr('disabled', 'disabled');
+                $("#accion_save").attr('disabled', 'disabled');
                 $("#hideUnico").hide();
 
             }            
@@ -396,8 +400,17 @@ function esUnicoProgresivo() {
     });
 }
 
-function get_data_edit_inventario(id_invent) {
+function get_data_edit_inventario(id_invent,unico) {
     //console.log(id_bien);
+    if(unico == 1 )
+    {
+        //$('#unicoEdit').
+        $("#unicoEdit").attr('disabled', true);
+    }
+    else
+    {
+        $("#unicoEdit").attr('disabled', false);
+    }
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -107,7 +107,7 @@
                                                 {{ Form::number('cantidad', auth()->user()->cantidad, array('class' => 'form-control')) }}
                                             </div>
                                         </div>-->
-                                        
+                                        <input type="hidden" id="idInventUnico" name="idInventUnico">
                                         <div id="boxNumber">
                                             <div class="form-group row">
                                             {{ Form::label('boxNumberInput', 'Cantidad Número', array('class' => 'col-xl-3 col-form-label')) }}
@@ -115,7 +115,9 @@
                                                     {{ Form::number('boxNumberInput', auth()->user()->codigoInvent, array('class' => 'form-control')) }}
                                                 </div>
                                                 <div class="col-xl-3">
-                                                    {{ Form::number('inputRestar', auth()->user()->codigoInvent, array('class' => 'form-control')) }}
+                                                    
+                                                    <input class="form-control" type="number" id="inputRestar" 
+                                                    name="inputRestar">
                                                 </div>
                                             </div>
                                         </div>
@@ -164,7 +166,7 @@
                                         <th> Nro. </th>
                                         <th> Sección </th>
                                         <th> Bien </th>
-                                        <th> Descripción</th>
+                                        <th> Conteo </th>
                                         <th> Acciones</th>
                                     </tr>
                                     </thead>

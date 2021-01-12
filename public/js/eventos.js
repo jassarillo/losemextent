@@ -67,15 +67,28 @@ $(document).ready(function() {
 
                     "columns": [
                         { data: 'unico', name: 'unico' },
-                        { data: 'idInvent', name: 'idInvent' },
+                        { data: 'idOrigin', name: 'idOrigin' },
                         { data: 'descClasif', name: 'descClasif' },
                         { data: 'descBien', name: 'descBien' },
-                        { data: 'factura', name: 'factura' },
+                        {
+                            "mRender": function (data, type, row) {
+                                if(row.unico == 1)
+                                {
+                                    cant = row.conteo
+                                }
+                                else
+                                {
+                                    cant = 1
+                                }
+                                return cant;
+                                //    return '<a onclick="remover_bien_evento('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-danger" >Eliminar</a>';
+                            }
+                        },
                         {
                             "mRender": function (data, type, row) {
                                 //var id_user = row.idInvent;
                                 return '<a class="btn btn-danger" onClick="remover_bien_evento(' + row.idInvent +','
-                                + row.id_clasifica + ',' +row.id_bien +');" href="javascript:void('+ row.idInvent+')">Eliminar</a>';
+                                + row.id_clasifica + ',' +row.id_bien +','+row.unico+','+row.conteo+');" href="javascript:void('+ row.idInvent+')">Eliminar</a>';
                                 //    return '<a onclick="remover_bien_evento('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-danger" >Eliminar</a>';
                             }
                         }
@@ -153,14 +166,19 @@ $('#frm_salida_a_evento').on('submit', function(e) {
                 Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
                 getSelectInventario();
                 reloadDataTableInvent();
+                getCantidad();
+                $('#boxNumberInput').val('');
+                $('#codigoInvent').val('');
                }
                     
                    //$('#eventos-table').DataTable().ajax.reload();
 
             } else {
-                Swal.fire('error', respuesta.message,"error");
+                $("#boxNumber").show();
+                getCantidad();
+                Swal.fire("Es necesario indicar Cantidad!", "Elemento con una etiqueta!","warning");
             }
-            $('#codigoInvent').val('');
+            
         },
         error: function(xhr) {
          //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
@@ -170,13 +188,14 @@ $('#frm_salida_a_evento').on('submit', function(e) {
     });
 });
 
-remover_bien_evento = function (idInvent,id_clasifica,id_bien) {
+remover_bien_evento = function (idInvent,id_clasifica,id_bien,unico,conteo) {
     //console.log(id_event);
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : url + "admin/remover_bien_evento/"+ idInvent+"/"+id_clasifica+"/"+id_bien,
+        url : url + "admin/remover_bien_evento/"+ idInvent+"/"+id_clasifica+"/"+
+                id_bien+"/"+unico+"/"+conteo,
         dataType: 'html',
         success: function(respuesta) {
                     var obj = jQuery.parseJSON( respuesta );
@@ -302,14 +321,15 @@ function getSelectBien() {
                                     
                                     
                                  $('#id_bien').append(
-                                  '<option class="optInvent" value="' + opt.id + '">' 
+                                  '<option class="optBien" value="' + opt.id + '">' 
                                    + opt.id_clasificacion +"-"+ opt.id + " " + opt.descripcionB + ' largo: '+ largo+
                                    largo_medidaD+ '- ancho: ' +ancho + ancho_medidaD+'- alto: '+alto + alto_medidaD
                                    +'- diametro: '+diametro + diametro_medidaD +'- peso: ' +peso+ peso_medidaD+ '- volumen: '
                                    +volumen+ volumen_medidaD+'</option>'
                                 );
-                                $('.selectpicker').selectpicker('refresh');
+                                
                             });
+                            $('.selectpicker').selectpicker('refresh');
                         },
         error: function(respuesta) {
             Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
@@ -362,7 +382,9 @@ function getCantidad() {
     //////////////////////////////////////////
     val_clasif = $("#id_clasifica").val();
     id_bien = $("#id_bien").val();
+    codigoInvent = $("#codigoInvent").val();
 
+    //console.log(id_bien);
     
 
     $(".optInvent").remove();
@@ -372,18 +394,32 @@ function getCantidad() {
         },
         type: "POST",
         url :  "admin/cantidadExistente",
-        data: {"val_clasif":  val_clasif, "id_bien": id_bien},
+        data: {"val_clasif":  val_clasif, "id_bien": id_bien,"codigoInvent":codigoInvent},
         dataType: "json",
         success: function (data)
                         {
                             //console.log(data);
+
                             $("#inputRestar").val(data[0].conteo_a);
+                            $("#idInventUnico").val(data[0].idInvent);
+                            $("#inputRestar").prop('disabled', true);
+
                         },
         error: function(respuesta) {
             Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
         }
     });
 }
+
+$('#boxNumberInput').on('keyup', function(){ // on change of state
+    boxNumberInput = $("#boxNumberInput").val();
+    inputRestar = $("#inputRestar").val();
+    console.log(boxNumberInput);
+    if(boxNumberInput > inputRestar)
+    {
+        alert("La cantidad es mayor a la existente");
+    }
+});
 
 function getSelectInventario() {
 
@@ -411,7 +447,7 @@ function getSelectInventario() {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
                                 $('#id_inventario').append(
-                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id_clasifica+ opt.id_bien+ opt.progresivo +" "+ opt.descripcion +'</option> '
+                                   '<option class="optInvent" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion +'</option> '
                                 );
                                 
                             });
@@ -523,6 +559,7 @@ $('#unico').on('change', function(){ // on change of state
                 console.log("chido!");
                 $("#hideUnico").hide();
                 $("#codigo_input").show();
+                $("#boxNumber").hide();
                 //$("#id_clasifica").val();
                 //$("#id_bien").val();
             }

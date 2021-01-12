@@ -161,7 +161,7 @@ Route::post('admin/getListTeam', 'EventosController@getListTeam');
 Route::post('admin/insertEmpleado', 'EventosController@insertEmpleado');
 Route::get('admin/listar_bienes_evento', 'EventosController@listar_bienes_evento');
 Route::post('admin/unicoMuchos', 'EventosController@unicoMuchos');
-Route::get('admin/remover_bien_evento/{idInvent}/{id_clasifica}/{id_bien}', 
+Route::get('admin/remover_bien_evento/{idInvent}/{id_clasifica}/{id_bien}/{unico}/{conteo}', 
     'EventosController@remover_bien_evento');
 Route::post('admin/cantidadExistente', 'EventosController@cantidadExistente');
 

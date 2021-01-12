@@ -238,12 +238,20 @@ class InventarioController extends Controller
         //dd($request->id_bien);
         $resg = Inventario::where('id', '=', $request->id_invent)->first();
         $resg->delete();
+
+        $fr = Existencias::where('id_clasifica',$request->id_clasifica)
+                            ->where('id_bien',$request->id_bien)
+                            ->update(['conteo_existencia' => 0 ]);
+
+        //dd($fr);                            
         //dd($resg);
         $respuesta = array('resp' => true, 'mensaje' => 'Elemento eliminado');
         return   $respuesta;
 
 
     }
+
+
 
     public function deleteBien(Request $request)
     { 
@@ -311,8 +319,7 @@ class InventarioController extends Controller
         //evaluamos si es unico
         if(!$request->unicoEdit){
             //dd(3);
-            $updateUnico->update(['conteo_existencia' => $request->conteo_existencia , 
-                                //'unico'=> $request->unicoEdit,
+            $updateUnico->update([
                                 'fecha_inventario'=>$request->fecha_inventario_e,
                                 'motivo_alta'=>$request->motivo_alta_e,
                                 'factura'=>$request->factura_e,
@@ -320,7 +327,10 @@ class InventarioController extends Controller
                                 'r_social'=>$request->r_social_e,
                                 'precio'=>$request->precio_e,
                                 'conteo'=>$request->conteo_e
-                                ]);  
+                                ]); 
+            $fr = Existencias::where('id_clasifica',$lastId[0]['id_clasifica'])
+                            ->where('id_bien',$lastId[0]['id_bien'])
+                            ->update(['conteo_existencia' => $request->conteo_e ]); 
         }
         else
         {//DB::raw('count(*) as user_count, status') 
@@ -334,12 +344,12 @@ class InventarioController extends Controller
             if(!$countUnicoVal)
             {
                 //dd(3232);
-                $conteo = 0;
+                $conteo = 1;
 
             }
             else
             {
-               $conteo = $countUnicoVal[0]['conteo'];
+               $conteo = $countUnicoVal[0]['conteo'] ;
             }
 
             $count = Inventario::select(DB::raw("count(*)  as count"))
@@ -348,7 +358,7 @@ class InventarioController extends Controller
                     ->where('id_clasifica',$lastId[0]['id_clasifica'])->get()->toArray();
                     //dd($count[0]['count']);
 
-            $updateUnico->update(['conteo_existencia' => $request->conteo_existencia , 
+            $updateUnico->update([
                                 'unico'=> 1,
                                 'fecha_inventario'=>$request->fecha_inventario_e,
                                 'motivo_alta'=>$request->motivo_alta_e,

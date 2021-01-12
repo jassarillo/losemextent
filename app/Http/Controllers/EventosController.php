@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Eventos;
 use App\Existencias;
+use App\ConteoEnEvento;
 use App\CausaAlta;
 use App\CatUso;
 use App\Secciones;
@@ -102,19 +103,35 @@ class EventosController extends Controller
             if($request->eligeBien == 0)
             {
                 //dd(2);
-                $invent = Inventario::select('inventario.id as idInvent','inventario.id', 'secciones.descripcion as descClasif', 
+                /*$invent = Inventario::select('inventario.id as idInvent','inventario.id', 'secciones.descripcion as descClasif', 
                     'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
                     'unico', 'conteo'
-                    ,'progresivo', 'id_clasifica', 'id_bien')
+                    ,'progresivo', 'inventario.id_clasifica', 'inventario.id_bien')
                 ->leftJoin('bienes','inventario.id_bien','=','bienes.id')
                 ->leftJoin('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
                 ->where('inventario.id_evento', $request->evento_id)
-                //->where('inventario.id_clasifica', $request->eligeSeccion)
-                ->get()->toArray();
+                ->get()->toArray();*/
+                $invent = DB::select(
+                    'select conteo_en_evento.id as idInvent, secciones.descripcion as descClasif, 
+                    bienes.descripcion as descBien, 1 as unico, conteo_evento as conteo, 
+                    inventario.id_clasifica, inventario.id_bien, inventario.id as idOrigin
+                    from conteo_en_evento
+                                        join inventario on conteo_en_evento.id_clasifica = inventario.id_clasifica 
+                                        and conteo_en_evento.id_bien = inventario.id_bien
+                    left join bienes on conteo_en_evento.id_bien = bienes.id 
+                    left join secciones on bienes.id_clasificacion = secciones.id_seccion
+                    where conteo_en_evento.id_evento =  '. $request->evento_id .'
+                    union
+                    select inventario.id as idInvent, secciones.descripcion as descClasif, 
+                    bienes.descripcion as descBien, unico, conteo, id_clasifica, id_bien, inventario.id as idOrigin
+                    from inventario left join bienes on inventario.id_bien = bienes.id 
+                    left join secciones on bienes.id_clasificacion = secciones.id_seccion 
+                     where inventario.id_evento = '. $request->evento_id
+                     );
             }
             else
             {
-                dd(3);
+                //dd(3);
                 $invent = Inventario::select('inventario.id as idInvent','inventario.id', 'secciones.descripcion as descClasif', 
                     'bienes.descripcion as descBien', 'inventario.factura', 'precio', 'progresivo',
                     'unico', 'conteo'
@@ -144,43 +161,116 @@ class EventosController extends Controller
 
         //dd($existencias->id);
 
-        if($request->codigoInvent !='')
-        {
-            if(!$existencias)
-            {
-               $mensaje = 'Elemento no disponible';
-               //dd($mensaje);
+        if($request->codigoInvent !='')//si existe codigo escaneado
+        {   
+
+            if($existencias->unico == 1)//si es unico mostrar  mensaje
+            {   
+                //evaluar si ya agregaron la cantidad a restar
+                if($request->boxNumberInput != '')
+                {   
+                    $invT = Inventario::select('*')->where('id',$request->codigoInvent)->first();
+                    //dd($invT);
+                    $existencias = Existencias::select('*')
+                    ->where('id_clasifica',$invT->id_clasifica)
+                    ->where('id_bien',$invT->id_bien)->first();
+
+                    $inventario = Inventario::select('*')->where('id',$request->codigoInvent)
+                    ->update([
+                            'conteo' => $existencias->conteo_existencia - $request->boxNumberInput,
+                            'id_evento' => $request->id_inventario
+                            ]);
+                    
+                    $conteoEvento = new ConteoEnEvento;
+                    $conteoEvento->id_clasifica = $invT->id_clasifica;                    
+                    $conteoEvento->id_bien = $invT->id_bien;                    
+                    $conteoEvento->conteo_evento = $request->boxNumberInput;                    
+                    $conteoEvento->id_evento = $request->evento;                    
+                    $conteoEvento->status = 1;
+                    $conteoEvento->save();
+
+                    $existenciaMenos = $existencias->conteo_existencia - $request->boxNumberInput;
+                    $existencias->update(['conteo_existencia' => $existenciaMenos]);
+                    $mensaje ='Registro exitoso';
+                }
+                else
+                {
+                    //dd(3);
+                    $respuesta = array('resp' => false, 'mensaje' => "Indicar cantidad a asignar");
+                    return   $respuesta;
+                //break;
+                }
+                
             }
             else
             {
-                //Registro por codigo scanner
-                $idClean = ltrim($request->codigoInvent, '0');
-                //dd($request->evento);
-                $inventario = Inventario::select('*')
-                ->where('id',$idClean)->update(['status' => 2, 'id_evento' => $request->evento]);
+                if(!$existencias)
+                {
+                   $mensaje = 'Elemento no disponible';
+                   //dd($mensaje);
+                }
+                else
+                {
+                    //Registro por codigo scanner
+                    $idClean = ltrim($request->codigoInvent, '0');
+                    //dd($request->evento);
+                    $inventario = Inventario::select('*')
+                    ->where('id',$idClean)->update(['status' => 2, 'id_evento' => $request->evento]);
 
-                $existencias = Existencias::select('*')
-                ->where('id_clasifica',$existencias->id_clasifica)
-                ->where('id_bien',$existencias->id_bien)->first();
-                //resta elemento a existencias
-                $existenciaMenos = $existencias->conteo_existencia - 1;
-                $existencias->update(['conteo_existencia' => $existenciaMenos]);
-                $mensaje = 'Registro exitoso';
+                    $existencias = Existencias::select('*')
+                    ->where('id_clasifica',$existencias->id_clasifica)
+                    ->where('id_bien',$existencias->id_bien)->first();
+                    //resta elemento a existencias
+                    $existenciaMenos = $existencias->conteo_existencia - 1;
+                    $existencias->update(['conteo_existencia' => $existenciaMenos]);
+                    $mensaje = 'Registro exitoso';
+                }   
             }    
+               
             
         }
         else
-        {
-            //registro por seleccion de combos
-            $inventario = Inventario::select('*')->where('id',$request->id_inventario)->update(['status' => 2, 'id_evento' => $request->id_inventario]);
+        {   //resta por cantidad de un registro unico
+            if($request->boxNumberInput > 0)
+            {
+                $existencias = Existencias::select('*')
+                ->where('id_clasifica',$request->id_clasifica)
+                ->where('id_bien',$request->id_bien)->first();
+                //dd($existencias);
+                //dd($request->boxNumberInput);
+                $inventario = Inventario::select('*')->where('id',$request->idInventUnico)
+                //->get()->ToArray();
+                //dd($inventario);
+                ->update([
+                        'conteo' => $existencias->conteo_existencia - $request->boxNumberInput,
+                        'id_evento' => $request->id_inventario
+                        ]);
+                $conteoEvento = new ConteoEnEvento;
+                    $conteoEvento->id_clasifica = $request->id_clasifica;                    
+                    $conteoEvento->id_bien = $request->id_bien;                    
+                    $conteoEvento->conteo_evento = $request->boxNumberInput;                    
+                    $conteoEvento->id_evento = $request->evento;                    
+                    $conteoEvento->status = 1;
+                    $conteoEvento->save();
+                //dd($existencias->conteo_existencia);
+                $existenciaMenos = $existencias->conteo_existencia - $request->boxNumberInput;
+                $existencias->update(['conteo_existencia' => $existenciaMenos]);
+                $mensaje ='Registro exitoso';
 
-            $existencias = Existencias::select('*')
+            }
+            else
+            {
+                $existencias = Existencias::select('*')
             ->where('id_clasifica',$request->id_clasifica)
             ->where('id_bien',$request->id_bien)->first();
-            //dd($existencias->conteo_existencia);
-            $existenciaMenos = $existencias->conteo_existencia - 1;
-            $existencias->update(['conteo_existencia' => $existenciaMenos]);
-            $mensaje ='Registro exitoso';
+                //registro por seleccion de combos
+                $inventario = Inventario::select('*')->where('id',$request->id_inventario)
+                ->update(['status' => 2, 'id_evento' => $request->evento]);
+                //dd($existencias->conteo_existencia);
+                $existenciaMenos = $existencias->conteo_existencia - 1;
+                $existencias->update(['conteo_existencia' => $existenciaMenos]);
+                $mensaje ='Registro exitoso';
+            }
         }
 
  
@@ -259,22 +349,45 @@ class EventosController extends Controller
         return   $respuesta;
     }
 
-    public function remover_bien_evento($id_event,$id_clasifica,$id_bien){
-        //dd($id_event);
-        $idUp =    Inventario::where('id',$id_event);
-        $idUp->update(['id_evento' => 0,'status' =>  1]);
-
+    public function remover_bien_evento($id_event,$id_clasifica,$id_bien,$unico,$conteo)
+    {
+            //dd($conteo);
         $getExistActual = Existencias::select('conteo_existencia')
         ->where('id_clasifica',$id_clasifica)
         ->where('id_bien',$id_bien)->get()->toArray();
-        //dd($getExistActual[0]['conteo_existencia']);
 
-        $existUp = Existencias::where('id_clasifica',$id_clasifica)
-        ->where('id_bien',$id_bien);
-        //dd($existUp);
-        $existUp->update(['conteo_existencia' => $getExistActual[0]['conteo_existencia'] +1]);
+        if($unico == 1)
+        {
+            $idUp =    Inventario::where('id_clasifica',$id_clasifica)
+            ->where('id_bien',$id_bien);
+            
+            $idUp->update(['conteo' =>  $getExistActual[0]['conteo_existencia'] + $conteo]);
 
+            $existUp = Existencias::where('id_clasifica',$id_clasifica)
+            ->where('id_bien',$id_bien);
+            $existUp->update([
+                'conteo_existencia' => $getExistActual[0]['conteo_existencia'] + $conteo
+            ]);
 
+            $resg = ConteoEnEvento::where('id_clasifica', '=', $id_clasifica)
+            ->where('id_bien', '=', $id_bien)->first();
+            $resg->delete();
+        }
+        else
+        {
+            
+            $idUp =    Inventario::where('id',$id_event);
+            $idUp->update(['id_evento' => 0,'status' =>  1]);
+
+            $existUp = Existencias::where('id_clasifica',$id_clasifica)
+            ->where('id_bien',$id_bien);
+
+            $existUp->update([
+                'conteo_existencia' => $getExistActual[0]['conteo_existencia'] + $conteo
+            ]);
+
+        }
+        
         //dd($bienes);
         $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
         return   response()->json($respuesta);
@@ -282,12 +395,26 @@ class EventosController extends Controller
 
     public function cantidadExistente(Request $request)
     {
-        $campoUnico = Inventario::select('conteo',
+        if($request->codigoInvent !='')
+        {
+            $campoUnico = Inventario::select('inventario.id as idInvent','conteo',
             DB::raw('case when conteo is null then \'0\' else conteo end as conteo_a'))
-        ->where('id_clasifica', $request->val_clasif)
-        ->where('id_bien', $request->id_bien)
-        ->where('unico', 1)
-        ->get()->toArray();
+            ->where('id', $request->codigoInvent)
+            ->get()->toArray();
+        }
+        else
+        {
+            $campoUnico = Inventario::select('inventario.id as idInvent','conteo',
+            DB::raw('case when conteo is null then \'0\' else conteo end as conteo_a'))
+            ->where('id_clasifica', $request->val_clasif)
+            ->where('id_bien', $request->id_bien)
+            ->where('unico', 1)
+            ->get()->toArray();
+        }
+        
+
+
+
 
         //dd($campoUnico);
 
