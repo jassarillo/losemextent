@@ -107,7 +107,7 @@ class ExistenciasController extends Controller
                     DB::raw("sum(conteo)  as conteo"))
                 ->Join('bienes','inventario.id_bien','=','bienes.id')
                 ->Join('secciones','bienes.id_clasificacion','=','secciones.id_seccion')
-                ->where('inventario.status',2)
+                ->where('inventario.status',5)
                 ->groupBy('secciones.descripcion')
                 ->get()->toArray();
 

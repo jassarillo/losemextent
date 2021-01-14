@@ -14,10 +14,10 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-2">Nombre de la Sección</div>
+                                <div class="col-md-2">Nombre de la Clasificación</div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="desc_seccion" name="desc_seccion" placeholder="Sección" required>
+                                        <input type="text" class="form-control" id="desc_seccion" name="desc_seccion" placeholder="Clasificación" required>
                                         <span id="usuario-error" class="help-block"></span>
                                     </div>
                                 </div>

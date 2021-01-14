@@ -39,7 +39,10 @@ class EventosController extends Controller
     public function data_listar_eventos(){
         //dd(3232);
         $eventos = Eventos::select('*')
+        ->whereNull('status')->orderBy('updated_at', 'desc')
         ->get()->toArray();
+        //$eventos = DB::select('Select * from eventos order by id desc');
+        //dd($eventos);
         return Datatables::of($eventos)->toJson();
     }
 
@@ -50,8 +53,6 @@ class EventosController extends Controller
     public function storeEventos(Request $request)
     {
         //dd($request->descripcion);
-      
-        
         $saveBienes = Eventos::create($request->all());
         
         //dd($saveBienes->destino);
@@ -59,14 +60,16 @@ class EventosController extends Controller
         return   $respuesta;
     }
     
-
     public function agregar_bienes_eventos(){
         return view('eventos.bienes_eventos');
     }
 
+    public function regresar_bienes_eventos(){
+        return view('eventos.regresar_bienes_eventos');
+    }
+
     public function getSelectEventos()
     {
-        
         $eventos = Eventos::select(['id','destino'])->get()->toArray();
         //dd($bienes);
         return response()->json($eventos);
@@ -281,6 +284,37 @@ class EventosController extends Controller
 
     }
 
+    public function itemReturnEvent(Request $request)
+    {
+        //dd($request->codigoInvent);
+        $esUnico =    Inventario::where('id',$request->codigoInvent)->first();
+      
+
+        $getConteo =  ConteoEnEvento::where('id_clasifica', '=', $esUnico->id_clasifica)
+            ->where('id_bien', '=', $esUnico->id_bien)->first();
+            //dd($getConteo);
+        $id_event = $request->evento;
+        $unico = $esUnico->unico;
+        $id_clasifica = $esUnico->id_clasifica;
+        $id_bien = $esUnico->id_bien;
+        $idInvent = $request->codigoInvent;
+        if($esUnico->unico == 0)
+        {
+            //dd(33);
+            $conteo = 1;
+        }
+        else
+        {
+            //dd(444);
+            $conteo = $getConteo->conteo_evento;
+        }
+        
+        
+        
+
+        //$respuesta = array('resp' => true, 'mensaje' => $mensaje);
+        return   $this->remover_bien_evento($id_event,$id_clasifica,$id_bien,$unico,$conteo,$idInvent);
+    }
     
     public function getListTeam(Request $request)
     {
@@ -349,7 +383,7 @@ class EventosController extends Controller
         return   $respuesta;
     }
 
-    public function remover_bien_evento($id_event,$id_clasifica,$id_bien,$unico,$conteo)
+    public function remover_bien_evento($id_event,$id_clasifica,$id_bien,$unico,$conteo,$idInvent)
     {
             //dd($conteo);
         $getExistActual = Existencias::select('conteo_existencia')
@@ -375,8 +409,9 @@ class EventosController extends Controller
         }
         else
         {
-            
-            $idUp =    Inventario::where('id',$id_event);
+            //dd(999);
+            $idUp =    Inventario::where('id',$idInvent)->first();
+            //dd($idUp);
             $idUp->update(['id_evento' => 0,'status' =>  1]);
 
             $existUp = Existencias::where('id_clasifica',$id_clasifica)

@@ -5,14 +5,17 @@ $(document).ready(function() {
         $(this).dataTable(window.dtDefaultOptions);
     });
     var dataTable = $('#eventos-table').dataTable({
+
         processing: true,
         serverSide: true,
+
         language: {
             "url": url + "assets/vendors/general/datatables/Spanish.json"
         },
         ajax: {
             "url": url + "admin/data_listar_eventos",
             "type": "GET"
+
         },
         columns: [
             { data: 'id', name: 'id' },
@@ -28,7 +31,8 @@ $(document).ready(function() {
                 "mRender": function (data, type, row) {
                     var id_user = row.id;
                     //return '<a class="btn btn-primary" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Editar</a>'; ----glyphicon glyphicon-print
-                    return '<a onclick="ver_acuse_pdf('+ row.id +');" href="#'+row.id+'" class="btn btn-default"  data-toggle="modal" data-target="#kt_modal_imagen_local" ><i class="fa fa-print" aria-hidden="true"></i>Imprimir</a>';
+                    //return '<a onclick="ver_acuse_pdf('+ row.id +');" href="#'+row.id+'" class="btn btn-default"  data-toggle="modal" data-target="#kt_modal_imagen_local" ><i class="fa fa-print" aria-hidden="true"></i>Imprimir</a>';
+                    return '<a  href="http://pdf.losemextent.com.mx/acuseEvento/'+row.id+'" target="_blank" class="btn btn-default"  ><i class="fa fa-print" aria-hidden="true"></i>Imprimir</a>';
                     
                 }
             },
@@ -131,7 +135,6 @@ $(document).ready(function() {
                         +"&evento_id=" + evento_id ).load();
         }; 
 
-
         // Salida nuevo Bien a evento
 $('#frm_salida_a_evento').on('submit', function(e) {
     e.preventDefault();
@@ -169,6 +172,69 @@ $('#frm_salida_a_evento').on('submit', function(e) {
                 getCantidad();
                 $('#boxNumberInput').val('');
                 $('#codigoInvent').val('');
+                dd = $("#unico").val();
+                if(dd=="on")
+                {
+                    $("#boxNumber").hide();
+                }                    
+               
+               }
+                    
+                   //$('#eventos-table').DataTable().ajax.reload();
+
+            } else {
+                $("#boxNumber").show();
+                getCantidad();
+                Swal.fire("Es necesario indicar Cantidad!", "Elemento con una etiqueta!","warning");
+            }
+            
+        },
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
+
+        }
+    });
+});
+
+
+        // Retorno bien de un evento
+$('#frm_retorno_de_evento').on('submit', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('_token', $('input[name=_token]').val());
+    console.log(formData);                          
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        //url : url + "admin/storeBien",
+        type: "POST",
+        dataType: "json",
+        url: "admin/itemReturnEvent",
+        data: formData, 
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            //console.log(respuesta.resp);
+            
+            if (respuesta.resp == true) {
+                //console.log(666);
+               if(respuesta.mensaje == 'Elemento no disponible')
+               {
+
+                Swal.fire("Elemento no disponible!", "Verificar existencia!","warning");
+                
+               }
+               else
+               {
+                Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                
+                reloadDataTableInvent();
+                
+                $('#boxNumberInput').val('');
+                $('#codigoInvent').val('');
                }
                     
                    //$('#eventos-table').DataTable().ajax.reload();
@@ -190,12 +256,13 @@ $('#frm_salida_a_evento').on('submit', function(e) {
 
 remover_bien_evento = function (idInvent,id_clasifica,id_bien,unico,conteo) {
     //console.log(id_event);
+    evento=$("#evento").val();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : url + "admin/remover_bien_evento/"+ idInvent+"/"+id_clasifica+"/"+
-                id_bien+"/"+unico+"/"+conteo,
+        url : url + "admin/remover_bien_evento/"+ evento+"/"+id_clasifica+"/"+
+                id_bien+"/"+unico+"/"+conteo+"/"+idInvent,
         dataType: 'html',
         success: function(respuesta) {
                     var obj = jQuery.parseJSON( respuesta );

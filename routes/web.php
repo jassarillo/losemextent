@@ -154,6 +154,7 @@ Route::post('admin/updateEvento', 'EventosController@updateEventPost');
 
 
 Route::get('admin/agregar_bienes_eventos', 'EventosController@agregar_bienes_eventos');
+Route::get('admin/regresar_bienes_eventos', 'EventosController@regresar_bienes_eventos');
 Route::post('admin/listEventos', 'EventosController@getSelectEventos');
 Route::post('admin/listInventario', 'EventosController@selectInventario');
 Route::post('admin/addItemEvent', 'EventosController@addItemEvent');
@@ -161,9 +162,11 @@ Route::post('admin/getListTeam', 'EventosController@getListTeam');
 Route::post('admin/insertEmpleado', 'EventosController@insertEmpleado');
 Route::get('admin/listar_bienes_evento', 'EventosController@listar_bienes_evento');
 Route::post('admin/unicoMuchos', 'EventosController@unicoMuchos');
-Route::get('admin/remover_bien_evento/{idInvent}/{id_clasifica}/{id_bien}/{unico}/{conteo}', 
+Route::get('admin/remover_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}', 
     'EventosController@remover_bien_evento');
 Route::post('admin/cantidadExistente', 'EventosController@cantidadExistente');
+Route::post('admin/itemReturnEvent', 'EventosController@itemReturnEvent');
+
 
 
 
