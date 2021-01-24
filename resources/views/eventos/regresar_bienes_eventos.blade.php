@@ -60,7 +60,39 @@
                                             </select> 
                                             </div>
                                         </div>
-                            
+                                        <div id="boxNumber">
+                                            <div class="form-group row">
+                                            {{ Form::label('boxNumberInput', 'Cantidad Número', array('class' => 'col-xl-3 col-form-label')) }}
+                                                <div class="col-xl-3">
+                                                    {{ Form::number('boxNumberInput', auth()->user()->codigoInvent, array('class' => 'form-control')) }}
+                                                </div>
+                                                <div class="col-xl-3">
+                                                    
+                                                    <input class="form-control" type="number" id="inputRestar" 
+                                                    name="inputRestar" readonly="readonly" style="background: #DCDCDC;">
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+
+                                        <div class="form-group row">
+                                            {{ Form::label('observaciones', 'Observaciones', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                
+                                                <input type="text" class="form-control" value="Obs." name="observaciones" id="observaciones">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{ Form::label('estado_fisico', 'Estado Físico', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                <select class="form-control selectpicker" 
+                                                id="estado_fisico" name="estado_fisico">
+                                                    <option value="1">Bueno</option>
+                                                    <option value="2">Regular</option>
+                                                    <option value="3">Malo</option>
+                                            </select> 
+                                            </div>
+                                        </div>
                                         
                                          <div class="form-group row">
                                             {{ Form::label('codigoInvent', 'Código Inventario', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
@@ -75,14 +107,14 @@
                                             </div>
                                         </div>
                                         <div class="kt-form__actions">
-                                            <!--<div class="row">
+                                            <div class="row">
                                                 <div class="col-xl-3"></div>
                                                 <div class="col-lg-9 col-xl-6">        
 
                                                     <button type="submit" id="acciones" class="btn btn-success" >Guardar</button>                                            
                                                     
                                                 </div>
-                                            </div>-->
+                                            </div>
                                         </div>
 
                                     </div>
@@ -106,6 +138,9 @@
                                         <th> Nro. </th>
                                         <th> Sección </th>
                                         <th> Bien </th>
+                                        <th> Observaciones </th>
+                                        <th> Fecha </th>
+                                        <th> Estado Fisico </th>
                                         <th> Conteo </th>
                                         <th> Acciones</th>
                                     </tr>

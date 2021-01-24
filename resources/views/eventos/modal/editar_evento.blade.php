@@ -67,7 +67,12 @@
                                             </div>
                                         </div>
 
-                                           
+                                        <div class="form-group row">
+                                            {{ Form::label('remision_e', 'Remisión', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                <input type="text" name="remision_e" id="remision_e" class="form-control" onkeyup="mayus(this);">
+                                            </div>
+                                        </div>
                                   
                                         <div class="kt-form__actions">
                                             <div class="row">

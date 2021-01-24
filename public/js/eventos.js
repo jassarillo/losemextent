@@ -30,7 +30,6 @@ $(document).ready(function() {
             {
                 "mRender": function (data, type, row) {
                     var id_user = row.id;
-                    //return '<a class="btn btn-primary" onClick="edit_user_modal('+id_user+');" href="javascript:void(0)">Editar</a>'; ----glyphicon glyphicon-print
                     //return '<a onclick="ver_acuse_pdf('+ row.id +');" href="#'+row.id+'" class="btn btn-default"  data-toggle="modal" data-target="#kt_modal_imagen_local" ><i class="fa fa-print" aria-hidden="true"></i>Imprimir</a>';
                     return '<a  href="http://pdf.losemextent.com.mx/acuseEvento/'+row.id+'" target="_blank" class="btn btn-default"  ><i class="fa fa-print" aria-hidden="true"></i>Imprimir</a>';
                     
@@ -46,6 +45,84 @@ $(document).ready(function() {
             }
         ]
         });
+    function selectBienesAEventoSalida() 
+    {
+        filtro=0;
+               
+                data_table_salida = $("#bienes-evento-salida-table").DataTable({
+                   
+                    "buttons": [
+                        'csv', 'excel', 'pdf', 'print'
+                    ],
+                    "ajax": {
+                        "url":   "admin/listar_bienes_evento_salida",
+                        "data": { filtro: filtro },//Consulta a PAGOSUNIFICADOS
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+                    "columnDefs":
+                        [{
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        }],
+
+                    "columns": [
+                        { data: 'unico', name: 'unico' },
+                        { data: 'idOrigin', name: 'idOrigin' },
+                        { data: 'descClasif', name: 'descClasif' },
+                        { data: 'descBien', name: 'descBien' },
+
+                        {
+                            "mRender": function (data, type, row) {
+                                if(row.unico == 1)
+                                {
+                                    cant = row.conteo
+                                }
+                                else
+                                {
+                                    cant = 1
+                                }
+                                return cant;
+                            }
+                        },
+                        {
+                            "mRender": function (data, type, row) {
+                                //var id_user = row.idInvent;
+                                if(row.status == '1')
+                                {
+                                return '<a class="btn btn-danger" onClick="eliminar_bien_evento(' + row.idInvent +','
+                                + row.id_clasifica + ',' +row.id_bien +','+row.unico+','+row.conteo+');" href="javascript:void('+ row.idInvent+')">Eliminar</a>';
+                                }
+                                else
+                                { //console.log(5444444);
+                                    return '';
+                                }
+                            }
+                        }
+                       
+                    ],
+                    "drawCallback": function () {
+                        $(".creditos").change(function () {
+                            if ($(this).is(':checked')) {
+                                //console.log($(this).val());
+                                if ($.inArray($(this).val(), creditos) == -1) {
+                                    //creditos[] = $(this).val();
+                                    creditos.push($(this).val());
+                                }
+
+                            }
+                            else {
+                                //creditos.pop($(this).val())
+                                creditos.splice($.inArray($(this).val(), creditos), 1);
+                            }
+                            console.log(creditos);
+                        });
+
+                    }
+                });
+    };
+    selectBienesAEventoSalida();
 
     function selectBienesAEvento() 
     {
@@ -74,6 +151,23 @@ $(document).ready(function() {
                         { data: 'idOrigin', name: 'idOrigin' },
                         { data: 'descClasif', name: 'descClasif' },
                         { data: 'descBien', name: 'descBien' },
+                        { data: 'observaciones', name: 'observaiones' },
+                        { data: 'updated_at', name: 'updated_at' },
+                        //{ data: 'estado_fisico', name: 'estado_fisico' },
+                        {
+                            "mRender": function (data, type, row) {
+                                if(row.estado_fisico == 1){
+                                    estado = "Bueno"; }
+                                else if(row.estado_fisico == 2){
+                                    estado = "Regular";
+                                }else if(row.estado_fisico == 3){
+                                    estado = "Malo";
+                                }else{
+                                    estado ="Bueno";
+                                }
+                                return estado;
+                            }
+                        },
                         {
                             "mRender": function (data, type, row) {
                                 if(row.unico == 1)
@@ -85,15 +179,20 @@ $(document).ready(function() {
                                     cant = 1
                                 }
                                 return cant;
-                                //    return '<a onclick="remover_bien_evento('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-danger" >Eliminar</a>';
                             }
                         },
                         {
                             "mRender": function (data, type, row) {
                                 //var id_user = row.idInvent;
-                                return '<a class="btn btn-danger" onClick="remover_bien_evento(' + row.idInvent +','
-                                + row.id_clasifica + ',' +row.id_bien +','+row.unico+','+row.conteo+');" href="javascript:void('+ row.idInvent+')">Eliminar</a>';
-                                //    return '<a onclick="remover_bien_evento('+ row.idInvent +');" href="#'+row.idInvent+'" class="btn btn-danger" >Eliminar</a>';
+                                if(row.status == '1')
+                                {
+                                return '<a class="btn btn-primary" onClick="remover_bien_evento(' + row.idInvent +','
+                                + row.id_clasifica + ',' +row.id_bien +','+row.unico+','+row.conteo+');" href="javascript:void('+ row.idInvent+')">Entrada</a>';
+                                }
+                                else
+                                { //console.log(5444444);
+                                    return '';
+                                }
                             }
                         }
                        
@@ -126,12 +225,27 @@ $(document).ready(function() {
 
         });
 
+    $('#evento_e').on('change', function () {
+                    
+                    reloadDataTableEventSend();
+
+        });
+
         function reloadDataTableInvent(){
             evento_id=$("#evento").val();
             //console.log(evento_id);
                     eligeBien=$("#eligeBien").val();
                     //console.log(eligeSeccion);
                     data_table.ajax.url("admin/listar_bienes_evento?inicio=" +1
+                        +"&evento_id=" + evento_id ).load();
+        }; 
+
+        function reloadDataTableEventSend(){
+            evento_id=$("#evento_e").val();
+            //console.log(evento_id);
+                    eligeBien=$("#eligeBien").val();
+                    //console.log(eligeSeccion);
+                    data_table_salida.ajax.url("admin/listar_bienes_evento_salida?inicio=" +1
                         +"&evento_id=" + evento_id ).load();
         }; 
 
@@ -168,7 +282,7 @@ $('#frm_salida_a_evento').on('submit', function(e) {
                {
                 Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
                 getSelectInventario();
-                reloadDataTableInvent();
+                reloadDataTableEventSend();
                 getCantidad();
                 $('#boxNumberInput').val('');
                 $('#codigoInvent').val('');
@@ -240,8 +354,9 @@ $('#frm_retorno_de_evento').on('submit', function(e) {
                    //$('#eventos-table').DataTable().ajax.reload();
 
             } else {
+
                 $("#boxNumber").show();
-                getCantidad();
+                getCantidadEnEvento();
                 Swal.fire("Es necesario indicar Cantidad!", "Elemento con una etiqueta!","warning");
             }
             
@@ -254,17 +369,51 @@ $('#frm_retorno_de_evento').on('submit', function(e) {
     });
 });
 
-remover_bien_evento = function (idInvent,id_clasifica,id_bien,unico,conteo) {
-    //console.log(id_event);
+
+eliminar_bien_evento = function (idInvent,id_clasifica,id_bien,unico,conteo){
+    console.log(idInvent);
+inputRestar =1;
     evento=$("#evento").val();
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : url + "admin/remover_bien_evento/"+ evento+"/"+id_clasifica+"/"+
-                id_bien+"/"+unico+"/"+conteo+"/"+idInvent,
+        url : url + "admin/eliminar_bien_evento/"+ evento+"/"+id_clasifica+"/"+
+                id_bien+"/"+unico+"/"+conteo+"/"+idInvent+"/"+inputRestar,
         dataType: 'html',
         success: function(respuesta) {
+                    var obj = jQuery.parseJSON( respuesta );
+                    //console.log(obj.resp);
+                    if(obj.resp == true) {
+                        //console.log(666);
+                       reloadDataTableEventSend();
+                            Swal.fire("Proceso  correcto!", "Registro removido!","success");
+                    } else {
+                        Swal.fire('error', respuesta.message,"error");
+                    }
+                },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+};
+
+
+remover_bien_evento = function (idInvent,id_clasifica,id_bien,unico,conteo) {
+    //console.log(id_event);
+    inputRestar =1;
+    evento=$("#evento").val();
+    observaciones=$("#observaciones").val();
+    estado_fisico=$("#estado_fisico").val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        //url : url + "admin/remover_bien_evento/"+evento+"/"+id_clasifica+"/"+id_bien+"/"+unico+"/"+conteo+"/"+idInvent+"/"+inputRestar+"/"+observaciones+"/"+estado_fisico,
+        url : url + "admin/remover_bien_evento/"+evento+"/"+id_clasifica+"/"+id_bien+"/"+unico+"/"+conteo+"/"+idInvent+"/"+inputRestar+"/"+observaciones+"/"+estado_fisico,
+        dataType: 'html',
+        success: function(respuesta) {
+
                     var obj = jQuery.parseJSON( respuesta );
                     //console.log(obj.resp);
                     if(obj.resp == true) {
@@ -302,6 +451,7 @@ function get_data_edit_evento(id_event) {
             $("#hora_e").val(obj[0]['hora']);
             $("#descripcion_e").val(obj[0]['descripcion']);
             $("#lugar_e").val(obj[0]['lugar']);
+            $("#remision_e").val(obj[0]['remision']);
             $("#id_update").val(obj[0]['id']);
 
             
@@ -444,16 +594,9 @@ $('#id_bien').on('change', function(){
 });
 
 function getCantidad() {
-    //////////////////////////////////////////
-    //////////////////////////////////////////
-    //////////////////////////////////////////
     val_clasif = $("#id_clasifica").val();
     id_bien = $("#id_bien").val();
     codigoInvent = $("#codigoInvent").val();
-
-    //console.log(id_bien);
-    
-
     $(".optInvent").remove();
     $.ajax({
         headers: {
@@ -466,10 +609,50 @@ function getCantidad() {
         success: function (data)
                         {
                             //console.log(data);
-
+                            if(data !='')
+                            {
                             $("#inputRestar").val(data[0].conteo_a);
                             $("#idInventUnico").val(data[0].idInvent);
                             $("#inputRestar").prop('disabled', true);
+                            }
+
+                        },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+}
+
+function getCantidadEnEvento() {
+    evento = $("#evento").val();
+    codigoInvent = $("#codigoInvent").val();
+    //$(".optInvent").remove();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url :  "admin/cantidadEnEvento",
+        data: {"codigoInvent":  codigoInvent,"evento":evento},
+        dataType: "json",
+        success: function (data)
+                        {
+                            if(data == '')
+                            {
+                                //console.log("ededed");
+                                $("#boxNumber").hide();
+                                Swal.fire('¡Alerta!','Elemento ya verifcado','warning');
+
+                            }
+                            else
+                            {
+                                $("#inputRestar").val(data[0].conteo_a);
+                                $("#idInventUnico").val(data[0].idInvent);
+                                //$("#inputRestar").prop('disabled', true);
+                            }
+                            
+
+                            
 
                         },
         error: function(respuesta) {
@@ -578,6 +761,7 @@ function limpiarFormEvento() {
     $("#hora").val("");
     $("#descripcion").val("");
     $("#lugar").val("");
+    $("#remision").val("");
     $("#empleado1").val("");
     $("#empleado2").val("");
     $("#empleado3").val(""); 
@@ -674,6 +858,11 @@ function getSelecEvento() {
                                    '<option class="optEvent" value="' + opt.id + '"> ' 
                                    + opt.id +" "+ opt.destino +'</option> '
                                 );
+
+                                $('#evento_e').append(
+                                   '<option class="optEvent" value="' + opt.id + '"> ' 
+                                   + opt.id +" "+ opt.destino +'</option> '
+                                );
                                 $('.selectpicker').selectpicker('refresh');
                             });
                         },
@@ -708,7 +897,76 @@ function getTeamList(idEvento) {
                             '<tr class="otrosTeam">' +
                                 '<td>' + opt.id_event + '</td>' +
                                 '<td>'+opt.destino+' </td> ' +
+                                '<td>'+opt.nro_empleado+' </td> ' +
                                 '<td>'+opt.nombre_completo+' </td> ' +
+                                '<td>'+
+                                    //'<a onclick="deleteEmpleado('+ opt.nro_empleado +');" href="#'+opt.nro_empleado+'" class="btn btn-danger" >Eliminar</a>'+
+                                    //'<a onclick="get_data_edit_evento('+ opt.nro_empleado +');" href="#'+opt.nro_empleado+'" class="btn btn-danger"  data-target="#kt_modal_KTDatatable_local" >Elii</a>'+
+                                    '<a class="btn btn-danger" onClick="deleteEmpleado(' + opt.nro_empleado +',2);" href="javascript:void('+ opt.nro_empleado+')">Eliminar</a>'+
+                                '</td> '+
+                            '</tr>');
+                    });
+                },
+
+                error: function (data)
+                { console.log(data);
+
+                }
+            });
+};
+
+//remover_bien_evento = function (idInvent,id_clasifica,id_bien,unico,conteo) {
+
+function deleteEmpleado(id_empleado,tipoEmpleado) {
+    
+    teamEvento = $("#teamEvento").val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : url + "admin/deleteEmpleado",
+        type: 'POST',
+        data: {'id_empleado':id_empleado, 'tipoEmpleado': tipoEmpleado, "teamEvento":teamEvento},
+        dataType: 'json',
+        success: function(response) {
+                getTeamList(teamEvento);
+                getResponsableList(teamEvento);
+                //reloadDataTableInvent();
+                Swal.fire('¡Correcto!',response.message,'success');
+                //$('#users-table').DataTable().ajax.reload();
+               
+           
+        },
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
+        }
+    });
+};
+
+function getResponsableList(idEvento) {
+      $(".otrosTeam").remove();
+           $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                dataType: "json",
+                url: "admin/getListResponsable",
+                data: {"idEvento": idEvento},
+                success: function( data ) {
+
+                   //Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                     $.each(data, function (idx, opt) {
+                        $('#responsableTable').append(
+                            '<tr class="otrosTeam">' +
+                                '<td>' + opt.id_event + '</td>' +
+                                '<td>'+opt.destino+' </td> ' +
+                                '<td>'+opt.nro_empleado+' </td> ' +
+                                '<td>'+opt.nombre_completo+' </td> ' +
+                                '<td>'+
+                                    '<a class="btn btn-danger" onClick="deleteEmpleado(' + opt.nro_empleado +',1);" href="javascript:void('+ opt.nro_empleado+')">Eliminar</a>'+
+                                '</td>'+
                             '</tr>');
                     });
                 },
@@ -721,6 +979,16 @@ function getTeamList(idEvento) {
 };
 
 $("#nro_empleado").change(function() {
+    insertar_empleado();
+});
+
+$("#nro_empleado_responsable").change(function() {
+    insertar_empleado();
+});
+
+//555555
+function insertar_empleado(){
+        nro_empleado_responsable = $("#nro_empleado_responsable").val();
             nro_empleado = $("#nro_empleado").val();
             teamEvento = $("#teamEvento").val();
             //contrato = $("#contrato").val();
@@ -732,12 +1000,15 @@ $("#nro_empleado").change(function() {
                 type: "POST",
                 dataType: "json",
                 url: "admin/insertEmpleado",
-                data: {"nro_empleado": nro_empleado, "teamEvento":teamEvento},
+                data: {"nro_empleado": nro_empleado, "teamEvento":teamEvento, 
+                "nro_empleado_responsable":nro_empleado_responsable},
                 success: function( data ) {
                    Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
                    idEvento = $("#teamEvento").val();
-                   //$("#nro_empleado").val();
+                   $("#nro_empleado").val('');
+                   $("#nro_empleado_responsable").val('');
                    getTeamList(idEvento);
+                   getResponsableList(idEvento);
                 },
 
                 error: function (data)
@@ -745,14 +1016,16 @@ $("#nro_empleado").change(function() {
 
                 }
             });
+    }
 
-});
 
+//555555
 
 
 $("#teamEvento").change(function() {
             idEvento = $("#teamEvento").val();
-            getTeamList(idEvento)
+            getTeamList(idEvento);
+            getResponsableList(idEvento);
 });
 
 $('#frm_edit_evento').on('submit', function(e) {
@@ -790,8 +1063,6 @@ $('#frm_edit_evento').on('submit', function(e) {
 
                 }
             });
-    
-
 });
 
 function ver_acuse_pdf(idBien){

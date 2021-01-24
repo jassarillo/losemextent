@@ -159,16 +159,19 @@ Route::post('admin/listEventos', 'EventosController@getSelectEventos');
 Route::post('admin/listInventario', 'EventosController@selectInventario');
 Route::post('admin/addItemEvent', 'EventosController@addItemEvent');
 Route::post('admin/getListTeam', 'EventosController@getListTeam');
+Route::post('admin/getListResponsable', 'EventosController@getListResponsable');
 Route::post('admin/insertEmpleado', 'EventosController@insertEmpleado');
 Route::get('admin/listar_bienes_evento', 'EventosController@listar_bienes_evento');
+Route::get('admin/listar_bienes_evento_salida', 'EventosController@listar_bienes_evento_salida');
+
 Route::post('admin/unicoMuchos', 'EventosController@unicoMuchos');
-Route::get('admin/remover_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}', 
-    'EventosController@remover_bien_evento');
+//Route::get('admin/remover_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}/{inputRestar}/{observaciones}/{estado_fisico}','EventosController@remover_bien_evento');
+Route::get('admin/remover_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}/{inputRestar}/{observaciones}/{estado_fisico}','EventosController@remover_bien_evento');
+Route::get('admin/eliminar_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}/{inputRestar}','EventosController@eliminar_bien_evento');
 Route::post('admin/cantidadExistente', 'EventosController@cantidadExistente');
 Route::post('admin/itemReturnEvent', 'EventosController@itemReturnEvent');
-
-
-
+Route::post('admin/deleteEmpleado', 'EventosController@deleteEmpleado');
+Route::post('admin/cantidadEnEvento', 'EventosController@cantidadEnEvento');
 
 Route::get('admin/getTotalNumbers', 'ExistenciasController@getTotalNumbers');
 Route::get('admin/InventDisponibles', 'ExistenciasController@InventDisponibles');

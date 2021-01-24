@@ -136,6 +136,13 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group row">
+                                            {{ Form::label('remision', 'Remisión', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            <div class="col-lg-9 col-xl-6">
+                                                <input type="text" name="remision" id="remision" class="form-control" onkeyup="mayus(this);">
+                                            </div>
+                                        </div>
+
                                         
                                                                             
                                          
@@ -250,15 +257,23 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                
                                 <div class="col-xl-12">
-                                    <label>Nro. Empleado: </label>
+                                    <label>Nro. Empleado Responsable: </label>
+                                        <input type="text" name="nro_empleado_responsable" id="nro_empleado_responsable" class="form-control" onkeyup="mayus(this);">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-12">
+                                    <label>Nro. Empleado Apoyo: </label>
                                         <input type="text" name="nro_empleado" id="nro_empleado" class="form-control" onkeyup="mayus(this);">
                                 </div>
                             </div>
                             
                             <!-- Otro form -->
-                   
+
+                            
+
                 </div>
             </div>
             <!--end:: Widgets/Support Requests-->
@@ -278,17 +293,36 @@
                 <div class="kt-portlet__body">
                 
                         <!-- Otro form -->
+                        <div class="row"><b>Responsable(s)</b></div>
+                        <table class="table table-striped- table-bordered table-hover table-checkable"
+                                id="responsableTable" name="responsableTable">
+                                <thead>
+                                    <tr>
+                                        <th> Id Evento</th>
+                                        <th> Evento</th>
+                                        <th> Nro. Empleado</th>
+                                        <th> Empleado </th>
+                                        <th> Eliminar </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        <br>
+                        <div class="row"><b>Empleados Apoyo</b></div>
                             <table class="table table-striped- table-bordered table-hover table-checkable"
                                 id="teamTable" name="teamTable">
                                 <thead>
                                     <tr>
                                         <th> Id Evento</th>
                                         <th> Evento</th>
+                                        <th> Nro. Empleado</th>
                                         <th> Empleado </th>
+                                        <th> Eliminar </th>
                                     </tr>
                                 </thead>
                             </table>
                         
+
+
                         <!-- Otro form -->
                    
                 </div>

@@ -63,9 +63,9 @@
                                         </div>
                                         
                                         <div class="form-group row">
-                                            {{ Form::label('evento', 'Evento', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
+                                            {{ Form::label('evento_e', 'Evento', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                            <select class="form-control selectpicker" id="evento" name="evento">
+                                            <select class="form-control selectpicker" id="evento_e" name="evento_e">
                                                     <option value="0">Elige</option>
                                             </select> 
                                             </div>
@@ -159,13 +159,14 @@
                                 <div class="kt-section kt-section--first">
                                 <!--begin: Datatable -->
                                 <div class="table-responsive col-xl-12"> 
-                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="bienes-evento-table">
+                                    <table class="table table-striped- table-bordered table-hover table-checkable" id="bienes-evento-salida-table">
                                     <thead>
                                     <tr>
                                         <th> ID </th>
                                         <th> Nro. </th>
                                         <th> Sección </th>
                                         <th> Bien </th>
+                                        
                                         <th> Conteo </th>
                                         <th> Acciones</th>
                                     </tr>
