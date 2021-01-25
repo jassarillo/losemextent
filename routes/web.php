@@ -165,7 +165,6 @@ Route::get('admin/listar_bienes_evento', 'EventosController@listar_bienes_evento
 Route::get('admin/listar_bienes_evento_salida', 'EventosController@listar_bienes_evento_salida');
 
 Route::post('admin/unicoMuchos', 'EventosController@unicoMuchos');
-//Route::get('admin/remover_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}/{inputRestar}/{observaciones}/{estado_fisico}','EventosController@remover_bien_evento');
 Route::get('admin/remover_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}/{inputRestar}/{observaciones}/{estado_fisico}','EventosController@remover_bien_evento');
 Route::get('admin/eliminar_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}/{inputRestar}','EventosController@eliminar_bien_evento');
 Route::post('admin/cantidadExistente', 'EventosController@cantidadExistente');
@@ -177,14 +176,9 @@ Route::get('admin/getTotalNumbers', 'ExistenciasController@getTotalNumbers');
 Route::get('admin/InventDisponibles', 'ExistenciasController@InventDisponibles');
 Route::get('admin/bienesEnUso', 'ExistenciasController@bienesEnUso');
 
-
-
-
-
-
-
-
-
+Route::get('admin/empleados', 'EmpleadosController@alta_empleados');
+Route::get('admin/data_listar_empleados', 'EmpleadosController@data_listar_empleados');
+Route::get('admin/get_data_edit_empleado/{idEmpleado}', 'EmpleadosController@get_data_edit_empleado');
 
 
 Route::group(['middleware' => ['role:SuperAdmin|admin']], function() {

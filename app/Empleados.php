@@ -9,6 +9,7 @@ class Empleados extends Model
     protected $table = 'empleados';
 
     protected $fillable = [
-        'id','nro_empleado','nombre_completo','status','created_at','updated_at'
+        'id','nro_empleado','nombre_completo','status',
+        'direccion','telefono','email','edad','created_at','updated_at'
     ];
 }
