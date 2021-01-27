@@ -477,7 +477,7 @@ class EventosController extends Controller
     }
 
     public function remover_bien_evento($id_event,$id_clasifica,$id_bien,$unico,$conteo,$idInvent,$inputRestar,$observaciones,$estado_fisico)
-    {
+    { //dd($idInvent);
             //dd($id_clasifica);
         $getExistActual = Existencias::select('conteo_existencia')
         ->where('id_clasifica',$id_clasifica)
@@ -553,8 +553,9 @@ class EventosController extends Controller
                 $existUp->update([
                     'conteo_existencia' => $getExistActual[0]['conteo_existencia'] + $conteo
                 ]);
-                
-                $resg = ConteoEnEvento::where('id', '=', $idInvent)
+                //dd("stop");
+                //dd($idInvent);
+                $resg = ConteoEnEvento::where('id_inventario', '=', $idInvent)
                         ->where('id_evento',$id_event)->first();
                         //dd($resg);
                         $resg->update([

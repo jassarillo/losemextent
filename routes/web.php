@@ -179,6 +179,11 @@ Route::get('admin/bienesEnUso', 'ExistenciasController@bienesEnUso');
 Route::get('admin/empleados', 'EmpleadosController@alta_empleados');
 Route::get('admin/data_listar_empleados', 'EmpleadosController@data_listar_empleados');
 Route::get('admin/get_data_edit_empleado/{idEmpleado}', 'EmpleadosController@get_data_edit_empleado');
+Route::post('admin/altaEmpleado', 'EmpleadosController@altaEmpleado');
+Route::post('admin/editEmpleado', 'EmpleadosController@editEmpleado');
+Route::get('admin/eliminar_empleado/{idEmpleado}', 'EmpleadosController@eliminar_empleado');
+
+
 
 
 Route::group(['middleware' => ['role:SuperAdmin|admin']], function() {

@@ -65,7 +65,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('evento_e', 'Evento', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                            <select class="form-control selectpicker" id="evento_e" name="evento_e">
+                                            <select class="form-control selectpicker" id="evento_e" name="evento_e" data-show-subtext="true" data-live-search="true">
                                                     <option value="0">Elige</option>
                                             </select> 
                                             </div>
@@ -74,7 +74,7 @@
                                             <div class="form-group row">
                                             {{ Form::label('id_clasifica', 'Clasificación', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                            <select class="form-control selectpicker" id="id_clasifica" name="id_clasifica">
+                                            <select class="form-control selectpicker" id="id_clasifica" name="id_clasifica" data-show-subtext="true" data-live-search="true">
                                             <option value="0">Elige</option>
                                             </select> 
                                             </div>
@@ -82,7 +82,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('id_bien', 'Bien', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                            <select class="form-control selectpicker" id="id_bien" name="id_bien">
+                                            <select class="form-control selectpicker" id="id_bien" name="id_bien" data-show-subtext="true" data-live-search="true">
                                             <option value="0">Elige</option>
                                             </select> 
                                             </div>
@@ -91,7 +91,7 @@
                                         <div class="form-group row">
                                             {{ Form::label('id_inventario', 'Inventariado', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                            <select class="form-control selectpicker" id="id_inventario" name="id_inventario">
+                                            <select class="form-control selectpicker" id="id_inventario" name="id_inventario" data-show-subtext="true" data-live-search="true">
                                                         <option value="0">Elige</option>
                                                         
                                             </select> 

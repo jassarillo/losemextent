@@ -57,6 +57,41 @@ class EmpleadosController extends Controller
         return response()->json($empleados);
     }
 
+    public function altaEmpleado(Request $request)
+    {
+       $saveBienes = Empleados::create($request->all());
+        
+        //dd($saveBienes->destino);
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
+        return   $respuesta;
+    }
+
+    public function editEmpleado(Request $request)
+    {
+        $id_update = $request->id_update;
+        $eventUp =    Empleados::where('id',$id_update);
+        //$bajaUP = $baja;
+        $eventUp->update(
+          ['nro_empleado' => $request->nro_empleado_e,
+            'nombre_completo' =>  $request->nombre_completo_e,
+            'direccion' =>  $request->direccion_e,
+            'email' => $request->email_e,
+            'telefono' => $request->telefono_e,
+            'edad' => $request->edad_e
+                 ]);
+
+        $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
+        return   $respuesta;
+    }
+
+    public function eliminar_empleado($idEmpleado)
+    {
+        $resg = Empleados::where('id', '=', $idEmpleado)->first();
+        $resg->delete();
+
+        $respuesta = array('resp' => true, 'mensaje' => 'Elemento eliminado');
+        return   $respuesta;
+    }
 
     
 }

@@ -84,16 +84,14 @@
                                            <div class="form-group row">
                                             {{ Form::label('nro_empleado', 'Nro. Empleado', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                    <input type="text" name="nro_empleado_e" id="nro_empleado_e" class="form-control" onkeyup="mayus(this);">
+                                                    <input type="number" name="nro_empleado" id="nro_empleado" class="form-control" onkeyup="mayus(this);">
                                             </div>
                                         </div>
-                                        
                                         
                                         <div class="form-group row">
                                             {{ Form::label('nombre_completo', 'Nombre y Apellido:', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
                                                <input type="text" name="nombre_completo" id="nombre_completo" class="form-control" onkeyup="mayus(this);"> 
-                                                
                                             </div>
                                         </div>
 
@@ -115,14 +113,14 @@
                                         <div class="form-group row">
                                             {{ Form::label('email', 'Correo Electrónico', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                {{ Form::text('email', auth()->user()->email, array('class' => 'form-control')) }}
+                                                <input type="email" class="form-control" name="email" id="email">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             {{ Form::label('edad', 'Edad', array('class' => 'col-xl-3 col-lg-3 col-form-label')) }}
                                             <div class="col-lg-9 col-xl-6">
-                                                <input type="text" name="edad" id="edad" class="form-control" onkeyup="mayus(this);">
+                                                <input type="number" name="edad" id="edad" class="form-control" onkeyup="mayus(this);">
                                             </div>
                                         </div>
                                   
@@ -162,7 +160,7 @@
                                         <th> ID </th>
                                         <th> Nro. Empleado </th>
                                         <th> Nombre Completo </th>
-                                        <th> Estatus </th>
+                                      
                                         <th> Edad</th>
                                         <th> Teléfono</th>
                                         <th> Editar</th>

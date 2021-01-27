@@ -140,7 +140,7 @@
                      <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">Utils</span></span></li>
                      <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/list_eventos') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Registrar Evento</span></a></li>
                      <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/agregar_bienes_eventos') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Salida Para Evento</span></a></li>
-                     <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/regresar_bienes_eventos') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Entreda-Retorno de Evento</span></a></li>
+                     <li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/regresar_bienes_eventos') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Entradas</span></a></li>
                      <!--<li class="kt-menu__item " aria-haspopup="true"><a href="{{ url('admin/agregar_bienes_eventos') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Salida Por Petición</span></a></li>-->
                   </ul>
                </div>

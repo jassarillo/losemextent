@@ -186,8 +186,8 @@ $(document).ready(function() {
                                 //var id_user = row.idInvent;
                                 if(row.status == '1')
                                 {
-                                return '<a class="btn btn-primary" onClick="remover_bien_evento(' + row.idInvent +','
-                                + row.id_clasifica + ',' +row.id_bien +','+row.unico+','+row.conteo+');" href="javascript:void('+ row.idInvent+')">Entrada</a>';
+                                return '<a class="btn btn-primary" onClick="remover_bien_evento(' + row.idOrigin +','
+                                + row.id_clasifica + ',' +row.id_bien +','+row.unico+','+row.conteo+');" href="javascript:void('+ row.idOrigin+')">Entrada</a>';
                                 }
                                 else
                                 { //console.log(5444444);
@@ -400,7 +400,7 @@ inputRestar =1;
 
 
 remover_bien_evento = function (idInvent,id_clasifica,id_bien,unico,conteo) {
-    //console.log(id_event);
+    console.log(idInvent);
     inputRestar =1;
     evento=$("#evento").val();
     observaciones=$("#observaciones").val();
@@ -475,6 +475,7 @@ function getSelectSeccion() {
         success: function (data)
                         {
                             //console.log(data[0]);
+                            $(".selectpicker").selectpicker();
                             $.each(data, function (idx, opt) {
                                   // alert('Estoy recorriendo el registro numero: ' + idx);
                                   //console.log(opt);
@@ -482,6 +483,8 @@ function getSelectSeccion() {
                                    '<option class="optSeccion" value="' + opt.id_seccion + '"> ' + opt.id_seccion +" "+ opt.descripcion +'</option> '
                                 );
                             });
+                            $('.selectpicker').selectpicker('refresh');
+
                         },
         error: function(respuesta) {
             Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
