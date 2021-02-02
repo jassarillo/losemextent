@@ -258,7 +258,7 @@ function deleteBien(id_bien) {
 
 //****---------->
 function get_data_edit_seccion(id_bien) {
-    console.log(id_bien);
+    //console.log(id_bien);
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -266,11 +266,14 @@ function get_data_edit_seccion(id_bien) {
         url : url + "admin/get_data_edit_seccion/"+ id_bien,
         dataType: 'html',
         success: function(data) {
-            console.log(data);
+            
             var obj = jQuery.parseJSON( data );
+            console.log(obj[0]['calibre_medida']);
+            console.log(obj[0]['peso_medida']);
+            console.log(obj[0]['volumen_medida']);
             //getSelectCausaAlta_edit();
  
-            getSelectCausaAlta_edit(obj[0]['causa_alta']);
+            //getSelectCausaAlta_edit(obj[0]['causa_alta']);
             $("#id_update").val(obj[0]['id']);
             $("#descripcion_e").val(obj[0]['descripcion']);
             $("#observacion_e").val(obj[0]['observacion']);
@@ -285,19 +288,21 @@ function get_data_edit_seccion(id_bien) {
             $("#diametro_e").val(obj[0]['diametro']);
             $("#diametro_e_medida").prop('selectedIndex', obj[0]['diametro_medida']);
             $("#peso_e").val(obj[0]['peso']);
-            $("#peso_e_medida").prop('selectedIndex', obj[0]['peso_medida']);
+            
             $("#calibre_e").val(obj[0]['calibre']);
-            $("#calibre_e_medida").prop('selectedIndex', obj[0]['calibre_medida']);
+            
             $("#volumen_e").val(obj[0]['volumen']);
-            $("#volumen_e_medida").prop('selectedIndex', obj[0]['volumen_medida']);
+            
 
             getSelectUso_edit(obj[0]['uso_material']);
             
 
             //$("#estado_e").val(obj[0]['estado']);
 
-            //$("#causa_alta_e").prop('selectedIndex', 3);
-            
+            $("#causa_alta_e").val(obj[0]['causa_alta']);
+            $("#peso_e_medida").val(obj[0]['peso_medida']);
+            $("#calibre_e_medida").val(obj[0]['calibre_medida']);
+            $("#volumen_e_medida").val(obj[0]['volumen_medida']);
         },
         error: function(respuesta) {
             Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
@@ -305,7 +310,7 @@ function get_data_edit_seccion(id_bien) {
     });
 }
 
-function getSelectCausaAlta_edit(causa_alta) {
+function getSelectCausaAlta_edit() {
     //console.log(causa_alta);
     $(".optCatAlta_e").remove();
     $.ajax({
@@ -323,7 +328,8 @@ function getSelectCausaAlta_edit(causa_alta) {
                                    '<option class="optCatAlta_e" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
                                 );
                             });
-                            $("#causa_alta_e").prop('selectedIndex', causa_alta - 5);
+
+                            //$("#causa_alta_e").val('selectedIndex', causa_alta);
 
                         },
         error: function(respuesta) {
@@ -331,6 +337,7 @@ function getSelectCausaAlta_edit(causa_alta) {
         }
     });
 };
+getSelectCausaAlta_edit();
 
 function getSelectUso_edit(cau_uso) {
     $(".optCatUso_e").remove();
