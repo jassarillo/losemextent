@@ -110,6 +110,7 @@ Route::get('admin/data_listar_inventario', 'InventarioController@data_listar_inv
 Route::get('admin/get_data_edit_inventario/{id_inventrio}', 'BienesController@getDataInventario');
 Route::post('admin/updateInventItem', 'InventarioController@updateInventItem');//***
 Route::post('admin/deleteUnico', 'InventarioController@deleteUnico');
+Route::post('admin/deleteInvent', 'InventarioController@deleteInvent');
 
 Route::get('admin/alta_bienes', 'InventarioController@alta_bienes');
 Route::post('admin/deleteBien', 'InventarioController@deleteBien');

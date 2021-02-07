@@ -31,11 +31,11 @@ $(document).ready(function() {
                 $("#diametro_e").val(obj[0]['diametro']);
                 $("#diametro_e_medida").prop('selectedIndex', obj[0]['diametro_medida']);
                 $("#peso_e").val(obj[0]['peso']);
-                $("#peso_e_medida").prop('selectedIndex', obj[0]['peso_medida']);
+                $("#peso_e_medida").val(obj[0]['peso_medida']);
                 $("#calibre_e").val(obj[0]['calibre']);
-                $("#calibre_e_medida").prop('selectedIndex', obj[0]['calibre_medida']);
+                $("#calibre_e_medida").val(obj[0]['calibre_medida']);
                 $("#volumen_e").val(obj[0]['volumen']);
-                $("#volumen_e_medida").prop('selectedIndex', obj[0]['volumen_medida']);
+                $("#volumen_e_medida").val(obj[0]['volumen_medida']);
 
                 //getSelectUso_edit(obj[0]['uso_material']);
                 
@@ -69,7 +69,7 @@ $(document).ready(function() {
                                        '<option class="optCatAlta_e" value="' + opt.id + '"> ' + opt.id +" "+ opt.descripcion+'</option> '
                                     );
                                 });
-                                $("#causa_alta_e").prop('selectedIndex', causa_alta - 5);
+                                $("#causa_alta_e").val(causa_alta);
 
                             },
             error: function(respuesta) {

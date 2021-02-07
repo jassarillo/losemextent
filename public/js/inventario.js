@@ -30,10 +30,7 @@ $(document).ready(function()
                                 number =  row.idInvent;
                                 if (number<=9999) { number = ("000"+number).slice(-5); }
                                 return number;
-                                
-                                //var id_user = row.idInvent;
-                                //return '<a class="btn btn-cdmx" onClick="get_data_edit_inventario('+row.idInvent+');" href="javascript:void('+ row.idInvent+')">Editar</a>';
-                               
+                
 
                             }
                         },
@@ -57,10 +54,22 @@ $(document).ready(function()
                         },
                         {
                             "mRender": function (data, type, row) {
-                                
-                                if(row.unico == 1)
-                                {
-                                    return '<a  onClick="deleteUnico('+ row.idInvent +','+ row.id_clasifica +','+row.id_bien+');" class="btn btn-outline-danger active">Eliminar</a>'
+                                var user_id_php = $("#user_id_php").val();
+                                //console.log(user_id_php);
+                                //if(user_id_php == 6)
+
+
+                                if(user_id_php == 7)
+                                { //console.log(4444);
+                                    if(row.unico == '1')
+                                    {
+                                        return '<a  onClick="deleteUnico('+ row.idInvent +','+ row.id_clasifica +','+row.id_bien+');" class="btn btn-outline-danger active">Eliminar</a>'; 
+                                    }
+                                    else
+                                    {
+                                        return '<a  onClick="deleteInvent('+ row.idInvent +','+ row.id_clasifica +','+row.id_bien+');" class="btn btn-outline-danger active">Eliminar</a>';
+
+                                    }
 
                                     //'<a class="btn btn-danger" onClick="deleteUnico('+row.idInvent+');">Eliminar</a>';
                                 }
@@ -94,11 +103,6 @@ $(document).ready(function()
     };
 
     extractEntradas();
-
-     
-
-
-
 
         // Guardar nuevo Bien
         $('#frm_nuevo_invent').on('submit', function(e)
@@ -186,7 +190,7 @@ $(document).ready(function()
                 Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
             }
         });
-    }
+    } 
     getSelectSeccionSearch();
 
     $('#frm_edit_invent').on('submit', function(e) {
@@ -249,7 +253,34 @@ $(document).ready(function()
          Swal.fire('¡Alerta!', xhr, 'warning');
         }
     });
-}
+};
+
+
+     deleteInvent = function(id_invent,id_clasifica,id_bien) {
+    //console.log(id_invent);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : url + "admin/deleteInvent",
+        type: 'POST',
+        data: {'id_invent':id_invent, 'id_clasifica': id_clasifica, 'id_bien': id_bien},
+        dataType: 'json',
+        success: function(response) {
+               reloadDataTableInvent();
+                Swal.fire('¡Correcto!',response.message,'success');
+                //$('#users-table').DataTable().ajax.reload();
+               
+           
+        },
+        error: function(xhr) {
+         //   var message = getErrorAjax(xhr, 'Error de conectividad de red USR-02.');
+         Swal.fire('¡Alerta!', xhr, 'warning');
+        }
+    });
+};
+
+
 });//fin Document reading
 
 

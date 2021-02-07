@@ -190,8 +190,9 @@
                                         <th> Empleado 3 </th>-->
                                         <th> Descripción</th>
                                         <th> Lugar</th>
+                                        <th> Imprimir</th>
                                         <th> Editar</th>
-                                        <th> Acciones</th>
+                                        <th> Eliminar</th>
                                     </tr>
                                     </thead>
 

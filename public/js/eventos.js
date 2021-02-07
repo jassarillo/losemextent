@@ -280,7 +280,14 @@ $('#frm_salida_a_evento').on('submit', function(e) {
                }
                else
                {
-                Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                //Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success",{timer: 2000});
+                Swal.fire({
+                          position: 'top-end',
+                          icon: 'success',
+                          title: 'Elemento añadido',
+                          showConfirmButton: false,
+                          timer: 1500
+                        })
                 getSelectInventario();
                 reloadDataTableEventSend();
                 getCantidad();
@@ -333,7 +340,8 @@ $('#frm_retorno_de_evento').on('submit', function(e) {
         success: function(respuesta) {
             //console.log(respuesta.resp);
             
-            if (respuesta.resp == true) {
+            if (respuesta.resp == true) 
+            {
                 //console.log(666);
                if(respuesta.mensaje == 'Elemento no disponible')
                {
@@ -343,7 +351,13 @@ $('#frm_retorno_de_evento').on('submit', function(e) {
                }
                else
                {
-                Swal.fire("Proceso  correcto!", "Bien registrado correctamente!","success");
+                Swal.fire({
+                          position: 'top-end',
+                          icon: 'success',
+                          title: 'Entrada correcta!',
+                          showConfirmButton: false,
+                          timer: 1500
+                        })
                 
                 reloadDataTableInvent();
                 
@@ -353,7 +367,7 @@ $('#frm_retorno_de_evento').on('submit', function(e) {
                     
                    //$('#eventos-table').DataTable().ajax.reload();
 
-            } else {
+            }else{
 
                 $("#boxNumber").show();
                 getCantidadEnEvento();

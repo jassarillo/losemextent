@@ -224,7 +224,8 @@
                         
                     <div class="tab-pane" id="kt_user_edit_tab_3" role="tabpanel">
                         <div class="kt-form kt-form--label-right">
-
+                        <input type="hidden" value="{{auth()->user()->id}}" name="user_id_php" 
+                        id="user_id_php">
                         <div class="row">    
                             <div class="col-md-6">
 

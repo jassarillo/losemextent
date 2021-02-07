@@ -252,6 +252,30 @@ class InventarioController extends Controller
     }
 
 
+    public function deleteInvent(Request $request)
+    { 
+        //dd($request->id_bien);
+        $existenciaCount = Existencias::where('id_clasifica',$request->id_clasifica)
+                            ->where('id_bien',$request->id_bien)->first();
+        //dd($existenciaCount->conteo_existencia);
+        $cantidad = $existenciaCount->conteo_existencia + 0;
+
+        $resg = Inventario::where('id', '=', $request->id_invent)->first();
+        $resg->delete();
+
+        $fr = Existencias::where('id_clasifica',$request->id_clasifica)
+                            ->where('id_bien',$request->id_bien)
+                            ->update(['conteo_existencia' =>  
+                                $cantidad - 1]);
+
+        //dd($fr);                            
+        //dd($resg);
+        $respuesta = array('resp' => true, 'mensaje' => 'Elemento eliminado');
+        return   $respuesta;
+
+
+    }
+
 
     public function deleteBien(Request $request)
     { 
