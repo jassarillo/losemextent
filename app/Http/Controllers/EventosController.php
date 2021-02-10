@@ -608,6 +608,113 @@ class EventosController extends Controller
             return   response()->json($respuesta);
     }
 
+    public function eliminar_evento($id_evento)
+    {
+        //dd($id_evento);
+
+        $evento =  Eventos::select('*')
+        ->where('id',$id_evento)->first();
+        //dd($evento);
+        $evento->delete();
+    
+        //Muchos********
+        //Muchos********
+        $elementos = ConteoEnEvento::select(
+            DB::raw('COUNT(conteo_evento) as count'),'id_bien','id_clasifica')
+        ->where('id_evento', $id_evento)
+        ->where('unico',0)->where('status',1)
+        ->groupBy('id_bien','id_clasifica')
+        ->get()->toArray();
+
+           //dd($elementos);
+       foreach($elementos as $rr) 
+        {   //dd($rr['count']);
+            //dd($rr['id_clasifica'],$rr['id_bien']);
+            $getExistActual = Existencias::select('conteo_existencia')
+            ->where('id_clasifica',$rr['id_clasifica'])
+            ->where('id_bien',$rr['id_bien'])->get()->toArray();
+            //dd($getExistActual[0]['conteo_existencia']);
+
+            $ExistenciasUp =  Existencias::select('*')
+            ->where('id_clasifica',$rr['id_clasifica'])
+            ->where('id_bien',$rr['id_bien'])->first();
+            $ExistenciasUp->update([
+                'conteo_existencia' => $getExistActual[0]['conteo_existencia'] + $rr['count']
+            ]);
+            //dd($ExistenciasUp);
+            $idUp =  Inventario::
+            where('id_clasifica',$rr['id_clasifica'])
+            ->where('id_bien',$rr['id_bien'])
+            ->where('status',2)
+            ->where('id_evento', $id_evento);
+            //dd($idUp);
+            $idUp->update(['id_evento' => 0,'status' =>  1]);
+
+            $idUp =  ConteoEnEvento::
+            where('id_clasifica',$rr['id_clasifica'])
+            ->where('id_bien',$rr['id_bien'])
+            ->where('id_evento', $id_evento)
+            ->where('unico',0)
+            ->delete();
+
+
+        }
+
+        //Unico********
+        //Unico********
+        $elementos = ConteoEnEvento::select(
+            'conteo_evento as count','id_bien','id_clasifica')
+        ->where('id_evento', $id_evento)
+        ->where('unico',1)
+        //->groupBy('id_bien','id_clasifica')
+        ->get()->toArray();
+
+           //dd($elementos);
+       foreach($elementos as $rrU) 
+        {   //dd($rrU['count']);
+            //dd($rrU['id_clasifica'],$rrU['id_bien']);
+            $getExistActualU = Existencias::select('conteo_existencia')
+            ->where('id_clasifica',$rrU['id_clasifica'])
+            ->where('id_bien',$rrU['id_bien'])->get()->toArray();
+            //dd($getExistActualU[0]['conteo_existencia']);
+
+            $ExistenciasUpU =  Existencias::select('*')
+            ->where('id_clasifica',$rrU['id_clasifica'])
+            ->where('id_bien',$rrU['id_bien'])->first();
+            $ExistenciasUpU->update([
+                'conteo_existencia' => $getExistActualU[0]['conteo_existencia'] + $rrU['count']
+            ]);
+
+            $conteoActual =  Inventario::
+            where('id_clasifica',$rrU['id_clasifica'])
+            ->where('id_bien',$rrU['id_bien'])
+            ->first();            
+            //dd($conteoActual->conteo);
+
+            $idUpU =  Inventario::
+            where('id_clasifica',$rrU['id_clasifica'])
+            ->where('id_bien',$rrU['id_bien'])
+            ->first();
+            //dd($idUpU);
+            $idUpU->update(['conteo' =>  $conteoActual->conteo + $rrU['count'] ]);
+
+            $idUp =  ConteoEnEvento::
+            where('id_clasifica',$rrU['id_clasifica'])
+            ->where('id_bien',$rrU['id_bien'])
+            ->where('id_evento', $id_evento)
+            ->where('unico',1)
+            ->delete();
+
+        }
+
+
+
+
+            $respuesta = array('resp' => true, 'mensaje' => 'Registro exitoso');
+            return   response()->json($respuesta);
+    }
+    
+
     /*public function remove_bien_evento_click()
     {
          

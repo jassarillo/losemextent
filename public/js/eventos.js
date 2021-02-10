@@ -42,6 +42,13 @@ $(document).ready(function() {
                     return '<a onclick="get_data_edit_evento('+ row.id +');" href="#'+row.id+'" class="btn btn-cdmx" data-toggle="modal" data-target="#kt_modal_KTDatatable_local" >Editar</a>';
 
                 }
+            },
+            {
+                "mRender": function (data, type, row) {
+                    
+                    return '<a class="btn btn-danger" onClick="eliminar_evento(' + row.id + ');" href="javascript:void('+ row.id +')">Eliminar</a>';
+                   
+                }
             }
         ]
         });
@@ -401,6 +408,30 @@ inputRestar =1;
                     if(obj.resp == true) {
                         //console.log(666);
                        reloadDataTableEventSend();
+                            Swal.fire("Proceso  correcto!", "Registro removido!","success");
+                    } else {
+                        Swal.fire('error', respuesta.message,"error");
+                    }
+                },
+        error: function(respuesta) {
+            Swal.fire('¡Alerta!','Error de conectividad de red USR-01','warning');
+        }
+    });
+};
+
+eliminar_evento = function (id_evento){
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url : url + "admin/eliminar_evento/"+ id_evento,
+        dataType: 'html',
+        success: function(respuesta) {
+                    var obj = jQuery.parseJSON( respuesta );
+                    //console.log(obj.resp);
+                    if(obj.resp == true) {
+                        //console.log(666);
+                       $('#eventos-table').DataTable().ajax.reload();
                             Swal.fire("Proceso  correcto!", "Registro removido!","success");
                     } else {
                         Swal.fire('error', respuesta.message,"error");

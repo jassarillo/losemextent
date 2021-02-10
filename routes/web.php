@@ -168,6 +168,7 @@ Route::get('admin/listar_bienes_evento_salida', 'EventosController@listar_bienes
 Route::post('admin/unicoMuchos', 'EventosController@unicoMuchos');
 Route::get('admin/remover_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}/{inputRestar}/{observaciones}/{estado_fisico}','EventosController@remover_bien_evento');
 Route::get('admin/eliminar_bien_evento/{evento}/{id_clasifica}/{id_bien}/{unico}/{conteo}/{idInvent}/{inputRestar}','EventosController@eliminar_bien_evento');
+Route::get('admin/eliminar_evento/{id_evento}','EventosController@eliminar_evento');
 Route::post('admin/cantidadExistente', 'EventosController@cantidadExistente');
 Route::post('admin/itemReturnEvent', 'EventosController@itemReturnEvent');
 Route::post('admin/deleteEmpleado', 'EventosController@deleteEmpleado');

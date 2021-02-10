@@ -35,7 +35,7 @@ class ExistenciasController extends Controller
     public function tableExistencias(){
         //dd(3232);
         
-        $existencias = Existencias::select('existencias.id','bodega', 'existencias.id_clasifica', 'se.descripcion as descSeccion', 'existencias.id_bien', 'bi.descripcion as descBien', 
+        $existencias = Existencias::select('existencias.id','existencias.bodega', 'existencias.id_clasifica', 'se.descripcion as descSeccion', 'existencias.id_bien', 'bi.descripcion as descBien', 
         	'conteo_existencia','existencias.created_at')
         ->leftJoin('secciones as se','existencias.id_clasifica','=','se.id_seccion')
         ->leftJoin('bienes as bi','existencias.id_bien','=','bi.id')
